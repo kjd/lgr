@@ -1,8 +1,13 @@
 import sys, os
 sys.path.append(os.path.abspath('_themes'))
 
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+if on_rtd:
+	html_theme = 'default'
+else:
+	html_theme = 'icann'
 html_theme_path = ['_themes']
-html_theme = 'icann'
 extensions = ['sphinx.ext.coverage']
 templates_path = ['_templates']
 source_suffix = '.rst'
