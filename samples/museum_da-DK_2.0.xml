@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>da-DK</language>
+    <domain>museum</domain>
+    <date>2004-10-01</date>
+    <version>2.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="199"&gt; TLD: MUSEUM&lt;br&gt;
+Language Tag: da-DK&lt;br&gt;
+Language Description: Danish&lt;br&gt;
+Version: 2.0&lt;br&gt;
+Effective Date: 1 October 2004&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="26"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt; Registry: Museum Domain Management Association&lt;br&gt;
+Contact: Cary Karp &lt;a href="mailto:admin@musedoma.museum"&gt;admin@musedoma.museum&lt;/a&gt;&lt;br&gt;
+Address: Box 50007, SE-10405 Stockholm, Sweden&lt;br&gt;
+Tel: +46 70 629 8176 Fax: +46 70 384 3246 &lt;br&gt;
+Website: &lt;a href="http://musedoma.museum"&gt;http://musedoma.museum/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Relevant Policy Document URL: http://about.museum/idn/idnpolicy.html&lt;/p&gt;
+&lt;p&gt;This document describes the Internationalized Domain Names (IDN) Character
+Table used by MuseDoma in the .MUSEUM TLD registry for the registration of .MUSEUM
+domains in the Danish language. The policies for the application of this table
+are described in detail in the document referenced above and are in compliance
+with the ICANN Guidelines for the Implementation of Internationalized Domain
+Names. The present document is intended for publication in the IANA IDN Character
+Table Registry. It is provided exclusively for the information of prospective
+holders of domains in .MUSEUM and for the users of resources within those domains.
+It is not to be taken as a normative statement about the use of the Danish language
+in any other context.&lt;/p&gt;
+&lt;p&gt;Base characters are listed at the start of each line in this table by giving
+their Unicode code points in U+xxxx format. If a base character is followed
+by a vertical line &amp;quot;|&amp;quot;, the code point to the right of that line is
+a variant of the base character. A hyphen &amp;quot;-&amp;quot; between code points
+indicates a character string. Text appearing to the right of a number sign &amp;quot;#&amp;quot;
+is an explanatory comment about a code point or group of code points.&lt;/p&gt;
+&lt;p&gt;This table conforms to current Danish orthographic and lexicographic practice
+as described by the Danish Language Council in the publication &amp;quot;Retskrivningsordbogen&amp;quot;
+(Orthographic Dictionary), 3rd edition, 2001 (3rd printing, 2004). In addition
+to the basic Danish alphabet, this authority recognizes foreign letters in proper
+nouns and loan words and explicitly lists selected such characters in exemplification
+of this. These characters are included in the present table for corresponding
+illustrational purposes. The use of several diacritical marks applied to characters
+in the basic Danish alphabet is also recognized but only selected resulting
+code points are included in this table.&lt;/p&gt;
+&lt;p&gt;Unlisted accented and foreign characters may be individually permitted in Danish
+language domains in .MUSEUM if the requesting entity can demonstrate warrant
+for doing so and the desired code points are explicitly included as base characters
+in the character table for another language in the .MUSEUM &amp;quot;European language
+group&amp;quot; as referenced in the policy document cited above. Danish belongs
+to the European language group and the base characters listed below may be available
+for use as foreign letters in other languages in that group, if doing so is
+permitted in the narrative text in their respective character tables.&lt;/p&gt;
+&lt;p&gt;The character variants listed below are intended to call attention to situations
+where confusion may arise if particular care is not taken to avoid it. No prescriptive
+policies are attached to these character variants and the registration of a
+domain containing one variant confers no rights to any other variant. All names
+in .MUSEUM are subject to approval during an &amp;quot;Eligibility and Name Selection&amp;quot;
+(ENS) process. Character variants are one of several factors considered to ensure
+adequate differentiation between registered domains. The specific relevance
+of variants will be determined for each domain during the ENS dialog within
+a framework detailed in the policy statements for .MUSEUM, as described or referenced
+in the policy document cited above.&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="0064" />
+    <char cp="0065">
+      <var cp="00E9" />
+    </char>
+    <range first-cp="0066" last-cp="007A" />
+    <char cp="00E4" />
+    <char cp="00E5">
+      <var cp="0061 0061" />
+    </char>
+    <char cp="00E6" />
+    <char cp="00E9">
+      <var cp="0065" />
+    </char>
+    <char cp="00F0" />
+    <char cp="00F6" />
+    <char cp="00F8" />
+    <char cp="00FC" />
+    <char cp="00FE" />
+  </data>
+</idntable>

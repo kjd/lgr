@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>ru-RU</language>
+    <domain>ru</domain>
+    <date>2008-10-20</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: RU&lt;br/&gt;
+Language Tag: ru-RU&lt;br/&gt;
+Language Description: Russian&lt;br/&gt;
+Version: 1.0&lt;br/&gt;
+Effective Date: 20 October 2008
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: Coordination Center for TLD RU&lt;br&gt;
+Contact: Andrew Romanov &lt;a href="mailto:rom@cctld.ru"&gt;rom@cctld.ru&lt;/a&gt;&lt;br/&gt;
+Address: #433, M-II, WTC, 12, Krasnopresnenskaya nab. Moscow 123610, Russian Federation&lt;br/&gt;
+Tel: +7 495 2581320&lt;br/&gt;
+Website: &lt;a href="http://www.cctld.ru"&gt;http://www.cctld.ru&lt;/a&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0430" last-cp="044F" />
+    <char cp="0451" />
+  </data>
+</idntable>

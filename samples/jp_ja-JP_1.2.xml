@@ -1,0 +1,4095 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>ja-JP</language>
+    <domain>jp</domain>
+    <date>2005-08-30</date>
+    <version>1.2</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: JP&lt;br&gt;
+Language Tag: ja-JP&lt;br&gt;
+Language Description: Japanese&lt;br&gt;
+Version: 1.2 20050830&lt;br&gt;
+Effective Date: 30 August 2005&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: Japan Registry Services Co., Ltd.&lt;br&gt;
+Contact: Jachar-admin &lt;a href="mailto:jachar-admin@jprs.jp"&gt;jachar-admin@jprs.jp&lt;/a&gt;&lt;br&gt;
+Address: Chiyoda First Bldg. East 13F, 3-8-1 Nishi-Kanda, Chiyoda-ku, Tokyo 101-0065, JAPAN&lt;br&gt;
+TEL: +81 3 5215 8451  FAX: +81 3 5215 8452&lt;br&gt;
+Website: &lt;a href="http://jprs.co.jp/en/"&gt;http://jprs.co.jp/en/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: &lt;a href="http://jprs.jp/doc/rule/saisoku-1-wideusejp.html"&gt;Technical Specification of General-use JP Domain Name&lt;/a&gt; (in Japanese)
+&lt;/p&gt;
+&lt;p&gt;
+&lt;dl&gt;
+&lt;dt&gt;Abstract&lt;/dt&gt;
+&lt;dd&gt;
+&lt;p&gt;
+Internationalized Domain Name (IDN) makes expression of domain name rich.
+The demand for such enrichment is to use native language characters in
+a domain name.  IDN itself has no language dependency as a protocol,
+but to utilize IDN in the real world, language and/or regional aspects
+should be taken into account.
+&lt;/p&gt;
+&lt;p&gt;
+This document defines Japanese character variant table for .JP registry.
+&lt;/p&gt;
+&lt;p&gt;
+Also, this document explains a guideline to any DNS zone administrator who
+accepts Japanese as an IDN label.
+&lt;/p&gt;
+&lt;/dd&gt;
+&lt;dt&gt;Language Variant Table for ja-JP&lt;/dt&gt;
+&lt;dd&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="3005" last-cp="3007" />
+    <range first-cp="3041" last-cp="3093" />
+    <range first-cp="309D" last-cp="309E" />
+    <range first-cp="30A1" last-cp="30F6" />
+    <range first-cp="30FB" last-cp="30FE" />
+    <range first-cp="4E00" last-cp="4E01" />
+    <char cp="4E03" />
+    <range first-cp="4E07" last-cp="4E0B" />
+    <range first-cp="4E0D" last-cp="4E0E" />
+    <range first-cp="4E10" last-cp="4E11" />
+    <range first-cp="4E14" last-cp="4E19" />
+    <char cp="4E1E" />
+    <char cp="4E21" />
+    <char cp="4E26" />
+    <char cp="4E2A" />
+    <char cp="4E2D" />
+    <range first-cp="4E31" last-cp="4E32" />
+    <char cp="4E36" />
+    <range first-cp="4E38" last-cp="4E39" />
+    <range first-cp="4E3B" last-cp="4E3C" />
+    <char cp="4E3F" />
+    <range first-cp="4E42" last-cp="4E43" />
+    <char cp="4E45" />
+    <char cp="4E4B" />
+    <range first-cp="4E4D" last-cp="4E4F" />
+    <range first-cp="4E55" last-cp="4E59" />
+    <range first-cp="4E5D" last-cp="4E5F" />
+    <char cp="4E62" />
+    <char cp="4E71" />
+    <char cp="4E73" />
+    <char cp="4E7E" />
+    <char cp="4E80" />
+    <char cp="4E82" />
+    <range first-cp="4E85" last-cp="4E86" />
+    <range first-cp="4E88" last-cp="4E8C" />
+    <char cp="4E8E" />
+    <range first-cp="4E91" last-cp="4E92" />
+    <range first-cp="4E94" last-cp="4E95" />
+    <range first-cp="4E98" last-cp="4E99" />
+    <range first-cp="4E9B" last-cp="4E9C" />
+    <range first-cp="4E9E" last-cp="4EA2" />
+    <range first-cp="4EA4" last-cp="4EA6" />
+    <char cp="4EA8" />
+    <range first-cp="4EAB" last-cp="4EAE" />
+    <char cp="4EB0" />
+    <char cp="4EB3" />
+    <char cp="4EB6" />
+    <char cp="4EBA" />
+    <range first-cp="4EC0" last-cp="4EC2" />
+    <char cp="4EC4" />
+    <range first-cp="4EC6" last-cp="4EC7" />
+    <range first-cp="4ECA" last-cp="4ECB" />
+    <range first-cp="4ECD" last-cp="4ECF" />
+    <range first-cp="4ED4" last-cp="4ED9" />
+    <range first-cp="4EDD" last-cp="4EDF" />
+    <range first-cp="4EE3" last-cp="4EE5" />
+    <range first-cp="4EED" last-cp="4EEE" />
+    <char cp="4EF0" />
+    <char cp="4EF2" />
+    <range first-cp="4EF6" last-cp="4EF7" />
+    <char cp="4EFB" />
+    <char cp="4F01" />
+    <range first-cp="4F09" last-cp="4F0A" />
+    <range first-cp="4F0D" last-cp="4F11" />
+    <char cp="4F1A" />
+    <range first-cp="4F1C" last-cp="4F1D" />
+    <range first-cp="4F2F" last-cp="4F30" />
+    <char cp="4F34" />
+    <char cp="4F36" />
+    <char cp="4F38" />
+    <char cp="4F3A" />
+    <range first-cp="4F3C" last-cp="4F3D" />
+    <char cp="4F43" />
+    <range first-cp="4F46" last-cp="4F47" />
+    <range first-cp="4F4D" last-cp="4F51" />
+    <char cp="4F53" />
+    <char cp="4F55" />
+    <char cp="4F57" />
+    <range first-cp="4F59" last-cp="4F5E" />
+    <char cp="4F69" />
+    <range first-cp="4F6F" last-cp="4F70" />
+    <char cp="4F73" />
+    <range first-cp="4F75" last-cp="4F76" />
+    <range first-cp="4F7B" last-cp="4F7C" />
+    <char cp="4F7F" />
+    <char cp="4F83" />
+    <char cp="4F86" />
+    <char cp="4F88" />
+    <char cp="4F8B" />
+    <char cp="4F8D" />
+    <char cp="4F8F" />
+    <char cp="4F91" />
+    <char cp="4F96" />
+    <char cp="4F98" />
+    <char cp="4F9B" />
+    <char cp="4F9D" />
+    <range first-cp="4FA0" last-cp="4FA1" />
+    <char cp="4FAB" />
+    <range first-cp="4FAD" last-cp="4FAF" />
+    <range first-cp="4FB5" last-cp="4FB6" />
+    <char cp="4FBF" />
+    <range first-cp="4FC2" last-cp="4FC4" />
+    <char cp="4FCA" />
+    <char cp="4FCE" />
+    <range first-cp="4FD0" last-cp="4FD1" />
+    <char cp="4FD4" />
+    <range first-cp="4FD7" last-cp="4FD8" />
+    <range first-cp="4FDA" last-cp="4FDB" />
+    <char cp="4FDD" />
+    <char cp="4FDF" />
+    <char cp="4FE1" />
+    <range first-cp="4FE3" last-cp="4FE5" />
+    <range first-cp="4FEE" last-cp="4FEF" />
+    <char cp="4FF3" />
+    <range first-cp="4FF5" last-cp="4FF6" />
+    <char cp="4FF8" />
+    <char cp="4FFA" />
+    <char cp="4FFE" />
+    <range first-cp="5005" last-cp="5006" />
+    <char cp="5009" />
+    <char cp="500B" />
+    <char cp="500D" />
+    <char cp="500F" />
+    <range first-cp="5011" last-cp="5012" />
+    <char cp="5014" />
+    <char cp="5016" />
+    <range first-cp="5019" last-cp="501A" />
+    <char cp="501F" />
+    <char cp="5021" />
+    <range first-cp="5023" last-cp="5026" />
+    <range first-cp="5028" last-cp="502D" />
+    <char cp="5036" />
+    <char cp="5039" />
+    <char cp="5043" />
+    <range first-cp="5047" last-cp="5049" />
+    <range first-cp="504F" last-cp="5050" />
+    <range first-cp="5055" last-cp="5056" />
+    <char cp="505A" />
+    <char cp="505C" />
+    <char cp="5065" />
+    <char cp="506C" />
+    <char cp="5072" />
+    <range first-cp="5074" last-cp="5076" />
+    <char cp="5078" />
+    <char cp="507D" />
+    <char cp="5080" />
+    <char cp="5085" />
+    <char cp="508D" />
+    <char cp="5091" />
+    <range first-cp="5098" last-cp="509A" />
+    <range first-cp="50AC" last-cp="50AD" />
+    <range first-cp="50B2" last-cp="50B5" />
+    <char cp="50B7" />
+    <char cp="50BE" />
+    <char cp="50C2" />
+    <char cp="50C5" />
+    <range first-cp="50C9" last-cp="50CA" />
+    <char cp="50CD" />
+    <char cp="50CF" />
+    <char cp="50D1" />
+    <range first-cp="50D5" last-cp="50D6" />
+    <char cp="50DA" />
+    <char cp="50DE" />
+    <char cp="50E3" />
+    <char cp="50E5" />
+    <char cp="50E7" />
+    <range first-cp="50ED" last-cp="50EE" />
+    <char cp="50F5" />
+    <char cp="50F9" />
+    <char cp="50FB" />
+    <range first-cp="5100" last-cp="5102" />
+    <char cp="5104" />
+    <char cp="5109" />
+    <char cp="5112" />
+    <range first-cp="5114" last-cp="5116" />
+    <char cp="5118" />
+    <char cp="511A" />
+    <char cp="511F" />
+    <char cp="5121" />
+    <char cp="512A" />
+    <char cp="5132" />
+    <char cp="5137" />
+    <range first-cp="513A" last-cp="513C" />
+    <range first-cp="513F" last-cp="5141" />
+    <range first-cp="5143" last-cp="5149" />
+    <range first-cp="514B" last-cp="514E" />
+    <char cp="5150" />
+    <char cp="5152" />
+    <char cp="5154" />
+    <char cp="515A" />
+    <char cp="515C" />
+    <char cp="5162" />
+    <char cp="5165" />
+    <range first-cp="5168" last-cp="516E" />
+    <char cp="5171" />
+    <range first-cp="5175" last-cp="5178" />
+    <char cp="517C" />
+    <char cp="5180" />
+    <char cp="5182" />
+    <range first-cp="5185" last-cp="5186" />
+    <range first-cp="5189" last-cp="518A" />
+    <range first-cp="518C" last-cp="518D" />
+    <range first-cp="518F" last-cp="5193" />
+    <range first-cp="5195" last-cp="5197" />
+    <char cp="5199" />
+    <char cp="51A0" />
+    <char cp="51A2" />
+    <range first-cp="51A4" last-cp="51A6" />
+    <range first-cp="51A8" last-cp="51AC" />
+    <range first-cp="51B0" last-cp="51B7" />
+    <char cp="51BD" />
+    <range first-cp="51C4" last-cp="51C6" />
+    <char cp="51C9" />
+    <range first-cp="51CB" last-cp="51CD" />
+    <char cp="51D6" />
+    <range first-cp="51DB" last-cp="51DD" />
+    <range first-cp="51E0" last-cp="51E1" />
+    <range first-cp="51E6" last-cp="51E7" />
+    <range first-cp="51E9" last-cp="51EA" />
+    <char cp="51ED" />
+    <range first-cp="51F0" last-cp="51F1" />
+    <range first-cp="51F5" last-cp="51F6" />
+    <range first-cp="51F8" last-cp="51FA" />
+    <range first-cp="51FD" last-cp="51FE" />
+    <char cp="5200" />
+    <range first-cp="5203" last-cp="5204" />
+    <range first-cp="5206" last-cp="5208" />
+    <range first-cp="520A" last-cp="520B" />
+    <char cp="520E" />
+    <char cp="5211" />
+    <char cp="5214" />
+    <char cp="5217" />
+    <char cp="521D" />
+    <range first-cp="5224" last-cp="5225" />
+    <char cp="5227" />
+    <range first-cp="5229" last-cp="522A" />
+    <char cp="522E" />
+    <char cp="5230" />
+    <char cp="5233" />
+    <range first-cp="5236" last-cp="523B" />
+    <range first-cp="5243" last-cp="5244" />
+    <char cp="5247" />
+    <range first-cp="524A" last-cp="524D" />
+    <char cp="524F" />
+    <char cp="5254" />
+    <char cp="5256" />
+    <char cp="525B" />
+    <char cp="525E" />
+    <range first-cp="5263" last-cp="5265" />
+    <range first-cp="5269" last-cp="526A" />
+    <range first-cp="526F" last-cp="5275" />
+    <char cp="527D" />
+    <char cp="527F" />
+    <char cp="5283" />
+    <range first-cp="5287" last-cp="5289" />
+    <char cp="528D" />
+    <range first-cp="5291" last-cp="5292" />
+    <char cp="5294" />
+    <char cp="529B" />
+    <range first-cp="529F" last-cp="52A0" />
+    <char cp="52A3" />
+    <range first-cp="52A9" last-cp="52AD" />
+    <char cp="52B1" />
+    <range first-cp="52B4" last-cp="52B5" />
+    <char cp="52B9" />
+    <char cp="52BC" />
+    <char cp="52BE" />
+    <char cp="52C1" />
+    <char cp="52C3" />
+    <char cp="52C5" />
+    <char cp="52C7" />
+    <char cp="52C9" />
+    <char cp="52CD" />
+    <char cp="52D2" />
+    <char cp="52D5" />
+    <range first-cp="52D7" last-cp="52D9" />
+    <range first-cp="52DD" last-cp="52E0" />
+    <range first-cp="52E2" last-cp="52E4" />
+    <range first-cp="52E6" last-cp="52E7" />
+    <range first-cp="52F2" last-cp="52F3" />
+    <char cp="52F5" />
+    <range first-cp="52F8" last-cp="52FA" />
+    <range first-cp="52FE" last-cp="52FF" />
+    <range first-cp="5301" last-cp="5302" />
+    <range first-cp="5305" last-cp="5306" />
+    <char cp="5308" />
+    <char cp="530D" />
+    <range first-cp="530F" last-cp="5310" />
+    <range first-cp="5315" last-cp="5317" />
+    <range first-cp="5319" last-cp="531A" />
+    <char cp="531D" />
+    <range first-cp="5320" last-cp="5321" />
+    <char cp="5323" />
+    <char cp="532A" />
+    <char cp="532F" />
+    <char cp="5331" />
+    <char cp="5333" />
+    <range first-cp="5338" last-cp="533B" />
+    <range first-cp="533F" last-cp="5341" />
+    <char cp="5343" />
+    <range first-cp="5345" last-cp="534A" />
+    <char cp="534D" />
+    <range first-cp="5351" last-cp="5354" />
+    <range first-cp="5357" last-cp="5358" />
+    <char cp="535A" />
+    <char cp="535C" />
+    <char cp="535E" />
+    <char cp="5360" />
+    <char cp="5366" />
+    <char cp="5369" />
+    <range first-cp="536E" last-cp="5371" />
+    <range first-cp="5373" last-cp="5375" />
+    <range first-cp="5377" last-cp="5378" />
+    <char cp="537B" />
+    <char cp="537F" />
+    <char cp="5382" />
+    <char cp="5384" />
+    <char cp="5396" />
+    <char cp="5398" />
+    <char cp="539A" />
+    <range first-cp="539F" last-cp="53A0" />
+    <range first-cp="53A5" last-cp="53A6" />
+    <range first-cp="53A8" last-cp="53A9" />
+    <range first-cp="53AD" last-cp="53AE" />
+    <char cp="53B0" />
+    <char cp="53B3" />
+    <char cp="53B6" />
+    <char cp="53BB" />
+    <range first-cp="53C2" last-cp="53C3" />
+    <range first-cp="53C8" last-cp="53CE" />
+    <char cp="53D4" />
+    <range first-cp="53D6" last-cp="53D7" />
+    <char cp="53D9" />
+    <char cp="53DB" />
+    <char cp="53DF" />
+    <range first-cp="53E1" last-cp="53E5" />
+    <range first-cp="53E8" last-cp="53F3" />
+    <range first-cp="53F6" last-cp="53F8" />
+    <char cp="53FA" />
+    <char cp="5401" />
+    <range first-cp="5403" last-cp="5404" />
+    <range first-cp="5408" last-cp="5411" />
+    <char cp="541B" />
+    <char cp="541D" />
+    <range first-cp="541F" last-cp="5420" />
+    <char cp="5426" />
+    <char cp="5429" />
+    <range first-cp="542B" last-cp="542E" />
+    <char cp="5436" />
+    <range first-cp="5438" last-cp="5439" />
+    <range first-cp="543B" last-cp="543E" />
+    <char cp="5440" />
+    <char cp="5442" />
+    <char cp="5446" />
+    <range first-cp="5448" last-cp="544A" />
+    <char cp="544E" />
+    <char cp="5451" />
+    <char cp="545F" />
+    <char cp="5468" />
+    <char cp="546A" />
+    <range first-cp="5470" last-cp="5471" />
+    <char cp="5473" />
+    <range first-cp="5475" last-cp="5477" />
+    <range first-cp="547B" last-cp="547D" />
+    <char cp="5480" />
+    <char cp="5484" />
+    <char cp="5486" />
+    <range first-cp="548B" last-cp="548C" />
+    <range first-cp="548E" last-cp="5490" />
+    <char cp="5492" />
+    <char cp="54A2" />
+    <range first-cp="54A4" last-cp="54A5" />
+    <char cp="54A8" />
+    <range first-cp="54AB" last-cp="54AC" />
+    <char cp="54AF" />
+    <range first-cp="54B2" last-cp="54B3" />
+    <char cp="54B8" />
+    <range first-cp="54BC" last-cp="54BE" />
+    <range first-cp="54C0" last-cp="54C2" />
+    <char cp="54C4" />
+    <range first-cp="54C7" last-cp="54C9" />
+    <char cp="54D8" />
+    <range first-cp="54E1" last-cp="54E2" />
+    <range first-cp="54E5" last-cp="54E6" />
+    <range first-cp="54E8" last-cp="54E9" />
+    <range first-cp="54ED" last-cp="54EE" />
+    <char cp="54F2" />
+    <char cp="54FA" />
+    <char cp="54FD" />
+    <char cp="5504" />
+    <range first-cp="5506" last-cp="5507" />
+    <range first-cp="550F" last-cp="5510" />
+    <char cp="5514" />
+    <char cp="5516" />
+    <range first-cp="552E" last-cp="552F" />
+    <char cp="5531" />
+    <char cp="5533" />
+    <range first-cp="5538" last-cp="5539" />
+    <char cp="553E" />
+    <char cp="5540" />
+    <range first-cp="5544" last-cp="5546" />
+    <char cp="554C" />
+    <char cp="554F" />
+    <char cp="5553" />
+    <range first-cp="5556" last-cp="5557" />
+    <range first-cp="555C" last-cp="555D" />
+    <char cp="5563" />
+    <range first-cp="557B" last-cp="557C" />
+    <char cp="557E" />
+    <char cp="5580" />
+    <range first-cp="5583" last-cp="5584" />
+    <char cp="5587" />
+    <range first-cp="5589" last-cp="558B" />
+    <range first-cp="5598" last-cp="559A" />
+    <range first-cp="559C" last-cp="559F" />
+    <range first-cp="55A7" last-cp="55AC" />
+    <char cp="55AE" />
+    <char cp="55B0" />
+    <char cp="55B6" />
+    <range first-cp="55C4" last-cp="55C5" />
+    <char cp="55C7" />
+    <char cp="55D4" />
+    <char cp="55DA" />
+    <char cp="55DC" />
+    <char cp="55DF" />
+    <range first-cp="55E3" last-cp="55E4" />
+    <char cp="55F7" />
+    <char cp="55F9" />
+    <range first-cp="55FD" last-cp="55FE" />
+    <char cp="5606" />
+    <char cp="5609" />
+    <char cp="5614" />
+    <range first-cp="5616" last-cp="5618" />
+    <char cp="561B" />
+    <char cp="5629" />
+    <char cp="562F" />
+    <range first-cp="5631" last-cp="5632" />
+    <char cp="5634" />
+    <char cp="5636" />
+    <char cp="5638" />
+    <char cp="5642" />
+    <char cp="564C" />
+    <char cp="564E" />
+    <char cp="5650" />
+    <char cp="565B" />
+    <char cp="5664" />
+    <char cp="5668" />
+    <range first-cp="566A" last-cp="566C" />
+    <char cp="5674" />
+    <char cp="5678" />
+    <char cp="567A" />
+    <char cp="5680" />
+    <range first-cp="5686" last-cp="5687" />
+    <char cp="568A" />
+    <char cp="568F" />
+    <char cp="5694" />
+    <char cp="56A0" />
+    <char cp="56A2" />
+    <char cp="56A5" />
+    <char cp="56AE" />
+    <char cp="56B4" />
+    <char cp="56B6" />
+    <char cp="56BC" />
+    <range first-cp="56C0" last-cp="56C3" />
+    <char cp="56C8" />
+    <char cp="56CE" />
+    <char cp="56D1" />
+    <char cp="56D3" />
+    <range first-cp="56D7" last-cp="56D8" />
+    <range first-cp="56DA" last-cp="56DB" />
+    <char cp="56DE" />
+    <char cp="56E0" />
+    <char cp="56E3" />
+    <char cp="56EE" />
+    <char cp="56F0" />
+    <range first-cp="56F2" last-cp="56F3" />
+    <range first-cp="56F9" last-cp="56FA" />
+    <char cp="56FD" />
+    <range first-cp="56FF" last-cp="5700" />
+    <range first-cp="5703" last-cp="5704" />
+    <range first-cp="5708" last-cp="5709" />
+    <char cp="570B" />
+    <char cp="570D" />
+    <char cp="570F" />
+    <range first-cp="5712" last-cp="5713" />
+    <char cp="5716" />
+    <char cp="5718" />
+    <char cp="571C" />
+    <char cp="571F" />
+    <range first-cp="5726" last-cp="5728" />
+    <char cp="572D" />
+    <char cp="5730" />
+    <range first-cp="5737" last-cp="5738" />
+    <char cp="573B" />
+    <char cp="5740" />
+    <char cp="5742" />
+    <char cp="5747" />
+    <char cp="574A" />
+    <range first-cp="574E" last-cp="5751" />
+    <char cp="5761" />
+    <char cp="5764" />
+    <char cp="5766" />
+    <range first-cp="5769" last-cp="576A" />
+    <char cp="577F" />
+    <char cp="5782" />
+    <range first-cp="5788" last-cp="5789" />
+    <char cp="578B" />
+    <char cp="5793" />
+    <char cp="57A0" />
+    <range first-cp="57A2" last-cp="57A4" />
+    <char cp="57AA" />
+    <char cp="57B0" />
+    <char cp="57B3" />
+    <char cp="57C0" />
+    <char cp="57C3" />
+    <char cp="57C6" />
+    <char cp="57CB" />
+    <char cp="57CE" />
+    <range first-cp="57D2" last-cp="57D4" />
+    <char cp="57D6" />
+    <char cp="57DC" />
+    <range first-cp="57DF" last-cp="57E0" />
+    <char cp="57E3" />
+    <char cp="57F4" />
+    <char cp="57F7" />
+    <range first-cp="57F9" last-cp="57FA" />
+    <char cp="57FC" />
+    <char cp="5800" />
+    <char cp="5802" />
+    <range first-cp="5805" last-cp="5806" />
+    <range first-cp="580A" last-cp="580B" />
+    <char cp="5815" />
+    <char cp="5819" />
+    <char cp="581D" />
+    <char cp="5821" />
+    <char cp="5824" />
+    <char cp="582A" />
+    <range first-cp="582F" last-cp="5831" />
+    <range first-cp="5834" last-cp="5835" />
+    <char cp="583A" />
+    <char cp="583D" />
+    <range first-cp="5840" last-cp="5841" />
+    <range first-cp="584A" last-cp="584B" />
+    <range first-cp="5851" last-cp="5852" />
+    <char cp="5854" />
+    <range first-cp="5857" last-cp="585A" />
+    <char cp="585E" />
+    <char cp="5862" />
+    <char cp="5869" />
+    <char cp="586B" />
+    <char cp="5870" />
+    <char cp="5872" />
+    <char cp="5875" />
+    <char cp="5879" />
+    <char cp="587E" />
+    <char cp="5883" />
+    <char cp="5885" />
+    <char cp="5893" />
+    <char cp="5897" />
+    <char cp="589C" />
+    <char cp="589F" />
+    <char cp="58A8" />
+    <char cp="58AB" />
+    <char cp="58AE" />
+    <char cp="58B3" />
+    <range first-cp="58B8" last-cp="58BB" />
+    <char cp="58BE" />
+    <char cp="58C1" />
+    <char cp="58C5" />
+    <char cp="58C7" />
+    <char cp="58CA" />
+    <char cp="58CC" />
+    <char cp="58D1" />
+    <char cp="58D3" />
+    <char cp="58D5" />
+    <range first-cp="58D7" last-cp="58D9" />
+    <char cp="58DC" />
+    <range first-cp="58DE" last-cp="58DF" />
+    <range first-cp="58E4" last-cp="58E5" />
+    <range first-cp="58EB" last-cp="58EC" />
+    <range first-cp="58EE" last-cp="58F2" />
+    <char cp="58F7" />
+    <range first-cp="58F9" last-cp="58FD" />
+    <char cp="5902" />
+    <range first-cp="5909" last-cp="590A" />
+    <range first-cp="590F" last-cp="5910" />
+    <range first-cp="5915" last-cp="5916" />
+    <range first-cp="5918" last-cp="591C" />
+    <char cp="5922" />
+    <char cp="5925" />
+    <char cp="5927" />
+    <range first-cp="5929" last-cp="592E" />
+    <range first-cp="5931" last-cp="5932" />
+    <range first-cp="5937" last-cp="5938" />
+    <char cp="593E" />
+    <char cp="5944" />
+    <range first-cp="5947" last-cp="5949" />
+    <range first-cp="594E" last-cp="5951" />
+    <range first-cp="5954" last-cp="5955" />
+    <range first-cp="5957" last-cp="5958" />
+    <char cp="595A" />
+    <char cp="5960" />
+    <char cp="5962" />
+    <char cp="5965" />
+    <range first-cp="5967" last-cp="596A" />
+    <char cp="596C" />
+    <char cp="596E" />
+    <range first-cp="5973" last-cp="5974" />
+    <char cp="5978" />
+    <char cp="597D" />
+    <range first-cp="5981" last-cp="5984" />
+    <char cp="598A" />
+    <char cp="598D" />
+    <char cp="5993" />
+    <char cp="5996" />
+    <char cp="5999" />
+    <char cp="599B" />
+    <char cp="599D" />
+    <char cp="59A3" />
+    <char cp="59A5" />
+    <char cp="59A8" />
+    <char cp="59AC" />
+    <char cp="59B2" />
+    <char cp="59B9" />
+    <char cp="59BB" />
+    <char cp="59BE" />
+    <char cp="59C6" />
+    <char cp="59C9" />
+    <char cp="59CB" />
+    <range first-cp="59D0" last-cp="59D1" />
+    <range first-cp="59D3" last-cp="59D4" />
+    <range first-cp="59D9" last-cp="59DA" />
+    <char cp="59DC" />
+    <range first-cp="59E5" last-cp="59E6" />
+    <char cp="59E8" />
+    <range first-cp="59EA" last-cp="59EB" />
+    <char cp="59F6" />
+    <char cp="59FB" />
+    <char cp="59FF" />
+    <char cp="5A01" />
+    <char cp="5A03" />
+    <char cp="5A09" />
+    <char cp="5A11" />
+    <char cp="5A18" />
+    <char cp="5A1A" />
+    <char cp="5A1C" />
+    <range first-cp="5A1F" last-cp="5A20" />
+    <char cp="5A25" />
+    <char cp="5A29" />
+    <char cp="5A2F" />
+    <range first-cp="5A35" last-cp="5A36" />
+    <char cp="5A3C" />
+    <range first-cp="5A40" last-cp="5A41" />
+    <char cp="5A46" />
+    <char cp="5A49" />
+    <char cp="5A5A" />
+    <char cp="5A62" />
+    <char cp="5A66" />
+    <char cp="5A6A" />
+    <char cp="5A6C" />
+    <char cp="5A7F" />
+    <char cp="5A92" />
+    <range first-cp="5A9A" last-cp="5A9B" />
+    <range first-cp="5ABC" last-cp="5ABE" />
+    <range first-cp="5AC1" last-cp="5AC2" />
+    <char cp="5AC9" />
+    <range first-cp="5ACB" last-cp="5ACC" />
+    <char cp="5AD0" />
+    <range first-cp="5AD6" last-cp="5AD7" />
+    <char cp="5AE1" />
+    <char cp="5AE3" />
+    <char cp="5AE6" />
+    <char cp="5AE9" />
+    <range first-cp="5AFA" last-cp="5AFB" />
+    <char cp="5B09" />
+    <range first-cp="5B0B" last-cp="5B0C" />
+    <char cp="5B16" />
+    <char cp="5B22" />
+    <char cp="5B2A" />
+    <char cp="5B2C" />
+    <char cp="5B30" />
+    <char cp="5B32" />
+    <char cp="5B36" />
+    <char cp="5B3E" />
+    <char cp="5B40" />
+    <char cp="5B43" />
+    <char cp="5B45" />
+    <range first-cp="5B50" last-cp="5B51" />
+    <range first-cp="5B54" last-cp="5B55" />
+    <range first-cp="5B57" last-cp="5B58" />
+    <range first-cp="5B5A" last-cp="5B5D" />
+    <char cp="5B5F" />
+    <range first-cp="5B63" last-cp="5B66" />
+    <char cp="5B69" />
+    <char cp="5B6B" />
+    <range first-cp="5B70" last-cp="5B71" />
+    <char cp="5B73" />
+    <char cp="5B75" />
+    <char cp="5B78" />
+    <char cp="5B7A" />
+    <char cp="5B80" />
+    <char cp="5B83" />
+    <char cp="5B85" />
+    <range first-cp="5B87" last-cp="5B89" />
+    <range first-cp="5B8B" last-cp="5B8D" />
+    <char cp="5B8F" />
+    <char cp="5B95" />
+    <range first-cp="5B97" last-cp="5B9D" />
+    <char cp="5B9F" />
+    <range first-cp="5BA2" last-cp="5BA6" />
+    <char cp="5BAE" />
+    <char cp="5BB0" />
+    <range first-cp="5BB3" last-cp="5BB6" />
+    <range first-cp="5BB8" last-cp="5BB9" />
+    <char cp="5BBF" />
+    <range first-cp="5BC2" last-cp="5BC7" />
+    <char cp="5BC9" />
+    <char cp="5BCC" />
+    <char cp="5BD0" />
+    <range first-cp="5BD2" last-cp="5BD4" />
+    <char cp="5BDB" />
+    <range first-cp="5BDD" last-cp="5BDF" />
+    <range first-cp="5BE1" last-cp="5BE2" />
+    <range first-cp="5BE4" last-cp="5BE9" />
+    <char cp="5BEB" />
+    <char cp="5BEE" />
+    <char cp="5BF0" />
+    <char cp="5BF3" />
+    <range first-cp="5BF5" last-cp="5BF6" />
+    <char cp="5BF8" />
+    <char cp="5BFA" />
+    <range first-cp="5BFE" last-cp="5BFF" />
+    <range first-cp="5C01" last-cp="5C02" />
+    <range first-cp="5C04" last-cp="5C0B" />
+    <range first-cp="5C0D" last-cp="5C0F" />
+    <char cp="5C11" />
+    <char cp="5C13" />
+    <char cp="5C16" />
+    <char cp="5C1A" />
+    <char cp="5C20" />
+    <char cp="5C22" />
+    <char cp="5C24" />
+    <char cp="5C28" />
+    <char cp="5C2D" />
+    <char cp="5C31" />
+    <range first-cp="5C38" last-cp="5C41" />
+    <range first-cp="5C45" last-cp="5C46" />
+    <char cp="5C48" />
+    <range first-cp="5C4A" last-cp="5C4B" />
+    <range first-cp="5C4D" last-cp="5C51" />
+    <char cp="5C53" />
+    <char cp="5C55" />
+    <char cp="5C5E" />
+    <range first-cp="5C60" last-cp="5C61" />
+    <range first-cp="5C64" last-cp="5C65" />
+    <char cp="5C6C" />
+    <range first-cp="5C6E" last-cp="5C6F" />
+    <char cp="5C71" />
+    <char cp="5C76" />
+    <char cp="5C79" />
+    <char cp="5C8C" />
+    <range first-cp="5C90" last-cp="5C91" />
+    <char cp="5C94" />
+    <char cp="5CA1" />
+    <range first-cp="5CA8" last-cp="5CA9" />
+    <range first-cp="5CAB" last-cp="5CAC" />
+    <char cp="5CB1" />
+    <char cp="5CB3" />
+    <range first-cp="5CB6" last-cp="5CB8" />
+    <range first-cp="5CBB" last-cp="5CBC" />
+    <char cp="5CBE" />
+    <char cp="5CC5" />
+    <char cp="5CC7" />
+    <char cp="5CD9" />
+    <range first-cp="5CE0" last-cp="5CE1" />
+    <range first-cp="5CE8" last-cp="5CEA" />
+    <char cp="5CED" />
+    <range first-cp="5CEF" last-cp="5CF0" />
+    <char cp="5CF6" />
+    <range first-cp="5CFA" last-cp="5CFB" />
+    <char cp="5CFD" />
+    <char cp="5D07" />
+    <char cp="5D0B" />
+    <char cp="5D0E" />
+    <char cp="5D11" />
+    <range first-cp="5D14" last-cp="5D1B" />
+    <char cp="5D1F" />
+    <char cp="5D22" />
+    <char cp="5D29" />
+    <range first-cp="5D4B" last-cp="5D4C" />
+    <char cp="5D4E" />
+    <char cp="5D50" />
+    <char cp="5D52" />
+    <char cp="5D5C" />
+    <char cp="5D69" />
+    <char cp="5D6C" />
+    <char cp="5D6F" />
+    <char cp="5D73" />
+    <char cp="5D76" />
+    <char cp="5D82" />
+    <char cp="5D84" />
+    <char cp="5D87" />
+    <range first-cp="5D8B" last-cp="5D8C" />
+    <char cp="5D90" />
+    <char cp="5D9D" />
+    <char cp="5DA2" />
+    <char cp="5DAC" />
+    <char cp="5DAE" />
+    <char cp="5DB7" />
+    <char cp="5DBA" />
+    <range first-cp="5DBC" last-cp="5DBD" />
+    <char cp="5DC9" />
+    <range first-cp="5DCC" last-cp="5DCD" />
+    <range first-cp="5DD2" last-cp="5DD3" />
+    <char cp="5DD6" />
+    <char cp="5DDB" />
+    <range first-cp="5DDD" last-cp="5DDE" />
+    <char cp="5DE1" />
+    <char cp="5DE3" />
+    <range first-cp="5DE5" last-cp="5DE8" />
+    <char cp="5DEB" />
+    <char cp="5DEE" />
+    <range first-cp="5DF1" last-cp="5DF5" />
+    <char cp="5DF7" />
+    <char cp="5DFB" />
+    <range first-cp="5DFD" last-cp="5DFE" />
+    <range first-cp="5E02" last-cp="5E03" />
+    <char cp="5E06" />
+    <range first-cp="5E0B" last-cp="5E0C" />
+    <char cp="5E11" />
+    <char cp="5E16" />
+    <range first-cp="5E19" last-cp="5E1B" />
+    <char cp="5E1D" />
+    <char cp="5E25" />
+    <char cp="5E2B" />
+    <char cp="5E2D" />
+    <range first-cp="5E2F" last-cp="5E30" />
+    <char cp="5E33" />
+    <range first-cp="5E36" last-cp="5E38" />
+    <char cp="5E3D" />
+    <char cp="5E40" />
+    <range first-cp="5E43" last-cp="5E45" />
+    <char cp="5E47" />
+    <char cp="5E4C" />
+    <char cp="5E4E" />
+    <range first-cp="5E54" last-cp="5E55" />
+    <char cp="5E57" />
+    <char cp="5E5F" />
+    <range first-cp="5E61" last-cp="5E64" />
+    <range first-cp="5E72" last-cp="5E76" />
+    <range first-cp="5E78" last-cp="5E7F" />
+    <char cp="5E81" />
+    <range first-cp="5E83" last-cp="5E84" />
+    <char cp="5E87" />
+    <char cp="5E8A" />
+    <char cp="5E8F" />
+    <range first-cp="5E95" last-cp="5E97" />
+    <char cp="5E9A" />
+    <char cp="5E9C" />
+    <char cp="5EA0" />
+    <range first-cp="5EA6" last-cp="5EA7" />
+    <char cp="5EAB" />
+    <char cp="5EAD" />
+    <range first-cp="5EB5" last-cp="5EB8" />
+    <range first-cp="5EC1" last-cp="5EC3" />
+    <range first-cp="5EC8" last-cp="5ECA" />
+    <range first-cp="5ECF" last-cp="5ED0" />
+    <char cp="5ED3" />
+    <char cp="5ED6" />
+    <range first-cp="5EDA" last-cp="5EDB" />
+    <char cp="5EDD" />
+    <range first-cp="5EDF" last-cp="5EE3" />
+    <range first-cp="5EE8" last-cp="5EE9" />
+    <char cp="5EEC" />
+    <range first-cp="5EF0" last-cp="5EF1" />
+    <range first-cp="5EF3" last-cp="5EF4" />
+    <range first-cp="5EF6" last-cp="5EF8" />
+    <range first-cp="5EFA" last-cp="5EFC" />
+    <range first-cp="5EFE" last-cp="5EFF" />
+    <char cp="5F01" />
+    <range first-cp="5F03" last-cp="5F04" />
+    <range first-cp="5F09" last-cp="5F0D" />
+    <range first-cp="5F0F" last-cp="5F11" />
+    <range first-cp="5F13" last-cp="5F18" />
+    <char cp="5F1B" />
+    <char cp="5F1F" />
+    <range first-cp="5F25" last-cp="5F27" />
+    <char cp="5F29" />
+    <char cp="5F2D" />
+    <char cp="5F2F" />
+    <char cp="5F31" />
+    <char cp="5F35" />
+    <range first-cp="5F37" last-cp="5F38" />
+    <char cp="5F3C" />
+    <char cp="5F3E" />
+    <char cp="5F41" />
+    <char cp="5F48" />
+    <char cp="5F4A" />
+    <char cp="5F4C" />
+    <char cp="5F4E" />
+    <char cp="5F51" />
+    <char cp="5F53" />
+    <range first-cp="5F56" last-cp="5F57" />
+    <char cp="5F59" />
+    <range first-cp="5F5C" last-cp="5F5D" />
+    <range first-cp="5F61" last-cp="5F62" />
+    <char cp="5F66" />
+    <range first-cp="5F69" last-cp="5F6D" />
+    <range first-cp="5F70" last-cp="5F71" />
+    <char cp="5F73" />
+    <char cp="5F77" />
+    <char cp="5F79" />
+    <char cp="5F7C" />
+    <range first-cp="5F7F" last-cp="5F85" />
+    <range first-cp="5F87" last-cp="5F88" />
+    <range first-cp="5F8A" last-cp="5F8C" />
+    <range first-cp="5F90" last-cp="5F93" />
+    <range first-cp="5F97" last-cp="5F99" />
+    <char cp="5F9E" />
+    <range first-cp="5FA0" last-cp="5FA1" />
+    <range first-cp="5FA8" last-cp="5FAA" />
+    <range first-cp="5FAD" last-cp="5FAE" />
+    <range first-cp="5FB3" last-cp="5FB4" />
+    <char cp="5FB9" />
+    <range first-cp="5FBC" last-cp="5FBD" />
+    <char cp="5FC3" />
+    <char cp="5FC5" />
+    <range first-cp="5FCC" last-cp="5FCD" />
+    <range first-cp="5FD6" last-cp="5FD9" />
+    <range first-cp="5FDC" last-cp="5FDD" />
+    <char cp="5FE0" />
+    <char cp="5FE4" />
+    <char cp="5FEB" />
+    <range first-cp="5FF0" last-cp="5FF1" />
+    <char cp="5FF5" />
+    <char cp="5FF8" />
+    <char cp="5FFB" />
+    <char cp="5FFD" />
+    <char cp="5FFF" />
+    <range first-cp="600E" last-cp="6010" />
+    <char cp="6012" />
+    <range first-cp="6015" last-cp="6016" />
+    <char cp="6019" />
+    <range first-cp="601B" last-cp="601D" />
+    <range first-cp="6020" last-cp="6021" />
+    <range first-cp="6025" last-cp="602B" />
+    <char cp="602F" />
+    <char cp="6031" />
+    <char cp="603A" />
+    <range first-cp="6041" last-cp="6043" />
+    <char cp="6046" />
+    <range first-cp="604A" last-cp="604B" />
+    <char cp="604D" />
+    <char cp="6050" />
+    <char cp="6052" />
+    <char cp="6055" />
+    <range first-cp="6059" last-cp="605A" />
+    <range first-cp="605F" last-cp="6060" />
+    <range first-cp="6062" last-cp="6065" />
+    <range first-cp="6068" last-cp="606D" />
+    <range first-cp="606F" last-cp="6070" />
+    <char cp="6075" />
+    <char cp="6077" />
+    <char cp="6081" />
+    <range first-cp="6083" last-cp="6084" />
+    <char cp="6089" />
+    <range first-cp="608B" last-cp="608D" />
+    <char cp="6092" />
+    <char cp="6094" />
+    <range first-cp="6096" last-cp="6097" />
+    <range first-cp="609A" last-cp="609B" />
+    <range first-cp="609F" last-cp="60A0" />
+    <char cp="60A3" />
+    <range first-cp="60A6" last-cp="60A7" />
+    <range first-cp="60A9" last-cp="60AA" />
+    <range first-cp="60B2" last-cp="60B6" />
+    <char cp="60B8" />
+    <range first-cp="60BC" last-cp="60BD" />
+    <range first-cp="60C5" last-cp="60C7" />
+    <char cp="60D1" />
+    <char cp="60D3" />
+    <char cp="60D8" />
+    <char cp="60DA" />
+    <char cp="60DC" />
+    <range first-cp="60DF" last-cp="60E1" />
+    <char cp="60E3" />
+    <range first-cp="60E7" last-cp="60E8" />
+    <range first-cp="60F0" last-cp="60F1" />
+    <range first-cp="60F3" last-cp="60F4" />
+    <range first-cp="60F6" last-cp="60F7" />
+    <range first-cp="60F9" last-cp="60FB" />
+    <range first-cp="6100" last-cp="6101" />
+    <char cp="6103" />
+    <char cp="6106" />
+    <range first-cp="6108" last-cp="6109" />
+    <range first-cp="610D" last-cp="610F" />
+    <char cp="6115" />
+    <range first-cp="611A" last-cp="611B" />
+    <char cp="611F" />
+    <char cp="6121" />
+    <range first-cp="6127" last-cp="6128" />
+    <char cp="612C" />
+    <char cp="6134" />
+    <range first-cp="613C" last-cp="613F" />
+    <char cp="6142" />
+    <char cp="6144" />
+    <range first-cp="6147" last-cp="6148" />
+    <range first-cp="614A" last-cp="614E" />
+    <char cp="6153" />
+    <char cp="6155" />
+    <range first-cp="6158" last-cp="615A" />
+    <char cp="615D" />
+    <char cp="615F" />
+    <range first-cp="6162" last-cp="6163" />
+    <char cp="6165" />
+    <range first-cp="6167" last-cp="6168" />
+    <char cp="616B" />
+    <range first-cp="616E" last-cp="6171" />
+    <range first-cp="6173" last-cp="6177" />
+    <char cp="617E" />
+    <char cp="6182" />
+    <char cp="6187" />
+    <char cp="618A" />
+    <char cp="618E" />
+    <range first-cp="6190" last-cp="6191" />
+    <char cp="6194" />
+    <char cp="6196" />
+    <range first-cp="6199" last-cp="619A" />
+    <char cp="61A4" />
+    <char cp="61A7" />
+    <char cp="61A9" />
+    <range first-cp="61AB" last-cp="61AC" />
+    <char cp="61AE" />
+    <char cp="61B2" />
+    <char cp="61B6" />
+    <char cp="61BA" />
+    <char cp="61BE" />
+    <char cp="61C3" />
+    <range first-cp="61C6" last-cp="61CD" />
+    <char cp="61D0" />
+    <char cp="61E3" />
+    <char cp="61E6" />
+    <char cp="61F2" />
+    <char cp="61F4" />
+    <range first-cp="61F6" last-cp="61F8" />
+    <char cp="61FA" />
+    <range first-cp="61FC" last-cp="6200" />
+    <range first-cp="6208" last-cp="620A" />
+    <range first-cp="620C" last-cp="620E" />
+    <range first-cp="6210" last-cp="6212" />
+    <char cp="6214" />
+    <char cp="6216" />
+    <range first-cp="621A" last-cp="621B" />
+    <range first-cp="621D" last-cp="621F" />
+    <char cp="6221" />
+    <char cp="6226" />
+    <char cp="622A" />
+    <range first-cp="622E" last-cp="6230" />
+    <range first-cp="6232" last-cp="6234" />
+    <char cp="6238" />
+    <char cp="623B" />
+    <range first-cp="623F" last-cp="6241" />
+    <range first-cp="6247" last-cp="6249" />
+    <char cp="624B" />
+    <range first-cp="624D" last-cp="624E" />
+    <char cp="6253" />
+    <char cp="6255" />
+    <char cp="6258" />
+    <char cp="625B" />
+    <char cp="625E" />
+    <char cp="6260" />
+    <char cp="6263" />
+    <char cp="6268" />
+    <char cp="626E" />
+    <char cp="6271" />
+    <char cp="6276" />
+    <char cp="6279" />
+    <char cp="627C" />
+    <range first-cp="627E" last-cp="6280" />
+    <range first-cp="6282" last-cp="6284" />
+    <range first-cp="6289" last-cp="628A" />
+    <range first-cp="6291" last-cp="6298" />
+    <range first-cp="629B" last-cp="629C" />
+    <char cp="629E" />
+    <range first-cp="62AB" last-cp="62AC" />
+    <char cp="62B1" />
+    <char cp="62B5" />
+    <char cp="62B9" />
+    <range first-cp="62BB" last-cp="62BD" />
+    <char cp="62C2" />
+    <range first-cp="62C5" last-cp="62CA" />
+    <range first-cp="62CC" last-cp="62CD" />
+    <range first-cp="62CF" last-cp="62D4" />
+    <range first-cp="62D7" last-cp="62D9" />
+    <range first-cp="62DB" last-cp="62DD" />
+    <range first-cp="62E0" last-cp="62E1" />
+    <range first-cp="62EC" last-cp="62EF" />
+    <char cp="62F1" />
+    <char cp="62F3" />
+    <range first-cp="62F5" last-cp="62F7" />
+    <range first-cp="62FE" last-cp="62FF" />
+    <range first-cp="6301" last-cp="6302" />
+    <range first-cp="6307" last-cp="6309" />
+    <char cp="630C" />
+    <char cp="6311" />
+    <char cp="6319" />
+    <char cp="631F" />
+    <range first-cp="6327" last-cp="6328" />
+    <char cp="632B" />
+    <char cp="632F" />
+    <char cp="633A" />
+    <range first-cp="633D" last-cp="633F" />
+    <char cp="6349" />
+    <range first-cp="634C" last-cp="634D" />
+    <range first-cp="634F" last-cp="6350" />
+    <char cp="6355" />
+    <char cp="6357" />
+    <char cp="635C" />
+    <range first-cp="6367" last-cp="6369" />
+    <char cp="636B" />
+    <char cp="636E" />
+    <char cp="6372" />
+    <range first-cp="6376" last-cp="6377" />
+    <range first-cp="637A" last-cp="637B" />
+    <char cp="6380" />
+    <char cp="6383" />
+    <range first-cp="6388" last-cp="6389" />
+    <char cp="638C" />
+    <range first-cp="638E" last-cp="638F" />
+    <char cp="6392" />
+    <char cp="6396" />
+    <char cp="6398" />
+    <char cp="639B" />
+    <range first-cp="639F" last-cp="63A3" />
+    <char cp="63A5" />
+    <range first-cp="63A7" last-cp="63AC" />
+    <char cp="63B2" />
+    <range first-cp="63B4" last-cp="63B5" />
+    <char cp="63BB" />
+    <char cp="63BE" />
+    <char cp="63C0" />
+    <range first-cp="63C3" last-cp="63C4" />
+    <char cp="63C6" />
+    <char cp="63C9" />
+    <range first-cp="63CF" last-cp="63D0" />
+    <char cp="63D2" />
+    <char cp="63D6" />
+    <range first-cp="63DA" last-cp="63DB" />
+    <char cp="63E1" />
+    <char cp="63E3" />
+    <char cp="63E9" />
+    <char cp="63EE" />
+    <char cp="63F4" />
+    <char cp="63F6" />
+    <char cp="63FA" />
+    <char cp="6406" />
+    <char cp="640D" />
+    <char cp="640F" />
+    <char cp="6413" />
+    <range first-cp="6416" last-cp="6417" />
+    <char cp="641C" />
+    <char cp="6426" />
+    <char cp="6428" />
+    <range first-cp="642C" last-cp="642D" />
+    <char cp="6434" />
+    <char cp="6436" />
+    <char cp="643A" />
+    <char cp="643E" />
+    <char cp="6442" />
+    <char cp="644E" />
+    <char cp="6458" />
+    <char cp="6467" />
+    <char cp="6469" />
+    <char cp="646F" />
+    <char cp="6476" />
+    <char cp="6478" />
+    <char cp="647A" />
+    <char cp="6483" />
+    <char cp="6488" />
+    <range first-cp="6492" last-cp="6493" />
+    <char cp="6495" />
+    <char cp="649A" />
+    <char cp="649E" />
+    <range first-cp="64A4" last-cp="64A5" />
+    <char cp="64A9" />
+    <char cp="64AB" />
+    <range first-cp="64AD" last-cp="64AE" />
+    <char cp="64B0" />
+    <char cp="64B2" />
+    <char cp="64B9" />
+    <range first-cp="64BB" last-cp="64BC" />
+    <range first-cp="64C1" last-cp="64C2" />
+    <char cp="64C5" />
+    <char cp="64C7" />
+    <char cp="64CD" />
+    <char cp="64D2" />
+    <char cp="64D4" />
+    <char cp="64D8" />
+    <char cp="64DA" />
+    <range first-cp="64E0" last-cp="64E3" />
+    <range first-cp="64E6" last-cp="64E7" />
+    <char cp="64EC" />
+    <char cp="64EF" />
+    <range first-cp="64F1" last-cp="64F2" />
+    <char cp="64F4" />
+    <char cp="64F6" />
+    <char cp="64FA" />
+    <range first-cp="64FD" last-cp="64FE" />
+    <char cp="6500" />
+    <char cp="6505" />
+    <char cp="6518" />
+    <range first-cp="651C" last-cp="651D" />
+    <range first-cp="6523" last-cp="6524" />
+    <range first-cp="652A" last-cp="652C" />
+    <char cp="652F" />
+    <range first-cp="6534" last-cp="6539" />
+    <char cp="653B" />
+    <range first-cp="653E" last-cp="653F" />
+    <char cp="6545" />
+    <char cp="6548" />
+    <char cp="654D" />
+    <char cp="654F" />
+    <char cp="6551" />
+    <range first-cp="6555" last-cp="6559" />
+    <range first-cp="655D" last-cp="655E" />
+    <range first-cp="6562" last-cp="6563" />
+    <char cp="6566" />
+    <char cp="656C" />
+    <char cp="6570" />
+    <char cp="6572" />
+    <range first-cp="6574" last-cp="6575" />
+    <range first-cp="6577" last-cp="6578" />
+    <range first-cp="6582" last-cp="6583" />
+    <range first-cp="6587" last-cp="6589" />
+    <char cp="658C" />
+    <char cp="658E" />
+    <range first-cp="6590" last-cp="6591" />
+    <char cp="6597" />
+    <char cp="6599" />
+    <range first-cp="659B" last-cp="659C" />
+    <char cp="659F" />
+    <char cp="65A1" />
+    <range first-cp="65A4" last-cp="65A5" />
+    <char cp="65A7" />
+    <range first-cp="65AB" last-cp="65AD" />
+    <range first-cp="65AF" last-cp="65B0" />
+    <char cp="65B7" />
+    <char cp="65B9" />
+    <range first-cp="65BC" last-cp="65BD" />
+    <char cp="65C1" />
+    <range first-cp="65C3" last-cp="65C6" />
+    <range first-cp="65CB" last-cp="65CC" />
+    <char cp="65CF" />
+    <char cp="65D2" />
+    <char cp="65D7" />
+    <char cp="65D9" />
+    <char cp="65DB" />
+    <range first-cp="65E0" last-cp="65E2" />
+    <range first-cp="65E5" last-cp="65E9" />
+    <range first-cp="65EC" last-cp="65ED" />
+    <char cp="65F1" />
+    <range first-cp="65FA" last-cp="65FB" />
+    <range first-cp="6602" last-cp="6603" />
+    <range first-cp="6606" last-cp="6607" />
+    <char cp="660A" />
+    <char cp="660C" />
+    <range first-cp="660E" last-cp="660F" />
+    <range first-cp="6613" last-cp="6614" />
+    <char cp="661C" />
+    <range first-cp="661F" last-cp="6620" />
+    <char cp="6625" />
+    <range first-cp="6627" last-cp="6628" />
+    <char cp="662D" />
+    <char cp="662F" />
+    <range first-cp="6634" last-cp="6636" />
+    <char cp="663C" />
+    <char cp="663F" />
+    <range first-cp="6641" last-cp="6644" />
+    <char cp="6649" />
+    <char cp="664B" />
+    <char cp="664F" />
+    <char cp="6652" />
+    <range first-cp="665D" last-cp="665F" />
+    <char cp="6662" />
+    <char cp="6664" />
+    <range first-cp="6666" last-cp="6669" />
+    <range first-cp="666E" last-cp="6670" />
+    <char cp="6674" />
+    <char cp="6676" />
+    <char cp="667A" />
+    <char cp="6681" />
+    <range first-cp="6683" last-cp="6684" />
+    <range first-cp="6687" last-cp="6689" />
+    <char cp="668E" />
+    <char cp="6691" />
+    <range first-cp="6696" last-cp="6698" />
+    <char cp="669D" />
+    <char cp="66A2" />
+    <char cp="66A6" />
+    <char cp="66AB" />
+    <char cp="66AE" />
+    <char cp="66B4" />
+    <range first-cp="66B8" last-cp="66B9" />
+    <char cp="66BC" />
+    <char cp="66BE" />
+    <char cp="66C1" />
+    <char cp="66C4" />
+    <char cp="66C7" />
+    <char cp="66C9" />
+    <char cp="66D6" />
+    <range first-cp="66D9" last-cp="66DA" />
+    <range first-cp="66DC" last-cp="66DD" />
+    <char cp="66E0" />
+    <char cp="66E6" />
+    <char cp="66E9" />
+    <char cp="66F0" />
+    <range first-cp="66F2" last-cp="66F5" />
+    <range first-cp="66F7" last-cp="66F9" />
+    <range first-cp="66FC" last-cp="6700" />
+    <char cp="6703" />
+    <range first-cp="6708" last-cp="6709" />
+    <char cp="670B" />
+    <char cp="670D" />
+    <char cp="670F" />
+    <range first-cp="6714" last-cp="6717" />
+    <char cp="671B" />
+    <range first-cp="671D" last-cp="671F" />
+    <range first-cp="6726" last-cp="6728" />
+    <range first-cp="672A" last-cp="672E" />
+    <char cp="6731" />
+    <char cp="6734" />
+    <range first-cp="6736" last-cp="6738" />
+    <char cp="673A" />
+    <char cp="673D" />
+    <char cp="673F" />
+    <char cp="6741" />
+    <char cp="6746" />
+    <char cp="6749" />
+    <range first-cp="674E" last-cp="6751" />
+    <char cp="6753" />
+    <char cp="6756" />
+    <char cp="6759" />
+    <char cp="675C" />
+    <range first-cp="675E" last-cp="6765" />
+    <char cp="676A" />
+    <char cp="676D" />
+    <range first-cp="676F" last-cp="6773" />
+    <char cp="6775" />
+    <char cp="6777" />
+    <char cp="677C" />
+    <range first-cp="677E" last-cp="677F" />
+    <char cp="6785" />
+    <char cp="6787" />
+    <char cp="6789" />
+    <range first-cp="678B" last-cp="678C" />
+    <char cp="6790" />
+    <char cp="6795" />
+    <char cp="6797" />
+    <char cp="679A" />
+    <range first-cp="679C" last-cp="679D" />
+    <range first-cp="67A0" last-cp="67A2" />
+    <char cp="67A6" />
+    <char cp="67A9" />
+    <char cp="67AF" />
+    <range first-cp="67B3" last-cp="67B4" />
+    <range first-cp="67B6" last-cp="67B9" />
+    <char cp="67C1" />
+    <char cp="67C4" />
+    <char cp="67C6" />
+    <char cp="67CA" />
+    <range first-cp="67CE" last-cp="67D1" />
+    <range first-cp="67D3" last-cp="67D4" />
+    <char cp="67D8" />
+    <char cp="67DA" />
+    <range first-cp="67DD" last-cp="67DE" />
+    <char cp="67E2" />
+    <char cp="67E4" />
+    <char cp="67E7" />
+    <char cp="67E9" />
+    <char cp="67EC" />
+    <range first-cp="67EE" last-cp="67EF" />
+    <char cp="67F1" />
+    <range first-cp="67F3" last-cp="67F5" />
+    <char cp="67FB" />
+    <range first-cp="67FE" last-cp="67FF" />
+    <range first-cp="6802" last-cp="6804" />
+    <char cp="6813" />
+    <range first-cp="6816" last-cp="6817" />
+    <char cp="681E" />
+    <range first-cp="6821" last-cp="6822" />
+    <range first-cp="6829" last-cp="682B" />
+    <char cp="6832" />
+    <char cp="6834" />
+    <range first-cp="6838" last-cp="6839" />
+    <range first-cp="683C" last-cp="683D" />
+    <range first-cp="6840" last-cp="6843" />
+    <char cp="6846" />
+    <char cp="6848" />
+    <range first-cp="684D" last-cp="684E" />
+    <range first-cp="6850" last-cp="6851" />
+    <range first-cp="6853" last-cp="6854" />
+    <char cp="6859" />
+    <range first-cp="685C" last-cp="685D" />
+    <char cp="685F" />
+    <char cp="6863" />
+    <char cp="6867" />
+    <char cp="6874" />
+    <range first-cp="6876" last-cp="6877" />
+    <range first-cp="687E" last-cp="687F" />
+    <char cp="6881" />
+    <char cp="6883" />
+    <char cp="6885" />
+    <char cp="688D" />
+    <char cp="688F" />
+    <range first-cp="6893" last-cp="6894" />
+    <char cp="6897" />
+    <char cp="689B" />
+    <char cp="689D" />
+    <range first-cp="689F" last-cp="68A0" />
+    <char cp="68A2" />
+    <range first-cp="68A6" last-cp="68A8" />
+    <char cp="68AD" />
+    <range first-cp="68AF" last-cp="68B1" />
+    <char cp="68B3" />
+    <range first-cp="68B5" last-cp="68B6" />
+    <range first-cp="68B9" last-cp="68BA" />
+    <char cp="68BC" />
+    <char cp="68C4" />
+    <char cp="68C6" />
+    <range first-cp="68C9" last-cp="68CB" />
+    <char cp="68CD" />
+    <char cp="68D2" />
+    <range first-cp="68D4" last-cp="68D5" />
+    <range first-cp="68D7" last-cp="68D8" />
+    <char cp="68DA" />
+    <range first-cp="68DF" last-cp="68E1" />
+    <char cp="68E3" />
+    <char cp="68E7" />
+    <range first-cp="68EE" last-cp="68EF" />
+    <char cp="68F2" />
+    <range first-cp="68F9" last-cp="68FA" />
+    <range first-cp="6900" last-cp="6901" />
+    <range first-cp="6904" last-cp="6905" />
+    <char cp="6908" />
+    <range first-cp="690B" last-cp="690F" />
+    <char cp="6912" />
+    <range first-cp="6919" last-cp="691C" />
+    <range first-cp="6921" last-cp="6923" />
+    <range first-cp="6925" last-cp="6926" />
+    <char cp="6928" />
+    <char cp="692A" />
+    <char cp="6930" />
+    <char cp="6934" />
+    <char cp="6936" />
+    <char cp="6939" />
+    <char cp="693D" />
+    <char cp="693F" />
+    <char cp="694A" />
+    <range first-cp="6953" last-cp="6955" />
+    <range first-cp="6959" last-cp="695A" />
+    <range first-cp="695C" last-cp="695E" />
+    <range first-cp="6960" last-cp="6962" />
+    <range first-cp="696A" last-cp="696B" />
+    <range first-cp="696D" last-cp="696F" />
+    <range first-cp="6973" last-cp="6975" />
+    <range first-cp="6977" last-cp="6979" />
+    <range first-cp="697C" last-cp="697E" />
+    <range first-cp="6981" last-cp="6982" />
+    <char cp="698A" />
+    <char cp="698E" />
+    <char cp="6991" />
+    <range first-cp="6994" last-cp="6995" />
+    <range first-cp="699B" last-cp="699C" />
+    <char cp="69A0" />
+    <char cp="69A7" />
+    <char cp="69AE" />
+    <range first-cp="69B1" last-cp="69B2" />
+    <char cp="69B4" />
+    <char cp="69BB" />
+    <range first-cp="69BE" last-cp="69BF" />
+    <char cp="69C1" />
+    <char cp="69C3" />
+    <char cp="69C7" />
+    <range first-cp="69CA" last-cp="69CE" />
+    <char cp="69D0" />
+    <char cp="69D3" />
+    <range first-cp="69D8" last-cp="69D9" />
+    <range first-cp="69DD" last-cp="69DE" />
+    <range first-cp="69E7" last-cp="69E8" />
+    <char cp="69EB" />
+    <char cp="69ED" />
+    <char cp="69F2" />
+    <char cp="69F9" />
+    <char cp="69FB" />
+    <char cp="69FD" />
+    <char cp="69FF" />
+    <char cp="6A02" />
+    <char cp="6A05" />
+    <range first-cp="6A0A" last-cp="6A0C" />
+    <range first-cp="6A12" last-cp="6A14" />
+    <char cp="6A17" />
+    <char cp="6A19" />
+    <char cp="6A1B" />
+    <range first-cp="6A1E" last-cp="6A1F" />
+    <range first-cp="6A21" last-cp="6A23" />
+    <range first-cp="6A29" last-cp="6A2B" />
+    <char cp="6A2E" />
+    <range first-cp="6A35" last-cp="6A36" />
+    <range first-cp="6A38" last-cp="6A3A" />
+    <char cp="6A3D" />
+    <char cp="6A44" />
+    <range first-cp="6A47" last-cp="6A48" />
+    <char cp="6A4B" />
+    <range first-cp="6A58" last-cp="6A59" />
+    <char cp="6A5F" />
+    <range first-cp="6A61" last-cp="6A62" />
+    <char cp="6A66" />
+    <char cp="6A72" />
+    <char cp="6A78" />
+    <range first-cp="6A7F" last-cp="6A80" />
+    <char cp="6A84" />
+    <range first-cp="6A8D" last-cp="6A8E" />
+    <char cp="6A90" />
+    <char cp="6A97" />
+    <char cp="6A9C" />
+    <char cp="6AA0" />
+    <range first-cp="6AA2" last-cp="6AA3" />
+    <char cp="6AAA" />
+    <char cp="6AAC" />
+    <char cp="6AAE" />
+    <char cp="6AB3" />
+    <char cp="6AB8" />
+    <char cp="6ABB" />
+    <range first-cp="6AC1" last-cp="6AC3" />
+    <char cp="6AD1" />
+    <char cp="6AD3" />
+    <range first-cp="6ADA" last-cp="6ADB" />
+    <range first-cp="6ADE" last-cp="6ADF" />
+    <char cp="6AE8" />
+    <char cp="6AEA" />
+    <range first-cp="6AFA" last-cp="6AFB" />
+    <range first-cp="6B04" last-cp="6B05" />
+    <char cp="6B0A" />
+    <char cp="6B12" />
+    <char cp="6B16" />
+    <char cp="6B1D" />
+    <range first-cp="6B1F" last-cp="6B21" />
+    <char cp="6B23" />
+    <char cp="6B27" />
+    <char cp="6B32" />
+    <range first-cp="6B37" last-cp="6B3A" />
+    <range first-cp="6B3D" last-cp="6B3E" />
+    <char cp="6B43" />
+    <char cp="6B47" />
+    <char cp="6B49" />
+    <char cp="6B4C" />
+    <char cp="6B4E" />
+    <char cp="6B50" />
+    <range first-cp="6B53" last-cp="6B54" />
+    <char cp="6B59" />
+    <char cp="6B5B" />
+    <char cp="6B5F" />
+    <range first-cp="6B61" last-cp="6B64" />
+    <char cp="6B66" />
+    <range first-cp="6B69" last-cp="6B6A" />
+    <char cp="6B6F" />
+    <range first-cp="6B73" last-cp="6B74" />
+    <range first-cp="6B78" last-cp="6B79" />
+    <char cp="6B7B" />
+    <range first-cp="6B7F" last-cp="6B80" />
+    <range first-cp="6B83" last-cp="6B84" />
+    <char cp="6B86" />
+    <range first-cp="6B89" last-cp="6B8B" />
+    <char cp="6B8D" />
+    <range first-cp="6B95" last-cp="6B96" />
+    <char cp="6B98" />
+    <char cp="6B9E" />
+    <char cp="6BA4" />
+    <range first-cp="6BAA" last-cp="6BAB" />
+    <char cp="6BAF" />
+    <range first-cp="6BB1" last-cp="6BB5" />
+    <char cp="6BB7" />
+    <range first-cp="6BBA" last-cp="6BBC" />
+    <range first-cp="6BBF" last-cp="6BC0" />
+    <range first-cp="6BC5" last-cp="6BC6" />
+    <char cp="6BCB" />
+    <range first-cp="6BCD" last-cp="6BCE" />
+    <range first-cp="6BD2" last-cp="6BD4" />
+    <char cp="6BD8" />
+    <char cp="6BDB" />
+    <char cp="6BDF" />
+    <range first-cp="6BEB" last-cp="6BEC" />
+    <char cp="6BEF" />
+    <char cp="6BF3" />
+    <char cp="6C08" />
+    <char cp="6C0F" />
+    <char cp="6C11" />
+    <range first-cp="6C13" last-cp="6C14" />
+    <char cp="6C17" />
+    <char cp="6C1B" />
+    <range first-cp="6C23" last-cp="6C24" />
+    <char cp="6C34" />
+    <range first-cp="6C37" last-cp="6C38" />
+    <char cp="6C3E" />
+    <range first-cp="6C40" last-cp="6C42" />
+    <char cp="6C4E" />
+    <char cp="6C50" />
+    <char cp="6C55" />
+    <char cp="6C57" />
+    <char cp="6C5A" />
+    <range first-cp="6C5D" last-cp="6C60" />
+    <char cp="6C62" />
+    <char cp="6C68" />
+    <char cp="6C6A" />
+    <char cp="6C70" />
+    <range first-cp="6C72" last-cp="6C73" />
+    <char cp="6C7A" />
+    <range first-cp="6C7D" last-cp="6C7E" />
+    <range first-cp="6C81" last-cp="6C83" />
+    <char cp="6C88" />
+    <range first-cp="6C8C" last-cp="6C8D" />
+    <char cp="6C90" />
+    <range first-cp="6C92" last-cp="6C93" />
+    <char cp="6C96" />
+    <range first-cp="6C99" last-cp="6C9B" />
+    <range first-cp="6CA1" last-cp="6CA2" />
+    <char cp="6CAB" />
+    <char cp="6CAE" />
+    <char cp="6CB1" />
+    <char cp="6CB3" />
+    <range first-cp="6CB8" last-cp="6CBF" />
+    <char cp="6CC1" />
+    <range first-cp="6CC4" last-cp="6CC5" />
+    <range first-cp="6CC9" last-cp="6CCA" />
+    <char cp="6CCC" />
+    <char cp="6CD3" />
+    <char cp="6CD5" />
+    <char cp="6CD7" />
+    <char cp="6CD9" />
+    <char cp="6CDB" />
+    <char cp="6CDD" />
+    <range first-cp="6CE1" last-cp="6CE3" />
+    <char cp="6CE5" />
+    <char cp="6CE8" />
+    <char cp="6CEA" />
+    <range first-cp="6CEF" last-cp="6CF1" />
+    <char cp="6CF3" />
+    <range first-cp="6D0B" last-cp="6D0C" />
+    <char cp="6D12" />
+    <char cp="6D17" />
+    <char cp="6D19" />
+    <char cp="6D1B" />
+    <range first-cp="6D1E" last-cp="6D1F" />
+    <char cp="6D25" />
+    <range first-cp="6D29" last-cp="6D2B" />
+    <range first-cp="6D32" last-cp="6D33" />
+    <range first-cp="6D35" last-cp="6D36" />
+    <char cp="6D38" />
+    <char cp="6D3B" />
+    <range first-cp="6D3D" last-cp="6D3E" />
+    <char cp="6D41" />
+    <range first-cp="6D44" last-cp="6D45" />
+    <range first-cp="6D59" last-cp="6D5A" />
+    <char cp="6D5C" />
+    <range first-cp="6D63" last-cp="6D64" />
+    <char cp="6D66" />
+    <range first-cp="6D69" last-cp="6D6A" />
+    <char cp="6D6C" />
+    <char cp="6D6E" />
+    <char cp="6D74" />
+    <range first-cp="6D77" last-cp="6D79" />
+    <char cp="6D85" />
+    <char cp="6D88" />
+    <char cp="6D8C" />
+    <char cp="6D8E" />
+    <char cp="6D93" />
+    <char cp="6D95" />
+    <char cp="6D99" />
+    <range first-cp="6D9B" last-cp="6D9C" />
+    <char cp="6DAF" />
+    <char cp="6DB2" />
+    <char cp="6DB5" />
+    <char cp="6DB8" />
+    <char cp="6DBC" />
+    <char cp="6DC0" />
+    <range first-cp="6DC5" last-cp="6DC7" />
+    <range first-cp="6DCB" last-cp="6DCC" />
+    <range first-cp="6DD1" last-cp="6DD2" />
+    <char cp="6DD5" />
+    <range first-cp="6DD8" last-cp="6DD9" />
+    <char cp="6DDE" />
+    <char cp="6DE1" />
+    <char cp="6DE4" />
+    <char cp="6DE6" />
+    <char cp="6DE8" />
+    <range first-cp="6DEA" last-cp="6DEC" />
+    <char cp="6DEE" />
+    <char cp="6DF1" />
+    <char cp="6DF3" />
+    <char cp="6DF5" />
+    <char cp="6DF7" />
+    <range first-cp="6DF9" last-cp="6DFB" />
+    <char cp="6E05" />
+    <range first-cp="6E07" last-cp="6E0B" />
+    <char cp="6E13" />
+    <char cp="6E15" />
+    <range first-cp="6E19" last-cp="6E1B" />
+    <char cp="6E1D" />
+    <range first-cp="6E1F" last-cp="6E21" />
+    <range first-cp="6E23" last-cp="6E26" />
+    <char cp="6E29" />
+    <range first-cp="6E2B" last-cp="6E2F" />
+    <char cp="6E38" />
+    <char cp="6E3A" />
+    <char cp="6E3E" />
+    <char cp="6E43" />
+    <char cp="6E4A" />
+    <range first-cp="6E4D" last-cp="6E4E" />
+    <char cp="6E56" />
+    <char cp="6E58" />
+    <char cp="6E5B" />
+    <char cp="6E5F" />
+    <char cp="6E67" />
+    <char cp="6E6B" />
+    <range first-cp="6E6E" last-cp="6E6F" />
+    <char cp="6E72" />
+    <char cp="6E76" />
+    <range first-cp="6E7E" last-cp="6E80" />
+    <char cp="6E82" />
+    <char cp="6E8C" />
+    <range first-cp="6E8F" last-cp="6E90" />
+    <char cp="6E96" />
+    <char cp="6E98" />
+    <range first-cp="6E9C" last-cp="6E9D" />
+    <char cp="6E9F" />
+    <char cp="6EA2" />
+    <char cp="6EA5" />
+    <char cp="6EAA" />
+    <char cp="6EAF" />
+    <char cp="6EB2" />
+    <range first-cp="6EB6" last-cp="6EB7" />
+    <char cp="6EBA" />
+    <char cp="6EBD" />
+    <char cp="6EC2" />
+    <range first-cp="6EC4" last-cp="6EC5" />
+    <char cp="6EC9" />
+    <range first-cp="6ECB" last-cp="6ECC" />
+    <char cp="6ED1" />
+    <range first-cp="6ED3" last-cp="6ED5" />
+    <range first-cp="6EDD" last-cp="6EDE" />
+    <char cp="6EEC" />
+    <char cp="6EEF" />
+    <char cp="6EF2" />
+    <char cp="6EF4" />
+    <range first-cp="6EF7" last-cp="6EF8" />
+    <range first-cp="6EFE" last-cp="6EFF" />
+    <range first-cp="6F01" last-cp="6F02" />
+    <char cp="6F06" />
+    <char cp="6F09" />
+    <char cp="6F0F" />
+    <char cp="6F11" />
+    <range first-cp="6F13" last-cp="6F15" />
+    <char cp="6F20" />
+    <range first-cp="6F22" last-cp="6F23" />
+    <range first-cp="6F2B" last-cp="6F2C" />
+    <range first-cp="6F31" last-cp="6F32" />
+    <char cp="6F38" />
+    <range first-cp="6F3E" last-cp="6F3F" />
+    <char cp="6F41" />
+    <char cp="6F45" />
+    <char cp="6F54" />
+    <char cp="6F58" />
+    <range first-cp="6F5B" last-cp="6F5C" />
+    <char cp="6F5F" />
+    <char cp="6F64" />
+    <char cp="6F66" />
+    <range first-cp="6F6D" last-cp="6F70" />
+    <char cp="6F74" />
+    <char cp="6F78" />
+    <char cp="6F7A" />
+    <char cp="6F7C" />
+    <range first-cp="6F80" last-cp="6F82" />
+    <char cp="6F84" />
+    <char cp="6F86" />
+    <char cp="6F8E" />
+    <char cp="6F91" />
+    <char cp="6F97" />
+    <char cp="6FA1" />
+    <range first-cp="6FA3" last-cp="6FA4" />
+    <char cp="6FAA" />
+    <char cp="6FB1" />
+    <char cp="6FB3" />
+    <char cp="6FB9" />
+    <range first-cp="6FC0" last-cp="6FC3" />
+    <char cp="6FC6" />
+    <range first-cp="6FD4" last-cp="6FD5" />
+    <char cp="6FD8" />
+    <char cp="6FDB" />
+    <range first-cp="6FDF" last-cp="6FE1" />
+    <char cp="6FE4" />
+    <range first-cp="6FEB" last-cp="6FEC" />
+    <range first-cp="6FEE" last-cp="6FEF" />
+    <char cp="6FF1" />
+    <char cp="6FF3" />
+    <char cp="6FF6" />
+    <char cp="6FFA" />
+    <char cp="6FFE" />
+    <char cp="7001" />
+    <char cp="7009" />
+    <char cp="700B" />
+    <char cp="700F" />
+    <char cp="7011" />
+    <char cp="7015" />
+    <char cp="7018" />
+    <range first-cp="701A" last-cp="701B" />
+    <range first-cp="701D" last-cp="701F" />
+    <range first-cp="7026" last-cp="7027" />
+    <char cp="702C" />
+    <char cp="7030" />
+    <char cp="7032" />
+    <char cp="703E" />
+    <char cp="704C" />
+    <char cp="7051" />
+    <char cp="7058" />
+    <char cp="7063" />
+    <char cp="706B" />
+    <range first-cp="706F" last-cp="7070" />
+    <char cp="7078" />
+    <range first-cp="707C" last-cp="707D" />
+    <range first-cp="7089" last-cp="708A" />
+    <char cp="708E" />
+    <char cp="7092" />
+    <char cp="7099" />
+    <range first-cp="70AC" last-cp="70AF" />
+    <char cp="70B3" />
+    <range first-cp="70B8" last-cp="70BA" />
+    <char cp="70C8" />
+    <char cp="70CB" />
+    <char cp="70CF" />
+    <char cp="70D9" />
+    <char cp="70DD" />
+    <char cp="70DF" />
+    <char cp="70F1" />
+    <char cp="70F9" />
+    <char cp="70FD" />
+    <char cp="7109" />
+    <char cp="7114" />
+    <range first-cp="7119" last-cp="711A" />
+    <char cp="711C" />
+    <char cp="7121" />
+    <char cp="7126" />
+    <char cp="7136" />
+    <char cp="713C" />
+    <char cp="7149" />
+    <char cp="714C" />
+    <char cp="714E" />
+    <range first-cp="7155" last-cp="7156" />
+    <char cp="7159" />
+    <char cp="7162" />
+    <range first-cp="7164" last-cp="7167" />
+    <char cp="7169" />
+    <char cp="716C" />
+    <char cp="716E" />
+    <char cp="717D" />
+    <char cp="7184" />
+    <char cp="7188" />
+    <char cp="718A" />
+    <char cp="718F" />
+    <range first-cp="7194" last-cp="7195" />
+    <char cp="7199" />
+    <char cp="719F" />
+    <char cp="71A8" />
+    <char cp="71AC" />
+    <char cp="71B1" />
+    <char cp="71B9" />
+    <char cp="71BE" />
+    <char cp="71C3" />
+    <range first-cp="71C8" last-cp="71C9" />
+    <char cp="71CE" />
+    <char cp="71D0" />
+    <char cp="71D2" />
+    <range first-cp="71D4" last-cp="71D5" />
+    <char cp="71D7" />
+    <range first-cp="71DF" last-cp="71E0" />
+    <range first-cp="71E5" last-cp="71E7" />
+    <range first-cp="71EC" last-cp="71EE" />
+    <char cp="71F5" />
+    <char cp="71F9" />
+    <range first-cp="71FB" last-cp="71FC" />
+    <char cp="71FF" />
+    <char cp="7206" />
+    <char cp="720D" />
+    <char cp="7210" />
+    <char cp="721B" />
+    <char cp="7228" />
+    <char cp="722A" />
+    <range first-cp="722C" last-cp="722D" />
+    <char cp="7230" />
+    <char cp="7232" />
+    <range first-cp="7235" last-cp="7236" />
+    <range first-cp="723A" last-cp="7240" />
+    <range first-cp="7246" last-cp="7248" />
+    <range first-cp="724B" last-cp="724C" />
+    <char cp="7252" />
+    <range first-cp="7258" last-cp="7259" />
+    <char cp="725B" />
+    <char cp="725D" />
+    <char cp="725F" />
+    <range first-cp="7261" last-cp="7262" />
+    <char cp="7267" />
+    <char cp="7269" />
+    <char cp="7272" />
+    <char cp="7274" />
+    <char cp="7279" />
+    <range first-cp="727D" last-cp="727E" />
+    <range first-cp="7280" last-cp="7282" />
+    <char cp="7287" />
+    <char cp="7292" />
+    <char cp="7296" />
+    <char cp="72A0" />
+    <char cp="72A2" />
+    <char cp="72A7" />
+    <char cp="72AC" />
+    <char cp="72AF" />
+    <char cp="72B2" />
+    <char cp="72B6" />
+    <char cp="72B9" />
+    <range first-cp="72C2" last-cp="72C4" />
+    <char cp="72C6" />
+    <char cp="72CE" />
+    <char cp="72D0" />
+    <char cp="72D2" />
+    <char cp="72D7" />
+    <char cp="72D9" />
+    <char cp="72DB" />
+    <range first-cp="72E0" last-cp="72E2" />
+    <char cp="72E9" />
+    <range first-cp="72EC" last-cp="72ED" />
+    <range first-cp="72F7" last-cp="72F9" />
+    <range first-cp="72FC" last-cp="72FD" />
+    <char cp="730A" />
+    <range first-cp="7316" last-cp="7317" />
+    <range first-cp="731B" last-cp="731D" />
+    <char cp="731F" />
+    <char cp="7325" />
+    <range first-cp="7329" last-cp="732B" />
+    <range first-cp="732E" last-cp="732F" />
+    <char cp="7334" />
+    <range first-cp="7336" last-cp="7337" />
+    <range first-cp="733E" last-cp="733F" />
+    <range first-cp="7344" last-cp="7345" />
+    <range first-cp="734E" last-cp="734F" />
+    <char cp="7357" />
+    <char cp="7363" />
+    <char cp="7368" />
+    <char cp="736A" />
+    <char cp="7370" />
+    <char cp="7372" />
+    <char cp="7375" />
+    <char cp="7378" />
+    <range first-cp="737A" last-cp="737B" />
+    <char cp="7384" />
+    <char cp="7387" />
+    <char cp="7389" />
+    <char cp="738B" />
+    <char cp="7396" />
+    <char cp="73A9" />
+    <range first-cp="73B2" last-cp="73B3" />
+    <char cp="73BB" />
+    <char cp="73C0" />
+    <char cp="73C2" />
+    <char cp="73C8" />
+    <char cp="73CA" />
+    <range first-cp="73CD" last-cp="73CE" />
+    <char cp="73DE" />
+    <char cp="73E0" />
+    <char cp="73E5" />
+    <char cp="73EA" />
+    <range first-cp="73ED" last-cp="73EE" />
+    <char cp="73F1" />
+    <char cp="73F8" />
+    <char cp="73FE" />
+    <char cp="7403" />
+    <range first-cp="7405" last-cp="7406" />
+    <char cp="7409" />
+    <char cp="7422" />
+    <char cp="7425" />
+    <range first-cp="7432" last-cp="7436" />
+    <char cp="743A" />
+    <char cp="743F" />
+    <char cp="7441" />
+    <char cp="7455" />
+    <range first-cp="7459" last-cp="745C" />
+    <range first-cp="745E" last-cp="7460" />
+    <range first-cp="7463" last-cp="7464" />
+    <range first-cp="7469" last-cp="746A" />
+    <range first-cp="746F" last-cp="7470" />
+    <char cp="7473" />
+    <char cp="7476" />
+    <char cp="747E" />
+    <char cp="7483" />
+    <char cp="748B" />
+    <char cp="749E" />
+    <char cp="74A2" />
+    <char cp="74A7" />
+    <char cp="74B0" />
+    <char cp="74BD" />
+    <char cp="74CA" />
+    <char cp="74CF" />
+    <char cp="74D4" />
+    <char cp="74DC" />
+    <char cp="74E0" />
+    <range first-cp="74E2" last-cp="74E3" />
+    <range first-cp="74E6" last-cp="74E7" />
+    <char cp="74E9" />
+    <char cp="74EE" />
+    <range first-cp="74F0" last-cp="74F2" />
+    <range first-cp="74F6" last-cp="74F8" />
+    <range first-cp="7503" last-cp="7505" />
+    <range first-cp="750C" last-cp="750E" />
+    <char cp="7511" />
+    <char cp="7513" />
+    <char cp="7515" />
+    <char cp="7518" />
+    <char cp="751A" />
+    <char cp="751C" />
+    <range first-cp="751E" last-cp="751F" />
+    <char cp="7523" />
+    <range first-cp="7525" last-cp="7526" />
+    <char cp="7528" />
+    <range first-cp="752B" last-cp="752C" />
+    <range first-cp="7530" last-cp="7533" />
+    <range first-cp="7537" last-cp="7538" />
+    <range first-cp="753A" last-cp="753C" />
+    <char cp="7544" />
+    <char cp="7546" />
+    <range first-cp="7549" last-cp="754D" />
+    <char cp="754F" />
+    <char cp="7551" />
+    <char cp="7554" />
+    <range first-cp="7559" last-cp="755D" />
+    <char cp="7560" />
+    <char cp="7562" />
+    <range first-cp="7564" last-cp="7567" />
+    <range first-cp="7569" last-cp="756B" />
+    <char cp="756D" />
+    <char cp="7570" />
+    <range first-cp="7573" last-cp="7574" />
+    <range first-cp="7576" last-cp="7578" />
+    <char cp="757F" />
+    <char cp="7582" />
+    <range first-cp="7586" last-cp="7587" />
+    <range first-cp="7589" last-cp="758B" />
+    <range first-cp="758E" last-cp="758F" />
+    <char cp="7591" />
+    <char cp="7594" />
+    <char cp="759A" />
+    <char cp="759D" />
+    <char cp="75A3" />
+    <char cp="75A5" />
+    <char cp="75AB" />
+    <range first-cp="75B1" last-cp="75B3" />
+    <char cp="75B5" />
+    <range first-cp="75B8" last-cp="75B9" />
+    <range first-cp="75BC" last-cp="75BE" />
+    <range first-cp="75C2" last-cp="75C3" />
+    <char cp="75C5" />
+    <char cp="75C7" />
+    <char cp="75CA" />
+    <char cp="75CD" />
+    <char cp="75D2" />
+    <range first-cp="75D4" last-cp="75D5" />
+    <range first-cp="75D8" last-cp="75D9" />
+    <char cp="75DB" />
+    <char cp="75DE" />
+    <range first-cp="75E2" last-cp="75E3" />
+    <char cp="75E9" />
+    <char cp="75F0" />
+    <range first-cp="75F2" last-cp="75F4" />
+    <char cp="75FA" />
+    <char cp="75FC" />
+    <range first-cp="75FE" last-cp="75FF" />
+    <char cp="7601" />
+    <char cp="7609" />
+    <char cp="760B" />
+    <char cp="760D" />
+    <range first-cp="761F" last-cp="7622" />
+    <char cp="7624" />
+    <char cp="7627" />
+    <char cp="7630" />
+    <char cp="7634" />
+    <char cp="763B" />
+    <char cp="7642" />
+    <range first-cp="7646" last-cp="7648" />
+    <char cp="764C" />
+    <char cp="7652" />
+    <char cp="7656" />
+    <char cp="7658" />
+    <char cp="765C" />
+    <range first-cp="7661" last-cp="7662" />
+    <range first-cp="7667" last-cp="766A" />
+    <char cp="766C" />
+    <char cp="7670" />
+    <char cp="7672" />
+    <char cp="7676" />
+    <char cp="7678" />
+    <range first-cp="767A" last-cp="767E" />
+    <char cp="7680" />
+    <range first-cp="7683" last-cp="7684" />
+    <range first-cp="7686" last-cp="7688" />
+    <char cp="768B" />
+    <char cp="768E" />
+    <char cp="7690" />
+    <char cp="7693" />
+    <char cp="7696" />
+    <range first-cp="7699" last-cp="769A" />
+    <char cp="76AE" />
+    <char cp="76B0" />
+    <char cp="76B4" />
+    <range first-cp="76B7" last-cp="76BA" />
+    <char cp="76BF" />
+    <range first-cp="76C2" last-cp="76C3" />
+    <char cp="76C6" />
+    <char cp="76C8" />
+    <char cp="76CA" />
+    <char cp="76CD" />
+    <char cp="76D2" />
+    <range first-cp="76D6" last-cp="76D7" />
+    <range first-cp="76DB" last-cp="76DC" />
+    <range first-cp="76DE" last-cp="76DF" />
+    <char cp="76E1" />
+    <range first-cp="76E3" last-cp="76E5" />
+    <char cp="76E7" />
+    <char cp="76EA" />
+    <char cp="76EE" />
+    <char cp="76F2" />
+    <char cp="76F4" />
+    <char cp="76F8" />
+    <char cp="76FB" />
+    <char cp="76FE" />
+    <char cp="7701" />
+    <char cp="7704" />
+    <range first-cp="7707" last-cp="7709" />
+    <range first-cp="770B" last-cp="770C" />
+    <char cp="771B" />
+    <range first-cp="771E" last-cp="7720" />
+    <range first-cp="7724" last-cp="7726" />
+    <char cp="7729" />
+    <range first-cp="7737" last-cp="7738" />
+    <char cp="773A" />
+    <char cp="773C" />
+    <char cp="7740" />
+    <char cp="7747" />
+    <range first-cp="775A" last-cp="775B" />
+    <char cp="7761" />
+    <char cp="7763" />
+    <range first-cp="7765" last-cp="7766" />
+    <char cp="7768" />
+    <char cp="776B" />
+    <char cp="7779" />
+    <range first-cp="777E" last-cp="777F" />
+    <char cp="778B" />
+    <char cp="778E" />
+    <char cp="7791" />
+    <char cp="779E" />
+    <char cp="77A0" />
+    <char cp="77A5" />
+    <range first-cp="77AC" last-cp="77AD" />
+    <char cp="77B0" />
+    <char cp="77B3" />
+    <char cp="77B6" />
+    <char cp="77B9" />
+    <range first-cp="77BB" last-cp="77BD" />
+    <char cp="77BF" />
+    <char cp="77C7" />
+    <char cp="77CD" />
+    <char cp="77D7" />
+    <range first-cp="77DA" last-cp="77DC" />
+    <range first-cp="77E2" last-cp="77E3" />
+    <char cp="77E5" />
+    <char cp="77E7" />
+    <char cp="77E9" />
+    <range first-cp="77ED" last-cp="77EF" />
+    <char cp="77F3" />
+    <char cp="77FC" />
+    <char cp="7802" />
+    <char cp="780C" />
+    <char cp="7812" />
+    <range first-cp="7814" last-cp="7815" />
+    <char cp="7820" />
+    <range first-cp="7825" last-cp="7827" />
+    <char cp="7832" />
+    <char cp="7834" />
+    <char cp="783A" />
+    <char cp="783F" />
+    <char cp="7845" />
+    <char cp="785D" />
+    <range first-cp="786B" last-cp="786C" />
+    <char cp="786F" />
+    <char cp="7872" />
+    <char cp="7874" />
+    <char cp="787C" />
+    <char cp="7881" />
+    <range first-cp="7886" last-cp="7887" />
+    <range first-cp="788C" last-cp="788E" />
+    <char cp="7891" />
+    <char cp="7893" />
+    <char cp="7895" />
+    <char cp="7897" />
+    <char cp="789A" />
+    <char cp="78A3" />
+    <char cp="78A7" />
+    <range first-cp="78A9" last-cp="78AA" />
+    <char cp="78AF" />
+    <char cp="78B5" />
+    <char cp="78BA" />
+    <char cp="78BC" />
+    <char cp="78BE" />
+    <char cp="78C1" />
+    <range first-cp="78C5" last-cp="78C6" />
+    <range first-cp="78CA" last-cp="78CB" />
+    <range first-cp="78D0" last-cp="78D1" />
+    <char cp="78D4" />
+    <char cp="78DA" />
+    <range first-cp="78E7" last-cp="78E8" />
+    <char cp="78EC" />
+    <char cp="78EF" />
+    <char cp="78F4" />
+    <char cp="78FD" />
+    <char cp="7901" />
+    <char cp="7907" />
+    <char cp="790E" />
+    <range first-cp="7911" last-cp="7912" />
+    <char cp="7919" />
+    <char cp="7926" />
+    <range first-cp="792A" last-cp="792C" />
+    <char cp="793A" />
+    <char cp="793C" />
+    <char cp="793E" />
+    <range first-cp="7940" last-cp="7941" />
+    <range first-cp="7947" last-cp="7949" />
+    <char cp="7950" />
+    <char cp="7953" />
+    <range first-cp="7955" last-cp="7957" />
+    <char cp="795A" />
+    <range first-cp="795D" last-cp="7960" />
+    <char cp="7962" />
+    <char cp="7965" />
+    <char cp="7968" />
+    <char cp="796D" />
+    <char cp="7977" />
+    <char cp="797A" />
+    <range first-cp="797F" last-cp="7981" />
+    <range first-cp="7984" last-cp="7985" />
+    <char cp="798A" />
+    <range first-cp="798D" last-cp="798F" />
+    <char cp="799D" />
+    <range first-cp="79A6" last-cp="79A7" />
+    <char cp="79AA" />
+    <char cp="79AE" />
+    <char cp="79B0" />
+    <char cp="79B3" />
+    <range first-cp="79B9" last-cp="79BA" />
+    <range first-cp="79BD" last-cp="79C1" />
+    <char cp="79C9" />
+    <char cp="79CB" />
+    <range first-cp="79D1" last-cp="79D2" />
+    <char cp="79D5" />
+    <char cp="79D8" />
+    <char cp="79DF" />
+    <char cp="79E1" />
+    <range first-cp="79E3" last-cp="79E4" />
+    <range first-cp="79E6" last-cp="79E7" />
+    <char cp="79E9" />
+    <char cp="79EC" />
+    <char cp="79F0" />
+    <char cp="79FB" />
+    <char cp="7A00" />
+    <char cp="7A08" />
+    <char cp="7A0B" />
+    <range first-cp="7A0D" last-cp="7A0E" />
+    <char cp="7A14" />
+    <range first-cp="7A17" last-cp="7A1A" />
+    <char cp="7A1C" />
+    <range first-cp="7A1F" last-cp="7A20" />
+    <char cp="7A2E" />
+    <range first-cp="7A31" last-cp="7A32" />
+    <char cp="7A37" />
+    <range first-cp="7A3B" last-cp="7A40" />
+    <range first-cp="7A42" last-cp="7A43" />
+    <char cp="7A46" />
+    <char cp="7A49" />
+    <range first-cp="7A4D" last-cp="7A50" />
+    <char cp="7A57" />
+    <range first-cp="7A61" last-cp="7A63" />
+    <char cp="7A69" />
+    <char cp="7A6B" />
+    <char cp="7A70" />
+    <char cp="7A74" />
+    <char cp="7A76" />
+    <range first-cp="7A79" last-cp="7A7A" />
+    <char cp="7A7D" />
+    <char cp="7A7F" />
+    <char cp="7A81" />
+    <range first-cp="7A83" last-cp="7A84" />
+    <char cp="7A88" />
+    <range first-cp="7A92" last-cp="7A93" />
+    <range first-cp="7A95" last-cp="7A98" />
+    <char cp="7A9F" />
+    <range first-cp="7AA9" last-cp="7AAA" />
+    <range first-cp="7AAE" last-cp="7AB0" />
+    <char cp="7AB6" />
+    <char cp="7ABA" />
+    <char cp="7ABF" />
+    <range first-cp="7AC3" last-cp="7AC5" />
+    <range first-cp="7AC7" last-cp="7AC8" />
+    <range first-cp="7ACA" last-cp="7ACB" />
+    <char cp="7ACD" />
+    <char cp="7ACF" />
+    <range first-cp="7AD2" last-cp="7AD3" />
+    <char cp="7AD5" />
+    <range first-cp="7AD9" last-cp="7ADA" />
+    <range first-cp="7ADC" last-cp="7ADD" />
+    <range first-cp="7ADF" last-cp="7AE3" />
+    <range first-cp="7AE5" last-cp="7AE6" />
+    <char cp="7AEA" />
+    <char cp="7AED" />
+    <range first-cp="7AEF" last-cp="7AF0" />
+    <char cp="7AF6" />
+    <range first-cp="7AF8" last-cp="7AFA" />
+    <char cp="7AFF" />
+    <char cp="7B02" />
+    <char cp="7B04" />
+    <char cp="7B06" />
+    <char cp="7B08" />
+    <range first-cp="7B0A" last-cp="7B0B" />
+    <char cp="7B0F" />
+    <char cp="7B11" />
+    <range first-cp="7B18" last-cp="7B19" />
+    <char cp="7B1B" />
+    <char cp="7B1E" />
+    <char cp="7B20" />
+    <range first-cp="7B25" last-cp="7B26" />
+    <char cp="7B28" />
+    <char cp="7B2C" />
+    <char cp="7B33" />
+    <range first-cp="7B35" last-cp="7B36" />
+    <char cp="7B39" />
+    <range first-cp="7B45" last-cp="7B46" />
+    <range first-cp="7B48" last-cp="7B49" />
+    <range first-cp="7B4B" last-cp="7B4D" />
+    <range first-cp="7B4F" last-cp="7B52" />
+    <char cp="7B54" />
+    <char cp="7B56" />
+    <char cp="7B5D" />
+    <char cp="7B65" />
+    <char cp="7B67" />
+    <char cp="7B6C" />
+    <char cp="7B6E" />
+    <range first-cp="7B70" last-cp="7B71" />
+    <range first-cp="7B74" last-cp="7B75" />
+    <char cp="7B7A" />
+    <range first-cp="7B86" last-cp="7B87" />
+    <char cp="7B8B" />
+    <char cp="7B8D" />
+    <char cp="7B8F" />
+    <char cp="7B92" />
+    <range first-cp="7B94" last-cp="7B95" />
+    <range first-cp="7B97" last-cp="7B9A" />
+    <range first-cp="7B9C" last-cp="7B9D" />
+    <char cp="7B9F" />
+    <char cp="7BA1" />
+    <char cp="7BAA" />
+    <char cp="7BAD" />
+    <char cp="7BB1" />
+    <char cp="7BB4" />
+    <char cp="7BB8" />
+    <range first-cp="7BC0" last-cp="7BC1" />
+    <char cp="7BC4" />
+    <range first-cp="7BC6" last-cp="7BC7" />
+    <char cp="7BC9" />
+    <range first-cp="7BCB" last-cp="7BCC" />
+    <char cp="7BCF" />
+    <char cp="7BDD" />
+    <char cp="7BE0" />
+    <range first-cp="7BE4" last-cp="7BE6" />
+    <char cp="7BE9" />
+    <char cp="7BED" />
+    <char cp="7BF3" />
+    <range first-cp="7BF6" last-cp="7BF7" />
+    <char cp="7C00" />
+    <char cp="7C07" />
+    <char cp="7C0D" />
+    <range first-cp="7C11" last-cp="7C14" />
+    <char cp="7C17" />
+    <char cp="7C1F" />
+    <char cp="7C21" />
+    <char cp="7C23" />
+    <char cp="7C27" />
+    <range first-cp="7C2A" last-cp="7C2B" />
+    <range first-cp="7C37" last-cp="7C38" />
+    <range first-cp="7C3D" last-cp="7C40" />
+    <char cp="7C43" />
+    <range first-cp="7C4C" last-cp="7C4D" />
+    <range first-cp="7C4F" last-cp="7C50" />
+    <char cp="7C54" />
+    <char cp="7C56" />
+    <char cp="7C58" />
+    <range first-cp="7C5F" last-cp="7C60" />
+    <range first-cp="7C64" last-cp="7C65" />
+    <char cp="7C6C" />
+    <char cp="7C73" />
+    <char cp="7C75" />
+    <char cp="7C7E" />
+    <range first-cp="7C81" last-cp="7C83" />
+    <char cp="7C89" />
+    <char cp="7C8B" />
+    <char cp="7C8D" />
+    <char cp="7C90" />
+    <char cp="7C92" />
+    <char cp="7C95" />
+    <range first-cp="7C97" last-cp="7C98" />
+    <char cp="7C9B" />
+    <char cp="7C9F" />
+    <range first-cp="7CA1" last-cp="7CA2" />
+    <range first-cp="7CA4" last-cp="7CA5" />
+    <range first-cp="7CA7" last-cp="7CA8" />
+    <char cp="7CAB" />
+    <range first-cp="7CAD" last-cp="7CAE" />
+    <range first-cp="7CB1" last-cp="7CB3" />
+    <char cp="7CB9" />
+    <range first-cp="7CBD" last-cp="7CBE" />
+    <char cp="7CC0" />
+    <char cp="7CC2" />
+    <char cp="7CC5" />
+    <char cp="7CCA" />
+    <char cp="7CCE" />
+    <char cp="7CD2" />
+    <char cp="7CD6" />
+    <char cp="7CD8" />
+    <char cp="7CDC" />
+    <range first-cp="7CDE" last-cp="7CE0" />
+    <char cp="7CE2" />
+    <char cp="7CE7" />
+    <char cp="7CEF" />
+    <char cp="7CF2" />
+    <char cp="7CF4" />
+    <char cp="7CF6" />
+    <char cp="7CF8" />
+    <range first-cp="7CFA" last-cp="7CFB" />
+    <char cp="7CFE" />
+    <char cp="7D00" />
+    <char cp="7D02" />
+    <range first-cp="7D04" last-cp="7D06" />
+    <range first-cp="7D0A" last-cp="7D0B" />
+    <char cp="7D0D" />
+    <char cp="7D10" />
+    <range first-cp="7D14" last-cp="7D15" />
+    <range first-cp="7D17" last-cp="7D1C" />
+    <range first-cp="7D20" last-cp="7D22" />
+    <range first-cp="7D2B" last-cp="7D2C" />
+    <range first-cp="7D2E" last-cp="7D30" />
+    <range first-cp="7D32" last-cp="7D33" />
+    <char cp="7D35" />
+    <range first-cp="7D39" last-cp="7D3A" />
+    <char cp="7D3F" />
+    <range first-cp="7D42" last-cp="7D46" />
+    <range first-cp="7D4B" last-cp="7D4C" />
+    <range first-cp="7D4E" last-cp="7D50" />
+    <char cp="7D56" />
+    <char cp="7D5B" />
+    <char cp="7D5E" />
+    <range first-cp="7D61" last-cp="7D63" />
+    <char cp="7D66" />
+    <char cp="7D68" />
+    <char cp="7D6E" />
+    <range first-cp="7D71" last-cp="7D73" />
+    <range first-cp="7D75" last-cp="7D76" />
+    <char cp="7D79" />
+    <char cp="7D7D" />
+    <char cp="7D89" />
+    <char cp="7D8F" />
+    <char cp="7D93" />
+    <range first-cp="7D99" last-cp="7D9C" />
+    <char cp="7D9F" />
+    <range first-cp="7DA2" last-cp="7DA3" />
+    <range first-cp="7DAB" last-cp="7DB2" />
+    <range first-cp="7DB4" last-cp="7DB5" />
+    <char cp="7DB8" />
+    <range first-cp="7DBA" last-cp="7DBB" />
+    <range first-cp="7DBD" last-cp="7DBF" />
+    <char cp="7DC7" />
+    <range first-cp="7DCA" last-cp="7DCB" />
+    <char cp="7DCF" />
+    <range first-cp="7DD1" last-cp="7DD2" />
+    <char cp="7DD5" />
+    <char cp="7DD8" />
+    <char cp="7DDA" />
+    <range first-cp="7DDC" last-cp="7DDE" />
+    <range first-cp="7DE0" last-cp="7DE1" />
+    <char cp="7DE4" />
+    <range first-cp="7DE8" last-cp="7DE9" />
+    <char cp="7DEC" />
+    <char cp="7DEF" />
+    <char cp="7DF2" />
+    <char cp="7DF4" />
+    <char cp="7DFB" />
+    <char cp="7E01" />
+    <range first-cp="7E04" last-cp="7E05" />
+    <range first-cp="7E09" last-cp="7E0B" />
+    <char cp="7E12" />
+    <char cp="7E1B" />
+    <range first-cp="7E1E" last-cp="7E1F" />
+    <range first-cp="7E21" last-cp="7E23" />
+    <char cp="7E26" />
+    <char cp="7E2B" />
+    <char cp="7E2E" />
+    <range first-cp="7E31" last-cp="7E32" />
+    <char cp="7E35" />
+    <char cp="7E37" />
+    <range first-cp="7E39" last-cp="7E3B" />
+    <range first-cp="7E3D" last-cp="7E3E" />
+    <char cp="7E41" />
+    <char cp="7E43" />
+    <char cp="7E46" />
+    <range first-cp="7E4A" last-cp="7E4B" />
+    <char cp="7E4D" />
+    <range first-cp="7E54" last-cp="7E56" />
+    <range first-cp="7E59" last-cp="7E5A" />
+    <range first-cp="7E5D" last-cp="7E5E" />
+    <range first-cp="7E66" last-cp="7E67" />
+    <range first-cp="7E69" last-cp="7E6A" />
+    <char cp="7E6D" />
+    <char cp="7E70" />
+    <char cp="7E79" />
+    <range first-cp="7E7B" last-cp="7E7D" />
+    <char cp="7E7F" />
+    <range first-cp="7E82" last-cp="7E83" />
+    <range first-cp="7E88" last-cp="7E89" />
+    <char cp="7E8C" />
+    <range first-cp="7E8E" last-cp="7E90" />
+    <range first-cp="7E92" last-cp="7E94" />
+    <char cp="7E96" />
+    <range first-cp="7E9B" last-cp="7E9C" />
+    <char cp="7F36" />
+    <char cp="7F38" />
+    <char cp="7F3A" />
+    <char cp="7F45" />
+    <range first-cp="7F4C" last-cp="7F4E" />
+    <range first-cp="7F50" last-cp="7F51" />
+    <range first-cp="7F54" last-cp="7F55" />
+    <char cp="7F58" />
+    <range first-cp="7F5F" last-cp="7F60" />
+    <range first-cp="7F67" last-cp="7F6B" />
+    <char cp="7F6E" />
+    <char cp="7F70" />
+    <char cp="7F72" />
+    <char cp="7F75" />
+    <range first-cp="7F77" last-cp="7F79" />
+    <range first-cp="7F82" last-cp="7F83" />
+    <range first-cp="7F85" last-cp="7F88" />
+    <char cp="7F8A" />
+    <char cp="7F8C" />
+    <char cp="7F8E" />
+    <char cp="7F94" />
+    <char cp="7F9A" />
+    <range first-cp="7F9D" last-cp="7F9E" />
+    <range first-cp="7FA3" last-cp="7FA4" />
+    <range first-cp="7FA8" last-cp="7FA9" />
+    <range first-cp="7FAE" last-cp="7FAF" />
+    <char cp="7FB2" />
+    <char cp="7FB6" />
+    <range first-cp="7FB8" last-cp="7FB9" />
+    <char cp="7FBD" />
+    <char cp="7FC1" />
+    <range first-cp="7FC5" last-cp="7FC6" />
+    <char cp="7FCA" />
+    <char cp="7FCC" />
+    <char cp="7FD2" />
+    <range first-cp="7FD4" last-cp="7FD5" />
+    <range first-cp="7FE0" last-cp="7FE1" />
+    <char cp="7FE6" />
+    <char cp="7FE9" />
+    <char cp="7FEB" />
+    <char cp="7FF0" />
+    <char cp="7FF3" />
+    <char cp="7FF9" />
+    <range first-cp="7FFB" last-cp="7FFC" />
+    <range first-cp="8000" last-cp="8001" />
+    <range first-cp="8003" last-cp="8006" />
+    <range first-cp="800B" last-cp="800C" />
+    <char cp="8010" />
+    <char cp="8012" />
+    <char cp="8015" />
+    <range first-cp="8017" last-cp="8019" />
+    <char cp="801C" />
+    <char cp="8021" />
+    <char cp="8028" />
+    <char cp="8033" />
+    <char cp="8036" />
+    <char cp="803B" />
+    <char cp="803D" />
+    <char cp="803F" />
+    <char cp="8046" />
+    <char cp="804A" />
+    <char cp="8052" />
+    <char cp="8056" />
+    <char cp="8058" />
+    <char cp="805A" />
+    <range first-cp="805E" last-cp="805F" />
+    <range first-cp="8061" last-cp="8062" />
+    <char cp="8068" />
+    <range first-cp="806F" last-cp="8070" />
+    <range first-cp="8072" last-cp="8074" />
+    <range first-cp="8076" last-cp="8077" />
+    <char cp="8079" />
+    <range first-cp="807D" last-cp="807F" />
+    <range first-cp="8084" last-cp="8087" />
+    <char cp="8089" />
+    <range first-cp="808B" last-cp="808C" />
+    <char cp="8093" />
+    <char cp="8096" />
+    <char cp="8098" />
+    <range first-cp="809A" last-cp="809B" />
+    <char cp="809D" />
+    <range first-cp="80A1" last-cp="80A2" />
+    <char cp="80A5" />
+    <range first-cp="80A9" last-cp="80AA" />
+    <range first-cp="80AC" last-cp="80AD" />
+    <char cp="80AF" />
+    <range first-cp="80B1" last-cp="80B2" />
+    <char cp="80B4" />
+    <char cp="80BA" />
+    <range first-cp="80C3" last-cp="80C4" />
+    <char cp="80C6" />
+    <char cp="80CC" />
+    <char cp="80CE" />
+    <char cp="80D6" />
+    <range first-cp="80D9" last-cp="80DB" />
+    <range first-cp="80DD" last-cp="80DE" />
+    <char cp="80E1" />
+    <range first-cp="80E4" last-cp="80E5" />
+    <char cp="80EF" />
+    <char cp="80F1" />
+    <char cp="80F4" />
+    <char cp="80F8" />
+    <range first-cp="80FC" last-cp="80FD" />
+    <char cp="8102" />
+    <range first-cp="8105" last-cp="810A" />
+    <range first-cp="811A" last-cp="811B" />
+    <char cp="8123" />
+    <char cp="8129" />
+    <char cp="812F" />
+    <char cp="8131" />
+    <char cp="8133" />
+    <char cp="8139" />
+    <char cp="813E" />
+    <char cp="8146" />
+    <char cp="814B" />
+    <char cp="814E" />
+    <range first-cp="8150" last-cp="8151" />
+    <range first-cp="8153" last-cp="8155" />
+    <char cp="815F" />
+    <range first-cp="8165" last-cp="8166" />
+    <char cp="816B" />
+    <char cp="816E" />
+    <range first-cp="8170" last-cp="8171" />
+    <char cp="8174" />
+    <range first-cp="8178" last-cp="817A" />
+    <range first-cp="817F" last-cp="8180" />
+    <range first-cp="8182" last-cp="8183" />
+    <char cp="8188" />
+    <char cp="818A" />
+    <char cp="818F" />
+    <char cp="8193" />
+    <char cp="8195" />
+    <char cp="819A" />
+    <range first-cp="819C" last-cp="819D" />
+    <char cp="81A0" />
+    <range first-cp="81A3" last-cp="81A4" />
+    <range first-cp="81A8" last-cp="81A9" />
+    <char cp="81B0" />
+    <char cp="81B3" />
+    <char cp="81B5" />
+    <char cp="81B8" />
+    <char cp="81BA" />
+    <range first-cp="81BD" last-cp="81C0" />
+    <char cp="81C2" />
+    <char cp="81C6" />
+    <range first-cp="81C8" last-cp="81C9" />
+    <char cp="81CD" />
+    <char cp="81D1" />
+    <char cp="81D3" />
+    <range first-cp="81D8" last-cp="81DA" />
+    <range first-cp="81DF" last-cp="81E0" />
+    <char cp="81E3" />
+    <char cp="81E5" />
+    <range first-cp="81E7" last-cp="81E8" />
+    <char cp="81EA" />
+    <char cp="81ED" />
+    <range first-cp="81F3" last-cp="81F4" />
+    <range first-cp="81FA" last-cp="81FC" />
+    <char cp="81FE" />
+    <range first-cp="8201" last-cp="8202" />
+    <char cp="8205" />
+    <range first-cp="8207" last-cp="820A" />
+    <range first-cp="820C" last-cp="820E" />
+    <char cp="8210" />
+    <char cp="8212" />
+    <range first-cp="8216" last-cp="8218" />
+    <range first-cp="821B" last-cp="821C" />
+    <range first-cp="821E" last-cp="821F" />
+    <range first-cp="8229" last-cp="822C" />
+    <char cp="822E" />
+    <char cp="8233" />
+    <range first-cp="8235" last-cp="8239" />
+    <char cp="8240" />
+    <char cp="8247" />
+    <range first-cp="8258" last-cp="825A" />
+    <char cp="825D" />
+    <char cp="825F" />
+    <char cp="8262" />
+    <char cp="8264" />
+    <char cp="8266" />
+    <char cp="8268" />
+    <range first-cp="826A" last-cp="826B" />
+    <range first-cp="826E" last-cp="826F" />
+    <range first-cp="8271" last-cp="8272" />
+    <range first-cp="8276" last-cp="8278" />
+    <char cp="827E" />
+    <char cp="828B" />
+    <char cp="828D" />
+    <char cp="8292" />
+    <char cp="8299" />
+    <char cp="829D" />
+    <char cp="829F" />
+    <range first-cp="82A5" last-cp="82A6" />
+    <range first-cp="82AB" last-cp="82AD" />
+    <char cp="82AF" />
+    <char cp="82B1" />
+    <char cp="82B3" />
+    <range first-cp="82B8" last-cp="82B9" />
+    <char cp="82BB" />
+    <char cp="82BD" />
+    <char cp="82C5" />
+    <range first-cp="82D1" last-cp="82D4" />
+    <char cp="82D7" />
+    <char cp="82D9" />
+    <range first-cp="82DB" last-cp="82DC" />
+    <range first-cp="82DE" last-cp="82DF" />
+    <char cp="82E1" />
+    <char cp="82E3" />
+    <range first-cp="82E5" last-cp="82E7" />
+    <char cp="82EB" />
+    <char cp="82F1" />
+    <range first-cp="82F3" last-cp="82F4" />
+    <range first-cp="82F9" last-cp="82FB" />
+    <range first-cp="8302" last-cp="8306" />
+    <char cp="8309" />
+    <char cp="830E" />
+    <range first-cp="8316" last-cp="8318" />
+    <char cp="831C" />
+    <char cp="8323" />
+    <char cp="8328" />
+    <char cp="832B" />
+    <char cp="832F" />
+    <range first-cp="8331" last-cp="8332" />
+    <range first-cp="8334" last-cp="8336" />
+    <range first-cp="8338" last-cp="8339" />
+    <char cp="8340" />
+    <char cp="8345" />
+    <range first-cp="8349" last-cp="834A" />
+    <range first-cp="834F" last-cp="8350" />
+    <char cp="8352" />
+    <char cp="8358" />
+    <char cp="8373" />
+    <char cp="8375" />
+    <char cp="8377" />
+    <range first-cp="837B" last-cp="837C" />
+    <char cp="8385" />
+    <char cp="8387" />
+    <range first-cp="8389" last-cp="838A" />
+    <char cp="838E" />
+    <char cp="8393" />
+    <char cp="8396" />
+    <char cp="839A" />
+    <range first-cp="839E" last-cp="83A0" />
+    <char cp="83A2" />
+    <char cp="83A8" />
+    <range first-cp="83AA" last-cp="83AB" />
+    <char cp="83B1" />
+    <char cp="83B5" />
+    <char cp="83BD" />
+    <char cp="83C1" />
+    <char cp="83C5" />
+    <char cp="83CA" />
+    <char cp="83CC" />
+    <char cp="83CE" />
+    <char cp="83D3" />
+    <char cp="83D6" />
+    <char cp="83D8" />
+    <char cp="83DC" />
+    <range first-cp="83DF" last-cp="83E0" />
+    <char cp="83E9" />
+    <char cp="83EB" />
+    <range first-cp="83EF" last-cp="83F2" />
+    <char cp="83F4" />
+    <char cp="83F7" />
+    <char cp="83FB" />
+    <char cp="83FD" />
+    <range first-cp="8403" last-cp="8404" />
+    <char cp="8407" />
+    <range first-cp="840B" last-cp="840E" />
+    <char cp="8413" />
+    <char cp="8420" />
+    <char cp="8422" />
+    <range first-cp="8429" last-cp="842A" />
+    <char cp="842C" />
+    <char cp="8431" />
+    <char cp="8435" />
+    <char cp="8438" />
+    <range first-cp="843C" last-cp="843D" />
+    <char cp="8446" />
+    <char cp="8449" />
+    <char cp="844E" />
+    <char cp="8457" />
+    <char cp="845B" />
+    <range first-cp="8461" last-cp="8463" />
+    <char cp="8466" />
+    <char cp="8469" />
+    <range first-cp="846B" last-cp="846F" />
+    <char cp="8471" />
+    <char cp="8475" />
+    <char cp="8477" />
+    <range first-cp="8479" last-cp="847A" />
+    <char cp="8482" />
+    <char cp="8484" />
+    <char cp="848B" />
+    <char cp="8490" />
+    <char cp="8494" />
+    <char cp="8499" />
+    <char cp="849C" />
+    <char cp="849F" />
+    <char cp="84A1" />
+    <char cp="84AD" />
+    <char cp="84B2" />
+    <range first-cp="84B8" last-cp="84B9" />
+    <range first-cp="84BB" last-cp="84BC" />
+    <char cp="84BF" />
+    <char cp="84C1" />
+    <char cp="84C4" />
+    <char cp="84C6" />
+    <range first-cp="84C9" last-cp="84CB" />
+    <char cp="84CD" />
+    <range first-cp="84D0" last-cp="84D1" />
+    <char cp="84D6" />
+    <range first-cp="84D9" last-cp="84DA" />
+    <char cp="84EC" />
+    <char cp="84EE" />
+    <char cp="84F4" />
+    <char cp="84FC" />
+    <range first-cp="84FF" last-cp="8500" />
+    <char cp="8506" />
+    <char cp="8511" />
+    <range first-cp="8513" last-cp="8515" />
+    <range first-cp="8517" last-cp="8518" />
+    <char cp="851A" />
+    <char cp="851F" />
+    <char cp="8521" />
+    <char cp="8526" />
+    <range first-cp="852C" last-cp="852D" />
+    <char cp="8535" />
+    <char cp="853D" />
+    <range first-cp="8540" last-cp="8541" />
+    <char cp="8543" />
+    <range first-cp="8548" last-cp="854B" />
+    <char cp="854E" />
+    <char cp="8555" />
+    <range first-cp="8557" last-cp="8558" />
+    <char cp="855A" />
+    <char cp="8563" />
+    <range first-cp="8568" last-cp="856A" />
+    <char cp="856D" />
+    <char cp="8577" />
+    <char cp="857E" />
+    <char cp="8580" />
+    <char cp="8584" />
+    <range first-cp="8587" last-cp="8588" />
+    <char cp="858A" />
+    <range first-cp="8590" last-cp="8591" />
+    <char cp="8594" />
+    <char cp="8597" />
+    <char cp="8599" />
+    <range first-cp="859B" last-cp="859C" />
+    <char cp="85A4" />
+    <char cp="85A6" />
+    <range first-cp="85A8" last-cp="85AC" />
+    <range first-cp="85AE" last-cp="85AF" />
+    <range first-cp="85B9" last-cp="85BA" />
+    <char cp="85C1" />
+    <char cp="85C9" />
+    <char cp="85CD" />
+    <range first-cp="85CF" last-cp="85D0" />
+    <char cp="85D5" />
+    <range first-cp="85DC" last-cp="85DD" />
+    <range first-cp="85E4" last-cp="85E5" />
+    <range first-cp="85E9" last-cp="85EA" />
+    <char cp="85F7" />
+    <range first-cp="85F9" last-cp="85FB" />
+    <char cp="85FE" />
+    <char cp="8602" />
+    <range first-cp="8606" last-cp="8607" />
+    <range first-cp="860A" last-cp="860B" />
+    <char cp="8613" />
+    <range first-cp="8616" last-cp="8617" />
+    <char cp="861A" />
+    <char cp="8622" />
+    <char cp="862D" />
+    <range first-cp="862F" last-cp="8630" />
+    <char cp="863F" />
+    <range first-cp="864D" last-cp="864E" />
+    <char cp="8650" />
+    <range first-cp="8654" last-cp="8655" />
+    <char cp="865A" />
+    <char cp="865C" />
+    <range first-cp="865E" last-cp="865F" />
+    <char cp="8667" />
+    <char cp="866B" />
+    <char cp="8671" />
+    <char cp="8679" />
+    <char cp="867B" />
+    <range first-cp="868A" last-cp="868C" />
+    <char cp="8693" />
+    <char cp="8695" />
+    <range first-cp="86A3" last-cp="86A4" />
+    <range first-cp="86A9" last-cp="86AB" />
+    <range first-cp="86AF" last-cp="86B0" />
+    <char cp="86B6" />
+    <char cp="86C4" />
+    <range first-cp="86C6" last-cp="86C7" />
+    <char cp="86C9" />
+    <char cp="86CB" />
+    <range first-cp="86CD" last-cp="86CE" />
+    <char cp="86D4" />
+    <char cp="86D9" />
+    <char cp="86DB" />
+    <range first-cp="86DE" last-cp="86DF" />
+    <char cp="86E4" />
+    <char cp="86E9" />
+    <range first-cp="86EC" last-cp="86EF" />
+    <range first-cp="86F8" last-cp="86F9" />
+    <char cp="86FB" />
+    <char cp="86FE" />
+    <char cp="8700" />
+    <range first-cp="8702" last-cp="8703" />
+    <char cp="8706" />
+    <range first-cp="8708" last-cp="870A" />
+    <char cp="870D" />
+    <range first-cp="8711" last-cp="8712" />
+    <char cp="8718" />
+    <char cp="871A" />
+    <char cp="871C" />
+    <char cp="8725" />
+    <char cp="8729" />
+    <char cp="8734" />
+    <char cp="8737" />
+    <char cp="873B" />
+    <char cp="873F" />
+    <char cp="8749" />
+    <range first-cp="874B" last-cp="874C" />
+    <char cp="874E" />
+    <char cp="8753" />
+    <char cp="8755" />
+    <char cp="8757" />
+    <char cp="8759" />
+    <range first-cp="875F" last-cp="8760" />
+    <char cp="8763" />
+    <char cp="8766" />
+    <char cp="8768" />
+    <char cp="876A" />
+    <char cp="876E" />
+    <char cp="8774" />
+    <char cp="8776" />
+    <char cp="8778" />
+    <char cp="877F" />
+    <char cp="8782" />
+    <char cp="878D" />
+    <char cp="879F" />
+    <char cp="87A2" />
+    <char cp="87AB" />
+    <char cp="87AF" />
+    <char cp="87B3" />
+    <range first-cp="87BA" last-cp="87BB" />
+    <char cp="87BD" />
+    <char cp="87C0" />
+    <char cp="87C4" />
+    <range first-cp="87C6" last-cp="87C7" />
+    <char cp="87CB" />
+    <char cp="87D0" />
+    <char cp="87D2" />
+    <char cp="87E0" />
+    <char cp="87EF" />
+    <char cp="87F2" />
+    <range first-cp="87F6" last-cp="87F7" />
+    <char cp="87F9" />
+    <char cp="87FB" />
+    <char cp="87FE" />
+    <char cp="8805" />
+    <range first-cp="880D" last-cp="880F" />
+    <char cp="8811" />
+    <range first-cp="8815" last-cp="8816" />
+    <range first-cp="8821" last-cp="8823" />
+    <char cp="8827" />
+    <char cp="8831" />
+    <char cp="8836" />
+    <char cp="8839" />
+    <char cp="883B" />
+    <char cp="8840" />
+    <char cp="8842" />
+    <char cp="8844" />
+    <char cp="8846" />
+    <range first-cp="884C" last-cp="884D" />
+    <range first-cp="8852" last-cp="8853" />
+    <char cp="8857" />
+    <char cp="8859" />
+    <char cp="885B" />
+    <range first-cp="885D" last-cp="885E" />
+    <range first-cp="8861" last-cp="8863" />
+    <char cp="8868" />
+    <char cp="886B" />
+    <char cp="8870" />
+    <char cp="8872" />
+    <char cp="8875" />
+    <char cp="8877" />
+    <range first-cp="887D" last-cp="887F" />
+    <range first-cp="8881" last-cp="8882" />
+    <char cp="8888" />
+    <char cp="888B" />
+    <char cp="888D" />
+    <char cp="8892" />
+    <range first-cp="8896" last-cp="8897" />
+    <char cp="8899" />
+    <char cp="889E" />
+    <char cp="88A2" />
+    <char cp="88A4" />
+    <char cp="88AB" />
+    <char cp="88AE" />
+    <range first-cp="88B0" last-cp="88B1" />
+    <range first-cp="88B4" last-cp="88B5" />
+    <char cp="88B7" />
+    <char cp="88BF" />
+    <range first-cp="88C1" last-cp="88C5" />
+    <char cp="88CF" />
+    <range first-cp="88D4" last-cp="88D5" />
+    <range first-cp="88D8" last-cp="88D9" />
+    <range first-cp="88DC" last-cp="88DD" />
+    <char cp="88DF" />
+    <char cp="88E1" />
+    <char cp="88E8" />
+    <range first-cp="88F2" last-cp="88F4" />
+    <range first-cp="88F8" last-cp="88F9" />
+    <range first-cp="88FC" last-cp="88FE" />
+    <char cp="8902" />
+    <char cp="8904" />
+    <char cp="8907" />
+    <char cp="890A" />
+    <char cp="890C" />
+    <char cp="8910" />
+    <range first-cp="8912" last-cp="8913" />
+    <range first-cp="891D" last-cp="891E" />
+    <char cp="8925" />
+    <range first-cp="892A" last-cp="892B" />
+    <char cp="8936" />
+    <char cp="8938" />
+    <char cp="893B" />
+    <char cp="8941" />
+    <range first-cp="8943" last-cp="8944" />
+    <range first-cp="894C" last-cp="894D" />
+    <char cp="8956" />
+    <range first-cp="895E" last-cp="8960" />
+    <char cp="8964" />
+    <char cp="8966" />
+    <char cp="896A" />
+    <char cp="896D" />
+    <char cp="896F" />
+    <char cp="8972" />
+    <char cp="8974" />
+    <char cp="8977" />
+    <range first-cp="897E" last-cp="897F" />
+    <char cp="8981" />
+    <char cp="8983" />
+    <range first-cp="8986" last-cp="8988" />
+    <range first-cp="898A" last-cp="898B" />
+    <char cp="898F" />
+    <char cp="8993" />
+    <range first-cp="8996" last-cp="8998" />
+    <char cp="899A" />
+    <char cp="89A1" />
+    <range first-cp="89A6" last-cp="89A7" />
+    <range first-cp="89A9" last-cp="89AA" />
+    <char cp="89AC" />
+    <char cp="89AF" />
+    <range first-cp="89B2" last-cp="89B3" />
+    <char cp="89BA" />
+    <char cp="89BD" />
+    <range first-cp="89BF" last-cp="89C0" />
+    <char cp="89D2" />
+    <char cp="89DA" />
+    <range first-cp="89DC" last-cp="89DD" />
+    <char cp="89E3" />
+    <range first-cp="89E6" last-cp="89E7" />
+    <char cp="89F4" />
+    <char cp="89F8" />
+    <char cp="8A00" />
+    <range first-cp="8A02" last-cp="8A03" />
+    <char cp="8A08" />
+    <char cp="8A0A" />
+    <char cp="8A0C" />
+    <char cp="8A0E" />
+    <char cp="8A10" />
+    <char cp="8A13" />
+    <range first-cp="8A16" last-cp="8A18" />
+    <char cp="8A1B" />
+    <char cp="8A1D" />
+    <char cp="8A1F" />
+    <char cp="8A23" />
+    <char cp="8A25" />
+    <char cp="8A2A" />
+    <char cp="8A2D" />
+    <char cp="8A31" />
+    <range first-cp="8A33" last-cp="8A34" />
+    <char cp="8A36" />
+    <range first-cp="8A3A" last-cp="8A3C" />
+    <char cp="8A41" />
+    <char cp="8A46" />
+    <char cp="8A48" />
+    <range first-cp="8A50" last-cp="8A52" />
+    <range first-cp="8A54" last-cp="8A55" />
+    <char cp="8A5B" />
+    <char cp="8A5E" />
+    <char cp="8A60" />
+    <range first-cp="8A62" last-cp="8A63" />
+    <char cp="8A66" />
+    <char cp="8A69" />
+    <range first-cp="8A6B" last-cp="8A6E" />
+    <range first-cp="8A70" last-cp="8A73" />
+    <char cp="8A7C" />
+    <char cp="8A82" />
+    <range first-cp="8A84" last-cp="8A85" />
+    <char cp="8A87" />
+    <char cp="8A89" />
+    <range first-cp="8A8C" last-cp="8A8D" />
+    <char cp="8A91" />
+    <char cp="8A93" />
+    <char cp="8A95" />
+    <char cp="8A98" />
+    <char cp="8A9A" />
+    <char cp="8A9E" />
+    <range first-cp="8AA0" last-cp="8AA1" />
+    <range first-cp="8AA3" last-cp="8AA6" />
+    <char cp="8AA8" />
+    <range first-cp="8AAC" last-cp="8AAD" />
+    <char cp="8AB0" />
+    <char cp="8AB2" />
+    <char cp="8AB9" />
+    <char cp="8ABC" />
+    <char cp="8ABF" />
+    <char cp="8AC2" />
+    <char cp="8AC4" />
+    <char cp="8AC7" />
+    <range first-cp="8ACB" last-cp="8ACD" />
+    <char cp="8ACF" />
+    <char cp="8AD2" />
+    <char cp="8AD6" />
+    <range first-cp="8ADA" last-cp="8ADC" />
+    <char cp="8ADE" />
+    <range first-cp="8AE0" last-cp="8AE2" />
+    <char cp="8AE4" />
+    <range first-cp="8AE6" last-cp="8AE7" />
+    <char cp="8AEB" />
+    <range first-cp="8AED" last-cp="8AEE" />
+    <char cp="8AF1" />
+    <char cp="8AF3" />
+    <range first-cp="8AF7" last-cp="8AF8" />
+    <char cp="8AFA" />
+    <char cp="8AFE" />
+    <range first-cp="8B00" last-cp="8B02" />
+    <char cp="8B04" />
+    <char cp="8B07" />
+    <char cp="8B0C" />
+    <char cp="8B0E" />
+    <char cp="8B10" />
+    <char cp="8B14" />
+    <range first-cp="8B16" last-cp="8B17" />
+    <range first-cp="8B19" last-cp="8B1B" />
+    <char cp="8B1D" />
+    <range first-cp="8B20" last-cp="8B21" />
+    <char cp="8B26" />
+    <char cp="8B28" />
+    <range first-cp="8B2B" last-cp="8B2C" />
+    <char cp="8B33" />
+    <char cp="8B39" />
+    <char cp="8B3E" />
+    <char cp="8B41" />
+    <char cp="8B49" />
+    <char cp="8B4C" />
+    <range first-cp="8B4E" last-cp="8B4F" />
+    <char cp="8B56" />
+    <char cp="8B58" />
+    <range first-cp="8B5A" last-cp="8B5C" />
+    <char cp="8B5F" />
+    <char cp="8B66" />
+    <range first-cp="8B6B" last-cp="8B6C" />
+    <range first-cp="8B6F" last-cp="8B72" />
+    <char cp="8B74" />
+    <char cp="8B77" />
+    <char cp="8B7D" />
+    <char cp="8B80" />
+    <char cp="8B83" />
+    <char cp="8B8A" />
+    <char cp="8B8C" />
+    <char cp="8B8E" />
+    <char cp="8B90" />
+    <range first-cp="8B92" last-cp="8B93" />
+    <char cp="8B96" />
+    <range first-cp="8B99" last-cp="8B9A" />
+    <char cp="8C37" />
+    <char cp="8C3A" />
+    <char cp="8C3F" />
+    <char cp="8C41" />
+    <char cp="8C46" />
+    <char cp="8C48" />
+    <char cp="8C4A" />
+    <char cp="8C4C" />
+    <char cp="8C4E" />
+    <char cp="8C50" />
+    <char cp="8C55" />
+    <char cp="8C5A" />
+    <range first-cp="8C61" last-cp="8C62" />
+    <range first-cp="8C6A" last-cp="8C6C" />
+    <range first-cp="8C78" last-cp="8C7A" />
+    <char cp="8C7C" />
+    <char cp="8C82" />
+    <char cp="8C85" />
+    <range first-cp="8C89" last-cp="8C8A" />
+    <range first-cp="8C8C" last-cp="8C8E" />
+    <char cp="8C94" />
+    <char cp="8C98" />
+    <range first-cp="8C9D" last-cp="8C9E" />
+    <range first-cp="8CA0" last-cp="8CA2" />
+    <range first-cp="8CA7" last-cp="8CB0" />
+    <range first-cp="8CB2" last-cp="8CB4" />
+    <range first-cp="8CB6" last-cp="8CB8" />
+    <range first-cp="8CBB" last-cp="8CBD" />
+    <range first-cp="8CBF" last-cp="8CC4" />
+    <range first-cp="8CC7" last-cp="8CC8" />
+    <char cp="8CCA" />
+    <range first-cp="8CCD" last-cp="8CCE" />
+    <char cp="8CD1" />
+    <char cp="8CD3" />
+    <range first-cp="8CDA" last-cp="8CDC" />
+    <char cp="8CDE" />
+    <char cp="8CE0" />
+    <range first-cp="8CE2" last-cp="8CE4" />
+    <char cp="8CE6" />
+    <char cp="8CEA" />
+    <char cp="8CED" />
+    <range first-cp="8CFA" last-cp="8CFD" />
+    <range first-cp="8D04" last-cp="8D05" />
+    <range first-cp="8D07" last-cp="8D08" />
+    <range first-cp="8D0A" last-cp="8D0B" />
+    <char cp="8D0D" />
+    <range first-cp="8D0F" last-cp="8D10" />
+    <range first-cp="8D13" last-cp="8D14" />
+    <char cp="8D16" />
+    <char cp="8D64" />
+    <range first-cp="8D66" last-cp="8D67" />
+    <char cp="8D6B" />
+    <char cp="8D6D" />
+    <range first-cp="8D70" last-cp="8D71" />
+    <range first-cp="8D73" last-cp="8D74" />
+    <char cp="8D77" />
+    <char cp="8D81" />
+    <char cp="8D85" />
+    <char cp="8D8A" />
+    <char cp="8D99" />
+    <char cp="8DA3" />
+    <char cp="8DA8" />
+    <char cp="8DB3" />
+    <char cp="8DBA" />
+    <char cp="8DBE" />
+    <char cp="8DC2" />
+    <range first-cp="8DCB" last-cp="8DCC" />
+    <char cp="8DCF" />
+    <char cp="8DD6" />
+    <range first-cp="8DDA" last-cp="8DDB" />
+    <char cp="8DDD" />
+    <char cp="8DDF" />
+    <char cp="8DE1" />
+    <char cp="8DE3" />
+    <char cp="8DE8" />
+    <range first-cp="8DEA" last-cp="8DEB" />
+    <char cp="8DEF" />
+    <char cp="8DF3" />
+    <char cp="8DF5" />
+    <char cp="8DFC" />
+    <char cp="8DFF" />
+    <range first-cp="8E08" last-cp="8E0A" />
+    <range first-cp="8E0F" last-cp="8E10" />
+    <range first-cp="8E1D" last-cp="8E1F" />
+    <char cp="8E2A" />
+    <char cp="8E30" />
+    <range first-cp="8E34" last-cp="8E35" />
+    <char cp="8E42" />
+    <char cp="8E44" />
+    <range first-cp="8E47" last-cp="8E4A" />
+    <char cp="8E4C" />
+    <char cp="8E50" />
+    <char cp="8E55" />
+    <char cp="8E59" />
+    <range first-cp="8E5F" last-cp="8E60" />
+    <range first-cp="8E63" last-cp="8E64" />
+    <char cp="8E72" />
+    <char cp="8E74" />
+    <char cp="8E76" />
+    <char cp="8E7C" />
+    <char cp="8E81" />
+    <range first-cp="8E84" last-cp="8E85" />
+    <char cp="8E87" />
+    <range first-cp="8E8A" last-cp="8E8B" />
+    <char cp="8E8D" />
+    <char cp="8E91" />
+    <range first-cp="8E93" last-cp="8E94" />
+    <char cp="8E99" />
+    <char cp="8EA1" />
+    <range first-cp="8EAA" last-cp="8EAC" />
+    <range first-cp="8EAF" last-cp="8EB1" />
+    <char cp="8EBE" />
+    <range first-cp="8EC5" last-cp="8EC6" />
+    <char cp="8EC8" />
+    <range first-cp="8ECA" last-cp="8ECD" />
+    <char cp="8ED2" />
+    <char cp="8EDB" />
+    <char cp="8EDF" />
+    <range first-cp="8EE2" last-cp="8EE3" />
+    <char cp="8EEB" />
+    <char cp="8EF8" />
+    <range first-cp="8EFB" last-cp="8EFE" />
+    <char cp="8F03" />
+    <char cp="8F05" />
+    <range first-cp="8F09" last-cp="8F0A" />
+    <char cp="8F0C" />
+    <range first-cp="8F12" last-cp="8F15" />
+    <char cp="8F19" />
+    <range first-cp="8F1B" last-cp="8F1D" />
+    <char cp="8F1F" />
+    <char cp="8F26" />
+    <range first-cp="8F29" last-cp="8F2A" />
+    <char cp="8F2F" />
+    <char cp="8F33" />
+    <range first-cp="8F38" last-cp="8F39" />
+    <char cp="8F3B" />
+    <range first-cp="8F3E" last-cp="8F3F" />
+    <char cp="8F42" />
+    <range first-cp="8F44" last-cp="8F46" />
+    <char cp="8F49" />
+    <range first-cp="8F4C" last-cp="8F4E" />
+    <char cp="8F57" />
+    <char cp="8F5C" />
+    <char cp="8F5F" />
+    <range first-cp="8F61" last-cp="8F64" />
+    <range first-cp="8F9B" last-cp="8F9C" />
+    <range first-cp="8F9E" last-cp="8F9F" />
+    <char cp="8FA3" />
+    <range first-cp="8FA7" last-cp="8FA8" />
+    <range first-cp="8FAD" last-cp="8FB2" />
+    <char cp="8FB7" />
+    <range first-cp="8FBA" last-cp="8FBC" />
+    <char cp="8FBF" />
+    <char cp="8FC2" />
+    <range first-cp="8FC4" last-cp="8FC5" />
+    <char cp="8FCE" />
+    <char cp="8FD1" />
+    <char cp="8FD4" />
+    <char cp="8FDA" />
+    <char cp="8FE2" />
+    <range first-cp="8FE5" last-cp="8FE6" />
+    <range first-cp="8FE9" last-cp="8FEB" />
+    <char cp="8FED" />
+    <range first-cp="8FEF" last-cp="8FF0" />
+    <char cp="8FF4" />
+    <range first-cp="8FF7" last-cp="8FFA" />
+    <char cp="8FFD" />
+    <range first-cp="9000" last-cp="9001" />
+    <char cp="9003" />
+    <range first-cp="9005" last-cp="9006" />
+    <char cp="900B" />
+    <range first-cp="900D" last-cp="9011" />
+    <range first-cp="9013" last-cp="9017" />
+    <range first-cp="9019" last-cp="901A" />
+    <range first-cp="901D" last-cp="9023" />
+    <char cp="9027" />
+    <char cp="902E" />
+    <range first-cp="9031" last-cp="9032" />
+    <range first-cp="9035" last-cp="9036" />
+    <range first-cp="9038" last-cp="9039" />
+    <char cp="903C" />
+    <char cp="903E" />
+    <range first-cp="9041" last-cp="9042" />
+    <char cp="9045" />
+    <char cp="9047" />
+    <range first-cp="9049" last-cp="904B" />
+    <range first-cp="904D" last-cp="9056" />
+    <range first-cp="9058" last-cp="9059" />
+    <char cp="905C" />
+    <char cp="905E" />
+    <range first-cp="9060" last-cp="9061" />
+    <char cp="9063" />
+    <char cp="9065" />
+    <range first-cp="9068" last-cp="9069" />
+    <range first-cp="906D" last-cp="906F" />
+    <char cp="9072" />
+    <range first-cp="9075" last-cp="9078" />
+    <char cp="907A" />
+    <range first-cp="907C" last-cp="907D" />
+    <range first-cp="907F" last-cp="9084" />
+    <char cp="9087" />
+    <range first-cp="9089" last-cp="908A" />
+    <char cp="908F" />
+    <char cp="9091" />
+    <char cp="90A3" />
+    <char cp="90A6" />
+    <char cp="90A8" />
+    <char cp="90AA" />
+    <char cp="90AF" />
+    <char cp="90B1" />
+    <char cp="90B5" />
+    <char cp="90B8" />
+    <char cp="90C1" />
+    <char cp="90CA" />
+    <char cp="90CE" />
+    <char cp="90DB" />
+    <range first-cp="90E1" last-cp="90E2" />
+    <char cp="90E4" />
+    <char cp="90E8" />
+    <char cp="90ED" />
+    <char cp="90F5" />
+    <char cp="90F7" />
+    <char cp="90FD" />
+    <char cp="9102" />
+    <char cp="9112" />
+    <char cp="9119" />
+    <char cp="912D" />
+    <char cp="9130" />
+    <char cp="9132" />
+    <range first-cp="9149" last-cp="914E" />
+    <char cp="9152" />
+    <char cp="9154" />
+    <char cp="9156" />
+    <char cp="9158" />
+    <range first-cp="9162" last-cp="9163" />
+    <char cp="9165" />
+    <range first-cp="9169" last-cp="916A" />
+    <char cp="916C" />
+    <range first-cp="9172" last-cp="9173" />
+    <char cp="9175" />
+    <range first-cp="9177" last-cp="9178" />
+    <char cp="9182" />
+    <char cp="9187" />
+    <char cp="9189" />
+    <char cp="918B" />
+    <char cp="918D" />
+    <char cp="9190" />
+    <char cp="9192" />
+    <char cp="9197" />
+    <char cp="919C" />
+    <char cp="91A2" />
+    <char cp="91A4" />
+    <range first-cp="91AA" last-cp="91AB" />
+    <char cp="91AF" />
+    <range first-cp="91B4" last-cp="91B5" />
+    <char cp="91B8" />
+    <char cp="91BA" />
+    <range first-cp="91C0" last-cp="91C1" />
+    <range first-cp="91C6" last-cp="91C9" />
+    <range first-cp="91CB" last-cp="91D1" />
+    <char cp="91D6" />
+    <char cp="91D8" />
+    <range first-cp="91DB" last-cp="91DD" />
+    <char cp="91DF" />
+    <char cp="91E1" />
+    <char cp="91E3" />
+    <range first-cp="91E6" last-cp="91E7" />
+    <range first-cp="91F5" last-cp="91F6" />
+    <char cp="91FC" />
+    <char cp="91FF" />
+    <range first-cp="920D" last-cp="920E" />
+    <char cp="9211" />
+    <range first-cp="9214" last-cp="9215" />
+    <char cp="921E" />
+    <char cp="9229" />
+    <char cp="922C" />
+    <char cp="9234" />
+    <char cp="9237" />
+    <char cp="923F" />
+    <range first-cp="9244" last-cp="9245" />
+    <range first-cp="9248" last-cp="9249" />
+    <char cp="924B" />
+    <char cp="9250" />
+    <char cp="9257" />
+    <range first-cp="925A" last-cp="925B" />
+    <char cp="925E" />
+    <char cp="9262" />
+    <char cp="9264" />
+    <char cp="9266" />
+    <char cp="9271" />
+    <char cp="927E" />
+    <char cp="9280" />
+    <char cp="9283" />
+    <char cp="9285" />
+    <char cp="9291" />
+    <char cp="9293" />
+    <range first-cp="9295" last-cp="9296" />
+    <char cp="9298" />
+    <range first-cp="929A" last-cp="929C" />
+    <char cp="92AD" />
+    <char cp="92B7" />
+    <char cp="92B9" />
+    <char cp="92CF" />
+    <char cp="92D2" />
+    <char cp="92E4" />
+    <range first-cp="92E9" last-cp="92EA" />
+    <char cp="92ED" />
+    <range first-cp="92F2" last-cp="92F3" />
+    <char cp="92F8" />
+    <char cp="92FA" />
+    <char cp="92FC" />
+    <char cp="9306" />
+    <range first-cp="930F" last-cp="9310" />
+    <range first-cp="9318" last-cp="931A" />
+    <char cp="9320" />
+    <range first-cp="9322" last-cp="9323" />
+    <char cp="9326" />
+    <char cp="9328" />
+    <range first-cp="932B" last-cp="932C" />
+    <range first-cp="932E" last-cp="932F" />
+    <char cp="9332" />
+    <char cp="9335" />
+    <range first-cp="933A" last-cp="933B" />
+    <char cp="9344" />
+    <char cp="934B" />
+    <char cp="934D" />
+    <char cp="9354" />
+    <char cp="9356" />
+    <range first-cp="935B" last-cp="935C" />
+    <char cp="9360" />
+    <char cp="936C" />
+    <char cp="936E" />
+    <char cp="9375" />
+    <char cp="937C" />
+    <char cp="937E" />
+    <char cp="938C" />
+    <char cp="9394" />
+    <range first-cp="9396" last-cp="9397" />
+    <char cp="939A" />
+    <char cp="93A7" />
+    <range first-cp="93AC" last-cp="93AE" />
+    <char cp="93B0" />
+    <char cp="93B9" />
+    <char cp="93C3" />
+    <char cp="93C8" />
+    <range first-cp="93D0" last-cp="93D1" />
+    <range first-cp="93D6" last-cp="93D8" />
+    <char cp="93DD" />
+    <char cp="93E1" />
+    <range first-cp="93E4" last-cp="93E5" />
+    <char cp="93E8" />
+    <char cp="9403" />
+    <char cp="9407" />
+    <char cp="9410" />
+    <range first-cp="9413" last-cp="9414" />
+    <range first-cp="9418" last-cp="941A" />
+    <char cp="9421" />
+    <char cp="942B" />
+    <range first-cp="9435" last-cp="9436" />
+    <char cp="9438" />
+    <char cp="943A" />
+    <char cp="9441" />
+    <char cp="9444" />
+    <range first-cp="9451" last-cp="9453" />
+    <range first-cp="945A" last-cp="945B" />
+    <char cp="945E" />
+    <char cp="9460" />
+    <char cp="9462" />
+    <char cp="946A" />
+    <char cp="9470" />
+    <char cp="9475" />
+    <char cp="9477" />
+    <range first-cp="947C" last-cp="947F" />
+    <char cp="9481" />
+    <char cp="9577" />
+    <char cp="9580" />
+    <range first-cp="9582" last-cp="9583" />
+    <char cp="9587" />
+    <range first-cp="9589" last-cp="958B" />
+    <char cp="958F" />
+    <char cp="9591" />
+    <range first-cp="9593" last-cp="9594" />
+    <char cp="9596" />
+    <range first-cp="9598" last-cp="9599" />
+    <char cp="95A0" />
+    <range first-cp="95A2" last-cp="95A5" />
+    <range first-cp="95A7" last-cp="95A8" />
+    <char cp="95AD" />
+    <char cp="95B2" />
+    <char cp="95B9" />
+    <range first-cp="95BB" last-cp="95BC" />
+    <char cp="95BE" />
+    <char cp="95C3" />
+    <char cp="95C7" />
+    <char cp="95CA" />
+    <range first-cp="95CC" last-cp="95CD" />
+    <range first-cp="95D4" last-cp="95D6" />
+    <char cp="95D8" />
+    <char cp="95DC" />
+    <range first-cp="95E1" last-cp="95E2" />
+    <char cp="95E5" />
+    <char cp="961C" />
+    <char cp="9621" />
+    <char cp="9628" />
+    <char cp="962A" />
+    <range first-cp="962E" last-cp="962F" />
+    <char cp="9632" />
+    <char cp="963B" />
+    <range first-cp="963F" last-cp="9640" />
+    <char cp="9642" />
+    <char cp="9644" />
+    <range first-cp="964B" last-cp="964D" />
+    <range first-cp="964F" last-cp="9650" />
+    <range first-cp="965B" last-cp="965F" />
+    <range first-cp="9662" last-cp="9666" />
+    <char cp="966A" />
+    <char cp="966C" />
+    <char cp="9670" />
+    <range first-cp="9672" last-cp="9673" />
+    <range first-cp="9675" last-cp="9678" />
+    <char cp="967A" />
+    <char cp="967D" />
+    <range first-cp="9685" last-cp="9686" />
+    <char cp="9688" />
+    <range first-cp="968A" last-cp="968B" />
+    <range first-cp="968D" last-cp="968F" />
+    <range first-cp="9694" last-cp="9695" />
+    <range first-cp="9697" last-cp="9699" />
+    <range first-cp="969B" last-cp="969C" />
+    <char cp="96A0" />
+    <char cp="96A3" />
+    <range first-cp="96A7" last-cp="96A8" />
+    <char cp="96AA" />
+    <range first-cp="96B0" last-cp="96B2" />
+    <char cp="96B4" />
+    <range first-cp="96B6" last-cp="96B9" />
+    <range first-cp="96BB" last-cp="96BC" />
+    <range first-cp="96C0" last-cp="96C1" />
+    <range first-cp="96C4" last-cp="96C7" />
+    <char cp="96C9" />
+    <range first-cp="96CB" last-cp="96CE" />
+    <char cp="96D1" />
+    <range first-cp="96D5" last-cp="96D6" />
+    <char cp="96D9" />
+    <range first-cp="96DB" last-cp="96DC" />
+    <range first-cp="96E2" last-cp="96E3" />
+    <char cp="96E8" />
+    <range first-cp="96EA" last-cp="96EB" />
+    <char cp="96F0" />
+    <char cp="96F2" />
+    <range first-cp="96F6" last-cp="96F7" />
+    <char cp="96F9" />
+    <char cp="96FB" />
+    <char cp="9700" />
+    <char cp="9704" />
+    <range first-cp="9706" last-cp="9708" />
+    <char cp="970A" />
+    <range first-cp="970D" last-cp="970F" />
+    <char cp="9711" />
+    <char cp="9713" />
+    <char cp="9716" />
+    <char cp="9719" />
+    <char cp="971C" />
+    <char cp="971E" />
+    <char cp="9724" />
+    <char cp="9727" />
+    <char cp="972A" />
+    <char cp="9730" />
+    <char cp="9732" />
+    <range first-cp="9738" last-cp="9739" />
+    <range first-cp="973D" last-cp="973E" />
+    <char cp="9742" />
+    <char cp="9744" />
+    <char cp="9746" />
+    <range first-cp="9748" last-cp="9749" />
+    <char cp="9752" />
+    <char cp="9756" />
+    <char cp="9759" />
+    <char cp="975C" />
+    <char cp="975E" />
+    <range first-cp="9760" last-cp="9762" />
+    <char cp="9764" />
+    <char cp="9766" />
+    <range first-cp="9768" last-cp="9769" />
+    <char cp="976B" />
+    <char cp="976D" />
+    <char cp="9771" />
+    <char cp="9774" />
+    <range first-cp="9779" last-cp="977A" />
+    <char cp="977C" />
+    <char cp="9781" />
+    <range first-cp="9784" last-cp="9786" />
+    <char cp="978B" />
+    <char cp="978D" />
+    <range first-cp="978F" last-cp="9790" />
+    <char cp="9798" />
+    <char cp="979C" />
+    <char cp="97A0" />
+    <char cp="97A3" />
+    <char cp="97A6" />
+    <char cp="97A8" />
+    <char cp="97AB" />
+    <char cp="97AD" />
+    <range first-cp="97B3" last-cp="97B4" />
+    <char cp="97C3" />
+    <char cp="97C6" />
+    <char cp="97C8" />
+    <char cp="97CB" />
+    <char cp="97D3" />
+    <char cp="97DC" />
+    <range first-cp="97ED" last-cp="97EE" />
+    <range first-cp="97F2" last-cp="97F3" />
+    <range first-cp="97F5" last-cp="97F6" />
+    <char cp="97FB" />
+    <char cp="97FF" />
+    <range first-cp="9801" last-cp="9803" />
+    <range first-cp="9805" last-cp="9806" />
+    <char cp="9808" />
+    <char cp="980C" />
+    <range first-cp="980F" last-cp="9813" />
+    <range first-cp="9817" last-cp="9818" />
+    <char cp="981A" />
+    <char cp="9821" />
+    <char cp="9824" />
+    <range first-cp="982C" last-cp="982D" />
+    <char cp="9834" />
+    <range first-cp="9837" last-cp="9838" />
+    <range first-cp="983B" last-cp="983D" />
+    <char cp="9846" />
+    <range first-cp="984B" last-cp="984F" />
+    <range first-cp="9854" last-cp="9855" />
+    <char cp="9858" />
+    <char cp="985B" />
+    <char cp="985E" />
+    <char cp="9867" />
+    <char cp="986B" />
+    <range first-cp="986F" last-cp="9871" />
+    <range first-cp="9873" last-cp="9874" />
+    <char cp="98A8" />
+    <char cp="98AA" />
+    <char cp="98AF" />
+    <char cp="98B1" />
+    <char cp="98B6" />
+    <range first-cp="98C3" last-cp="98C4" />
+    <char cp="98C6" />
+    <range first-cp="98DB" last-cp="98DC" />
+    <char cp="98DF" />
+    <char cp="98E2" />
+    <char cp="98E9" />
+    <char cp="98EB" />
+    <range first-cp="98ED" last-cp="98EF" />
+    <char cp="98F2" />
+    <char cp="98F4" />
+    <range first-cp="98FC" last-cp="98FE" />
+    <char cp="9903" />
+    <char cp="9905" />
+    <range first-cp="9909" last-cp="990A" />
+    <char cp="990C" />
+    <char cp="9910" />
+    <range first-cp="9912" last-cp="9914" />
+    <char cp="9918" />
+    <range first-cp="991D" last-cp="991E" />
+    <range first-cp="9920" last-cp="9921" />
+    <char cp="9924" />
+    <char cp="9928" />
+    <char cp="992C" />
+    <char cp="992E" />
+    <range first-cp="993D" last-cp="993E" />
+    <char cp="9942" />
+    <char cp="9945" />
+    <char cp="9949" />
+    <range first-cp="994B" last-cp="994C" />
+    <range first-cp="9950" last-cp="9952" />
+    <char cp="9955" />
+    <char cp="9957" />
+    <range first-cp="9996" last-cp="9999" />
+    <char cp="99A5" />
+    <char cp="99A8" />
+    <range first-cp="99AC" last-cp="99AE" />
+    <range first-cp="99B3" last-cp="99B4" />
+    <char cp="99BC" />
+    <char cp="99C1" />
+    <range first-cp="99C4" last-cp="99C6" />
+    <char cp="99C8" />
+    <range first-cp="99D0" last-cp="99D2" />
+    <char cp="99D5" />
+    <char cp="99D8" />
+    <char cp="99DB" />
+    <char cp="99DD" />
+    <char cp="99DF" />
+    <char cp="99E2" />
+    <range first-cp="99ED" last-cp="99EE" />
+    <range first-cp="99F1" last-cp="99F2" />
+    <char cp="99F8" />
+    <char cp="99FB" />
+    <char cp="99FF" />
+    <char cp="9A01" />
+    <char cp="9A05" />
+    <range first-cp="9A0E" last-cp="9A0F" />
+    <range first-cp="9A12" last-cp="9A13" />
+    <char cp="9A19" />
+    <char cp="9A28" />
+    <char cp="9A2B" />
+    <char cp="9A30" />
+    <char cp="9A37" />
+    <char cp="9A3E" />
+    <char cp="9A40" />
+    <range first-cp="9A42" last-cp="9A43" />
+    <char cp="9A45" />
+    <char cp="9A4D" />
+    <char cp="9A55" />
+    <char cp="9A57" />
+    <range first-cp="9A5A" last-cp="9A5B" />
+    <char cp="9A5F" />
+    <char cp="9A62" />
+    <range first-cp="9A64" last-cp="9A65" />
+    <range first-cp="9A69" last-cp="9A6B" />
+    <char cp="9AA8" />
+    <char cp="9AAD" />
+    <char cp="9AB0" />
+    <char cp="9AB8" />
+    <char cp="9ABC" />
+    <char cp="9AC0" />
+    <char cp="9AC4" />
+    <char cp="9ACF" />
+    <char cp="9AD1" />
+    <range first-cp="9AD3" last-cp="9AD4" />
+    <char cp="9AD8" />
+    <range first-cp="9ADE" last-cp="9ADF" />
+    <range first-cp="9AE2" last-cp="9AE3" />
+    <char cp="9AE6" />
+    <range first-cp="9AEA" last-cp="9AEB" />
+    <range first-cp="9AED" last-cp="9AEF" />
+    <char cp="9AF1" />
+    <char cp="9AF4" />
+    <char cp="9AF7" />
+    <char cp="9AFB" />
+    <char cp="9B06" />
+    <char cp="9B18" />
+    <char cp="9B1A" />
+    <char cp="9B1F" />
+    <range first-cp="9B22" last-cp="9B23" />
+    <char cp="9B25" />
+    <range first-cp="9B27" last-cp="9B2A" />
+    <range first-cp="9B2E" last-cp="9B2F" />
+    <range first-cp="9B31" last-cp="9B32" />
+    <range first-cp="9B3B" last-cp="9B3C" />
+    <range first-cp="9B41" last-cp="9B45" />
+    <range first-cp="9B4D" last-cp="9B4F" />
+    <char cp="9B51" />
+    <char cp="9B54" />
+    <char cp="9B58" />
+    <char cp="9B5A" />
+    <char cp="9B6F" />
+    <char cp="9B74" />
+    <char cp="9B83" />
+    <char cp="9B8E" />
+    <range first-cp="9B91" last-cp="9B93" />
+    <range first-cp="9B96" last-cp="9B97" />
+    <range first-cp="9B9F" last-cp="9BA0" />
+    <char cp="9BA8" />
+    <range first-cp="9BAA" last-cp="9BAB" />
+    <range first-cp="9BAD" last-cp="9BAE" />
+    <char cp="9BB4" />
+    <char cp="9BB9" />
+    <char cp="9BC0" />
+    <char cp="9BC6" />
+    <range first-cp="9BC9" last-cp="9BCA" />
+    <char cp="9BCF" />
+    <range first-cp="9BD1" last-cp="9BD2" />
+    <char cp="9BD4" />
+    <char cp="9BD6" />
+    <char cp="9BDB" />
+    <range first-cp="9BE1" last-cp="9BE4" />
+    <char cp="9BE8" />
+    <range first-cp="9BF0" last-cp="9BF2" />
+    <char cp="9BF5" />
+    <char cp="9C04" />
+    <char cp="9C06" />
+    <range first-cp="9C08" last-cp="9C0A" />
+    <range first-cp="9C0C" last-cp="9C0D" />
+    <char cp="9C10" />
+    <range first-cp="9C12" last-cp="9C15" />
+    <char cp="9C1B" />
+    <char cp="9C21" />
+    <range first-cp="9C24" last-cp="9C25" />
+    <range first-cp="9C2D" last-cp="9C30" />
+    <char cp="9C32" />
+    <range first-cp="9C39" last-cp="9C3B" />
+    <char cp="9C3E" />
+    <range first-cp="9C46" last-cp="9C48" />
+    <char cp="9C52" />
+    <char cp="9C57" />
+    <char cp="9C5A" />
+    <char cp="9C60" />
+    <char cp="9C67" />
+    <char cp="9C76" />
+    <char cp="9C78" />
+    <char cp="9CE5" />
+    <char cp="9CE7" />
+    <char cp="9CE9" />
+    <range first-cp="9CEB" last-cp="9CEC" />
+    <char cp="9CF0" />
+    <range first-cp="9CF3" last-cp="9CF4" />
+    <char cp="9CF6" />
+    <char cp="9D03" />
+    <range first-cp="9D06" last-cp="9D09" />
+    <char cp="9D0E" />
+    <char cp="9D12" />
+    <char cp="9D15" />
+    <char cp="9D1B" />
+    <char cp="9D1F" />
+    <char cp="9D23" />
+    <char cp="9D26" />
+    <char cp="9D28" />
+    <range first-cp="9D2A" last-cp="9D2C" />
+    <char cp="9D3B" />
+    <range first-cp="9D3E" last-cp="9D3F" />
+    <char cp="9D41" />
+    <char cp="9D44" />
+    <char cp="9D46" />
+    <char cp="9D48" />
+    <range first-cp="9D50" last-cp="9D51" />
+    <char cp="9D59" />
+    <range first-cp="9D5C" last-cp="9D5E" />
+    <range first-cp="9D60" last-cp="9D61" />
+    <char cp="9D64" />
+    <char cp="9D6C" />
+    <char cp="9D6F" />
+    <char cp="9D72" />
+    <char cp="9D7A" />
+    <char cp="9D87" />
+    <char cp="9D89" />
+    <char cp="9D8F" />
+    <char cp="9D9A" />
+    <char cp="9DA4" />
+    <char cp="9DA9" />
+    <char cp="9DAB" />
+    <char cp="9DAF" />
+    <char cp="9DB2" />
+    <char cp="9DB4" />
+    <char cp="9DB8" />
+    <range first-cp="9DBA" last-cp="9DBB" />
+    <range first-cp="9DC1" last-cp="9DC2" />
+    <char cp="9DC4" />
+    <char cp="9DC6" />
+    <char cp="9DCF" />
+    <char cp="9DD3" />
+    <char cp="9DD9" />
+    <char cp="9DE6" />
+    <char cp="9DED" />
+    <char cp="9DEF" />
+    <char cp="9DF2" />
+    <range first-cp="9DF8" last-cp="9DFA" />
+    <char cp="9DFD" />
+    <range first-cp="9E1A" last-cp="9E1B" />
+    <char cp="9E1E" />
+    <char cp="9E75" />
+    <range first-cp="9E78" last-cp="9E79" />
+    <char cp="9E7D" />
+    <char cp="9E7F" />
+    <char cp="9E81" />
+    <char cp="9E88" />
+    <range first-cp="9E8B" last-cp="9E8C" />
+    <range first-cp="9E91" last-cp="9E93" />
+    <char cp="9E95" />
+    <char cp="9E97" />
+    <char cp="9E9D" />
+    <char cp="9E9F" />
+    <range first-cp="9EA5" last-cp="9EA6" />
+    <range first-cp="9EA9" last-cp="9EAA" />
+    <char cp="9EAD" />
+    <range first-cp="9EB8" last-cp="9EBC" />
+    <range first-cp="9EBE" last-cp="9EBF" />
+    <char cp="9EC4" />
+    <range first-cp="9ECC" last-cp="9ED0" />
+    <char cp="9ED2" />
+    <char cp="9ED4" />
+    <range first-cp="9ED8" last-cp="9ED9" />
+    <range first-cp="9EDB" last-cp="9EDE" />
+    <char cp="9EE0" />
+    <char cp="9EE5" />
+    <char cp="9EE8" />
+    <char cp="9EEF" />
+    <char cp="9EF4" />
+    <range first-cp="9EF6" last-cp="9EF7" />
+    <char cp="9EF9" />
+    <range first-cp="9EFB" last-cp="9EFD" />
+    <range first-cp="9F07" last-cp="9F08" />
+    <char cp="9F0E" />
+    <char cp="9F13" />
+    <char cp="9F15" />
+    <range first-cp="9F20" last-cp="9F21" />
+    <char cp="9F2C" />
+    <char cp="9F3B" />
+    <char cp="9F3E" />
+    <range first-cp="9F4A" last-cp="9F4B" />
+    <range first-cp="9F4E" last-cp="9F4F" />
+    <char cp="9F52" />
+    <char cp="9F54" />
+    <range first-cp="9F5F" last-cp="9F63" />
+    <range first-cp="9F66" last-cp="9F67" />
+    <char cp="9F6A" />
+    <char cp="9F6C" />
+    <char cp="9F72" />
+    <range first-cp="9F76" last-cp="9F77" />
+    <char cp="9F8D" />
+    <char cp="9F95" />
+    <range first-cp="9F9C" last-cp="9F9D" />
+    <char cp="9FA0" />
+  </data>
+</idntable>

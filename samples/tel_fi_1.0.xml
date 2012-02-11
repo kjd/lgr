@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>fi</language>
+    <domain>tel</domain>
+    <date>2010-06-15</date>
+    <version>1.0</version>
+    <description type="text/plain">Registry: Telnic Ltd.
+Contact: Vladimir Shadrunov vshadrunov@telnic.org
+Address: 37 Percy str., W1T 2DJ London UK
+Telephone: +44-20-7467-6450
+Website: http://www.telnic.org/
+
+Relevant Policy Document URL: http://www.telnic.org/downloads/policies/IDN_Policy_German.pdf
+
+The table below lists the characters allowed in the Unicode representation of IDNs
+associated with the German language. The &#8216;#&#8217; symbol denotes start of a comment that
+continues to the end of line.
+
+Registrants are advised to carefully consider the potential confusion over the perception
+of equivalence between an accented Latin character and a sequence of other Latin
+characters (with or without accents.) There exists no equivalence rule that can be applied
+universally as any such mappings are generally dependent on the language, culture and
+context in which an IDN is used.
+
+Note: according to the IDN Standards, the Eszet character &#8220;&#223;&#8221; used in the German
+language will be mapped to a double s string (i.e. ss).</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="00E4" />
+    <char cp="00F6" />
+    <char cp="00FC" />
+  </data>
+</idntable>

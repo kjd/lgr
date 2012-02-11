@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>ko-KR</language>
+    <domain>kr</domain>
+    <date>2004-03-25</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="195"&gt; TLD: KR&lt;br&gt;
+Language Tag: ko-KR&lt;br&gt;
+Language Description: Korean&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 25 March 2004&lt;br&gt; &lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt; &lt;p&gt;Registry: KRNIC&lt;br&gt;
+Contact: Chanki Park &lt;a href="mailto:ckp@nic.or.kr"&gt;ckp@nic.or.kr&lt;/a&gt;&lt;br&gt;
+Address: 11F, KTF Bldg, 1321-11 Seocho2-Dong, Seocho-Gu Seoul 137-857
+South Korea&lt;br&gt;
+Tel: +82-2-2186-4504 Fax: +82-2-2186-4498&lt;br&gt;
+&lt;br&gt;
+&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Abstract&lt;br&gt;
+&lt;br&gt;
+We submit 11,172 Hangul Syllables defined in Unicode 4.0 according to the consensus
+of Korean Internet community. Though most present computer environments support
+11,172 Hangul Syllables submitted herein, some systems still support only 2,350
+Hangul Syllables defined in KS X 1001:2002, which is a subset of 11,172 Hangul
+Syllables. These 2,350 syllables are asterisked in the comment line below. Thus,
+for the purpose of interoperability and stability, we recommend using 2,350
+Hangul Syllables. Under the IETF IDN standards such as RFC 3490, 3491, and 3492,
+the registrar may inform registrants that other syllables except 2,350 syllables
+among the above 11,172 Hangul Syllables may not be supported.&lt;/p&gt;
+&lt;p&gt;Reference 1 KS X 1001:2002&lt;br&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="AC00" last-cp="D7A3" />
+  </data>
+</idntable>

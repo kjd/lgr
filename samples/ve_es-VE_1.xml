@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>es-VE</language>
+    <domain>ve</domain>
+    <date>2005-03-15</date>
+    <version>1</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: VE&lt;br/&gt;
+Language Tag or Script Identifier: es-VE&lt;br/&gt;
+Language or Script Description: Spanish&lt;br/&gt;
+Version: 1&lt;br/&gt;
+Effective Date: 15 March 2005&lt;br/&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: NIC-VE&lt;br&gt;
+Contact: Francisco Obispo &lt;a href="mailto:fobispo@nic.ve"&gt;fobispo@nic.ve&lt;/a&gt;&lt;br&gt;
+Address: Av. Universidad, Esq. El Chorro Torre MCT (Antigua sede Banesco), Caracas-Venezuela&lt;br/&gt;
+Telephone: +58-212-771-8584, +58-212-771-8599&lt;br/&gt;
+Website: &lt;a href="http://www.nic.ve"&gt;http://www.nic.ve&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Relevant Policy Document URL:
+&lt;a href="http://www.nic.ve/documentos/"&gt;http://www.nic.ve/documentos/&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+This Character repertoire was derived from the following sources:&lt;br&gt;
+-
+&lt;/p&gt;
+
+&lt;p&gt;
+Internationalized Domain Names (IDN), extend the use the domain name space by allowing registrants
+to use spanish characters not available in the US-ASCII character set.
+
+System Administrators wishing to use IDN in their services should read the notes at the end of this
+document
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <char cp="00E1" />
+    <char cp="00E9" />
+    <char cp="00ED" />
+    <char cp="00F1" />
+    <char cp="00F3" />
+    <char cp="00FA" />
+    <char cp="00FC" />
+  </data>
+</idntable>

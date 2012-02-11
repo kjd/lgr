@@ -1,0 +1,5 @@
+include *.txt
+recursive-include docs *.rst
+recursive-include samples README *.xml
+recursive-include specification *
+global-exclude .DS_Store

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>th-TH</language>
+    <domain>th</domain>
+    <date>2004-06-21</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="195"&gt; TLD: TH&lt;br&gt;
+Language Tag: th-TH&lt;br&gt;
+Language Description: Thai&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 21 June 2004&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt; Registry: Thailand Network Information Center&lt;br&gt;
+Contact: Krit Witwiyaruj &lt;a href="mailto:krit@thnic.or.th"&gt;krit@thnic.or.th&lt;/a&gt;&lt;br&gt;
+Address: 111 Mu9, Thailand Science Park, 2nd Floor, Room P-206 Thanon Phahon
+Yothin, Khlong Nueng, Khlong Luang Pathum Thani 12120 Thailand &lt;br&gt;
+Tel: +66 2564 8031-2 #112&lt;br&gt;
+Website: &lt;a href="http://www.thnic.or.th/"&gt;http://www.thnic.or.th/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt; Relevant Policy Document URL: &lt;a href="http://www.thnic.or.th/homepage2/thaidomain.html"&gt;
+http://www.thnic.or.th/homepage2/thaidomain.html&lt;/a&gt;
+&lt;p&gt; This document provides a description of the IDN (Internationalized Domain
+Names) Language Table to be used by THNIC in the .th TLD registry for the registration
+of Thai language .th domains. The policy is consistent and compliant with the
+ICANN IDN Registry Implementation Guidelines [ICANN] and is intended to be published
+publicly and registered at the IANA Internationalized Domain Names Character.
+&lt;p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0041" last-cp="005A" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="0E01" last-cp="0E3A" />
+    <range first-cp="0E40" last-cp="0E4D" />
+    <range first-cp="0E50" last-cp="0E59" />
+  </data>
+</idntable>

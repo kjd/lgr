@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>sv-SE</language>
+    <domain>se</domain>
+    <date>2006-11-21</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="250"&gt; TLD: SE&lt;br&gt;
+Language Tag: sv-SE&lt;br&gt;
+Language Description: Swedish&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 21 November 2006&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="26"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="360"&gt; Registry: .SE (Stiftelsen f&amp;ouml;r Internetinfrastruktur)&lt;br&gt;
+Contact: Anne-Marie Eklund-L&amp;ouml;winder &lt;a href="mailto:Anne-Marie.Eklund-Lowinder@iis.se"&gt;Anne-Marie.Eklund-Lowinder@iis.se&lt;/a&gt;&lt;br&gt;
+Address: Box 7399, SE-10391 Stockholm, Sweden&lt;br&gt;
+Tel: +46 8 452 3500 Fax: +46 8 452 3502 &lt;br&gt;
+Website: &lt;a href="http://www.iis.se"&gt;http://www.iis.se/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;Relevant Policy Document URL: &lt;a href="http://www.iis.se/pdf/allmanna_villkor_eng.pdf"&gt;http://www.iis.se/pdf/allmanna_villkor_eng.pdf&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This document describes the character table used by the .SE registry for the
+registration of domain names in the Swedish language and is intended for
+publication in the IANA Repository of TLD IDN Practices. It is provided for the
+information of prospective holders of domains in .SE and for the users of
+resources within those domains. It is further intended to be a generally
+applicable description of the character repertoire necessary for the inclusion
+of Swedish language labels on all levels in other DNS registries.&lt;/p&gt;
+
+&lt;p&gt;The material presented here was initially prepared by the .MUSEUM registry
+and was posted as such in the IANA Repository (where it is now archived). The
+present document is being substituted for it in collaboration with the .MUSEUM
+registry, to indicate the Swedish language nexus more clearly. There are two
+substantive differences between the versions. The first reflects an orthographic
+reform that entered into effect in April 2006 and would, in any case, have
+necessitated a revision of the previous table. The second is a simplification
+in the description of alternate orthographic representations of characters that
+lie outside the ASCII repertoire. The relevant policy document for the .MUSEUM
+implementation is located at:
+&lt;a href="http://about.museum/idn/idnpolicy.html"&gt;
+http://about.museum/idn/idnpolicy.html&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This table conforms to current Swedish orthographic practice as described by
+the Swedish Language Council in the publication &amp;quot;Svenska
+spr&amp;aring;kregler&amp;quot;, 2nd edition, 2000 (2003 printing), and the
+lexicographic practice documented by the Swedish Academy in the publication
+&amp;quot;Svenska akademiens ordlista &amp;ouml;ver svenska spr&amp;aring;ket&amp;quot;, 13th
+edition, first printing, 2006.&lt;/p&gt;
+
+&lt;p&gt;Characters are listed in this table by their Unicode code points in U+xxxx
+format. The name of each character appears to the right of the number
+sign &amp;quot;#&amp;quot; on the same line. Explanatory comments about associated
+orthographic conventions are similarly placed to the right of number signs. Any
+narrative text about character variants is intended solely to call attention to
+situations where confusion can arise if particular care is not taken to avoid it.
+No prescriptive policies are attached to character variants in either the .SE
+or .MUSEUM registries, and the registration of a label containing any of the listed
+characters confers no rights to any other orthographically equivalent form. Other
+registries wishing to implement this table are advised to take the discussion of
+character variants solely for its informational value.&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="00E4" last-cp="00E5" />
+    <char cp="00E9" />
+    <char cp="00F6" />
+    <char cp="00FC" />
+  </data>
+</idntable>

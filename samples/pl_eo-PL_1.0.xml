@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>eo-PL</language>
+    <domain>pl</domain>
+    <date>2003-10-20</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table width="100%"&gt;
+&lt;tr valign="top"&gt;
+
+&lt;td width="30%"&gt;
+TLD: PL
+&lt;br&gt;Language Tag: eo-PL
+&lt;br&gt;Language Description: Esperanto
+&lt;br&gt;Version: 1.0
+&lt;br&gt;Effective Date: 20 October 2003
+
+&lt;/td&gt;
+
+&lt;td&gt;
+Registry: NASK
+&lt;br&gt;Contact: Andrzej Bartosiewicz &lt;a href="mailto:andrzejb@nask.pl"&gt;andrzejb@nask.pl&lt;/a&gt;, Krzysztof Olesik &lt;a href="mailto:kolesik@nask.pl"&gt;kolesik@nask.pl&lt;/a&gt;
+&lt;br&gt;Address: Wawozowa 18 Str, 02-796 Warsaw, Poland
+&lt;br&gt;Tel: +48 22 52 31 200 Fax: +48 22 52 31 301
+&lt;br&gt;Website: &lt;a href="http://www.nask.pl/nask_en/"&gt;http://www.nask.pl/nask_en/&lt;/a&gt;, &lt;a href="http://www.dns.pl/english/"&gt;http://www.dns.pl/english/&lt;/a&gt;
+
+&lt;/td&gt;
+
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Relevant Policy Document URL: &lt;a href="http://www.dns.pl/IDN/idn-registration-policy.txt"&gt;http://www.dns.pl/IDN/idn-registration-policy.txt&lt;/a&gt;
+&lt;/p&gt;
+
+
+&lt;p&gt;
+This document presents a character table created by NASK (Research and Academic Computer Network - .PL ccTLD registry) for Esperanto language. The document is intended for informational purpose only and for exclusive use by .PL ccTLD Registry.
+The character set was created on the basis of the following sources:
+&lt;br&gt;1. &lt;a href="http://www.evertype.com/alphabets/index.html"&gt;http://www.evertype.com/alphabets/index.html&lt;/a&gt;
+&lt;br&gt;2. &lt;a href="http://www.omniglot.com"&gt;http://www.omniglot.com&lt;/a&gt;
+&lt;br&gt;3.  &lt;a href="http://www-950.ibm.com/software/globalization/icu/demo/locales"&gt;http://www-950.ibm.com/software/globalization/icu/demo/locales&lt;/a&gt;&lt;br&gt;The table does not provide neither definition of an alphabet nor language itself. The table may contain additional letters which are used to represent foreign names and words. These letters may not be listed in the alphabet, or may be listed very rarely. Full policy of IDNs registration is presented in the following document "Registering Internationalized Domain Names under .PL" A. Bartosiewicz, K. Olesik (&lt;a href="http://www.dns.pl/IDN/idn-registration-policy.txt"&gt;http://www.dns.pl/IDN/idn-registration-policy.txt&lt;/a&gt;).
+
+&lt;/p&gt;
+
+&lt;p&gt;The following characters are given in their Unicode code points in format U+XXXX, where X is a hexadecimal digit. The range of code points is expressed as U+XXXX..U+YYYY, where XXXX and YYYY are the first and last Unicode code point in the range.
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0032" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="0109" />
+    <char cp="011D" />
+    <char cp="0125" />
+    <char cp="0135" />
+    <char cp="015D" />
+    <char cp="016D" />
+  </data>
+</idntable>

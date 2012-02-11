@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>pt-BR</language>
+    <domain>br</domain>
+    <date>2005-05-09</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="216"&gt; TLD: BR&lt;br&gt;
+Language Tag: pt-BR&lt;br&gt;
+Language Description: Portuguese&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 09 May 2005&lt;br&gt; &lt;/td&gt;
+&lt;td width="25"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="18"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt; &lt;p&gt;Registry: Registro.br&lt;br&gt;
+Contact: Frederico A C Neves &lt;a href="mailto:fneves@registro.br"&gt;fneves@registro.br&lt;/a&gt;&lt;br&gt;
+Tel: +55 11 55093505 Fax: +55 11 5509-3501&lt;br&gt;
+Website: &lt;ahref="http://registro.br/"&gt;http://registro.br/&lt;/a&gt;&lt;br&gt;
+&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt; Relevant Policy Document URL: &lt;a href="http://registro.br/info/dicas.html"&gt; http://registro.br/info/dicas.html&lt;/a&gt; &lt;/p&gt; &lt;p&gt; This document describes the valid character table for IDNA in the .BR registry. &lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="00E0" last-cp="00E3" />
+    <char cp="00E7" />
+    <range first-cp="00E9" last-cp="00EA" />
+    <char cp="00ED" />
+    <range first-cp="00F3" last-cp="00F5" />
+    <char cp="00FA" />
+    <char cp="00FC" />
+  </data>
+</idntable>

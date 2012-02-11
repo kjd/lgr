@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <script>Latn</script>
+    <domain>cl</domain>
+    <date>2005-09-21</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: CL&lt;br&gt;
+Script Identifier: Latin&lt;br&gt;
+Script Description: Latin Unicode Script, ISO 15924 Latn&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 21 September 2005&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: NIC Chile&lt;br&gt;
+Contact: Patricio Poblete &lt;a href="mailto:ppoblete@nic.cl"&gt;ppoblete@nic.cl&lt;/a&gt;&lt;br&gt;
+Address: Miraflores 222, piso 14, Santiago, CP 8320198, Chile&lt;br&gt;
+Telephone: +56-2-9407700 Fax: +56-2-9407701&lt;br&gt;
+Website: &lt;a href="http://www.nic.cl/"&gt;http://www.nic.cl/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: &lt;a href="http://www.nic.cl/CL-IDN-policy.html"&gt;
+http://www.nic.cl/CL-IDN-policy.html&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;
+This document describes the Internationalized Domain Names (IDN) Character Table to be used by NIC Chile in the .CL TLD registry for the registration of .cl domain names.
+&lt;/p&gt;
+
+&lt;p&gt;
+We advise registrants to carefully consider the potential confusion over the perception of equivalence between an accented Latin character and another sequence of Latin characters (with or without accents). There exists no equivalence rule nor character mappings.
+&lt;/p&gt;
+
+&lt;p&gt;
+This table is in compliance with the ICANN Guidelines for the Implementation of Internationalized Domain Names Version 2.1, and is intended for publication in the IANA IDN Character Table Registry.
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="00E1" />
+    <char cp="00E9" />
+    <char cp="00ED" />
+    <char cp="00F1" />
+    <char cp="00F3" />
+    <char cp="00FA" />
+    <char cp="00FC" />
+  </data>
+</idntable>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>ko</language>
+    <domain>asia</domain>
+    <date>2011-05-04</date>
+    <version>1.1</version>
+    <description type="text/plain">&#65279;.ASIA KO IDN Language Table
+
+TLD: ASIA
+Version: 1.0
+Effective Date: 2011-03-11
+
+Summary of IDN Policy Profile:
+IDN LangaugeTag: KO
+IDN Language Description: Korean
+Minimum Length: A-Label: 3; U-Label: 1
+Maximum Length: A-Label: 63
+Valid Characters: 11,209
+Additional Contextual Rules: A Domain Name Applied For must include at least one non-LDH character
+IDN Variants: N/A
+
+Registry: DotAsia Organisation
+Contact: DotAsia Admin Contact &lt;admin@iana.whois.asia&gt;
+Contact: DotAsia Tech Contact &lt;tech@iana.whois.asia&gt;
+Address: 15/F, 6 Knutsford Terrace, Tsim Sha Tsui, Hong Kong
+TEL: +852.35202635
+FAX: +852.35202634
+Website: http://www.registry.asia
+
+Relevant Policy Document URLs:
+- .ASIA IDN Policies for CJK (Chinese, Japanese &amp; Korean): http://dot.asia/policies/DotAsia-CJK-IDN-
+Policies-COMPLETE--2011-03-11.pdf
+- .ASIA IDN Sunrise Policies: http://dot.asia/policies/DotAsia-IDN-Sunrise-Policies-COMPLETE--2011-
+03-11.pdf
+
+
+Abstract
+
+This language table is adopted from the KRNIC Korean IDN Language table (ko-KR:
+http://www.iana.org/domains/idn-tables/tables/kr_ko-kr_1.0.html) for the implementation of
+Korean IDN registrations at the .ASIA gTLD.
+
+DotAsia is committed to maintaining the integrity of .ASIA IDN registrations and understands the
+multilingual nature of the .ASIA zone as a gTLD.  In preparation of this language table, DotAsia has
+coordinated with KISA (Korea Internet &amp; Security Agency) on the applicability of the KRNIC Korean IDN
+Language table for the .ASIA gTLD.
+
+The following table includes 11,172 Hangul Syllables (along with the 36 LDH characters, &#8220;a-z&#8221;, &#8220;0-9&#8221; and
+&#8220;-&#8220;) according to the consensus of Korean Internet community.  Hanja characters are not included in
+the table.  Mixture of Hanja characters with Hangul characters for domain names is not encouraged.
+Registrants interested in registering domain names with Hanja characters only may consider utilizing a
+registration based on the ZH table.
+
+The following table uses the RFC3743-defined format, and is in compliance with the ICANN Guidelines
+for IDN registration and for publication in the IANA Repository of IDN Practices.
+
+References:
+
+Please refer to the references cited for the ko-KR KRNIC Korean IDN Language table.</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="AC00" last-cp="D7A3" />
+  </data>
+</idntable>

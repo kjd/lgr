@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <script>Latn</script>
+    <domain>eu</domain>
+    <date>2009-12-10</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: EU&lt;br/&gt;
+Script Identifier: Latin&lt;br/&gt;
+Script Description: Latin Unicode (Basic, Extended-A and Extended-B)&lt;br/&gt;
+
+Version: 1.0&lt;br/&gt;
+Effective Date: 10 December 2009&lt;br/&gt;
+&lt;/td&gt;
+&lt;td width="10%"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: EURid vzw/asbl&lt;br/&gt;
+Contact: Marc Van Wesemael &lt;a href="mailto:admin@eurid.eu"&gt;admin@eurid.eu&lt;/a&gt;&lt;br/&gt;
+Address: Woluwelaan 150, 1831 Diegem, Belgium&lt;br/&gt;
+Telephone: +32-2-4012750&lt;br/&gt;Fax: +32-2-4012751&lt;br/&gt;
+
+Website: &lt;a href="http://www.eurid.eu/"&gt;http://www.eurid.eu/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: &lt;a href="http://link.eurid.eu/trm-con"&gt;
+http://link.eurid.eu/trm-con&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;
+This document describes the Latin Internationalized Domain Names (IDN) Character Table to be used by
+EURid vzw/asbl, the .eu Registry for registration of .eu Internationalized Domain Names in Latin Script.
+&lt;/p&gt;
+&lt;p&gt;
+The hyphen (U+002D), as well as the digits zero to nine (U+0030 .. U+0039), for purposes of .eu
+Internationalised Domain Name registration are considered to form part of the Latin script.
+&lt;/p&gt;
+
+
+&lt;p&gt;
+This table is in compliance with the ICANN Guidelines for the Implementation of Internationalized
+Domain Names Version 2.2, and is intended for publication in the IANA IDN Character Table Registry.
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="00E0" last-cp="00F6" />
+    <range first-cp="00F8" last-cp="00FF" />
+    <char cp="0101" />
+    <char cp="0103" />
+    <char cp="0105" />
+    <char cp="0107" />
+    <char cp="0109" />
+    <char cp="010B" />
+    <char cp="010D" />
+    <char cp="010F" />
+    <char cp="0111" />
+    <char cp="0113" />
+    <char cp="0115" />
+    <char cp="0117" />
+    <char cp="0119" />
+    <char cp="011B" />
+    <char cp="011D" />
+    <char cp="011F" />
+    <char cp="0121" />
+    <char cp="0123" />
+    <char cp="0125" />
+    <char cp="0127" />
+    <char cp="0129" />
+    <char cp="012B" />
+    <char cp="012D" />
+    <char cp="012F" />
+    <char cp="0131" />
+    <char cp="0135" />
+    <char cp="0137" />
+    <char cp="013A" />
+    <char cp="013C" />
+    <char cp="013E" />
+    <char cp="0140" />
+    <char cp="0142" />
+    <char cp="0144" />
+    <char cp="0146" />
+    <range first-cp="0148" last-cp="0149" />
+    <char cp="014B" />
+    <char cp="014D" />
+    <char cp="014F" />
+    <char cp="0151" />
+    <char cp="0153" />
+    <char cp="0155" />
+    <char cp="0157" />
+    <char cp="0159" />
+    <char cp="015B" />
+    <char cp="015D" />
+    <char cp="0161" />
+    <char cp="0165" />
+    <char cp="0167" />
+    <char cp="0169" />
+    <char cp="016B" />
+    <char cp="016D" />
+    <char cp="016F" />
+    <char cp="0171" />
+    <char cp="0173" />
+    <char cp="0175" />
+    <char cp="0177" />
+    <char cp="017A" />
+    <char cp="017C" />
+    <char cp="017E" />
+    <char cp="0219" />
+    <char cp="021B" />
+  </data>
+</idntable>

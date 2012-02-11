@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>fa-IR</language>
+    <domain>ir</domain>
+    <date>2005-09-23</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: IR&lt;br/&gt;
+Language Tag or Script Identifier: fa-IR&lt;br/&gt;
+Language Description: Persian (Farsi)&lt;br/&gt;
+Version: 1.0&lt;br/&gt;
+Effective Date: 23 September 2005&lt;br/&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: IPM/IRNIC&lt;br&gt;
+Contact: Siavash Shahshahani &lt;a href="mailto:shahshah@irnic.ir"&gt;shahshah@irnic.ir&lt;/a&gt;&lt;br&gt;
+Address: P.O. Box 19395-1795, Shahid Bahonar Sq., Tehran, IR 19548&lt;br/&gt;
+Telephone: (+98 21) 22 29 03 06&lt;br/&gt;
+Website: &lt;a href="http://www.nic.ir"&gt;www.nic.ir&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Relevant Policy Document URL:
+&lt;a href="http://www.nic.ir/Terms_and_Conditions_iran"&gt;http://www.nic.ir/Terms_and_Conditions_iran&lt;/a&gt; (in Persian)&lt;br/&gt;
+English Presentation:
+&lt;a href="http://www.nic.ir/Internationalized_Domain_Names"&gt;http://www.nic.ir/Internationalized_Domain_Names&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Persian language is written in a variant of Arabic alphabet. This presents a source of confusion and possible abuse by clients using different variants of Arabic keyboard. Our Persian IDN is based on the standard Persian keyboard but allows for the use of Arabic keyboard, with similar characters being automatically converted into standard Persian. A &amp;lsquo;bundle&amp;rsquo; of up to five other potentially confusable variants of the registered domain is automatically saved for the registrant.
+-&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0621" last-cp="0624" />
+    <range first-cp="0626" last-cp="063A" />
+    <range first-cp="0641" last-cp="0648" />
+    <char cp="064A" />
+    <range first-cp="0660" last-cp="0669" />
+    <char cp="067E" />
+    <char cp="0686" />
+    <char cp="0698" />
+    <char cp="06A9" />
+    <char cp="06AF" />
+    <char cp="06CC" />
+    <range first-cp="06F0" last-cp="06F9" />
+    <range first-cp="200C" last-cp="200D" />
+  </data>
+</idntable>

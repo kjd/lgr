@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>no-NO</language>
+    <domain>museum</domain>
+    <date>2004-01-21</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+
+&lt;tr&gt;
+
+&lt;td width="199"&gt; TLD: MUSEUM&lt;br&gt;
+
+Language Tag: no-NO&lt;br&gt;
+
+Language Description: Norwegian&lt;br&gt;
+
+Version: 1.0&lt;br&gt;
+
+Effective Date: 21 January 2004&lt;br&gt;
+
+&lt;/td&gt;
+
+&lt;td width="26"&gt;&amp;nbsp;&lt;/td&gt;
+
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+
+&lt;td width="401"&gt; Registry: Museum Domain Management Association&lt;br&gt;
+
+Contact: Cary Karp &lt;a href="mailto:admin&amp;musedoma.museum"&gt;admin&amp;musedoma.museum&lt;/a&gt;&lt;br&gt;
+
+Address: Box 50007, SE-10405 Stockholm, Sweden&lt;br&gt;
+
+Tel: +46 70 629 8176 Fax: +46 70 384 3246 &lt;br&gt;
+
+Website: &lt;a href="http://musedoma.museum"&gt;http://musedoma.museum/&lt;/a&gt;&lt;br&gt;
+
+&lt;/td&gt;
+
+&lt;/tr&gt;
+
+&lt;/table&gt;
+
+&lt;p&gt;Relevant Policy Document URL: &lt;a href="http://about.museum/idn/idnpolicy.html"&gt;http://about.museum/idn/idnpolicy.html&lt;/a&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;This document describes the Internationalized Domain Names (IDN) Character
+
+Table to be used by MuseDoma in the .MUSEUM TLD registry for the registration
+
+of .MUSEUM domains in the Norwegian language. The policies for the application
+
+of this table are described in detail in the Policy Document referenced above and are
+
+in compliance with the ICANN Guidelines for the Implementation of Internationalized
+
+Domain Names. The present document is intended for publication in the IANA
+
+IDN Character Table Registry.&lt;/p&gt;
+
+&lt;p&gt;The following table uses the convention U+XXXX to denote a Unicode codepoint,
+
+and XXXX..YYYY for a continuous range of codepoints. The first column in each
+
+row indicates the code point for an accepted character or range of characters
+
+that may be used for IDN registration in the Norwegian language. The second column
+
+names the designated characters. This table states the character repertoire necessary
+
+for representing the two official forms of the written Norwegian language, "Bokmal"
+
+(Dano-Norwegian) and "Nynorsk" (New Norwegian), according to current lexicographic
+
+practice.&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="00E0" />
+    <range first-cp="00E4" last-cp="00EA" />
+    <range first-cp="00F1" last-cp="00F4" />
+    <char cp="00F8" />
+    <char cp="00FC" />
+  </data>
+</idntable>

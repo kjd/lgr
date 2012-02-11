@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>pl-PL</language>
+    <domain>pl</domain>
+    <date>2004-09-11</date>
+    <version>6.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="216"&gt; TLD: PL&lt;br&gt;
+Language Tag: pl-PL&lt;br&gt;
+Language Description: Polish&lt;br&gt;
+Version: 6.0&lt;br&gt;Effective Date: 11 September 2004&lt;br&gt; &lt;/td&gt;
+&lt;td width="25"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="18"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt; &lt;p&gt;Registry: NASK&lt;br&gt;
+Contact: Andrzej Bartosiewicz &lt;a href="mailto:andrzejb@nask.pl"&gt;andrzejb@nask.pl&lt;/a&gt;,
+Krzysztof Olesik &lt;a href="mailto:kolesik@nask.pl"&gt;kolesik@nask.pl&lt;/a&gt;&lt;br&gt;
+Address: Wawozowa 18 Str, 02-796 Warsaw, Poland&lt;br&gt;
+Tel: +48 22 52 31 200 Fax: +48 22 52 31 301&lt;br&gt;
+Website: &lt;a href="http://www.nask.pl/nask_en/"&gt;http://www.nask.pl/nask_en/&lt;/a&gt;,
+&lt;a href="http://www.dns.pl/english/"&gt;http://www.dns.pl/english/&lt;/a&gt;&lt;br&gt;
+&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt; Relevant Policy Document URL: &lt;a href="http://www.dns.pl/IDN/draft-bartosiewicz-idn-pltld-06.txt"&gt;http://www.dns.pl/IDN/draft-bartosiewicz-idn-pltld-06.txt&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;This document presents language character table for Polish language created by NASK (Research and Academic Computer Network) - .PL ccTLD registry. Full policy of IDNs registration is presented in the internet draft &amp;quot;Registering Internationalized Domain Names under .PL&amp;quot; A. Bartosiewicz (&lt;a href="http://www.ietf.org/internet-drafts/draft-bartosiewicz-idn-pltld-06.txt"&gt;http://www.ietf.org/internet-drafts/draft-bartosiewicz-idn-pltld-06.txt&lt;/a&gt;)&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="00F3" />
+    <char cp="0105" />
+    <char cp="0107" />
+    <char cp="0119" />
+    <char cp="0142" />
+    <char cp="0144" />
+    <char cp="015B" />
+    <char cp="017A" />
+    <char cp="017C" />
+  </data>
+</idntable>

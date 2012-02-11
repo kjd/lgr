@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>he</language>
+    <domain>il</domain>
+    <date>2010-12-16</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: IL&lt;br/&gt;
+Script/Language Identifier: he&lt;br/&gt;
+Script/Language Description: Hebrew  &lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 2010-12-26&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="25"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: ISOC-IL&lt;br/&gt;
+Contact: Doron Shikmoni, doron@isoc.org.il&lt;/br&gt;
+Address: Bareket 6, Petah Tikva, Israel&lt;br/&gt;
+Telephone: +972 3 9700900 Fax: +972 3 9700901&lt;/br&gt;
+Website: http://www.isoc.org.il/domains
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: http://www.isoc.org.il/domains/il-domain-rules.html
+&lt;/p&gt;
+&lt;p&gt;
+This document describes the IDN table used by the Israel ccTLD registry, The Israeli
+Internet Association (ISOC-IL), for the registration of domain names using the Hebrew script.
+Hebrew is the primary official language in Israel.
+&lt;/p&gt;
+&lt;p&gt;
+This table is presented in compliance with the ICANN "Guidelines for the Implementation of
+Internationalized Domain Names" Version 2.1.
+&lt;/p&gt;
+&lt;p&gt;
+Characters are listed in this table by their Unicode code points in U+xxxx format, and the
+Unicode name for each character after a hash sign "#" on the same line.
+&lt;/p&gt;
+&lt;p&gt;
+A Hebrew Domain Name label registered under .il must meet the following requirements:
+&lt;/p&gt;
+&lt;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+Be comprised of characters from this table, only.
+&lt;/li&gt;
+&lt;li&gt;
+Be at least 2 characters long in U-Label form and at most 63 characters long in A-Label form.
+&lt;/li&gt;
+&lt;li&gt;
+Not start with, end with, or contain two consecutive occurances of, U+002D (HYPHEN-MINUS).
+&lt;/li&gt;
+&lt;li&gt;
+Meet IDNA2008 requirements for bidirectional language labels (RFC5893); in particular,
+must start with a Hebrew letter and must end with a Hebrew letter or a digit.
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="05D0" last-cp="05EA" />
+  </data>
+</idntable>

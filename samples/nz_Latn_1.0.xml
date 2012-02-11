@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <script>Latn</script>
+    <domain>nz</domain>
+    <date>2010-07-26</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: NZ&lt;br/&gt;
+Script Identifier: Latn&lt;br/&gt;
+Script Description: Latin&lt;br/&gt;
+Version: 1.0&lt;br/&gt;
+Effective Date: 26 July 2010&lt;br/&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: .nz Registry Services&lt;br&gt;
+Contact: &lt;a href="mailto:iana@nzrs.net.nz"&gt;iana@nzrs.net.nz&lt;/a&gt;&lt;br&gt;
+Address: InternetNZ, Level 9, Grand Arcande Tower 16 Willis Street, Wellington 6011, New Zealand&lt;br/&gt;
+Telephone: +64 4 472 1600&lt;br/&gt;
+Website: &lt;a href="http://www.dnc.org.nz"&gt;http://www.dnc.org.nz&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Relevant Policy Document URL: &lt;a href="http://www.nzrs.net.nz/srs/idn.shtml"&gt;http://www.nzrs.net.nz/srs/idn.shtml&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This document contains the character table used by .nz Registry Services (New Zealand Registry Services Limited) for the registration of .NZ domains represented using the Latin script. This table is in compliance with the ICANN Guidelines for the Implementation of Internationalised Domain Names and is intended for publication in the IANA IDN Character Table Registry.&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="0101" />
+    <char cp="0113" />
+    <char cp="012B" />
+    <char cp="014D" />
+    <char cp="016B" />
+  </data>
+</idntable>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>da</language>
+    <domain>org</domain>
+    <date>2005-07-23</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="195"&gt; TLD: ORG&lt;br&gt;
+Language Tag: DA&lt;br&gt;
+Language Description: Danish (DIFO)&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 23 July 2005&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt; Registry: Public Interest Registry (PIR)&lt;br&gt;
+Contact: Pamela Miller &lt;a href="mailto:ops@pir.org"&gt;ops@pir.org&lt;/a&gt;&lt;br&gt;
+Address: 1775 Wiehle Avenue, Suite 102A, Reston, VA 20190, USA &lt;br&gt;
+Tel: +1.703.464.7005&lt;br&gt;
+Fax: +1.703.464.7006&lt;br&gt;
+Website: &lt;a href="http://www.pir.org/"&gt;http://www.pir.org/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt; Relevant Policy Document URL: &lt;a href="http://www.pir.org/register/languages/policy_form_da.pdf "&gt;
+http://www.pir.org/register/languages/policy_form_da.pdf&lt;/a&gt;
+&lt;p&gt; This document provides a description of the IDN (Internationalized Domain Names) Language Table and Policy to be used by the .ORG TLD registry for the registration of Danish language domains. The policy is derived based on the Dansk Internet Forum (DIFO) policies for the .DK registry (Denmark), and is consistent and compliant with the ICANN IDN Registry Implementation Guidelines.  This document is intended to be published publicly and registered at the IANA Internationalized Domain Names Character Tables Registry.
+&lt;p&gt; The following Character Inclusion Table will be used for the .ORG registry. Note that only the "sanitized" character based on the Nameprep [RFC3491] specifications are included. It is expected that implementers first "sanitize" an IDN according to the Nameprep specifications before applying this table.
+&lt;p&gt; The table will use the convention U+XXXX to denote Unicode codepoints for each of the accepted characters for IDN registrations. The table includes entry rows with 2 columns: 1. Unicode Codepoint; and 2. Description; each, separated by a semicolon: ";".</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="00E4" last-cp="00E6" />
+    <char cp="00E9" />
+    <char cp="00F6" />
+    <char cp="00F8" />
+    <char cp="00FC" />
+  </data>
+</idntable>

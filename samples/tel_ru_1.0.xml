@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>ru</language>
+    <domain>tel</domain>
+    <date>2010-06-15</date>
+    <version>1.0</version>
+    <description type="text/plain">Registry: Telnic Ltd.
+Contact: Vladimir Shadrunov vshadrunov@telnic.org
+Address: 37 Percy str., W1T 2DJ London UK
+Telephone: +44-20-7467-6450
+Website: http://www.telnic.org/
+
+Relevant Policy Document URL: http://www.telnic.org/downloads/policies/IDN_Policy_Russian.pdf
+
+.tel Russian Language IDN implementation has a feature that mitigates homographic
+attacks by blocking a name from being registered if a similar name is already registered.
+
+For every registered Russian language IDN a canonical string will be computed and
+stored in the SRS database. The canonical string is produced by mapping every character
+in the IDN U-label into the corresponding canonical character as specified in the
+character table below. Once a Russian language IDN is registered, other domain names
+that map into the same canonical string will be unavailable for registration. Conversely, if
+the US ASCII registration exists then the Russian IDN label that maps to the identical
+canonical string is unavailable.
+
+The table below lists the characters allowed in the Unicode representation of IDNs
+associated with the Russian language. The second column shows the canonical code point
+corresponding to the first column. Columns are delimited with semicolons. The &#8216;#&#8217;
+symbol denotes start of a comment that continues to the end of line.
+
+Note: as opposed to most other IDN languages supported in .tel, the character table for
+the Russian language IDNs does not include US ASCII letters a to z.</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <char cp="0430">
+      <var cp="0061" type="column2" />
+    </char>
+    <char cp="0431" />
+    <char cp="0432">
+      <var cp="0062" type="column2" />
+    </char>
+    <char cp="0433">
+      <var cp="0072" type="column2" />
+    </char>
+    <char cp="0434" />
+    <char cp="0435">
+      <var cp="0065" type="column2" />
+    </char>
+    <range first-cp="0436" last-cp="0437" />
+    <char cp="0438">
+      <var cp="0075" type="column2" />
+    </char>
+    <char cp="0439" />
+    <char cp="043A">
+      <var cp="006B" type="column2" />
+    </char>
+    <char cp="043B" />
+    <char cp="043C">
+      <var cp="006D" type="column2" />
+    </char>
+    <char cp="043D">
+      <var cp="0068" type="column2" />
+    </char>
+    <char cp="043E">
+      <var cp="006F" type="column2" />
+    </char>
+    <char cp="043F">
+      <var cp="006E" type="column2" />
+    </char>
+    <char cp="0440">
+      <var cp="0070" type="column2" />
+    </char>
+    <char cp="0441">
+      <var cp="0063" type="column2" />
+    </char>
+    <char cp="0442">
+      <var cp="0074" type="column2" />
+    </char>
+    <char cp="0443">
+      <var cp="0079" type="column2" />
+    </char>
+    <char cp="0444" />
+    <char cp="0445">
+      <var cp="0078" type="column2" />
+    </char>
+    <range first-cp="0446" last-cp="044F" />
+    <char cp="0451">
+      <var cp="00EB" type="column2" />
+    </char>
+  </data>
+</idntable>

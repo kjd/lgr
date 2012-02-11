@@ -1,0 +1,74 @@
+default namespace = "http://www.iana.org/idn-tables/0.1"
+
+# SIMPLE TYPES
+
+language-tag = text       # ISO language tag (e.g. "de")
+script-tag = text         # ISO script tag (e.g. "Latn")
+domain-name = text        # Domain name
+code-point = text         # A single codepoint, expressed as a hexidecimal number
+variant-condition = text  # A condition for applying the variant (TBD)
+
+# STRUCTURES
+
+# Representation of a single codepoint
+
+point-single = element char {
+	attribute cp { code-point },
+	point-variant*
+}
+
+# Representation of a code point variant
+
+point-variant = element var {
+	attribute cp { code-point },
+	attribute type { text }?,
+	attribute when { variant-condition }?
+}
+
+
+# Representation of a range of codepoints
+
+point-multiple = element range {
+	attribute first-cp { code-point },
+	attribute last-cp { code-point },
+	text
+}
+
+# A collection of codepoints and ranges of codepoints that comprise
+# an IDN table
+
+points = (point-single | point-multiple)+
+
+# DOCUMENT STRUCTURE
+
+# Main document structure, comprised of a meta section followed by
+# a data section.
+
+start = idn-table
+idn-table = element idntable {
+	meta-section?,
+	data-section
+}
+
+# Meta section - information recorded with an IDN table that does not
+# affect machine processing.
+
+meta-section = element meta {
+	(
+		element version { text }? |
+		element date { text }? |
+		element language { language-tag }* |
+		element script { script-tag }* |
+		element domain { domain-name }* |
+		element description {
+			attribute type { text },
+			text
+		}*
+	)*
+}
+
+# Data section - the actual code point data of the table.
+
+data-section = element data {
+	points
+}

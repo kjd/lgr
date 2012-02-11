@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>da</language>
+    <domain>biz</domain>
+    <date>2006-01-01</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: BIZ&lt;br&gt;
+Language Tag: da&lt;br&gt;
+Language Description: Danish&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 01 NOVEMBER 2006&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: NeuLevel&lt;br&gt;
+Contact: William Tan &lt;a href="mailto:william.tan@neustar.biz"&gt;william.tan@neustar.biz&lt;/a&gt;&lt;br&gt;
+Address: 46000 Center Oak Plaza, Sterling VA 20166 USA&lt;br&gt;
+Telephone: +1-571-434-5400&lt;br&gt;
+Website: &lt;a href="http://www.neulevel.biz/"&gt;http://www.neulevel.biz/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
+Relevant Policy Document URL:
+&lt;a href="http://www.neulevel.biz/idn/"&gt;
+http://www.neulevel.biz/idn/
+&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+This character repertoire was derived from the following sources:&lt;br&gt;
+&lt;pre&gt;
+- http://www.difo.dk/regler/Tegn-01-01-2004.pdf
+- Davies, K. and Schneider, M., "Suggested IDN Code Points For European
+Languages", Version 0.5, 19 November 2003
+https://www.centr.org/docs/2003/11/centr-ga20-idncodepoints.pdf
+&lt;/pre&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;
+This document describes the Internationalized Domain Names (IDN) Character Table
+to be used by NeuLevel in the .BIZ TLD registry for the registration of .BIZ
+domains in the Danish language.
+&lt;/p&gt;
+
+&lt;p&gt;
+We advise registrants to carefully consider the potential confusion over the
+perception of equivalence between an accented Latin character and another
+sequence of Latin characters (with or without accents.)
+
+There exists no equivalence rule that can be applied universally as any
+such mappings are generally dependent on the language, culture and context in
+which an IDN is used.
+&lt;/p&gt;
+
+&lt;p&gt;
+NeuLevel would like to thank DK-Hostmaster for their guidance and advice on language and confusion issues specific to the Danish language.
+&lt;/p&gt;
+
+&lt;p&gt;
+This table is in compliance with the ICANN Guidelines for the Implementation
+of Internationalized Domain Names and is intended for publication in the IANA
+IDN Character Table Registry.
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="00E4" last-cp="00E6" />
+    <char cp="00E9" />
+    <char cp="00F6" />
+    <char cp="00F8" />
+    <char cp="00FC" />
+  </data>
+</idntable>

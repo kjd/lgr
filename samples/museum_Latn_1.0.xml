@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <script>Latn</script>
+    <domain>museum</domain>
+    <date>2009-01-12</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: MUSEUM&lt;br&gt;
+Script Identifier: ISO 15924 Latn&lt;br&gt;
+Script Description: Latin&lt;br&gt;
+
+Version: 1.0&lt;br&gt;
+Effective Date: 12 January 2009&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: Museum Domain Management Association International&lt;br&gt;
+Contact: Cary Karp &lt;a href="mailto:admin@musedoma.museum"&gt;admin@musedoma.museum&lt;/a&gt;&lt;br&gt;
+Address: Box 50007, SE-10405 Stockholm, Sweden&lt;br&gt;
+Telephone: +46 70 629 8176 Fax: +46 70 384 3246&lt;br&gt;
+
+Website: &lt;a href="http://about.museum/"&gt;http://about.museum/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: &lt;a href="http://about.museum/idn/idnpolicy.html"&gt;
+http://about.museum/idn/idnpolicy.html&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;
+This document contains the character table used by the .MUSEUM registry for the registration of domain names
+represented using Latin script. The table is in compliance with the ICANN Guidelines for the Implementation
+of Internationalized Domain Names Version 2.1, and is intended for publication in the IANA Repository of TLD
+IDN Practices, for the information of prospective holders of domains in .MUSEUM and for the users of resources
+within those domains. It subsumes and replaces descriptions of the character repertoires available for labels
+based on several Nordic languages that were previously posted in the IANA Repository and are herewith being
+archived.
+&lt;/p&gt;
+
+&lt;p&gt;
+The material presented here was prepared for collaborative use by the .SE registry, which is posting it
+simultaneously in the IANA Repository. A detailed explanation of the derivation of the table is located at
+&lt;a href="http://about.museum/idn/museum-se-latin.pdf"&gt;http://about.museum/idn/museum-se-latin.pdf&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Characters are listed in this table with their Unicode code points in U+xxxx format. The Unicode name for each
+character appears to the right of the number sign "#" on the same line. A label that contains a LATIN LETTER
+may not contain a letter or equivalent character from any other script, unless explicitly permitted in the IDN
+character table for a language written with that script. No prescriptive policies are attached to what in a
+language-specific context might be seen as character variants, and the registration of a label containing any
+of the listed characters confers no rights to any other orthographically comparable form. However, all names
+in .MUSEUM are individually reviewed prior to registration, and in situations where the bundling or blocking of
+similar labels is deemed appropriate, the registration request may be processed accordingly. Restrictions apply
+to the positions in which the U+002D HYPHEN-MINUS may appear.
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <char cp="002D" />
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <range first-cp="00E0" last-cp="00F6" />
+    <range first-cp="00F8" last-cp="00FF" />
+    <char cp="0101" />
+    <char cp="0103" />
+    <char cp="0105" />
+    <char cp="0107" />
+    <char cp="010B" />
+    <char cp="010D" />
+    <char cp="010F" />
+    <char cp="0111" />
+    <char cp="0113" />
+    <char cp="0117" />
+    <char cp="0119" />
+    <char cp="011B" />
+    <char cp="011F" />
+    <char cp="0121" />
+    <char cp="0123" />
+    <char cp="0127" />
+    <char cp="012B" />
+    <char cp="012F" />
+    <char cp="0131" />
+    <char cp="0137" />
+    <char cp="013A" />
+    <char cp="013C" />
+    <char cp="013E" />
+    <char cp="0142" />
+    <char cp="0144" />
+    <char cp="0146" />
+    <char cp="0148" />
+    <char cp="014B" />
+    <char cp="014D" />
+    <char cp="0151" />
+    <char cp="0153" />
+    <char cp="0155" />
+    <char cp="0157" />
+    <char cp="0159" />
+    <char cp="015B" />
+    <char cp="015F" />
+    <char cp="0161" />
+    <char cp="0163" />
+    <char cp="0165" />
+    <char cp="0167" />
+    <char cp="016B" />
+    <char cp="016F" />
+    <char cp="0171" />
+    <char cp="0173" />
+    <char cp="0175" />
+    <char cp="0177" />
+    <char cp="017A" />
+    <char cp="017C" />
+    <char cp="017E" />
+    <char cp="01CE" />
+    <char cp="01D0" />
+    <char cp="01D2" />
+    <char cp="01D4" />
+    <char cp="01E5" />
+    <char cp="01E7" />
+    <char cp="01E9" />
+    <char cp="01EF" />
+    <char cp="0259" />
+    <char cp="0292" />
+    <char cp="1E81" />
+    <char cp="1E83" />
+    <char cp="1E85" />
+    <char cp="1EF3" />
+  </data>
+</idntable>

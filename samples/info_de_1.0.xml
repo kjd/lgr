@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>de</language>
+    <domain>info</domain>
+    <date>2004-03-16</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td width="195"&gt;
+TLD: INFO&lt;br&gt;
+Language Tag: de&lt;br&gt;
+Language Description: German&lt;br&gt;
+Version: 1.0&lt;br&gt;
+Effective Date: 16 March 2004&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="33"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="401"&gt;
+Registry: Afilias&lt;br&gt;
+Contact: Ram Mohan &lt;a href="mailto:rmohan@afilias.info"&gt;rmohan@afilias.info&lt;/a&gt;&lt;br&gt;
+Address: Building 3, Suite 105, 330 Welsh Road, Horsham, PA 19044, USA&lt;br&gt;
+Tel: +1 215 706 5700 Fax: +1 215 706 5701&lt;br&gt;
+Website: &lt;a href="http://www.afilias.info/"&gt;http://www.afilias.info/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: &lt;a href="http://www.afilias.info/register/idn/DE-INFO_IDN_Language_Table-v1-1.pdf"&gt;
+http://www.afilias.info/register/idn/DE-INFO_IDN_Language_Table-v1-1.pdf&lt;/a&gt;
+
+&lt;p&gt; This document provides a description of the IDN (Internationalized Domain
+Names) Language Table and Policy to be used by Afilias in the .INFO TLD registry
+for the registration of German language .INFO domains. The policy is consistent
+and compliant with the ICANN IDN Registry Implementation Guidelines [ICANN]
+and is intended to be published publicly and registered at the IANA Internationalized
+Domain Names Character Tables Registry [IANA].
+&lt;p&gt; The following is the German Character Table that will be used for the .INFO
+registry. Note that only the &amp;quot;sanitized&amp;quot; character based on the Nameprep
+[RFC3491] specifications are included. It is expected that implementers first
+&amp;quot;sanitize&amp;quot; an IDN according to the Nameprep specifications before
+applying this table.
+&lt;p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="0061" last-cp="007A" />
+    <char cp="00E4" />
+    <char cp="00F6" />
+    <char cp="00FC" />
+  </data>
+</idntable>

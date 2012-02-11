@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.iana.org/idn-tables/0.1" xmlns="http://relaxng.org/ns/structure/1.0">
+  <!-- SIMPLE TYPES -->
+  <define name="language-tag">
+    <text/>
+  </define>
+  <!-- ISO language tag (e.g. "de") -->
+  <define name="script-tag">
+    <text/>
+  </define>
+  <!-- ISO script tag (e.g. "Latn") -->
+  <define name="domain-name">
+    <text/>
+  </define>
+  <!-- Domain name -->
+  <define name="code-point">
+    <text/>
+  </define>
+  <!-- A single codepoint, expressed as a hexidecimal number -->
+  <define name="variant-condition">
+    <text/>
+  </define>
+  <!-- STRUCTURES -->
+  <!-- Representation of a single codepoint -->
+  <define name="point-single">
+    <element name="char">
+      <attribute name="cp">
+        <ref name="code-point"/>
+      </attribute>
+      <zeroOrMore>
+        <ref name="point-variant"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!-- Representation of a code point variant -->
+  <define name="point-variant">
+    <element name="var">
+      <attribute name="cp">
+        <ref name="code-point"/>
+      </attribute>
+      <optional>
+        <attribute name="type"/>
+      </optional>
+      <optional>
+        <attribute name="when">
+          <ref name="variant-condition"/>
+        </attribute>
+      </optional>
+    </element>
+  </define>
+  <!-- Representation of a range of codepoints -->
+  <define name="point-multiple">
+    <element name="range">
+      <attribute name="first-cp">
+        <ref name="code-point"/>
+      </attribute>
+      <attribute name="last-cp">
+        <ref name="code-point"/>
+      </attribute>
+      <text/>
+    </element>
+  </define>
+  <!--
+    A collection of codepoints and ranges of codepoints that comprise
+    an IDN table
+  -->
+  <define name="points">
+    <oneOrMore>
+      <choice>
+        <ref name="point-single"/>
+        <ref name="point-multiple"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <!-- DOCUMENT STRUCTURE -->
+  <!--
+    Main document structure, comprised of a meta section followed by
+    a data section.
+  -->
+  <start>
+    <ref name="idn-table"/>
+  </start>
+  <define name="idn-table">
+    <element name="idntable">
+      <optional>
+        <ref name="meta-section"/>
+      </optional>
+      <ref name="data-section"/>
+    </element>
+  </define>
+  <!--
+    Meta section - information recorded with an IDN table that does not
+    affect machine processing.
+  -->
+  <define name="meta-section">
+    <element name="meta">
+      <zeroOrMore>
+        <choice>
+          <optional>
+            <element name="version">
+              <text/>
+            </element>
+          </optional>
+          <optional>
+            <element name="date">
+              <text/>
+            </element>
+          </optional>
+          <zeroOrMore>
+            <element name="language">
+              <ref name="language-tag"/>
+            </element>
+          </zeroOrMore>
+          <zeroOrMore>
+            <element name="script">
+              <ref name="script-tag"/>
+            </element>
+          </zeroOrMore>
+          <zeroOrMore>
+            <element name="domain">
+              <ref name="domain-name"/>
+            </element>
+          </zeroOrMore>
+          <zeroOrMore>
+            <element name="description">
+              <attribute name="type"/>
+              <text/>
+            </element>
+          </zeroOrMore>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <!-- Data section - the actual code point data of the table. -->
+  <define name="data-section">
+    <element name="data">
+      <ref name="points"/>
+    </element>
+  </define>
+</grammar>

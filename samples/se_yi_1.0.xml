@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<idntable xmlns="http://www.iana.org/idn-tables/0.1">
+  <meta>
+    <language>yi</language>
+    <domain>se</domain>
+    <date>2009-01-12</date>
+    <version>1.0</version>
+    <description type="text/html">&lt;table&gt;
+&lt;tr&gt;
+&lt;td&gt;
+TLD: SE&lt;br&gt;
+Language Tag: yi&lt;br&gt;
+Language Description: Yiddish&lt;br&gt;
+
+Version: 1.0&lt;br&gt;
+Effective Date: 12 January 2009&lt;br&gt;
+&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td width="30"&gt;&amp;nbsp;&lt;/td&gt;
+&lt;td&gt;
+Registry: .SE (Stiftelsen f&amp;ouml;r Internetinfrastruktur)&lt;br&gt;
+Contact: Anne-Marie Eklund-L&amp;ouml;winder &lt;a href="mailto:Anne-Marie.Eklund-Lowinder@iis.se"&gt;
+Anne-Marie.Eklund-Lowinder@iis.se&lt;/a&gt;&lt;br&gt;
+Address: Box 7399, SE-10391 Stockholm, Sweden&lt;br&gt;
+Telephone: +46 8 452 3500 Fax: +46 8 452 3502&lt;br&gt;
+
+Website: &lt;a href="http://www.iis.se//"&gt;http://www.iis.se/&lt;/a&gt;&lt;br&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;
+Relevant Policy Document URL: &lt;a href="http://www.iis.se/pdf/allmanna_villkor_eng.pdf"&gt;
+http://www.iis.se/pdf/allmanna_villkor_eng.pdf&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;
+This document describes the language table used by the .SE registry for the registration of domain names in the
+Yiddish language, which is one of the five legally recognized minority language in Sweden, and the only one
+not written with the Latin script. The table presented here is in compliance with the ICANN Guidelines for the
+Implementation of Internationalized Domain Names Version 2.1 and is intended for publication in the IANA
+Repository of TLD IDN Practices, for the information of prospective holders of domains in .SE and for the users
+of resources within those domains.
+&lt;/p&gt;
+
+&lt;p&gt;
+The material presented here was initially prepared by the .MUSEUM registry, which also supports the
+registration of names using the following repertoire. A detailed explanation of the derivation of the
+table, together with guidelines for name holders, is located
+at &lt;a href="http://about.museum/idn/yiddish-language.pdf"&gt;http://about.museum/idn/yiddish-language.pdf&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Characters are listed in this table by their Unicode code points in U+xxxx format. The Unicode name for each
+character appears to the right of the number sign "#" on the same line. Two consecutive code points on the
+same line designate a base character with a combining mark.
+&lt;/p&gt;
+
+&lt;p&gt;A combining mark may only be used with a base character that it is explicitly associated with in the table.
+A base character that only appears with a combining mark may not be used without that combining mark. A label
+that includes a HEBREW LETTER may not contain a letter or equivalent character from any other script. Neither a
+DIGIT nor a HYPHEN-MINUS may be placed in the initial or the final position in a label. Due to a restriction
+imposed by the IDNA protocol, a character with a combining mark may not appear in the final position in a label.
+&lt;/p&gt;
+
+&lt;p&gt;
+No prescriptive policies are attached to what in differing orthographic traditions might be seen as character
+variants, including characters that differ only by the presence or absence of a combining mark. The registration
+of a label containing any of the listed characters confers no rights to any other orthographically comparable form.
+&lt;/p&gt;</description>
+  </meta>
+  <data>
+    <range first-cp="0030" last-cp="0039" />
+    <range first-cp="05D0" last-cp="05EA" />
+    <char cp="05F2" />
+  </data>
+</idntable>

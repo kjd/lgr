@@ -1,0 +1,626 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><title>Representing registration policy for IDNs using XML</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Representing registration policy for IDNs using XML">
+<meta name="generator" content="xml2rfc v1.36 (http://xml.resource.org/)">
+<style type='text/css'><!--
+        body {
+                font-family: verdana, charcoal, helvetica, arial, sans-serif;
+                font-size: small; color: #000; background-color: #FFF;
+                margin: 2em;
+        }
+        h1, h2, h3, h4, h5, h6 {
+                font-family: helvetica, monaco, "MS Sans Serif", arial, sans-serif;
+                font-weight: bold; font-style: normal;
+        }
+        h1 { color: #900; background-color: transparent; text-align: right; }
+        h3 { color: #333; background-color: transparent; }
+
+        td.RFCbug {
+                font-size: x-small; text-decoration: none;
+                width: 30px; height: 30px; padding-top: 2px;
+                text-align: justify; vertical-align: middle;
+                background-color: #000;
+        }
+        td.RFCbug span.RFC {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: bold; color: #666;
+        }
+        td.RFCbug span.hotText {
+                font-family: charcoal, monaco, geneva, "MS Sans Serif", helvetica, verdana, sans-serif;
+                font-weight: normal; text-align: center; color: #FFF;
+        }
+
+        table.TOCbug { width: 30px; height: 15px; }
+        td.TOCbug {
+                text-align: center; width: 30px; height: 15px;
+                color: #FFF; background-color: #900;
+        }
+        td.TOCbug a {
+                font-family: monaco, charcoal, geneva, "MS Sans Serif", helvetica, sans-serif;
+                font-weight: bold; font-size: x-small; text-decoration: none;
+                color: #FFF; background-color: transparent;
+        }
+
+        td.header {
+                font-family: arial, helvetica, sans-serif; font-size: x-small;
+                vertical-align: top; width: 33%;
+                color: #FFF; background-color: #666;
+        }
+        td.author { font-weight: bold; font-size: x-small; margin-left: 4em; }
+        td.author-text { font-size: x-small; }
+
+        /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+        a.info {
+                /* This is the key. */
+                position: relative;
+                z-index: 24;
+                text-decoration: none;
+        }
+        a.info:hover {
+                z-index: 25;
+                color: #FFF; background-color: #900;
+        }
+        a.info span { display: none; }
+        a.info:hover span.info {
+                /* The span will display just on :hover state. */
+                display: block;
+                position: absolute;
+                font-size: smaller;
+                top: 2em; left: -5em; width: 15em;
+                padding: 2px; border: 1px solid #333;
+                color: #900; background-color: #EEE;
+                text-align: left;
+        }
+
+        a { font-weight: bold; }
+        a:link    { color: #900; background-color: transparent; }
+        a:visited { color: #633; background-color: transparent; }
+        a:active  { color: #633; background-color: transparent; }
+
+        p { margin-left: 2em; margin-right: 2em; }
+        p.copyright { font-size: x-small; }
+        p.toc { font-size: small; font-weight: bold; margin-left: 3em; }
+        table.toc { margin: 0 0 0 3em; padding: 0; border: 0; vertical-align: text-top; }
+        td.toc { font-size: small; font-weight: bold; vertical-align: text-top; }
+
+        ol.text { margin-left: 2em; margin-right: 2em; }
+        ul.text { margin-left: 2em; margin-right: 2em; }
+        li      { margin-left: 3em; }
+
+        /* RFC-2629 <spanx>s and <artwork>s. */
+        em     { font-style: italic; }
+        strong { font-weight: bold; }
+        dfn    { font-weight: bold; font-style: normal; }
+        cite   { font-weight: normal; font-style: normal; }
+        tt     { color: #036; }
+        tt, pre, pre dfn, pre em, pre cite, pre span {
+                font-family: "Courier New", Courier, monospace; font-size: small;
+        }
+        pre {
+                text-align: left; padding: 4px;
+                color: #000; background-color: #CCC;
+        }
+        pre dfn  { color: #900; }
+        pre em   { color: #66F; background-color: #FFC; font-weight: normal; }
+        pre .key { color: #33C; font-weight: bold; }
+        pre .id  { color: #900; }
+        pre .str { color: #000; background-color: #CFF; }
+        pre .val { color: #066; }
+        pre .rep { color: #909; }
+        pre .oth { color: #000; background-color: #FCF; }
+        pre .err { background-color: #FCC; }
+
+        /* RFC-2629 <texttable>s. */
+        table.all, table.full, table.headers, table.none {
+                font-size: small; text-align: center; border-width: 2px;
+                vertical-align: top; border-collapse: collapse;
+        }
+        table.all, table.full { border-style: solid; border-color: black; }
+        table.headers, table.none { border-style: none; }
+        th {
+                font-weight: bold; border-color: black;
+                border-width: 2px 2px 3px 2px;
+        }
+        table.all th, table.full th { border-style: solid; }
+        table.headers th { border-style: none none solid none; }
+        table.none th { border-style: none; }
+        table.all td {
+                border-style: solid; border-color: #333;
+                border-width: 1px 2px;
+        }
+        table.full td, table.headers td, table.none td { border-style: none; }
+
+        hr { height: 1px; }
+        hr.insert {
+                width: 80%; border-style: none; border-width: 0;
+                color: #CCC; background-color: #CCC;
+        }
+--></style>
+</head>
+<body>
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
+<tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
+<tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
+<tr><td class="header">Intended status: Informational</td><td class="header">February 10, 2012</td></tr>
+<tr><td class="header">Expires: August 13, 2012</td><td class="header">&nbsp;</td></tr>
+</table></td></tr></table>
+<h1><br />Representing registration policy for IDNs using XML<br />draft-davies-idntables-00</h1>
+
+<h3>Abstract</h3>
+
+<p>This memo described a method of representing the registration policy that a zone administrator uses
+			for registering Internationalised Domain Names using Extensible Markup Language (XML). These registry
+			policies, commonly known as "IDN tables", are used 
+			to enforce and share policy on which specific code-points are permitted for registrations,
+			and which alternative code-points are considered variants.
+</p>
+<h3>Status of this Memo</h3>
+<p>
+This Internet-Draft is submitted  in full
+conformance with the provisions of BCP&nbsp;78 and BCP&nbsp;79.</p>
+<p>
+Internet-Drafts are working documents of the Internet Engineering
+Task Force (IETF).  Note that other groups may also distribute
+working documents as Internet-Drafts.  The list of current
+Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>
+Internet-Drafts are draft documents valid for a maximum of six months
+and may be updated, replaced, or obsoleted by other documents at any time.
+It is inappropriate to use Internet-Drafts as reference material or to cite
+them other than as &ldquo;work in progress.&rdquo;</p>
+<p>
+This Internet-Draft will expire on August 13, 2012.</p>
+
+<h3>Copyright Notice</h3>
+<p>
+Copyright (c) 2012 IETF Trust and the persons identified as the
+document authors.  All rights reserved.</p>
+<p>
+This document is subject to BCP 78 and the IETF Trust's Legal
+Provisions Relating to IETF Documents
+(http://trustee.ietf.org/license-info) in effect on the date of
+publication of this document.  Please review these documents
+carefully, as they describe your rights and restrictions with respect
+to this document. Code Components extracted from this document must
+include Simplified BSD License text as described in Section 4.e of
+the Trust Legal Provisions and are provided without warranty as
+described in the Simplified BSD License.</p>
+<a name="toc"></a><br /><hr />
+<h3>Table of Contents</h3>
+<p class="toc">
+<a href="#anchor1">1.</a>&nbsp;
+Introduction<br />
+<a href="#anchor2">2.</a>&nbsp;
+IDN Table XML Format<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor3">2.1.</a>&nbsp;
+Basic structure<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor4">2.2.</a>&nbsp;
+The meta element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor5">2.2.1.</a>&nbsp;
+The version element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor6">2.2.2.</a>&nbsp;
+The date element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor7">2.2.3.</a>&nbsp;
+The language element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor8">2.2.4.</a>&nbsp;
+The script element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor9">2.2.5.</a>&nbsp;
+The domain element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor10">2.2.6.</a>&nbsp;
+The description element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor11">2.2.7.</a>&nbsp;
+The variant-classes element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor12">2.3.</a>&nbsp;
+The data element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">2.3.1.</a>&nbsp;
+Variants<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">2.4.</a>&nbsp;
+Example table<br />
+<a href="#anchor17">3.</a>&nbsp;
+Converting to text format<br />
+<a href="#anchor18">4.</a>&nbsp;
+Implementation of IDN Tables<br />
+<a href="#anchor19">5.</a>&nbsp;
+IANA Considerations<br />
+<a href="#anchor20">6.</a>&nbsp;
+Security Considerations<br />
+<a href="#rfc.references1">7.</a>&nbsp;
+References<br />
+<a href="#anchor22">Appendix&nbsp;A.</a>&nbsp;
+Acknowledgements<br />
+<a href="#anchor23">Appendix&nbsp;B.</a>&nbsp;
+Editorial Notes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">B.1.</a>&nbsp;
+Change History<br />
+<a href="#rfc.authors">&#167;</a>&nbsp;
+Author's Address<br />
+</p>
+<br clear="all" />
+
+<a name="anchor1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.1"></a><h3>1.&nbsp;
+Introduction</h3>
+
+<p>This memo described how to use Extensible Markup Language (XML) to describe the
+		list of permissible code points and variants used in a domain name registry's policies.
+</p>
+<p>Historically, text and HTML based formats have been used, loosely based around
+			the format used to describe a Language Variant Table in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
+			<a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a> further posts a "Model table format"
+			that describes a similar subset of functionality than is expressable using the JET-format.
+</p>
+<p>With the experience of many IDN tables, and variant tables, being constructed through
+			registry policies over the first decade of IDN deployment, a structured XML format will assist in improving
+			machine-readability, consistency, and maintainability of IDN tables. It will also provide
+			for more complex conditional implementation of variants that reflects the known requirements
+			of current registry policy.
+</p>
+<a name="anchor2"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2"></a><h3>2.&nbsp;
+IDN Table XML Format</h3>
+
+<a name="anchor3"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.1"></a><h3>2.1.&nbsp;
+Basic structure</h3>
+
+<p>The basic XML framework of the document is as follows:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;?xml version="1.0"?&gt;
+    &lt;idntable&gt;
+        ...
+    &lt;/idntable&gt;
+</pre></div>
+<p>Within the "idntable" element rests two sub-elements. Firstly is a "meta" element that contains
+			all meta-data associated with the IDN table, such as its authorship, what it is used for,
+			implementation notes and references. This is followed by a "data" element that contains the
+			substantive code-point data.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;?xml version="1.0"?&gt;
+    &lt;idntable&gt;
+        &lt;meta&gt;
+            ...
+        &lt;/meta&gt;
+        &lt;data&gt;
+            ...
+        &lt;/data&gt;
+    &lt;/idntable&gt;
+</pre></div>
+<p>A document should contain exactly one "idntable" element, and within that optionally one "meta"
+			element and exactly one "data" element.
+</p>
+<a name="anchor4"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2"></a><h3>2.2.&nbsp;
+The meta element</h3>
+
+<p>The "meta" element is used to express meta-data associated within the IDN table. It can be
+			used to explain the author or relevant contact person, explain what the usage of the IDN
+			table is, provide implementation notes as well as references. The data contained within is not
+			required by software consuming the IDN table in order to calculate valid IDN labels, or to
+			calculate variants.
+</p>
+<a name="anchor5"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.1"></a><h3>2.2.1.&nbsp;
+The version element</h3>
+
+<p>The "version" element is used to uniquely identify each version of the table being represented.
+				No specific format is required, but it is RECOMMENDED that it be a numerical positive integer, which
+				is incremented with each revision of the file.
+</p>
+<p>An example of a typical first edition of a document:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;version&gt;1&lt;/version&gt;
+</pre></div>
+<p>A common alternative is to use a major-minor number scheme, where two decimal numbers are used
+				to represent major and minor changes to the table. For example, "1.0" would be the first
+				major release, "1.1" would be a minor update to that, and "2.0" would represent a major
+				revision. It is important to note this style of versioning can not be represented
+				in text format and remain in compliance with the JET table specification.
+</p>
+<a name="anchor6"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.2"></a><h3>2.2.2.&nbsp;
+The date element</h3>
+
+<p>The "date" element is used to identify the date the table was written. The contents of this
+				element MUST be a valid ISO 8601 date string as described in <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+</p>
+<p>Example of a date:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;date&gt;2009-11-01&lt;/date&gt;
+</pre></div>
+<a name="anchor7"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.3"></a><h3>2.2.3.&nbsp;
+The language element</h3>
+
+<p>The "language" element signals that the table is associated with a specific language. The
+					value of the language element must be a valid language tag from the IANA Language
+					Subtag Registry <a class='info' href='#IANALSR'>[IANALSR]<span> (</span><span class='info'>IANA Staff, &ldquo;IANA Language Sub-Tag Registry,&rdquo; .</span><span>)</span></a>, as described in <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>.
+</p>
+<p>Example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+   &lt;language&gt;en&lt;/language&gt;
+</pre></div>
+<a name="anchor8"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.4"></a><h3>2.2.4.&nbsp;
+The script element</h3>
+
+<p>Must be an eligible script type from the IANA Language Subtag Registry.
+</p>
+<p>Example:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+   &lt;script&gt;Cyrl&lt;/script&gt;
+</pre></div>
+<a name="anchor9"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.5"></a><h3>2.2.5.&nbsp;
+The domain element</h3>
+
+<p>Refers to the domain in which this policy is applied.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;domain&gt;example&lt;/domain&gt;
+</pre></div>
+<p>There may be one or more domains listed.
+</p>
+<a name="anchor10"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.6"></a><h3>2.2.6.&nbsp;
+The description element</h3>
+
+<p>The "description" element is a free-form element that contains any additional
+					relevant description. Typically, this field contains authorship information, as
+					well as additional context on how the table was formulated (such as with references),
+					and how it has been applied.
+</p>
+<p>The element has an optional "type" attribute, which refers to the MIME-type of the
+					enclosed data. If the description lacks a type field, it will be assumed to be
+					plain text.
+</p>
+<p>The description elements describe information relating to the IDN table that is useful
+			for the user of the table in its interpretation. This may explain the history, the rationale,
+			reference sources etc. It may also contain authorship information.
+</p>
+<p>The "type" attribute may be used to specify the encoding within description element.
+				The attribute should be a valid MIME type. 
+			If supplied, it will be assumed the contents is a single CDATA element of that encoding.
+			Typical types would be "text/plain" or "text/html". "text/plain" will be assumed if
+			not type attribute is specified.
+</p>
+<a name="anchor11"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.2.7"></a><h3>2.2.7.&nbsp;
+The variant-classes element</h3>
+
+<p>Consumers of the IDN table may classify the generated variants into different classes using
+				the class attribute, discussed below. This class attribute allows the registry to apply
+				different policy (for example, whether the block or register specific generated
+				strings). The variant-classes block provides human-readable explanations of the meaning
+				of the classes used in the IDN table.
+</p>
+<a name="anchor12"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3"></a><h3>2.3.&nbsp;
+The data element</h3>
+
+<p>The "data" element contains the code point data the comprises the registry policy. It describes
+				registry policy using a series of XML elements that either represent individual code points,
+				or ranges of code points.
+</p>
+<p>The data may use the "char" and "range" elements to specify code points, and code ranges.
+</p>
+<p>Discrete permissable code points may be stipulated with a "char" element, e.g.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;char cp="002D"/&gt;
+</pre></div>
+<p>Ranges of permissable code points may be stipulated with a "range" element, e.g.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;range first-cp="0030" last-cp="0039"/&gt;
+</pre></div>
+<p>Codepoints must be expressed in hexadecimal, i.e. according to the standard Unicode convention without the prefix "U+". The reasons for not allowing other encoding formats, including native Unicode encoding in XML, is explored in <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Corsortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>. The XML conventions used in this format, including the element and attribute names, mirror this document where practical and reasonable to do so.
+</p>
+<a name="anchor13"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.1"></a><h3>2.3.1.&nbsp;
+Variants</h3>
+
+<p>While most tables typically only determine code point eligibility, others additionally specify a mapping of code points to other code points, known as "variants". What constitutes a variant is a matter of policy, and varies for each implementation.
+</p>
+<a name="anchor14"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.1.1"></a><h3>2.3.1.1.&nbsp;
+Basic variants</h3>
+
+<p>Variants are specified as one of more children of a "char" element.
+</p>
+<p>For example, to map "v" as a variant of "u":
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;char cp="0075"&gt;
+  &lt;var cp="0076"/&gt;
+&lt;/char&gt;
+</pre></div>
+<p>It is not possible to specify variants for ranges.
+</p>
+<a name="anchor15"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.3.1.2"></a><h3>2.3.1.2.&nbsp;
+Conditional variants</h3>
+
+<p>At its basis, generation of variants are conditional on a specific code point or set of code points. However, in some instances registries perform more granular control of how strings are constructed. The IDN table provides for conditioning generation variants on specific instances as follows, using the "when" attribute.
+</p>
+<p>
+						</p>
+<blockquote class="text"><dl>
+<dt>arabic-initial</dt>
+<dd>Based on context, the code point would be presented in its Arabic Initial form.
+</dd>
+<dt>arabic-isolated</dt>
+<dd>Based on context, the code point would be presented in its Arabic Isolated form.
+</dd>
+<dt>arabic-medial</dt>
+<dd>Based on context, the code point would be presented in its Arabic Medial form.
+</dd>
+<dt>arabic-final</dt>
+<dd>Based on context, the code point would be presented in its Arabic Final form.
+</dd>
+</dl></blockquote><p>
+					
+</p>
+<p>For example, to mark U+0673 as a variant of U+0625, but only when it appears in isolated or final forms:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;char cp="0625"&gt;
+  &lt;var cp="0673" when="arabic-isolated"/&gt;
+  &lt;var cp="0673" when="arabic-final"/&gt;
+&lt;/char&gt;
+</pre></div>
+<a name="anchor16"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.2.4"></a><h3>2.4.&nbsp;
+Example table</h3>
+
+<p>A sample complete XML IDN table is as follows.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+    &lt;?xml version="1.0"?&gt;
+    &lt;idntable xmlns="XXX"&gt;
+        &lt;meta&gt;
+             &lt;version&gt;1&lt;/version&gt;
+             &lt;date&gt;2010-01-01&lt;/date&gt;
+             &lt;language&gt;sv&lt;/language&gt;
+             &lt;domain&gt;example&lt;/domain&gt;
+             &lt;description type="text/html"&gt;
+                 This language table was developed with the
+                 &lt;a href="http://swedish.example/"&gt;Swedish
+                 examples institute&lt;/a&gt;.
+             &lt;/description&gt;
+        &lt;/meta&gt;
+        &lt;data&gt;
+            &lt;range first-cp="0061" last-cp="007A"/&gt;
+            &lt;char cp="00E4" /&gt;
+        &lt;/data&gt;
+    &lt;/idntable&gt;</pre></div>
+<a name="anchor17"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3"></a><h3>3.&nbsp;
+Converting to text format</h3>
+
+<p>Tables represented using this XML format can be converted to the format described in the JET Guidelines
+			for IDN, with some minor caveats:
+</p>
+<p></p>
+<ul class="text">
+<li>Version numbers not expressed as integers will not satisfy the ABNF formatting for JETLVT.
+</li>
+<li>Much of the additional meta data can not be expressed in the text format (although can be supplied
+					as comments in the text file).
+</li>
+<li>The JET format only allows for variant classes of "preferred" and "not-preferred". Other distinctions will be lost.
+</li>
+</ul>
+
+<p>Tables similarly can be converted to the format described in <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a> with the same caveats
+		as the JET Guidelines, and additionally the inability to classify variants into groups such as "preferred".
+</p>
+<a name="anchor18"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4"></a><h3>4.&nbsp;
+Implementation of IDN Tables</h3>
+
+<p>How these tables are implemented is outside the scope of this memo. The IDN tables are only designed
+		to describe sets of code points, but does not proscribe how registries and other parties utilise them.
+</p>
+<a name="anchor19"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+IANA Considerations</h3>
+
+<p>This document does not require any specific IANA actions.
+</p>
+<a name="anchor20"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Security Considerations</h3>
+
+<p>There are no security considerations for this memo.
+</p>
+<a name="rfc.references1"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>7.&nbsp;References</h3>
+<table width="99%" border="0">
+<tr><td class="author-text" valign="top"><a name="IANALSR">[IANALSR]</a></td>
+<td class="author-text">IANA Staff, &ldquo;<a href="http://www.iana.org/assignments/language-subtag-registry">IANA Language Sub-Tag Registry</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3339">[RFC3339]</a></td>
+<td class="author-text"><a href="mailto:GK@ACM.ORG">Klyne, G., Ed.</a> and <a href="mailto:chris.newman@sun.com">C. Newman</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3339">Date and Time on the Internet: Timestamps</a>,&rdquo; RFC&nbsp;3339, July&nbsp;2002 (<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3339.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3339.xml">XML</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC3743">[RFC3743]</a></td>
+<td class="author-text">Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;<a href="http://tools.ietf.org/html/rfc3743">Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean</a>,&rdquo; RFC&nbsp;3743, April&nbsp;2004 (<a href="http://www.rfc-editor.org/rfc/rfc3743.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC4290">[RFC4290]</a></td>
+<td class="author-text">Klensin, J., &ldquo;<a href="http://tools.ietf.org/html/rfc4290">Suggested Practices for Registration of Internationalized Domain Names (IDN)</a>,&rdquo; RFC&nbsp;4290, December&nbsp;2005 (<a href="http://www.rfc-editor.org/rfc/rfc4290.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5564">[RFC5564]</a></td>
+<td class="author-text">El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman, &ldquo;<a href="http://tools.ietf.org/html/rfc5564">Linguistic Guidelines for the Use of the Arabic Language in Internet Domains</a>,&rdquo; RFC&nbsp;5564, February&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5564.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5646">[RFC5646]</a></td>
+<td class="author-text">Phillips, A. and M. Davis, &ldquo;<a href="http://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a>,&rdquo; BCP&nbsp;47, RFC&nbsp;5646, September&nbsp;2009 (<a href="http://www.rfc-editor.org/rfc/rfc5646.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="UAX42">[UAX42]</a></td>
+<td class="author-text">Unicode Corsortium, &ldquo;<a href="http://unicode.org/reports/tr42/">Unicode Character Database in XML</a>.&rdquo;</td></tr>
+</table>
+
+<a name="anchor22"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
+Acknowledgements</h3>
+
+<p>This format builds upon the work on documenting IDN tables that commenced with the work by
+			the Joint Engineering Team documented in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>. Singificant work
+			that has influenced this document is that published in <a class='info' href='#RFC5564'>[RFC5564]<span> (</span><span class='info'>El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman, &ldquo;Linguistic Guidelines for the Use of the Arabic Language in Internet Domains,&rdquo; February&nbsp;2010.</span><span>)</span></a> by the
+			Arabic-language community.
+</p>
+<a name="anchor23"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
+Editorial Notes</h3>
+
+<p>This appendix to be removed prior to final publication.
+</p>
+<a name="anchor24"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.B.1"></a><h3>B.1.&nbsp;
+Change History</h3>
+
+<p>
+				</p>
+<blockquote class="text"><dl>
+<dt>-00</dt>
+<dd>Initial draft.
+</dd>
+</dl></blockquote><p>
+			
+</p>
+<a name="rfc.authors"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<h3>Author's Address</h3>
+<table width="99%" border="0" cellpadding="0" cellspacing="0">
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Kim Davies</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Internet Corporation for Assigned Names and Numbers</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">4676 Admiralty Way</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Suite 330</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">Marina del Rey, CA  90292</td></tr>
+<tr><td class="author-text">&nbsp;</td>
+<td class="author-text">US</td></tr>
+<tr><td class="author" align="right">Phone:&nbsp;</td>
+<td class="author-text">+1 310 823 9358</td></tr>
+<tr><td class="author" align="right">Email:&nbsp;</td>
+<td class="author-text"><a href="mailto:kim.davies@icann.org">kim.davies@icann.org</a></td></tr>
+<tr><td class="author" align="right">URI:&nbsp;</td>
+<td class="author-text"><a href="http://www.iana.org/">http://www.iana.org/</a></td></tr>
+</table>
+</body></html>

@@ -1,0 +1,896 @@
+
+
+
+Network Working Group                                          K. Davies
+Internet-Draft                                                     ICANN
+Intended status: Informational                         February 10, 2012
+Expires: August 13, 2012
+
+
+          Representing registration policy for IDNs using XML
+                       draft-davies-idntables-00
+
+Abstract
+
+   This memo described a method of representing the registration policy
+   that a zone administrator uses for registering Internationalised
+   Domain Names using Extensible Markup Language (XML).  These registry
+   policies, commonly known as "IDN tables", are used to enforce and
+   share policy on which specific code-points are permitted for
+   registrations, and which alternative code-points are considered
+   variants.
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on August 13, 2012.
+
+Copyright Notice
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+
+
+
+Davies                   Expires August 13, 2012                [Page 1]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+Table of Contents
+
+   1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.  IDN Table XML Format . . . . . . . . . . . . . . . . . . . . .  4
+     2.1.  Basic structure  . . . . . . . . . . . . . . . . . . . . .  4
+     2.2.  The meta element . . . . . . . . . . . . . . . . . . . . .  4
+       2.2.1.  The version element  . . . . . . . . . . . . . . . . .  4
+       2.2.2.  The date element . . . . . . . . . . . . . . . . . . .  5
+       2.2.3.  The language element . . . . . . . . . . . . . . . . .  5
+       2.2.4.  The script element . . . . . . . . . . . . . . . . . .  5
+       2.2.5.  The domain element . . . . . . . . . . . . . . . . . .  5
+       2.2.6.  The description element  . . . . . . . . . . . . . . .  6
+       2.2.7.  The variant-classes element  . . . . . . . . . . . . .  6
+     2.3.  The data element . . . . . . . . . . . . . . . . . . . . .  6
+       2.3.1.  Variants . . . . . . . . . . . . . . . . . . . . . . .  7
+     2.4.  Example table  . . . . . . . . . . . . . . . . . . . . . .  8
+   3.  Converting to text format  . . . . . . . . . . . . . . . . . .  9
+   4.  Implementation of IDN Tables . . . . . . . . . . . . . . . . . 10
+   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 11
+   6.  Security Considerations  . . . . . . . . . . . . . . . . . . . 12
+   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+   Appendix A.  Acknowledgements  . . . . . . . . . . . . . . . . . . 14
+   Appendix B.  Editorial Notes . . . . . . . . . . . . . . . . . . . 15
+     B.1.  Change History . . . . . . . . . . . . . . . . . . . . . . 15
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 2]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+1.  Introduction
+
+   This memo described how to use Extensible Markup Language (XML) to
+   describe the list of permissible code points and variants used in a
+   domain name registry's policies.
+
+   Historically, text and HTML based formats have been used, loosely
+   based around the format used to describe a Language Variant Table in
+   [RFC3743].  [RFC4290] further posts a "Model table format" that
+   describes a similar subset of functionality than is expressable using
+   the JET-format.
+
+   With the experience of many IDN tables, and variant tables, being
+   constructed through registry policies over the first decade of IDN
+   deployment, a structured XML format will assist in improving machine-
+   readability, consistency, and maintainability of IDN tables.  It will
+   also provide for more complex conditional implementation of variants
+   that reflects the known requirements of current registry policy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 3]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+2.  IDN Table XML Format
+
+2.1.  Basic structure
+
+   The basic XML framework of the document is as follows:
+
+       <?xml version="1.0"?>
+       <idntable>
+           ...
+       </idntable>
+
+   Within the "idntable" element rests two sub-elements.  Firstly is a
+   "meta" element that contains all meta-data associated with the IDN
+   table, such as its authorship, what it is used for, implementation
+   notes and references.  This is followed by a "data" element that
+   contains the substantive code-point data.
+
+       <?xml version="1.0"?>
+       <idntable>
+           <meta>
+               ...
+           </meta>
+           <data>
+               ...
+           </data>
+       </idntable>
+
+   A document should contain exactly one "idntable" element, and within
+   that optionally one "meta" element and exactly one "data" element.
+
+2.2.  The meta element
+
+   The "meta" element is used to express meta-data associated within the
+   IDN table.  It can be used to explain the author or relevant contact
+   person, explain what the usage of the IDN table is, provide
+   implementation notes as well as references.  The data contained
+   within is not required by software consuming the IDN table in order
+   to calculate valid IDN labels, or to calculate variants.
+
+2.2.1.  The version element
+
+   The "version" element is used to uniquely identify each version of
+   the table being represented.  No specific format is required, but it
+   is RECOMMENDED that it be a numerical positive integer, which is
+   incremented with each revision of the file.
+
+   An example of a typical first edition of a document:
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 4]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+       <version>1</version>
+
+   A common alternative is to use a major-minor number scheme, where two
+   decimal numbers are used to represent major and minor changes to the
+   table.  For example, "1.0" would be the first major release, "1.1"
+   would be a minor update to that, and "2.0" would represent a major
+   revision.  It is important to note this style of versioning can not
+   be represented in text format and remain in compliance with the JET
+   table specification.
+
+2.2.2.  The date element
+
+   The "date" element is used to identify the date the table was
+   written.  The contents of this element MUST be a valid ISO 8601 date
+   string as described in [RFC3339].
+
+   Example of a date:
+
+       <date>2009-11-01</date>
+
+2.2.3.  The language element
+
+   The "language" element signals that the table is associated with a
+   specific language.  The value of the language element must be a valid
+   language tag from the IANA Language Subtag Registry [IANALSR], as
+   described in [RFC5646].
+
+   Example:
+
+      <language>en</language>
+
+2.2.4.  The script element
+
+   Must be an eligible script type from the IANA Language Subtag
+   Registry.
+
+   Example:
+
+      <script>Cyrl</script>
+
+2.2.5.  The domain element
+
+   Refers to the domain in which this policy is applied.
+
+       <domain>example</domain>
+
+   There may be one or more domains listed.
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 5]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+2.2.6.  The description element
+
+   The "description" element is a free-form element that contains any
+   additional relevant description.  Typically, this field contains
+   authorship information, as well as additional context on how the
+   table was formulated (such as with references), and how it has been
+   applied.
+
+   The element has an optional "type" attribute, which refers to the
+   MIME-type of the enclosed data.  If the description lacks a type
+   field, it will be assumed to be plain text.
+
+   The description elements describe information relating to the IDN
+   table that is useful for the user of the table in its interpretation.
+   This may explain the history, the rationale, reference sources etc.
+   It may also contain authorship information.
+
+   The "type" attribute may be used to specify the encoding within
+   description element.  The attribute should be a valid MIME type.  If
+   supplied, it will be assumed the contents is a single CDATA element
+   of that encoding.  Typical types would be "text/plain" or "text/
+   html". "text/plain" will be assumed if not type attribute is
+   specified.
+
+2.2.7.  The variant-classes element
+
+   Consumers of the IDN table may classify the generated variants into
+   different classes using the class attribute, discussed below.  This
+   class attribute allows the registry to apply different policy (for
+   example, whether the block or register specific generated strings).
+   The variant-classes block provides human-readable explanations of the
+   meaning of the classes used in the IDN table.
+
+2.3.  The data element
+
+   The "data" element contains the code point data the comprises the
+   registry policy.  It describes registry policy using a series of XML
+   elements that either represent individual code points, or ranges of
+   code points.
+
+   The data may use the "char" and "range" elements to specify code
+   points, and code ranges.
+
+   Discrete permissable code points may be stipulated with a "char"
+   element, e.g.
+
+       <char cp="002D"/>
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 6]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+   Ranges of permissable code points may be stipulated with a "range"
+   element, e.g.
+
+       <range first-cp="0030" last-cp="0039"/>
+
+   Codepoints must be expressed in hexadecimal, i.e. according to the
+   standard Unicode convention without the prefix "U+".  The reasons for
+   not allowing other encoding formats, including native Unicode
+   encoding in XML, is explored in [UAX42].  The XML conventions used in
+   this format, including the element and attribute names, mirror this
+   document where practical and reasonable to do so.
+
+2.3.1.  Variants
+
+   While most tables typically only determine code point eligibility,
+   others additionally specify a mapping of code points to other code
+   points, known as "variants".  What constitutes a variant is a matter
+   of policy, and varies for each implementation.
+
+2.3.1.1.  Basic variants
+
+   Variants are specified as one of more children of a "char" element.
+
+   For example, to map "v" as a variant of "u":
+
+   <char cp="0075">
+     <var cp="0076"/>
+   </char>
+
+   It is not possible to specify variants for ranges.
+
+2.3.1.2.  Conditional variants
+
+   At its basis, generation of variants are conditional on a specific
+   code point or set of code points.  However, in some instances
+   registries perform more granular control of how strings are
+   constructed.  The IDN table provides for conditioning generation
+   variants on specific instances as follows, using the "when"
+   attribute.
+
+   arabic-initial  Based on context, the code point would be presented
+        in its Arabic Initial form.
+
+   arabic-isolated  Based on context, the code point would be presented
+        in its Arabic Isolated form.
+
+
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 7]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+   arabic-medial  Based on context, the code point would be presented in
+        its Arabic Medial form.
+
+   arabic-final  Based on context, the code point would be presented in
+        its Arabic Final form.
+
+   For example, to mark U+0673 as a variant of U+0625, but only when it
+   appears in isolated or final forms:
+
+   <char cp="0625">
+     <var cp="0673" when="arabic-isolated"/>
+     <var cp="0673" when="arabic-final"/>
+   </char>
+
+2.4.  Example table
+
+   A sample complete XML IDN table is as follows.
+
+       <?xml version="1.0"?>
+       <idntable xmlns="XXX">
+           <meta>
+                <version>1</version>
+                <date>2010-01-01</date>
+                <language>sv</language>
+                <domain>example</domain>
+                <description type="text/html">
+                    This language table was developed with the
+                    <a href="http://swedish.example/">Swedish
+                    examples institute</a>.
+                </description>
+           </meta>
+           <data>
+               <range first-cp="0061" last-cp="007A"/>
+               <char cp="00E4" />
+           </data>
+       </idntable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 8]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+3.  Converting to text format
+
+   Tables represented using this XML format can be converted to the
+   format described in the JET Guidelines for IDN, with some minor
+   caveats:
+
+   o  Version numbers not expressed as integers will not satisfy the
+      ABNF formatting for JETLVT.
+
+   o  Much of the additional meta data can not be expressed in the text
+      format (although can be supplied as comments in the text file).
+
+   o  The JET format only allows for variant classes of "preferred" and
+      "not-preferred".  Other distinctions will be lost.
+
+   Tables similarly can be converted to the format described in
+   [RFC4290] with the same caveats as the JET Guidelines, and
+   additionally the inability to classify variants into groups such as
+   "preferred".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012                [Page 9]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+4.  Implementation of IDN Tables
+
+   How these tables are implemented is outside the scope of this memo.
+   The IDN tables are only designed to describe sets of code points, but
+   does not proscribe how registries and other parties utilise them.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 10]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+5.  IANA Considerations
+
+   This document does not require any specific IANA actions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 11]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+6.  Security Considerations
+
+   There are no security considerations for this memo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 12]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+7.  References
+
+   [IANALSR]  IANA Staff, "IANA Language Sub-Tag Registry".
+
+   [RFC3339]  Klyne, G., Ed. and C. Newman, "Date and Time on the
+              Internet: Timestamps", RFC 3339, July 2002.
+
+   [RFC3743]  Konishi, K., Huang, K., Qian, H., and Y. Ko, "Joint
+              Engineering Team (JET) Guidelines for Internationalized
+              Domain Names (IDN) Registration and Administration for
+              Chinese, Japanese, and Korean", RFC 3743, April 2004.
+
+   [RFC4290]  Klensin, J., "Suggested Practices for Registration of
+              Internationalized Domain Names (IDN)", RFC 4290,
+              December 2005.
+
+   [RFC5564]  El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman,
+              "Linguistic Guidelines for the Use of the Arabic Language
+              in Internet Domains", RFC 5564, February 2010.
+
+   [RFC5646]  Phillips, A. and M. Davis, "Tags for Identifying
+              Languages", BCP 47, RFC 5646, September 2009.
+
+   [UAX42]    Unicode Corsortium, "Unicode Character Database in XML".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 13]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+Appendix A.  Acknowledgements
+
+   This format builds upon the work on documenting IDN tables that
+   commenced with the work by the Joint Engineering Team documented in
+   [RFC3743].  Singificant work that has influenced this document is
+   that published in [RFC5564] by the Arabic-language community.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 14]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+Appendix B.  Editorial Notes
+
+   This appendix to be removed prior to final publication.
+
+B.1.  Change History
+
+   -00  Initial draft.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 15]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+Author's Address
+
+   Kim Davies
+   Internet Corporation for Assigned Names and Numbers
+   4676 Admiralty Way
+   Suite 330
+   Marina del Rey, CA  90292
+   US
+
+   Phone: +1 310 823 9358
+   Email: kim.davies@icann.org
+   URI:   http://www.iana.org/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                   Expires August 13, 2012               [Page 16]
+
