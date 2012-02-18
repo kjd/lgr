@@ -8,7 +8,7 @@ class InvalidCodepoint(ValueError): pass
 
 class CodePoint(object):
 	
-	def __init__(self, codepoint=None, variants=[]):
+	def __init__(self, codepoint=None, variants=()):
 		
 		self.codepoint = codepoint
 		self.variants = variants
@@ -62,7 +62,7 @@ class CodePointRange(object):
 
 def cp_to_int(s, raw=False):
 	
-	if raw == True:
+	if raw:
 		codepoints = []
 		for cp in s:
 			codepoints.append(cp)
@@ -105,12 +105,12 @@ def int_to_cp(input, prefix="U+"):
 def find_range(input):
 	
 	if isinstance(input, basestring):
-		if (0 < input.find('-') < len(input)):
+		if 0 < input.find('-') < len(input):
 			(start, end) = string.split(input, '-', 2)
-			return (start, end)
-		elif (0 < input.find('..') < len(input)):
+			return start, end
+		elif 0 < input.find('..') < len(input):
 			(start, end) = string.split(input, '..', 2)
-			return (start, end)
+			return start, end
 	return False
 
 

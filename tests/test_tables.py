@@ -6,10 +6,7 @@ class IDNTablesTestCase(unittest.TestCase):
 		# Tests
 		# 'a'; 'a-z', 'U+0061', 'U+0061-U+0074'
 		# fail: '-z', 'z-', 'U+XXXX'
-		
-	def testTableLength1(self):
-		i = idntables.IDNTable()
-		i.add('a')
+
 		
 	def testTableLength(self):
 		i = idntables.IDNTable()

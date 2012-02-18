@@ -1,7 +1,5 @@
 import datetime
 import re
-import string
-import StringIO
 
 from idntables.codepoints import *
 from idntables.idna import IDN
@@ -13,6 +11,7 @@ xml_namespace = "http://www.iana.org/idn-tables/0.1"
 
 class InvalidDomain(Exception): pass
 class InvalidIDNTable(Exception): pass
+class XMLValidationError(Exception): pass
 
 
 class IDNTable(object):
@@ -218,7 +217,8 @@ class IDNTable(object):
 
 
 	def merge(self, table):
-		
+
+		# TODO: Add merge functionality.
 		raise NotImplementedError
 
 
@@ -284,26 +284,26 @@ class IDNTable(object):
 
 		xmlobj = etree.XML(data)
 		
-		for c in self._findall(xmlobj, 'data/char', xmlns):
-			self.add(c.get('cp'))
-			for v in self._findall(c, 'var', xmlns):
-				self.addvariant(c.get('cp'), v.get('cp'), condition=v.get('when'), category=v.get('type'))
-		for r in self._findall(xmlobj, 'data/range', xmlns):
-			self.addrange(r.get('first-cp'), r.get('last-cp'))
+		for char in self._findall(xmlobj, 'data/char', xmlns):
+			self.add(char.get('cp'))
+			for variant in self._findall(char, 'var', xmlns):
+				self.addvariant(char.get('cp'), variant.get('cp'), condition=variant.get('when'), category=variant.get('type'))
+		for char_range in self._findall(xmlobj, 'data/range', xmlns):
+			self.addrange(char_range.get('first-cp'), char_range.get('last-cp'))
 			
-		for e in self._findall(xmlobj, 'meta/data', xmlns):
-			self.meta.date = e.text
-		for e in self._findall(xmlobj, 'meta/version', xmlns):
-			self.meta.version = e.text
-		for e in self._findall(xmlobj, 'meta/domain', xmlns):
-			self.meta.domain.append(e.text)
-		for e in self._findall(xmlobj, 'meta/language', xmlns):
-			self.meta.language.append(e.text)
-		for e in self._findall(xmlobj, 'meta/script', xmlns):
-			self.meta.script.append(e.text)
-		for e in self._findall(xmlobj, 'meta/description', xmlns):
-			self.meta.description_type = e.get('type')
-			self.meta.description = e.text
+		for element in self._findall(xmlobj, 'meta/data', xmlns):
+			self.meta.date = element.text
+		for element in self._findall(xmlobj, 'meta/version', xmlns):
+			self.meta.version = element.text
+		for element in self._findall(xmlobj, 'meta/domain', xmlns):
+			self.meta.domain.append(element.text)
+		for element in self._findall(xmlobj, 'meta/language', xmlns):
+			self.meta.language.append(element.text)
+		for element in self._findall(xmlobj, 'meta/script', xmlns):
+			self.meta.script.append(element.text)
+		for element in self._findall(xmlobj, 'meta/description', xmlns):
+			self.meta.description_type = element.get('type')
+			self.meta.description = element.text
 
 
 	def _findall(self, obj, path, xmlns):
@@ -408,9 +408,9 @@ class IDNTableMetadata(object):
 		
 		identifier = "unknown"
 		if self.script:
-			identifier = string.join(self.script, '+')
+			identifier = '+'.join(self.script)
 		elif self.language:
-			identifier = string.join(self.language, '+')
+			identifier = '+'.join(self.language)
 		
 		return "%s_%s_%s" % (self.domain or "unknown", identifier, self.version or '0')	
 
@@ -443,21 +443,21 @@ def load(filename):
 	return IDNTable(filename=filename)
 
 
-def _xml_indent(elem, level=0):
+def _xml_indent(element, level=0):
 
-	i = "\n" + level*"  "
-	if len(elem):
-		if not elem.text or not elem.text.strip():
-			elem.text = i + "  "
-		for e in elem:
-			_xml_indent(e, level+1)
-			if not e.tail or not e.tail.strip():
-				e.tail = i + "  "
-		if not e.tail or not e.tail.strip():
-			e.tail = i
+	i = "\n" + level * "  "
+	if len(element):
+		if not element.text or not element.text.strip():
+			element.text = i + "  "
+		for subelement in element:
+			_xml_indent(subelement, level+1)
+			if not subelement.tail or not subelement.tail.strip():
+				subelement.tail = i + "  "
+		if not subelement.tail or not subelement.tail.strip():
+			subelement.tail = i
 	else:
-		if level and (not elem.tail or not elem.tail.strip()):
-			elem.tail = i
+		if level and (not element.tail or not element.tail.strip()):
+			element.tail = i
 
 
 def _text_element(name, value, attribs=None):

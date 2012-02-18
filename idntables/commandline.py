@@ -9,7 +9,7 @@ def load_table(filename):
 	try:
 		table = idntables.load(filename)
 	except idntables.tables.InvalidIDNTable, e:
-		print "Table Error: %s" % (e)
+		print "Table Error: %s" % e
 		sys.exit(2)
 	
 	return table
@@ -34,7 +34,7 @@ def table_validate(tables, fh, verbose=True):
 	for filename in tables:
 		try:
 			table = idntables.load(filename, validate=True)
-		except idntables.tables.ValidationError, e:
+		except idntables.tables.XMLValidationError, e:
 			if verbose:
 				print "Table %s Error: %s" % (filename, e)
 			sys.exit(2)
@@ -66,7 +66,7 @@ def table_test(idn, tables, fh, verbose=True):
 		try:
 			if table.contains(idn, exceptions=True):
 				if verbose:
-					print "Matches table %s" % (filename)
+					print "Matches table %s" % filename
 				sys.exit(0)
 		except idntables.tables.InvalidDomain, e:
 			success = False
@@ -107,7 +107,7 @@ def main(args=None):
 	
 	subparser = subparsers.add_parser('validate', help="validate if table is correctly formatted")
 	subparser.add_argument('table', nargs='+', help="table file")
-		
+
 	subparser = subparsers.add_parser('diff', help="compare two tables and show the differences")
 	subparser.add_argument('table1', help="first table file")
 	subparser.add_argument('table2', help="second table file")
@@ -125,10 +125,10 @@ def main(args=None):
 	
 	parser.add_argument('-o', '--output', dest="output", help="send output to file")
 	if interactive:
-		parser.add_argument('-q', '--quiet', dest="quiet", action='store_true', help="suppress discretionary output to stdout")	
+		parser.add_argument('-q', '--quiet', dest="quiet", action='store_true', help="suppress discretionary output to stdout")
 		parser.add_argument('-v', '--verbose', dest="verbose", action='store_true', help="information output to stdout (default)")
 	else:
-		parser.add_argument('-q', '--quiet', dest="quiet", action='store_true', help="suppress discretionary output to stdout (default)")	
+		parser.add_argument('-q', '--quiet', dest="quiet", action='store_true', help="suppress discretionary output to stdout (default)")
 		parser.add_argument('-v', '--verbose', dest="verbose", action='store_true', help="information output to stdout")
 		
 	args = parser.parse_args()

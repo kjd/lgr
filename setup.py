@@ -9,8 +9,6 @@ generating sets of labels derived from nominated code point variants.
 import sys
 from setuptools import setup, find_packages
 
-version = "0.1"
-
 def main():
 
 	python_version = sys.version_info[:2]
@@ -21,11 +19,13 @@ def main():
 	if python_version < (2,5):
 		raise SystemExit("Sorry, Python 2.5 or newer required")
 
+	from idntables import __version__
+
 	arguments = {
 		'name': 'idntables',
 		'packages': find_packages(),
 		'provides': ['idntables'],
-		'version': version,
+		'version': __version__,
 		'entry_points': {
 			'console_scripts': [
 				'idntables = idntables.commandline:main',
