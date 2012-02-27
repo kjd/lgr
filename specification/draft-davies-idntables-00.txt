@@ -3,8 +3,8 @@
 
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
-Intended status: Informational                         February 10, 2012
-Expires: August 13, 2012
+Intended status: Informational                         February 27, 2012
+Expires: August 30, 2012
 
 
           Representing registration policy for IDNs using XML
@@ -12,7 +12,7 @@ Expires: August 13, 2012
 
 Abstract
 
-   This memo described a method of representing the registration policy
+   This memo describes a method of representing the registration policy
    that a zone administrator uses for registering Internationalised
    Domain Names using Extensible Markup Language (XML).  These registry
    policies, commonly known as "IDN tables", are used to enforce and
@@ -35,7 +35,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 13, 2012.
+   This Internet-Draft will expire on August 30, 2012.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Davies                   Expires August 13, 2012                [Page 1]
+Davies                   Expires August 30, 2012                [Page 1]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -64,28 +64,31 @@ Internet-Draft        IDN Table XML representation         February 2012
 Table of Contents
 
    1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
-   2.  IDN Table XML Format . . . . . . . . . . . . . . . . . . . . .  4
-     2.1.  Basic structure  . . . . . . . . . . . . . . . . . . . . .  4
-     2.2.  The meta element . . . . . . . . . . . . . . . . . . . . .  4
-       2.2.1.  The version element  . . . . . . . . . . . . . . . . .  4
-       2.2.2.  The date element . . . . . . . . . . . . . . . . . . .  5
-       2.2.3.  The language element . . . . . . . . . . . . . . . . .  5
-       2.2.4.  The script element . . . . . . . . . . . . . . . . . .  5
-       2.2.5.  The domain element . . . . . . . . . . . . . . . . . .  5
-       2.2.6.  The description element  . . . . . . . . . . . . . . .  6
-       2.2.7.  The variant-classes element  . . . . . . . . . . . . .  6
-     2.3.  The data element . . . . . . . . . . . . . . . . . . . . .  6
-       2.3.1.  Variants . . . . . . . . . . . . . . . . . . . . . . .  7
-     2.4.  Example table  . . . . . . . . . . . . . . . . . . . . . .  8
-   3.  Converting to text format  . . . . . . . . . . . . . . . . . .  9
-   4.  Implementation of IDN Tables . . . . . . . . . . . . . . . . . 10
-   5.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 11
-   6.  Security Considerations  . . . . . . . . . . . . . . . . . . . 12
-   7.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 13
-   Appendix A.  Acknowledgements  . . . . . . . . . . . . . . . . . . 14
-   Appendix B.  Editorial Notes . . . . . . . . . . . . . . . . . . . 15
-     B.1.  Change History . . . . . . . . . . . . . . . . . . . . . . 15
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 16
+   2.  Design Goals . . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.  IDN Table XML Format . . . . . . . . . . . . . . . . . . . . .  5
+     3.1.  Basic structure  . . . . . . . . . . . . . . . . . . . . .  5
+     3.2.  The meta element . . . . . . . . . . . . . . . . . . . . .  5
+       3.2.1.  The version element  . . . . . . . . . . . . . . . . .  5
+       3.2.2.  The date element . . . . . . . . . . . . . . . . . . .  6
+       3.2.3.  The language element . . . . . . . . . . . . . . . . .  6
+       3.2.4.  The script element . . . . . . . . . . . . . . . . . .  6
+       3.2.5.  The domain element . . . . . . . . . . . . . . . . . .  6
+       3.2.6.  The description element  . . . . . . . . . . . . . . .  7
+       3.2.7.  The variant-classes element  . . . . . . . . . . . . .  7
+     3.3.  The data element . . . . . . . . . . . . . . . . . . . . .  7
+       3.3.1.  Variants . . . . . . . . . . . . . . . . . . . . . . .  8
+     3.4.  Example table  . . . . . . . . . . . . . . . . . . . . . .  9
+   4.  Converting to text format  . . . . . . . . . . . . . . . . . . 10
+   5.  Processing a label against a table . . . . . . . . . . . . . . 11
+     5.1.  Determining eligibility for a label  . . . . . . . . . . . 11
+     5.2.  Determining variants for a label . . . . . . . . . . . . . 11
+   6.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 12
+   7.  Security Considerations  . . . . . . . . . . . . . . . . . . . 13
+   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+   Appendix A.  Acknowledgements  . . . . . . . . . . . . . . . . . . 15
+   Appendix B.  Editorial Notes . . . . . . . . . . . . . . . . . . . 16
+     B.1.  Change History . . . . . . . . . . . . . . . . . . . . . . 16
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 17
 
 
 
@@ -105,10 +108,7 @@ Table of Contents
 
 
 
-
-
-
-Davies                   Expires August 13, 2012                [Page 2]
+Davies                   Expires August 30, 2012                [Page 2]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -164,14 +164,70 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 3]
+Davies                   Expires August 30, 2012                [Page 3]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-2.  IDN Table XML Format
+2.  Design Goals
 
-2.1.  Basic structure
+   The following items are explicit design goals of this format:
+
+   o  Must be in a format that can be implemented in a reasonably
+      straightforward manner by software implementors;
+
+   o  The format should be able to be checked for formatting errors,
+      such that common mistakes can be caught;
+
+   o  An IDN Table needs to be able to express the set of valid code
+      points that are allowed for registration under a specific zone
+      administrator's policies;
+
+   o  Needs to be able to express computed alternatives to a given
+      domain name based on a one-to-one, or one-to-many relationship.
+      These computed alternatives are commonly known as "IDN variants";
+
+   o  IDN Variants need to be able to be tagged with specific
+      categories, such that the categories can be used to support
+      registry policy (such as whether to list the computed variant in
+      the zone, or to merely block it from registration);
+
+   o  IDN Variants need to be able to stipulated based on contextual
+      information.  For example, specific variants may only be
+      applicable when they follow another specific code point, or when
+      the code point is displayed in a specific presentation form;
+
+   o  The data contained within the table should be unambiguous, such
+      that independent implementations that utilise the contents will
+      arrive at the same results;
+
+   o  IDN Tables need to be suitable for comparison and re-use, such
+      that one could easily compare the contents of two or more to see
+      the differences, to merge them, and so on.
+
+   It is explicitly NOT the goal of this format to:
+
+   o  Stipulate what code points should be listed in an IDN Table by a
+      zone administrator.  What registration policies are used for a
+      particular zone is outside the scope of this memo.
+
+   o  Stipulate what a consumer of an IDN Table must do when they
+      determine a particular domain is valid or invalid; or arrive at a
+      set of computed IDN variants.  IDN Tables are only used to
+      describe rules for computing code points, but does not prescribe
+      how registries and other parties utilise them.
+
+
+
+
+Davies                   Expires August 30, 2012                [Page 4]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
+3.  IDN Table XML Format
+
+3.1.  Basic structure
 
    The basic XML framework of the document is as follows:
 
@@ -199,7 +255,7 @@ Internet-Draft        IDN Table XML representation         February 2012
    A document should contain exactly one "idntable" element, and within
    that optionally one "meta" element and exactly one "data" element.
 
-2.2.  The meta element
+3.2.  The meta element
 
    The "meta" element is used to express meta-data associated within the
    IDN table.  It can be used to explain the author or relevant contact
@@ -208,7 +264,7 @@ Internet-Draft        IDN Table XML representation         February 2012
    within is not required by software consuming the IDN table in order
    to calculate valid IDN labels, or to calculate variants.
 
-2.2.1.  The version element
+3.2.1.  The version element
 
    The "version" element is used to uniquely identify each version of
    the table being represented.  No specific format is required, but it
@@ -220,7 +276,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 4]
+Davies                   Expires August 30, 2012                [Page 5]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -235,7 +291,7 @@ Internet-Draft        IDN Table XML representation         February 2012
    be represented in text format and remain in compliance with the JET
    table specification.
 
-2.2.2.  The date element
+3.2.2.  The date element
 
    The "date" element is used to identify the date the table was
    written.  The contents of this element MUST be a valid ISO 8601 date
@@ -245,7 +301,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
        <date>2009-11-01</date>
 
-2.2.3.  The language element
+3.2.3.  The language element
 
    The "language" element signals that the table is associated with a
    specific language.  The value of the language element must be a valid
@@ -256,7 +312,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
       <language>en</language>
 
-2.2.4.  The script element
+3.2.4.  The script element
 
    Must be an eligible script type from the IANA Language Subtag
    Registry.
@@ -265,7 +321,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
       <script>Cyrl</script>
 
-2.2.5.  The domain element
+3.2.5.  The domain element
 
    Refers to the domain in which this policy is applied.
 
@@ -276,12 +332,12 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 5]
+Davies                   Expires August 30, 2012                [Page 6]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-2.2.6.  The description element
+3.2.6.  The description element
 
    The "description" element is a free-form element that contains any
    additional relevant description.  Typically, this field contains
@@ -302,10 +358,10 @@ Internet-Draft        IDN Table XML representation         February 2012
    description element.  The attribute should be a valid MIME type.  If
    supplied, it will be assumed the contents is a single CDATA element
    of that encoding.  Typical types would be "text/plain" or "text/
-   html". "text/plain" will be assumed if not type attribute is
+   html". "text/plain" will be assumed if no type attribute is
    specified.
 
-2.2.7.  The variant-classes element
+3.2.7.  The variant-classes element
 
    Consumers of the IDN table may classify the generated variants into
    different classes using the class attribute, discussed below.  This
@@ -314,7 +370,7 @@ Internet-Draft        IDN Table XML representation         February 2012
    The variant-classes block provides human-readable explanations of the
    meaning of the classes used in the IDN table.
 
-2.3.  The data element
+3.3.  The data element
 
    The "data" element contains the code point data the comprises the
    registry policy.  It describes registry policy using a series of XML
@@ -332,7 +388,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 6]
+Davies                   Expires August 30, 2012                [Page 7]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -343,20 +399,20 @@ Internet-Draft        IDN Table XML representation         February 2012
        <range first-cp="0030" last-cp="0039"/>
 
    Codepoints must be expressed in hexadecimal, i.e. according to the
-   standard Unicode convention without the prefix "U+".  The reasons for
-   not allowing other encoding formats, including native Unicode
+   standard Unicode convention without the prefix "U+".  The rationale
+   for not allowing other encoding formats, including native Unicode
    encoding in XML, is explored in [UAX42].  The XML conventions used in
    this format, including the element and attribute names, mirror this
    document where practical and reasonable to do so.
 
-2.3.1.  Variants
+3.3.1.  Variants
 
    While most tables typically only determine code point eligibility,
    others additionally specify a mapping of code points to other code
    points, known as "variants".  What constitutes a variant is a matter
    of policy, and varies for each implementation.
 
-2.3.1.1.  Basic variants
+3.3.1.1.  Basic variants
 
    Variants are specified as one of more children of a "char" element.
 
@@ -368,7 +424,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
    It is not possible to specify variants for ranges.
 
-2.3.1.2.  Conditional variants
+3.3.1.2.  Conditional variants
 
    At its basis, generation of variants are conditional on a specific
    code point or set of code points.  However, in some instances
@@ -388,7 +444,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 7]
+Davies                   Expires August 30, 2012                [Page 8]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -407,7 +463,7 @@ Internet-Draft        IDN Table XML representation         February 2012
      <var cp="0673" when="arabic-final"/>
    </char>
 
-2.4.  Example table
+3.4.  Example table
 
    A sample complete XML IDN table is as follows.
 
@@ -444,12 +500,12 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 8]
+Davies                   Expires August 30, 2012                [Page 9]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-3.  Converting to text format
+4.  Converting to text format
 
    Tables represented using this XML format can be converted to the
    format described in the JET Guidelines for IDN, with some minor
@@ -500,33 +556,31 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012                [Page 9]
+Davies                   Expires August 30, 2012               [Page 10]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-4.  Implementation of IDN Tables
+5.  Processing a label against a table
 
-   How these tables are implemented is outside the scope of this memo.
-   The IDN tables are only designed to describe sets of code points, but
-   does not proscribe how registries and other parties utilise them.
+5.1.  Determining eligibility for a label
 
+   In order to use a table to test a specific IDN table for membership
+   in the table, a consumer of an IDN table must iterate through each
+   code point within a given U-label, and test that each code point is a
+   member of the IDN table.  If any code point is not a member of the
+   IDN Table, it shall be deemed as not eligible in accordance with the
+   table.
 
+   A code point is deemed a member of the table when it is listed with
+   the <char> element, and all necessary condition listed in "when"
+   attributes are correctly satisfied.
 
+5.2.  Determining variants for a label
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+   For a given eligible label, the set of variants is deemed to be each
+   possible permutation of <var> elements, whereby all "when" attributes
+   are correctly satisfied for each code point in the given permutation.
 
 
 
@@ -556,16 +610,16 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012               [Page 10]
+
+
+Davies                   Expires August 30, 2012               [Page 11]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-5.  IANA Considerations
+6.  IANA Considerations
 
-   This document does not require any specific IANA actions.
-
-
+   This document does not specify any IANA actions.
 
 
 
@@ -612,12 +666,14 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012               [Page 11]
+
+
+Davies                   Expires August 30, 2012               [Page 12]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-6.  Security Considerations
+7.  Security Considerations
 
    There are no security considerations for this memo.
 
@@ -668,12 +724,12 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012               [Page 12]
+Davies                   Expires August 30, 2012               [Page 13]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-7.  References
+8.  References
 
    [IANALSR]  IANA Staff, "IANA Language Sub-Tag Registry".
 
@@ -724,7 +780,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                   Expires August 13, 2012               [Page 13]
+Davies                   Expires August 30, 2012               [Page 14]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -780,7 +836,7 @@ Appendix A.  Acknowledgements
 
 
 
-Davies                   Expires August 13, 2012               [Page 14]
+Davies                   Expires August 30, 2012               [Page 15]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -836,7 +892,7 @@ B.1.  Change History
 
 
 
-Davies                   Expires August 13, 2012               [Page 15]
+Davies                   Expires August 30, 2012               [Page 16]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -892,5 +948,5 @@ Author's Address
 
 
 
-Davies                   Expires August 13, 2012               [Page 16]
+Davies                   Expires August 30, 2012               [Page 17]
 

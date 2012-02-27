@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc3339 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml">
+<!ENTITY rfc3743 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3743.xml">
+<!ENTITY rfc5646 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5646.xml">
+<!ENTITY rfc4290 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4290.xml">
+<!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
+]>
+<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-00">
+	<?rfc toc="yes" ?>
+	<?rfc symrefs="yes" ?>
+	<?rfc sortrefs="yes"?>
+	<?rfc iprnotified="no" ?>
+	<?rfc strict="no" ?>
+	<front>
+		<title abbrev="IDN Table XML representation">Representing registration policy for IDNs using XML</title>
+		<author initials="K" surname="Davies" fullname="Kim Davies">
+			<organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization>
+			<address>
+				<postal>
+					<street>4676 Admiralty Way</street>
+					<street>Suite 330</street>
+					<city>Marina del Rey</city>
+					<region>CA</region>
+					<code>90292</code>
+					<country>US</country>
+				</postal>
+				<phone>+1 310 823 9358</phone>
+				<email>kim.davies@icann.org</email>
+				<uri>http://www.iana.org/</uri>
+			</address>
+		</author>
+		<date/>
+		<area>Management</area>
+		<abstract>
+			
+			<t>This memo describes a method of representing the registration
+			policy that a zone administrator uses for registering
+			Internationalised Domain Names using Extensible Markup Language
+			(XML). These registry policies, commonly known as "IDN tables",
+			are used to enforce and share policy on which specific code-points
+			are permitted for registrations, and which alternative code-points
+			are considered variants.</t>
+		
+		</abstract>
+	</front>
+	<middle>
+		
+		<section title="Introduction">
+			
+			<t>This memo described how to use Extensible Markup Language
+			(XML) to describe the list of permissible code points and variants
+			used in a domain name registry's policies.</t>
+			
+			<t>Historically, text and HTML based formats have been used,
+			loosely based around the format used to describe a Language Variant
+			Table in <xref target="RFC3743"/>. <xref target="RFC4290"/> further
+			posts a "Model table format" that describes a similar subset of
+			functionality than is expressable using the JET-format.</t>
+			
+			<t>With the experience of many IDN tables, and variant tables,
+			being constructed through registry policies over the first decade
+			of IDN deployment, a structured XML format will assist in improving
+			machine-readability, consistency, and maintainability of IDN
+			tables. It will also provide for more complex conditional
+			implementation of variants that reflects the known requirements
+			of current registry policy.</t>
+			
+		</section>
+		
+		<section title="Design Goals">
+			
+			<t>The following items are explicit design goals of this format:</t>
+			
+			<t>
+			<list style="symbols">
+				<t>Must be in a format that can be implemented in a reasonably
+				straightforward manner by software implementors;</t>
+				
+				<t>The format should be able to be checked for formatting errors,
+				such that common mistakes can be caught;</t>
+				
+				<t>An IDN Table needs to be able to express the set of valid
+				code points that are allowed for registration under a specific
+				zone administrator's policies;</t>
+				
+				<t>Needs to be able to express computed alternatives to a given
+				domain name based on a one-to-one, or one-to-many relationship.
+				These computed alternatives are commonly known as "IDN
+				variants";</t>
+				
+				<t>IDN Variants need to be able to be tagged with specific
+				categories, such that the categories can be used to support
+				registry policy (such as whether to list the computed variant in
+				the zone, or to merely block it from registration);</t>
+				
+				<t>IDN Variants need to be able to stipulated based on contextual
+				information. For example, specific variants may only be applicable
+				when they follow another specific code point, or when the code point
+				is displayed in a specific presentation form;</t>
+				
+				<t>The data contained within the table should be unambiguous, such
+				that independent implementations that utilise the contents will
+				arrive at the same results;</t>
+				
+				<t>IDN Tables need to be suitable for comparison and re-use, such
+				that one could easily compare the contents of two or more to
+				see the differences, to merge them, and so on.</t>
+			</list>
+			</t>
+			
+			<t>It is explicitly NOT the goal of this format to:</t>
+			
+			<t>
+			<list style="symbols">
+				
+				<t>Stipulate what code points should be listed in an IDN Table
+				by a zone administrator. What registration policies are used
+				for a particular zone is outside the scope of this memo.</t>
+				
+				<t>Stipulate what a consumer of an IDN Table must do when they
+				determine a particular domain is valid or invalid; or arrive
+				at a set of computed IDN variants. IDN Tables are only used to
+				describe rules for computing code points, but does not prescribe
+				how registries and other parties utilise them.</t>
+				
+			</list>
+			</t>
+
+		</section>
+		
+		<section title="IDN Table XML Format">
+			
+			<section title="Basic structure">
+				
+				<t>The basic XML framework of the document is as follows:</t>
+				<figure>
+					<artwork><![CDATA[
+    <?xml version="1.0"?>
+    <idntable>
+        ...
+    </idntable>
+    ]]></artwork>
+				</figure>
+				
+				<t>Within the "idntable" element rests two sub-elements.
+				Firstly is a "meta" element that contains all meta-data
+				associated with the IDN table, such as its authorship, what
+				it is used for, implementation notes and references. This is
+				followed by a "data" element that contains the substantive
+				code-point data.</t>
+				
+				<figure>
+					<artwork><![CDATA[
+    <?xml version="1.0"?>
+    <idntable>
+        <meta>
+            ...
+        </meta>
+        <data>
+            ...
+        </data>
+    </idntable>
+]]></artwork>
+				</figure>
+				
+				<t>A document should contain exactly one "idntable"
+				element, and within that optionally one "meta" element and
+				exactly one "data" element.</t>
+				
+			</section>
+			
+			<section title="The meta element">
+				
+				<t>The "meta" element is used to express meta-data
+				associated within the IDN table. It can be used to explain
+				the author or relevant contact person, explain what the
+				usage of the IDN table is, provide implementation notes as
+				well as references. The data contained within is not
+				required by software consuming the IDN table in order to
+				calculate valid IDN labels, or to calculate variants.</t>
+				
+				<section title="The version element">
+				
+					<t>The "version" element is used to uniquely identify
+					each version of the table being represented. No specific
+					format is required, but it is RECOMMENDED that it be a
+					numerical positive integer, which is incremented with
+					each revision of the file.</t>
+					
+					<t>An example of a typical first edition of a document:</t>
+					
+					<figure>
+						<artwork><![CDATA[
+    <version>1</version>
+    ]]></artwork>
+					</figure>
+					
+					<t>A common alternative is to use a major-minor number
+					scheme, where two decimal numbers are used to represent
+					major and minor changes to the table. For example,
+					"1.0" would be the first major release, "1.1" would be
+					a minor update to that, and "2.0" would represent a major
+					revision. It is important to note this style of versioning
+					can not be represented in text format and remain in
+					compliance with the JET table specification.</t>
+					
+				</section>
+				<section title="The date element">
+					
+					<t>The "date" element is used to identify the date the
+					table was written. The contents of this element MUST be a
+					valid ISO 8601 date string as described in
+					<xref target="RFC3339"/>.</t>
+					
+					<figure>
+						<preamble>Example of a date:</preamble>
+						<artwork><![CDATA[
+    <date>2009-11-01</date>
+]]></artwork>
+					</figure>
+					
+				</section>
+				<section title="The language element">
+					
+					<t>The "language" element signals that the table is
+					associated with a specific language. The value of the
+					language element must be a valid language tag from the
+					IANA Language Subtag Registry <xref target="IANALSR"/>,
+					as described in <xref target="RFC5646"/>.</t>
+					
+					<t>Example:</t>
+					
+					<figure>
+						<artwork><![CDATA[
+   <language>en</language>
+]]></artwork>
+					</figure>
+				</section>
+				<section title="The script element">
+					<t>Must be an eligible script type from the IANA
+					Language Subtag Registry.</t>
+					
+					<t>Example:</t>
+					
+					<figure>
+						<artwork><![CDATA[
+   <script>Cyrl</script>
+]]></artwork>
+					</figure>
+				</section>
+				<section title="The domain element">
+					
+					<t>Refers to the domain in which this policy is applied.</t>
+					
+					<figure>
+						<artwork><![CDATA[
+    <domain>example</domain>
+]]></artwork>
+					</figure>
+					
+					<t>There may be one or more domains listed.</t>
+				
+				</section>
+				<section title="The description element">
+					
+					<t>The "description" element is a free-form element that
+					contains any additional relevant description. Typically,
+					this field contains authorship information, as well as
+					additional context on how the table was formulated (such
+					as with references), and how it has been applied.</t>
+					
+					<t>The element has an optional "type" attribute, which
+					refers to the MIME-type of the enclosed data. If the
+					description lacks a type field, it will be assumed to be
+					plain text.</t>
+					
+					<t>The description elements describe information relating
+					to the IDN table that is useful for the user of the table
+					in its interpretation. This may explain the history, the
+					rationale, reference sources etc. It may also contain
+					authorship information.</t>
+					
+					<t>The "type" attribute may be used to specify the encoding
+					within description element. The attribute should be a valid
+					MIME type. If supplied, it will be assumed the contents
+					is a single CDATA element of that encoding. Typical types
+					would be "text/plain" or "text/html". "text/plain" will
+					be assumed if no type attribute is specified.</t>
+					
+				</section>
+				<section title="The variant-classes element">
+					
+					<t>Consumers of the IDN table may classify the generated
+					variants into different classes using the class attribute,
+					discussed below. This class attribute allows the registry
+					to apply different policy (for example, whether the block
+					or register specific generated strings). The
+					variant-classes block provides human-readable explanations
+					of the meaning of the classes used in the IDN table.</t>
+					
+				</section>
+			</section>
+			<section title="The data element">
+				
+				<t>The "data" element contains the code point data the
+				comprises the registry policy. It describes registry policy
+				using a series of XML elements that either represent individual
+				code points, or ranges of code points.</t>
+				
+				<t>The data may use the "char" and "range" elements to specify
+				code points, and code ranges.</t>
+				
+				<t>Discrete permissable code points may be stipulated with a
+				"char" element, e.g.</t>
+				
+				<figure>
+					<artwork><![CDATA[
+    <char cp="002D"/>
+				]]></artwork>
+				</figure>
+				<t>Ranges of permissable code points may be stipulated with a
+				"range" element, e.g.</t>
+				<figure>
+					<artwork><![CDATA[
+    <range first-cp="0030" last-cp="0039"/>
+				]]></artwork>
+				</figure>
+				<t>Codepoints must be expressed in hexadecimal, i.e. according
+				to the standard Unicode convention without the prefix "U+".
+				The rationale for not allowing other encoding formats, including
+				native Unicode encoding in XML, is explored in
+				<xref target="UAX42"/>. The XML conventions used in this format,
+				including the element and attribute names, mirror this document
+				where practical and reasonable to do so.</t>
+				
+				<section title="Variants">
+					<t>While most tables typically only determine code point eligibility, others additionally specify
+					a mapping of code points to other code points, known as "variants". What constitutes a variant is
+					a matter of policy, and varies for each implementation.</t>
+					<section title="Basic variants">
+						<t>Variants are specified as one of more children of a "char" element.</t>
+						<t>For example, to map "v" as a variant of "u":</t>
+						<figure>
+							<artwork><![CDATA[
+<char cp="0075">
+  <var cp="0076"/>
+</char>
+									]]></artwork>
+						</figure>
+						<t>It is not possible to specify variants for ranges.</t>
+					</section>
+					<section title="Conditional variants">
+						<t>At its basis, generation of variants are conditional on a specific code point or set of
+						code points. However, in some instances registries perform more granular control of how
+						strings are constructed. The IDN table provides for conditioning generation variants on
+						specific instances as follows, using the "when" attribute.</t>
+						<t>
+							<list style="hanging" hangIndent="5">
+								<t hangText="arabic-initial">Based on context, the code point would be presented in its Arabic Initial form.</t>
+								<t hangText="arabic-isolated">Based on context, the code point would be presented in its Arabic Isolated form.</t>
+								<t hangText="arabic-medial">Based on context, the code point would be presented in its Arabic Medial form.</t>
+								<t hangText="arabic-final">Based on context, the code point would be presented in its Arabic Final form.</t>
+							</list>
+						</t>
+						<t>For example, to mark U+0673 as a variant of U+0625, but only when it appears in
+						isolated or final forms:</t>
+						<figure>
+							<artwork><![CDATA[
+<char cp="0625">
+  <var cp="0673" when="arabic-isolated"/>
+  <var cp="0673" when="arabic-final"/>
+</char>
+					]]></artwork>
+						</figure>
+					</section>
+				</section>
+			</section>
+			<section title="Example table">
+				<t>A sample complete XML IDN table is as follows.</t>
+				<figure>
+					<artwork><![CDATA[
+    <?xml version="1.0"?>
+    <idntable xmlns="XXX">
+        <meta>
+             <version>1</version>
+             <date>2010-01-01</date>
+             <language>sv</language>
+             <domain>example</domain>
+             <description type="text/html">
+                 This language table was developed with the 
+                 <a href="http://swedish.example/">Swedish 
+                 examples institute</a>.
+             </description>
+        </meta>
+        <data>
+            <range first-cp="0061" last-cp="007A"/>
+            <char cp="00E4" />
+        </data>
+    </idntable>]]></artwork>
+				</figure>
+			</section>
+		</section>
+		<section title="Converting to text format">
+			<t>Tables represented using this XML format can be converted to the format described in the JET Guidelines
+			for IDN, with some minor caveats:</t>
+			<t>
+				<list style="symbols">
+					<t>Version numbers not expressed as integers will not satisfy the ABNF formatting for JETLVT.</t>
+					<t>Much of the additional meta data can not be expressed in the text format (although can be supplied
+					as comments in the text file).</t>
+					<t>The JET format only allows for variant classes of "preferred" and "not-preferred". Other
+					distinctions will be lost.</t>
+				</list>
+			</t>
+			<t>Tables similarly can be converted to the format described in <xref target="RFC4290"/> with the same caveats
+		as the JET Guidelines, and additionally the inability to classify variants into groups such as "preferred".</t>
+		</section>
+		
+		<section title="Processing a label against a table">
+			
+			<section title="Determining eligibility for a label">
+
+				<t>In order to use a table to test a specific IDN table for membership in the table, a consumer of
+				an IDN table must iterate through each code point within a given U-label, and test that each
+				code point is a member of the IDN table. If any code point is not a member of the IDN Table,
+				it shall be deemed as not eligible in accordance with the table.</t>
+			
+				<t>A code point is deemed a member of the table when it is listed with the &lt;char&gt;
+				element, and all necessary condition listed in "when" attributes are correctly satisfied.</t>
+				
+			</section>
+		
+			<section title="Determining variants for a label">
+			
+				<t>For a given eligible label, the set of variants is deemed to be each possible permutation of
+					&lt;var&gt; elements, whereby all "when" attributes are correctly satisfied for each code
+					point in the given permutation.</t>
+			
+			</section>
+
+		</section>
+		
+		<section title="IANA Considerations">
+			<t>This document does not specify any IANA actions.</t>
+		</section>
+		<section title="Security Considerations">
+			<t>There are no security considerations for this memo.</t>
+		</section>
+	</middle>
+	<back>
+		<references>
+		&rfc3339;
+		&rfc3743;
+		&rfc4290;
+		&rfc5646;
+		&rfc5564;
+		<reference anchor="IANALSR"><front><title>IANA Language Sub-Tag Registry</title><author><organization abbrev="IANA Staff">IANA Staff</organization></author></front><format type="HTML" target="http://www.iana.org/assignments/language-subtag-registry"/></reference>
+		<reference anchor="UAX42"><front><title>Unicode Character Database in XML</title><author><organization abbrev="Unicode">Unicode Corsortium</organization></author></front><format type="HTML" target="http://unicode.org/reports/tr42/"/></reference>
+		</references>
+		<section title="Acknowledgements">
+			<t>This format builds upon the work on documenting IDN tables that commenced with the work by
+			the Joint Engineering Team documented in <xref target="RFC3743"/>. Singificant work
+			that has influenced this document is that published in <xref target="RFC5564"/> by the
+			Arabic-language community.</t>
+		</section>
+		<section title="Editorial Notes">
+			<t>This appendix to be removed prior to final publication.</t>
+			<section title="Change History">
+				<t>
+					<list style="hanging" hangIndent="5">
+						<t hangText="-00">Initial draft.</t>
+					</list>
+				</t>
+			</section>
+		</section>
+	</back>
+</rfc>
