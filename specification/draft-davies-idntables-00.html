@@ -218,31 +218,31 @@ The variant-classes element<br />
 The data element<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor13">3.3.1.</a>&nbsp;
 Variants<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">3.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">3.4.</a>&nbsp;
 Example table<br />
-<a href="#anchor17">4.</a>&nbsp;
+<a href="#anchor18">4.</a>&nbsp;
 Converting to text format<br />
-<a href="#anchor18">5.</a>&nbsp;
+<a href="#anchor19">5.</a>&nbsp;
 Processing a label against a table<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor19">5.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">5.1.</a>&nbsp;
 Determining eligibility for a label<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">5.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor21">5.2.</a>&nbsp;
 Determining variants for a label<br />
-<a href="#anchor21">6.</a>&nbsp;
+<a href="#anchor22">6.</a>&nbsp;
 IANA Considerations<br />
-<a href="#anchor22">7.</a>&nbsp;
+<a href="#anchor23">7.</a>&nbsp;
 Security Considerations<br />
 <a href="#rfc.references1">8.</a>&nbsp;
 References<br />
-<a href="#anchor24">Appendix&nbsp;A.</a>&nbsp;
+<a href="#anchor25">Appendix&nbsp;A.</a>&nbsp;
 RelaxNG Schema<br />
-<a href="#anchor25">Appendix&nbsp;B.</a>&nbsp;
+<a href="#anchor26">Appendix&nbsp;B.</a>&nbsp;
 Acknowledgements<br />
-<a href="#anchor26">Appendix&nbsp;C.</a>&nbsp;
+<a href="#anchor27">Appendix&nbsp;C.</a>&nbsp;
 Editorial Notes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">C.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">C.1.</a>&nbsp;
 Known Issues and Future Work<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">C.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">C.2.</a>&nbsp;
 Change History<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Author's Address<br />
@@ -254,7 +254,7 @@ Author's Address<br />
 <a name="rfc.section.1"></a><h3>1.&nbsp;
 Introduction</h3>
 
-<p>This memo described how to use Extensible Markup Language
+<p>This memo describes how to use Extensible Markup Language
 			(XML) to describe the list of permissible code points and variants
 			used in a zone administrator's policies.
 </p>
@@ -262,7 +262,7 @@ Introduction</h3>
 			registries - have published their policies using text and HTML based
 			formats loosely based around the format used to describe a Language Variant
 			Table in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>. <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a> further
-			posts a "Model table format" that describes a similar subset of
+			posts a "Model table format" that describes a similar set of
 			functionality.
 </p>
 <p>Through the first decade of IDN deployment, experience has shown
@@ -578,6 +578,20 @@ Basic variants</h3>
 <a name="anchor15"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.3.3.1.2"></a><h3>3.3.1.2.&nbsp;
+Null variants</h3>
+
+<p>To specify a null variant, which is a variant string that maps to
+							no codepoint, use the null codepoint 0000. For example,
+							to mark a string with a zero width non-joiner to the same string
+							without the zero width non-joiner:
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+&lt;char cp="200c"&gt;
+  &lt;var cp="0000"/&gt;
+&lt;/char&gt;
+</pre></div>
+<a name="anchor16"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.3.3.1.3"></a><h3>3.3.1.3.&nbsp;
 Conditional variants</h3>
 
 <p>At its basis, generation of variants are conditional on a specific code point or set of
@@ -616,7 +630,7 @@ Conditional variants</h3>
   &lt;var cp="0673" when="arabic-final"/&gt;
 &lt;/char&gt;
 </pre></div>
-<a name="anchor16"></a><br /><hr />
+<a name="anchor17"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.3.4"></a><h3>3.4.&nbsp;
 Example table</h3>
@@ -641,7 +655,7 @@ Example table</h3>
             &lt;char cp="00E4" /&gt;
         &lt;/data&gt;
     &lt;/idntable&gt;</pre></div>
-<a name="anchor17"></a><br /><hr />
+<a name="anchor18"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4"></a><h3>4.&nbsp;
 Converting to text format</h3>
@@ -666,12 +680,12 @@ Converting to text format</h3>
 <p>Tables similarly can be converted to the format described in <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a> with the same caveats
 		as the JET Guidelines, and additionally the inability to classify variants into groups such as "preferred".
 </p>
-<a name="anchor18"></a><br /><hr />
+<a name="anchor19"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5"></a><h3>5.&nbsp;
 Processing a label against a table</h3>
 
-<a name="anchor19"></a><br /><hr />
+<a name="anchor20"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
 Determining eligibility for a label</h3>
@@ -684,7 +698,7 @@ Determining eligibility for a label</h3>
 <p>A code point is deemed a member of the table when it is listed with the &lt;char&gt;
 				element, and all necessary condition listed in "when" attributes are correctly satisfied.
 </p>
-<a name="anchor20"></a><br /><hr />
+<a name="anchor21"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
 Determining variants for a label</h3>
@@ -693,14 +707,14 @@ Determining variants for a label</h3>
 					&lt;var&gt; elements, whereby all "when" attributes are correctly satisfied for each code
 					point in the given permutation.
 </p>
-<a name="anchor21"></a><br /><hr />
+<a name="anchor22"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6"></a><h3>6.&nbsp;
 IANA Considerations</h3>
 
 <p>This document does not specify any IANA actions.
 </p>
-<a name="anchor22"></a><br /><hr />
+<a name="anchor23"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.7"></a><h3>7.&nbsp;
 Security Considerations</h3>
@@ -725,7 +739,7 @@ Security Considerations</h3>
 <td class="author-text">Unicode Consortium, &ldquo;<a href="http://unicode.org/reports/tr42/">Unicode Character Database in XML</a>.&rdquo;</td></tr>
 </table>
 
-<a name="anchor24"></a><br /><hr />
+<a name="anchor25"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
 RelaxNG Schema</h3>
@@ -844,7 +858,7 @@ RelaxNG Schema</h3>
 
 
 </pre></div>
-<a name="anchor25"></a><br /><hr />
+<a name="anchor26"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
 Acknowledgements</h3>
@@ -855,16 +869,16 @@ Acknowledgements</h3>
 				<a class='info' href='#RFC5564'>[RFC5564]<span> (</span><span class='info'>El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman, &ldquo;Linguistic Guidelines for the Use of the Arabic Language in Internet Domains,&rdquo; February&nbsp;2010.</span><span>)</span></a> published by the Arabic-language community.
 </p>
 <p>Significant contributions on this document have been received from Francisco Arias,
-			Steve Sheng and Andrew Sullivan.
+			Nicholas Ostler, Steve Sheng and Andrew Sullivan.
 </p>
-<a name="anchor26"></a><br /><hr />
+<a name="anchor27"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C"></a><h3>Appendix C.&nbsp;
 Editorial Notes</h3>
 
 <p>This appendix to be removed prior to final publication.
 </p>
-<a name="anchor27"></a><br /><hr />
+<a name="anchor28"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C.1"></a><h3>C.1.&nbsp;
 Known Issues and Future Work</h3>
@@ -885,7 +899,7 @@ Known Issues and Future Work</h3>
 </ul><p>
 				
 </p>
-<a name="anchor28"></a><br /><hr />
+<a name="anchor29"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C.2"></a><h3>C.2.&nbsp;
 Change History</h3>

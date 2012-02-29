@@ -49,7 +49,7 @@
 		
 		<section title="Introduction">
 			
-			<t>This memo described how to use Extensible Markup Language
+			<t>This memo describes how to use Extensible Markup Language
 			(XML) to describe the list of permissible code points and variants
 			used in a zone administrator's policies.</t>
 			
@@ -57,7 +57,7 @@
 			registries - have published their policies using text and HTML based
 			formats loosely based around the format used to describe a Language Variant
 			Table in <xref target="RFC3743"/>. <xref target="RFC4290"/> further
-			posts a "Model table format" that describes a similar subset of
+			posts a "Model table format" that describes a similar set of
 			functionality.</t>
 			
 			<t>Through the first decade of IDN deployment, experience has shown
@@ -372,9 +372,29 @@
 </char>
 						]]></artwork>
 						</figure>
-							
+					
 						<t>It is not possible to specify variants for ranges.</t>
+
 					</section>
+					
+					<section title="Null variants">
+						
+						<t>To specify a null variant, which is a variant string that maps to
+							no codepoint, use the null codepoint 0000. For example,
+							to mark a string with a zero width non-joiner to the same string
+							without the zero width non-joiner:</t>
+						
+							<figure>
+								<artwork><![CDATA[
+<char cp="200c">
+  <var cp="0000"/>
+</char>
+							]]></artwork>
+							</figure>
+							
+							
+					</section>
+					
 					<section title="Conditional variants">
 						<t>At its basis, generation of variants are conditional on a specific code point or set of
 						code points. However, in some instances registries perform control based on other
@@ -612,7 +632,7 @@
 				the Joint Engineering Team published as <xref target="RFC3743"/>, and
 				<xref target="RFC5564"/> published by the Arabic-language community.</t>
 			<t>Significant contributions on this document have been received from Francisco Arias,
-			Steve Sheng and Andrew Sullivan.</t>
+			Nicholas Ostler, Steve Sheng and Andrew Sullivan.</t>
 		</section>
 		<section title="Editorial Notes">
 			<t>This appendix to be removed prior to final publication.</t>

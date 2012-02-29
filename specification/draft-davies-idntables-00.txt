@@ -77,19 +77,19 @@ Table of Contents
      3.3.  The data element . . . . . . . . . . . . . . . . . . . . .  8
        3.3.1.  Variants . . . . . . . . . . . . . . . . . . . . . . .  9
      3.4.  Example table  . . . . . . . . . . . . . . . . . . . . . . 10
-   4.  Converting to text format  . . . . . . . . . . . . . . . . . . 11
-   5.  Processing a label against a table . . . . . . . . . . . . . . 12
-     5.1.  Determining eligibility for a label  . . . . . . . . . . . 12
-     5.2.  Determining variants for a label . . . . . . . . . . . . . 12
-   6.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 13
-   7.  Security Considerations  . . . . . . . . . . . . . . . . . . . 14
-   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 15
-   Appendix A.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 16
-   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 19
-   Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 20
-     C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 20
-     C.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 20
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 21
+   4.  Converting to text format  . . . . . . . . . . . . . . . . . . 12
+   5.  Processing a label against a table . . . . . . . . . . . . . . 13
+     5.1.  Determining eligibility for a label  . . . . . . . . . . . 13
+     5.2.  Determining variants for a label . . . . . . . . . . . . . 13
+   6.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 14
+   7.  Security Considerations  . . . . . . . . . . . . . . . . . . . 15
+   8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+   Appendix A.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 17
+   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 20
+   Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 21
+     C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 21
+     C.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 21
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 22
 
 
 
@@ -115,7 +115,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 1.  Introduction
 
-   This memo described how to use Extensible Markup Language (XML) to
+   This memo describes how to use Extensible Markup Language (XML) to
    describe the list of permissible code points and variants used in a
    zone administrator's policies.
 
@@ -123,7 +123,7 @@ Internet-Draft        IDN Table XML representation         February 2012
    registries - have published their policies using text and HTML based
    formats loosely based around the format used to describe a Language
    Variant Table in [RFC3743].  [RFC4290] further posts a "Model table
-   format" that describes a similar subset of functionality.
+   format" that describes a similar set of functionality.
 
    Through the first decade of IDN deployment, experience has shown that
    these table formats are difficult to consistently implement and
@@ -488,15 +488,15 @@ Internet-Draft        IDN Table XML representation         February 2012
 
    It is not possible to specify variants for ranges.
 
-3.3.1.2.  Conditional variants
+3.3.1.2.  Null variants
 
-   At its basis, generation of variants are conditional on a specific
-   code point or set of code points.  However, in some instances
-   registries perform control based on other attributes that can not
-   solely be determined based on simple code point comparisons.  For
-   example, in some tables utilising the Arabic script, the Arabic
-   contextual form is a determinant in which variants are used.  The
-   contextual form can not be derived solely from the code point, as the
+   To specify a null variant, which is a variant string that maps to no
+   codepoint, use the null codepoint 0000.  For example, to mark a
+   string with a zero width non-joiner to the same string without the
+   zero width non-joiner:
+
+   <char cp="200c">
+     <var cp="0000"/>
 
 
 
@@ -505,6 +505,17 @@ Davies                  Expires September 1, 2012               [Page 9]
 Internet-Draft        IDN Table XML representation         February 2012
 
 
+   </char>
+
+3.3.1.3.  Conditional variants
+
+   At its basis, generation of variants are conditional on a specific
+   code point or set of code points.  However, in some instances
+   registries perform control based on other attributes that can not
+   solely be determined based on simple code point comparisons.  For
+   example, in some tables utilising the Arabic script, the Arabic
+   contextual form is a determinant in which variants are used.  The
+   contextual form can not be derived solely from the code point, as the
    code point is the same for the various forms.
 
    The IDN table provides for conditioning generation variants on
@@ -534,6 +545,22 @@ Internet-Draft        IDN Table XML representation         February 2012
 
    A sample complete XML IDN table is as follows.
 
+
+
+
+
+
+
+
+
+
+
+
+Davies                  Expires September 1, 2012              [Page 10]
+
+Internet-Draft        IDN Table XML representation         February 2012
+
+
        <?xml version="1.0"?>
        <idntable xmlns="XXX">
            <meta>
@@ -556,7 +583,36 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                  Expires September 1, 2012              [Page 11]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -612,7 +668,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 11]
+Davies                  Expires September 1, 2012              [Page 12]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -668,7 +724,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 12]
+Davies                  Expires September 1, 2012              [Page 13]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -724,7 +780,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 13]
+Davies                  Expires September 1, 2012              [Page 14]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -780,7 +836,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 14]
+Davies                  Expires September 1, 2012              [Page 15]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -836,7 +892,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 15]
+Davies                  Expires September 1, 2012              [Page 16]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -892,7 +948,7 @@ Appendix A.  RelaxNG Schema
 
 
 
-Davies                  Expires September 1, 2012              [Page 16]
+Davies                  Expires September 1, 2012              [Page 17]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -948,7 +1004,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 17]
+Davies                  Expires September 1, 2012              [Page 18]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -1004,7 +1060,7 @@ Internet-Draft        IDN Table XML representation         February 2012
 
 
 
-Davies                  Expires September 1, 2012              [Page 18]
+Davies                  Expires September 1, 2012              [Page 19]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -1017,7 +1073,7 @@ Appendix B.  Acknowledgements
    the Arabic-language community.
 
    Significant contributions on this document have been received from
-   Francisco Arias, Steve Sheng and Andrew Sullivan.
+   Francisco Arias, Nicholas Ostler, Steve Sheng and Andrew Sullivan.
 
 
 
@@ -1060,7 +1116,7 @@ Appendix B.  Acknowledgements
 
 
 
-Davies                  Expires September 1, 2012              [Page 19]
+Davies                  Expires September 1, 2012              [Page 20]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -1116,7 +1172,7 @@ C.2.  Change History
 
 
 
-Davies                  Expires September 1, 2012              [Page 20]
+Davies                  Expires September 1, 2012              [Page 21]
 
 Internet-Draft        IDN Table XML representation         February 2012
 
@@ -1172,5 +1228,5 @@ Author's Address
 
 
 
-Davies                  Expires September 1, 2012              [Page 21]
+Davies                  Expires September 1, 2012              [Page 22]
 
