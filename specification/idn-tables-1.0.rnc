@@ -2,8 +2,7 @@ default namespace = "http://www.iana.org/idn-tables/0.1"
 
 # SIMPLE TYPES
 
-language-tag = text       # ISO language tag (e.g. "de")
-script-tag = text         # ISO script tag (e.g. "Latn")
+language-tag = text       # RFC 5646 language tag (e.g. "de", "Latn", etc.)
 domain-name = text        # Domain name
 code-point = text         # A single codepoint, expressed as a hexidecimal number
 variant-condition = text  # A condition for applying the variant (TBD)
@@ -58,7 +57,6 @@ meta-section = element meta {
 		element version { text }? |
 		element date { text }? |
 		element language { language-tag }* |
-		element script { script-tag }* |
 		element domain { domain-name }* |
 		element description {
 			attribute type { text },

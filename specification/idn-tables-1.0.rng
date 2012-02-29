@@ -4,11 +4,7 @@
   <define name="language-tag">
     <text/>
   </define>
-  <!-- ISO language tag (e.g. "de") -->
-  <define name="script-tag">
-    <text/>
-  </define>
-  <!-- ISO script tag (e.g. "Latn") -->
+  <!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) -->
   <define name="domain-name">
     <text/>
   </define>
@@ -20,6 +16,7 @@
   <define name="variant-condition">
     <text/>
   </define>
+  <!-- A condition for applying the variant (TBD) -->
   <!-- STRUCTURES -->
   <!-- Representation of a single codepoint -->
   <define name="point-single">
@@ -109,11 +106,6 @@
           <zeroOrMore>
             <element name="language">
               <ref name="language-tag"/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="script">
-              <ref name="script-tag"/>
             </element>
           </zeroOrMore>
           <zeroOrMore>
