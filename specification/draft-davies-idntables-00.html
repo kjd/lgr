@@ -445,16 +445,17 @@ The language element</h3>
 					multiple language elements for a table if the table
 					spans multiple languages and/or scripts.
 </p>
-<p>Example:
+<p>Example of an English language table:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
    &lt;language&gt;en&lt;/language&gt;
 </pre></div>
 <p>If the table applies to a specific script, rather than
-						a language, an <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>
-						script tag should be used. For example, for a
+						a language, the "und" language tag should be used followed
+						by the relevant <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>
+						script subtag. For example, for a
 						Cyrillic script table:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-   &lt;language&gt;Cyrl&lt;/language&gt;
+   &lt;language&gt;und-Cyrl&lt;/language&gt;
 </pre></div>
 <a name="anchor9"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>

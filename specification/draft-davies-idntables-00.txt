@@ -366,15 +366,15 @@ Internet-Draft        IDN Table XML representation         February 2012
    language.  There may be multiple language elements for a table if the
    table spans multiple languages and/or scripts.
 
-   Example:
+   Example of an English language table:
 
       <language>en</language>
 
-   If the table applies to a specific script, rather than a language, an
-   [RFC5646] script tag should be used.  For example, for a Cyrillic
-   script table:
+   If the table applies to a specific script, rather than a language,
+   the "und" language tag should be used followed by the relevant
+   [RFC5646] script subtag.  For example, for a Cyrillic script table:
 
-      <language>Cyrl</language>
+      <language>und-Cyrl</language>
 
 3.2.4.  The domain element
 
