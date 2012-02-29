@@ -1,14 +1,34 @@
 import unittest
 import idntables
+from idntables.codepoints import InvalidCodepoint
 
 class IDNTablesTestCase(unittest.TestCase):
 
-		# Tests
-		# 'a'; 'a-z', 'U+0061', 'U+0061-U+0074'
-		# fail: '-z', 'z-', 'U+XXXX'
 
-		
+	def testAdd(self):
+
+		i = idntables.IDNTable()
+		i.add('a')
+		i.add('a-z')
+		i.add('U+0061')
+		i.add('U+0061-U+0074')
+		self.assertRaises(idntables.codepoints.InvalidCodepoint, i.add, '-z')
+		self.assertRaises(idntables.codepoints.InvalidCodepoint, i.add, 'z-')
+		self.assertRaises(idntables.codepoints.InvalidCodepoint, i.add, 'U+XXXX')
+
+	def testContains(self):
+
+		i = idntables.IDNTable()
+		i.add('a-z')
+		self.assertTrue('b' in i)
+		self.assertTrue('ab' in i)
+		self.assertFalse('0' in i)
+		self.assertFalse('xn--4ca' in i)
+		i.add('\u00e4')
+		self.assertTrue('xn--4ca' in i)
+
 	def testTableLength(self):
+
 		i = idntables.IDNTable()
 		self.assertEqual(len(i), 0)
 		i.add('a')
@@ -26,4 +46,4 @@ class IDNTablesTestCase(unittest.TestCase):
 	#
 	
 if __name__ == '__main__':
-    unittest.main()
+	unittest.main()
