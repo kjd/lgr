@@ -208,9 +208,7 @@
 					major and minor changes to the table. For example,
 					"1.0" would be the first major release, "1.1" would be
 					a minor update to that, and "2.0" would represent a major
-					revision. It is important to note this style of versioning
-					can not be represented in text format and remain in
-					compliance with the JET table specification.</t>
+					revision.</t>
 					
 				</section>
 				<section title="The date element">
@@ -451,21 +449,6 @@
 				</figure>
 			</section>
 		</section>
-		<section title="Converting to text format">
-			<t>Tables represented using this XML format can be converted to the format described in the JET Guidelines
-			for IDN, with some minor caveats:</t>
-			<t>
-				<list style="symbols">
-					<t>Version numbers not expressed as integers will not satisfy the ABNF formatting for JETLVT.</t>
-					<t>Much of the additional meta data can not be expressed in the text format (although can be supplied
-					as comments in the text file).</t>
-					<t>The JET format only allows for variant classes of "preferred" and "not-preferred". Other
-					distinctions will be lost.</t>
-				</list>
-			</t>
-			<t>Tables similarly can be converted to the format described in <xref target="RFC4290"/> with the same caveats
-		as the JET Guidelines, and additionally the inability to classify variants into groups such as "preferred".</t>
-		</section>
 		
 		<section title="Processing a label against a table">
 			
@@ -490,6 +473,43 @@
 			</section>
 
 		</section>
+		
+		
+		<section title="Conversion between other formats">
+			
+			<section title="RFC 3743 Language Variant Table">
+			
+			<t>All attributes can be retained in conversion from an <xref target="RFC3743"/> language variant table to
+			this XML format.</t>
+			
+			<t>This XML format can be converted to the format described in <xref target="RFC3743"/>, 
+			with the following caveats:</t>
+			<t>
+				<list style="symbols">
+					<t>Version numbers not expressed as integers will not satisfy the ABNF formatting for <xref target="RFC3743"/>.</t>
+					<t>Much of the additional meta data can not be expressed in the text format (although can be supplied
+					as comments in the text file).</t>
+					<t>The <xref target="RFC3743"/> format only allows for two variant classes, those that are preferred and those
+					that are regular. Other distinctions will be lost.</t>
+					<t>No ability to retain conditional variants.</t>
+				</list>
+			</t>
+			
+			</section>
+		
+			<section title="RFC 4290 Model Table Format">
+			
+			<t>All attributes can be retained in conversion from the <xref target="RFC4290"/> model table format to
+			this XML format.</t>
+
+			<t>Tables similarly can be converted to the format described in <xref target="RFC4290"/> with the same caveats
+			as the <xref target="RFC3743"/> format, and additionally the inability to classify variants into groups such as
+			"preferred".</t>
+		
+			</section>
+		
+		</section>
+		
 		
 		<section title="IANA Considerations">
 			<t>This document does not specify any IANA actions.</t>
@@ -631,11 +651,12 @@
 				parties, most significantly that of the
 				the Joint Engineering Team published as <xref target="RFC3743"/>, and
 				<xref target="RFC5564"/> published by the Arabic-language community.</t>
-			<t>Significant contributions on this document have been received from Francisco Arias,
+			<t>Contributions that have helped shape this document have been contributed by Francisco Arias,
 			Nicholas Ostler, Steve Sheng and Andrew Sullivan.</t>
 		</section>
 		<section title="Editorial Notes">
 			<t>This appendix to be removed prior to final publication.</t>
+
 			<section title="Known Issues and Future Work">
 
 				<t>
@@ -648,6 +669,13 @@
 				</list>
 				</t>				
 
+			</section>
+
+			<section title="Sample tables and running code">
+			
+				<t>Some sample tables using this format, as well as a basic implementation of this specification,
+					is posted at https://github.com/kjd/idntables</t>
+			
 			</section>
 			
 			<section title="Change History">

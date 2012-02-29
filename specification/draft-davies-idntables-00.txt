@@ -77,10 +77,12 @@ Table of Contents
      3.3.  The data element . . . . . . . . . . . . . . . . . . . . .  8
        3.3.1.  Variants . . . . . . . . . . . . . . . . . . . . . . .  9
      3.4.  Example table  . . . . . . . . . . . . . . . . . . . . . . 10
-   4.  Converting to text format  . . . . . . . . . . . . . . . . . . 12
-   5.  Processing a label against a table . . . . . . . . . . . . . . 13
-     5.1.  Determining eligibility for a label  . . . . . . . . . . . 13
-     5.2.  Determining variants for a label . . . . . . . . . . . . . 13
+   4.  Processing a label against a table . . . . . . . . . . . . . . 12
+     4.1.  Determining eligibility for a label  . . . . . . . . . . . 12
+     4.2.  Determining variants for a label . . . . . . . . . . . . . 12
+   5.  Conversion between other formats . . . . . . . . . . . . . . . 13
+     5.1.  RFC 3743 Language Variant Table  . . . . . . . . . . . . . 13
+     5.2.  RFC 4290 Model Table Format  . . . . . . . . . . . . . . . 13
    6.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 14
    7.  Security Considerations  . . . . . . . . . . . . . . . . . . . 15
    8.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 16
@@ -88,11 +90,9 @@ Table of Contents
    Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 20
    Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 21
      C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 21
-     C.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 21
+     C.2.  Sample tables and running code . . . . . . . . . . . . . . 21
+     C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 21
    Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 22
-
-
-
 
 
 
@@ -343,9 +343,7 @@ Internet-Draft        IDN Table XML representation         February 2012
    decimal numbers are used to represent major and minor changes to the
    table.  For example, "1.0" would be the first major release, "1.1"
    would be a minor update to that, and "2.0" would represent a major
-   revision.  It is important to note this style of versioning can not
-   be represented in text format and remain in compliance with the JET
-   table specification.
+   revision.
 
 3.2.2.  The date element
 
@@ -385,6 +383,8 @@ Internet-Draft        IDN Table XML representation         February 2012
 
    There may be multiple <domain> tags used to reflect a list of
    domains.
+
+
 
 
 
@@ -617,26 +617,26 @@ Davies                  Expires September 1, 2012              [Page 11]
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-4.  Converting to text format
+4.  Processing a label against a table
 
-   Tables represented using this XML format can be converted to the
-   format described in the JET Guidelines for IDN, with some minor
-   caveats:
+4.1.  Determining eligibility for a label
 
-   o  Version numbers not expressed as integers will not satisfy the
-      ABNF formatting for JETLVT.
+   In order to use a table to test a specific IDN table for membership
+   in the table, a consumer of an IDN table must iterate through each
+   code point within a given U-label, and test that each code point is a
+   member of the IDN table.  If any code point is not a member of the
+   IDN Table, it shall be deemed as not eligible in accordance with the
+   table.
 
-   o  Much of the additional meta data can not be expressed in the text
-      format (although can be supplied as comments in the text file).
+   A code point is deemed a member of the table when it is listed with
+   the <char> element, and all necessary condition listed in "when"
+   attributes are correctly satisfied.
 
-   o  The JET format only allows for variant classes of "preferred" and
-      "not-preferred".  Other distinctions will be lost.
+4.2.  Determining variants for a label
 
-   Tables similarly can be converted to the format described in
-   [RFC4290] with the same caveats as the JET Guidelines, and
-   additionally the inability to classify variants into groups such as
-   "preferred".
-
+   For a given eligible label, the set of variants is deemed to be each
+   possible permutation of <var> elements, whereby all "when" attributes
+   are correctly satisfied for each code point in the given permutation.
 
 
 
@@ -673,37 +673,37 @@ Davies                  Expires September 1, 2012              [Page 12]
 Internet-Draft        IDN Table XML representation         February 2012
 
 
-5.  Processing a label against a table
+5.  Conversion between other formats
 
-5.1.  Determining eligibility for a label
+5.1.  RFC 3743 Language Variant Table
 
-   In order to use a table to test a specific IDN table for membership
-   in the table, a consumer of an IDN table must iterate through each
-   code point within a given U-label, and test that each code point is a
-   member of the IDN table.  If any code point is not a member of the
-   IDN Table, it shall be deemed as not eligible in accordance with the
-   table.
+   All attributes can be retained in conversion from an [RFC3743]
+   language variant table to this XML format.
 
-   A code point is deemed a member of the table when it is listed with
-   the <char> element, and all necessary condition listed in "when"
-   attributes are correctly satisfied.
+   This XML format can be converted to the format described in
+   [RFC3743], with the following caveats:
 
-5.2.  Determining variants for a label
+   o  Version numbers not expressed as integers will not satisfy the
+      ABNF formatting for [RFC3743].
 
-   For a given eligible label, the set of variants is deemed to be each
-   possible permutation of <var> elements, whereby all "when" attributes
-   are correctly satisfied for each code point in the given permutation.
+   o  Much of the additional meta data can not be expressed in the text
+      format (although can be supplied as comments in the text file).
 
+   o  The [RFC3743] format only allows for two variant classes, those
+      that are preferred and those that are regular.  Other distinctions
+      will be lost.
 
+   o  No ability to retain conditional variants.
 
+5.2.  RFC 4290 Model Table Format
 
+   All attributes can be retained in conversion from the [RFC4290] model
+   table format to this XML format.
 
-
-
-
-
-
-
+   Tables similarly can be converted to the format described in
+   [RFC4290] with the same caveats as the [RFC3743] format, and
+   additionally the inability to classify variants into groups such as
+   "preferred".
 
 
 
@@ -1072,9 +1072,9 @@ Appendix B.  Acknowledgements
    Engineering Team published as [RFC3743], and [RFC5564] published by
    the Arabic-language community.
 
-   Significant contributions on this document have been received from
-   Francisco Arias, Nicholas Ostler, Steve Sheng and Andrew Sullivan.
-
+   Contributions that have helped shape this document have been
+   contributed by Francisco Arias, Nicholas Ostler, Steve Sheng and
+   Andrew Sullivan.
 
 
 
@@ -1153,15 +1153,15 @@ C.1.  Known Issues and Future Work
    o  A more formal step-wise description of how variants are computed
       needs to be supplied.
 
-C.2.  Change History
+C.2.  Sample tables and running code
+
+   Some sample tables using this format, as well as a basic
+   implementation of this specification, is posted at
+   https://github.com/kjd/idntables
+
+C.3.  Change History
 
    -00  Initial draft.
-
-
-
-
-
-
 
 
 
