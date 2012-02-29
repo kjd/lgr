@@ -139,7 +139,7 @@ class IDNTable(object):
 		# range. If a codepoint has a variant, it is removed from a range.
 		
 		codepoint_list = sorted(self._codepoints)
-		last_write = 1
+		last_write = -1
 		
 		for i in range(0, len(codepoint_list)):
 			
@@ -149,7 +149,7 @@ class IDNTable(object):
 				if codepoint_list[i] == codepoint_list[i+1]-1:
 					if not has_variant:
 						continue
-						
+
 			codepoint_range = codepoint_list[last_write+1:i+1]
 			codepoint_single = None
 			if has_variant:
@@ -282,35 +282,29 @@ class IDNTable(object):
 
 	def parse(self, data, xmlns=xml_namespace):
 
+		ns = _XMLNamespace(xmlns)
 		xmlobj = etree.XML(data)
 		
-		for char in self._findall(xmlobj, 'data/char', xmlns):
+		for char in xmlobj.findall(ns('data/char')):
 			self.add(char.get('cp'))
-			for variant in self._findall(char, 'var', xmlns):
+			for variant in char.findall(ns('var')):
 				self.addvariant(char.get('cp'), variant.get('cp'), condition=variant.get('when'), category=variant.get('type'))
-		for char_range in self._findall(xmlobj, 'data/range', xmlns):
+		for char_range in xmlobj.findall(ns('data/range')):
 			self.addrange(char_range.get('first-cp'), char_range.get('last-cp'))
 			
-		for element in self._findall(xmlobj, 'meta/data', xmlns):
+		for element in xmlobj.findall(ns('meta/data')):
 			self.meta.date = element.text
-		for element in self._findall(xmlobj, 'meta/version', xmlns):
+		for element in xmlobj.findall(ns('meta/version')):
 			self.meta.version = element.text
-		for element in self._findall(xmlobj, 'meta/domain', xmlns):
+		for element in xmlobj.findall(ns('meta/domain')):
 			self.meta.domain.append(element.text)
-		for element in self._findall(xmlobj, 'meta/language', xmlns):
+		for element in xmlobj.findall(ns('meta/language')):
 			self.meta.language.append(element.text)
-		for element in self._findall(xmlobj, 'meta/script', xmlns):
+		for element in xmlobj.findall(ns('meta/script')):
 			self.meta.script.append(element.text)
-		for element in self._findall(xmlobj, 'meta/description', xmlns):
+		for element in xmlobj.findall(ns('meta/description')):
 			self.meta.description_type = element.get('type')
 			self.meta.description = element.text
-
-
-	def _findall(self, obj, path, xmlns):
-		
-		elements = path.split('/')
-		path = "/".join(["{%s}%s" % (xmlns, e) for e in elements])
-		return obj.findall(path)
 
 
 	def save(self, filename):
@@ -445,16 +439,17 @@ def load(filename):
 
 def _xml_indent(element, level=0):
 
+	subelement = None
 	i = "\n" + level * "  "
 	if len(element):
 		if not element.text or not element.text.strip():
 			element.text = i + "  "
 		for subelement in element:
 			_xml_indent(subelement, level+1)
-			if not subelement.tail or not subelement.tail.strip():
-				subelement.tail = i + "  "
-		if not subelement.tail or not subelement.tail.strip():
+		if subelement is not None and not subelement.tail or not subelement.tail.strip():
 			subelement.tail = i
+		if not element.tail or not element.tail.strip():
+			element.tail = i
 	else:
 		if level and (not element.tail or not element.tail.strip()):
 			element.tail = i
@@ -466,3 +461,14 @@ def _text_element(name, value, attribs=None):
 	element.text = value
 	return element
 
+
+class _XMLNamespace:
+
+	def __init__(self, uri):
+		self.uri = uri
+
+	def __getattr__(self, tag):
+		return "{%s}%s" % (self.uri, tag)
+
+	def __call__(self, path):
+		return "/".join(getattr(self, tag) for tag in path.split("/"))
