@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <idntable xmlns="http://www.iana.org/idn-tables/0.1">
   <meta>
-    <script>Latn</script>
+    <language>Latn</language>
     <domain>cl</domain>
     <date>2005-09-21</date>
     <version>1.0</version>
