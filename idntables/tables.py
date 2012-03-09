@@ -240,12 +240,6 @@ class IDNTable(object):
 		for entry in self.entries():
 			data.append(entry.xml_element())
 
-		if self.meta.script:
-			if isinstance(self.meta.script, basestring):
-				self.meta.script = [self.meta.script]
-			for script in self.meta.script:
-				meta.append(_text_element('script', script))
-	
 		if self.meta.language:
 			if isinstance(self.meta.language, basestring):
 				self.meta.language = [self.meta.language]
@@ -300,8 +294,6 @@ class IDNTable(object):
 			self.meta.domain.append(element.text)
 		for element in xmlobj.findall(ns('meta/language')):
 			self.meta.language.append(element.text)
-		for element in xmlobj.findall(ns('meta/script')):
-			self.meta.script.append(element.text)
 		for element in xmlobj.findall(ns('meta/description')):
 			self.meta.description_type = element.get('type')
 			self.meta.description = element.text
@@ -338,7 +330,6 @@ class IDNTableMetadata(object):
 		
 		self.version = None
 		self._date = None
-		self.script = []
 		self.language = []
 		self.domain = []
 		self.description = None
