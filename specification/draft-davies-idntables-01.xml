@@ -7,7 +7,7 @@
 <!ENTITY rfc4290 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4290.xml">
 <!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
 ]>
-<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-00">
+<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-01">
 	<?rfc toc="yes" ?>
 	<?rfc symrefs="yes" ?>
 	<?rfc sortrefs="yes"?>
@@ -138,13 +138,19 @@
 		
 		<section title="IDN Table XML Format">
 			
+			<section title="Namespace">
+				
+				<t>The XML Namespace URI is [TBD].</t>
+			
+			</section>
+			
 			<section title="Basic structure">
 				
 				<t>The basic XML framework of the document is as follows:</t>
 				<figure>
 					<artwork><![CDATA[
     <?xml version="1.0"?>
-    <idntable>
+    <idntable xmlns="http://www.iana.org/idn-tables/0.1">
         ...
     </idntable>
     ]]></artwork>
@@ -160,7 +166,7 @@
 				<figure>
 					<artwork><![CDATA[
     <?xml version="1.0"?>
-    <idntable>
+    <idntable xmlns="http://www.iana.org/idn-tables/0.1">
         <meta>
             ...
         </meta>
@@ -283,7 +289,7 @@
 					as with references), and how it has been applied.</t>
 					
 					<t>The element has an optional "type" attribute, which
-					refers to the MIME-type of the enclosed data. If the
+					refers to the media type of the enclosed data. If the
 					description lacks a type field, it will be assumed to be
 					plain text.</t>
 					
@@ -296,7 +302,7 @@
 					<t>The "type" attribute may be used to specify the encoding
 					within description element. The attribute should be a valid
 					MIME type. If supplied, it will be assumed the contents
-					is a single CDATA element of that encoding. Typical types
+					is content of that encoding. Typical types
 					would be "text/plain" or "text/html". "text/plain" will
 					be assumed if no type attribute is specified.</t>
 					
@@ -378,14 +384,14 @@
 					<section title="Null variants">
 						
 						<t>To specify a null variant, which is a variant string that maps to
-							no codepoint, use the null codepoint 0000. For example,
+							no codepoint, use an empty cp attribute. For example,
 							to mark a string with a zero width non-joiner to the same string
 							without the zero width non-joiner:</t>
 						
 							<figure>
 								<artwork><![CDATA[
 <char cp="200c">
-  <var cp="0000"/>
+  <var cp=""/>
 </char>
 							]]></artwork>
 							</figure>
@@ -427,25 +433,27 @@
 			<section title="Example table">
 				<t>A sample complete XML IDN table is as follows.</t>
 				<figure>
-					<artwork><![CDATA[
-    <?xml version="1.0"?>
-    <idntable xmlns="XXX">
-        <meta>
-             <version>1</version>
-             <date>2010-01-01</date>
-             <language>sv</language>
-             <domain>example</domain>
-             <description type="text/html">
+					<artwork>
+    &lt;?xml version="1.0"?&gt;
+    &lt;idntable xmlns="http://www.iana.org/idn-tables/0.1"&gt;
+        &lt;meta&gt;
+             &lt;version&gt;1&lt;/version&gt;
+             &lt;date&gt;2010-01-01&lt;/date&gt;
+             &lt;language&gt;sv&lt;/language&gt;
+             &lt;domain&gt;example&lt;/domain&gt;
+             &lt;description type="text/html"&gt;
+             &lt;![CDATA[
                  This language table was developed with the 
-                 <a href="http://swedish.example/">Swedish 
-                 examples institute</a>.
-             </description>
-        </meta>
-        <data>
-            <range first-cp="0061" last-cp="007A"/>
-            <char cp="00E4" />
-        </data>
-    </idntable>]]></artwork>
+                 &lt;a href="http://swedish.example/"&gt;Swedish 
+                 examples institute&lt;/a&gt;.
+             ]]&gt;
+             &lt;/description&gt;
+        &lt;/meta&gt;
+        &lt;data&gt;
+            &lt;range first-cp="0061" last-cp="007A"/&gt;
+            &lt;char cp="00E4"/&gt;
+        &lt;/data&gt;
+    &lt;/idntable&gt;</artwork>
 				</figure>
 			</section>
 		</section>
@@ -652,7 +660,7 @@
 				the Joint Engineering Team published as <xref target="RFC3743"/>, and
 				<xref target="RFC5564"/> published by the Arabic-language community.</t>
 			<t>Contributions that have helped shape this document have been contributed by Francisco Arias,
-			Nicholas Ostler, Steve Sheng and Andrew Sullivan.</t>
+			Mark Davis, Nicholas Ostler, Thomas Roessler, Steve Sheng and Andrew Sullivan.</t>
 		</section>
 		<section title="Editorial Notes">
 			<t>This appendix to be removed prior to final publication.</t>
