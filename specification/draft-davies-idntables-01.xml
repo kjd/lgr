@@ -307,17 +307,6 @@
 					be assumed if no type attribute is specified.</t>
 					
 				</section>
-				<section title="The variant-classes element">
-					
-					<t>Consumers of the IDN table may classify the generated
-					variants into different classes using the class attribute,
-					discussed below. This class attribute allows the registry
-					to apply different policy (for example, whether the block
-					or register specific generated strings). The
-					variant-classes block provides human-readable explanations
-					of the meaning of the classes used in the IDN table.</t>
-					
-				</section>
 			</section>
 			<section title="The data element">
 				
@@ -329,14 +318,15 @@
 				<t>The data may use the "char" and "range" elements to specify
 				code points, and code ranges.</t>
 				
-				<t>Discrete permissable code points may be stipulated with a
-				"char" element, e.g.</t>
+				<t>Discrete permissable code points or code point sequences may 
+				be stipulated with a "char" element, e.g.</t>
 				
 				<figure>
 					<artwork><![CDATA[
     <char cp="002D"/>
 				]]></artwork>
 				</figure>
+				
 				<t>Ranges of permissable code points may be stipulated with a
 				"range" element, e.g.</t>
 				<figure>
@@ -352,13 +342,30 @@
 				including the element and attribute names, mirror this document
 				where practical and reasonable to do so.</t>
 				
+				<section title="Sequences">
+				<t>A sequence of two or more code points may be specified in a table,
+				when the exact sequence of code points is required to occur in order
+				for the consituent elements to be eligible. This approach allows
+				representation of policy where a specific code point is only eligible
+				when preceded or followed by another code point. For example, in
+				order to represent the eligibility of the MIDDLE DOT (U+00B7)
+				only when both preceded and followed by the LATIN SMALL LETTER L
+				(U+006C):</t>
+
+				<figure>
+				<artwork><![CDATA[
+<char cp="006C 00B7 006C"/>
+]]></artwork>
+				</figure>
+			</section>
+
 				<section title="Variants">
 					<t>While most tables typically only determine code point eligibility, others additionally specify
 					a mapping of code points to other code points, known as "variants". What constitutes a variant is
 					a matter of policy, and varies for each implementation.</t>
 					<section title="Basic variants">
 						<t>Variants are specified as one of more children of a "char" element.</t>
-						<t>For example, to map "v" as a variant of "u":</t>
+						<t>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U (U+0075):</t>
 						<figure>
 							<artwork><![CDATA[
 <char cp="0075">
@@ -367,8 +374,10 @@
 									]]></artwork>
 						</figure>
 						<t>A sequence of multiple code points can be specified as a variant
-							of a single code point. For example, the sequence of "o" then "e" 
-							can be specified as a variant for an "o with umlaut" (U+00F6) as follows:</t>
+							of a single code point. For example, the sequence of LATIN SMALL
+							LETTER O (U+006F) then LATIN SMALL LETTER E (U+0065) 
+							can be specified as a variant for an LATIN SMALL LETTER O WITH
+							DIAERESIS (U+00F6) as follows:</t>
 						<figure>
 							<artwork><![CDATA[
 <char cp="00F6">
@@ -376,6 +385,18 @@
 </char>
 						]]></artwork>
 						</figure>
+						
+						<t>Variants are specified in only on direction. For symmetric variants,
+						the inverse of the variant must be explicitly specified:</t>
+
+						<figure>
+							<artwork><![CDATA[
+<char cp="006F 0065">
+  <var cp="00F6"/>
+</char>
+						]]></artwork>
+						</figure>
+						
 					
 						<t>It is not possible to specify variants for ranges.</t>
 
@@ -417,7 +438,7 @@
 								<t hangText="arabic-final">Based on context, the code point would be presented in its Arabic Final form.</t>
 							</list>
 						</t>
-						<t>For example, to mark U+0673 as a variant of U+0625, but only when it appears in
+						<t>For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW (U+0625), but only when it appears in
 						isolated or final forms:</t>
 						<figure>
 							<artwork><![CDATA[
@@ -669,8 +690,6 @@
 
 				<t>
 				<list style="symbols">
-					<t>The text does not currently provide a mechanism for deriving variants based on a sequence of two or more code points. Such a mechanism would be required to perform an inverse mapping from one provided in this document, namely, mapping the sequence of "o" and "e" to an "o with umlaut"</t>
-					<t>A mechanism for a specific code point only being eligible when preceded or followed by a specific sequence of characters is not provided. Such a mechanism is needed to support the contextual rule required by the .CAT top-level domain, which supports the middle dot (U+00B7) only when both preceded and followed by the letter "l" (U+006C).</t>
 					<t>An optional mechanism for explicitly nominating the registry action associated with a computed variant could be added. For example, an "action" attribute to the &lt;var&gt; element could specify one of the following: "allocate", "block", "delegate", "mirror" or "withhold". Each of these actions would need to be formally defined.</t>
 					<t>The tables may benefit from a unique identifier, such as an "id" attribute on the &lt;idntables&gt; element.</t>
 					<t>A more formal step-wise description of how variants are computed needs to be supplied.</t>

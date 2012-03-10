@@ -74,10 +74,10 @@ Table of Contents
        3.3.3.  The language element . . . . . . . . . . . . . . . . .  7
        3.3.4.  The domain element . . . . . . . . . . . . . . . . . .  7
        3.3.5.  The description element  . . . . . . . . . . . . . . .  8
-       3.3.6.  The variant-classes element  . . . . . . . . . . . . .  8
      3.4.  The data element . . . . . . . . . . . . . . . . . . . . .  8
-       3.4.1.  Variants . . . . . . . . . . . . . . . . . . . . . . .  9
-     3.5.  Example table  . . . . . . . . . . . . . . . . . . . . . . 10
+       3.4.1.  Sequences  . . . . . . . . . . . . . . . . . . . . . .  9
+       3.4.2.  Variants . . . . . . . . . . . . . . . . . . . . . . .  9
+     3.5.  Example table  . . . . . . . . . . . . . . . . . . . . . . 11
    4.  Processing a label against a table . . . . . . . . . . . . . . 12
      4.1.  Determining eligibility for a label  . . . . . . . . . . . 12
      4.2.  Determining variants for a label . . . . . . . . . . . . . 12
@@ -419,15 +419,6 @@ Internet-Draft        IDN Table XML representation            March 2012
    encoding.  Typical types would be "text/plain" or "text/html". "text/
    plain" will be assumed if no type attribute is specified.
 
-3.3.6.  The variant-classes element
-
-   Consumers of the IDN table may classify the generated variants into
-   different classes using the class attribute, discussed below.  This
-   class attribute allows the registry to apply different policy (for
-   example, whether the block or register specific generated strings).
-   The variant-classes block provides human-readable explanations of the
-   meaning of the classes used in the IDN table.
-
 3.4.  The data element
 
    The "data" element contains the code point data the comprises the
@@ -438,16 +429,8 @@ Internet-Draft        IDN Table XML representation            March 2012
    The data may use the "char" and "range" elements to specify code
    points, and code ranges.
 
-   Discrete permissable code points may be stipulated with a "char"
-   element, e.g.
-
-
-
-
-Davies                 Expires September 11, 2012               [Page 8]
-
-Internet-Draft        IDN Table XML representation            March 2012
-
+   Discrete permissable code points or code point sequences may be
+   stipulated with a "char" element, e.g.
 
        <char cp="002D"/>
 
@@ -458,44 +441,61 @@ Internet-Draft        IDN Table XML representation            March 2012
 
    Codepoints must be expressed in hexadecimal, i.e. according to the
    standard Unicode convention without the prefix "U+".  The rationale
+
+
+
+Davies                 Expires September 11, 2012               [Page 8]
+
+Internet-Draft        IDN Table XML representation            March 2012
+
+
    for not allowing other encoding formats, including native Unicode
    encoding in XML, is explored in [UAX42].  The XML conventions used in
    this format, including the element and attribute names, mirror this
    document where practical and reasonable to do so.
 
-3.4.1.  Variants
+3.4.1.  Sequences
+
+   A sequence of two or more code points may be specified in a table,
+   when the exact sequence of code points is required to occur in order
+   for the consituent elements to be eligible.  This approach allows
+   representation of policy where a specific code point is only eligible
+   when preceded or followed by another code point.  For example, in
+   order to represent the eligibility of the MIDDLE DOT (U+00B7) only
+   when both preceded and followed by the LATIN SMALL LETTER L (U+006C):
+
+   <char cp="006C 00B7 006C"/>
+
+3.4.2.  Variants
 
    While most tables typically only determine code point eligibility,
    others additionally specify a mapping of code points to other code
    points, known as "variants".  What constitutes a variant is a matter
    of policy, and varies for each implementation.
 
-3.4.1.1.  Basic variants
+3.4.2.1.  Basic variants
 
    Variants are specified as one of more children of a "char" element.
 
-   For example, to map "v" as a variant of "u":
+   For example, to map LATIN SMALL LETTER V (U+0076) as a variant of
+   LATIN SMALL LETTER U (U+0075):
 
    <char cp="0075">
      <var cp="0076"/>
    </char>
 
    A sequence of multiple code points can be specified as a variant of a
-   single code point.  For example, the sequence of "o" then "e" can be
-   specified as a variant for an "o with umlaut" (U+00F6) as follows:
+   single code point.  For example, the sequence of LATIN SMALL LETTER O
+   (U+006F) then LATIN SMALL LETTER E (U+0065) can be specified as a
+   variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as
+   follows:
 
    <char cp="00F6">
      <var cp="006F 0065"/>
    </char>
 
-   It is not possible to specify variants for ranges.
-
-3.4.1.2.  Null variants
-
-   To specify a null variant, which is a variant string that maps to no
-   codepoint, use an empty cp attribute.  For example, to mark a string
-   with a zero width non-joiner to the same string without the zero
-   width non-joiner:
+   Variants are specified in only on direction.  For symmetric variants,
+   the inverse of the variant must be explicitly specified:
 
 
 
@@ -505,11 +505,24 @@ Davies                 Expires September 11, 2012               [Page 9]
 Internet-Draft        IDN Table XML representation            March 2012
 
 
+   <char cp="006F 0065">
+     <var cp="00F6"/>
+   </char>
+
+   It is not possible to specify variants for ranges.
+
+3.4.2.2.  Null variants
+
+   To specify a null variant, which is a variant string that maps to no
+   codepoint, use an empty cp attribute.  For example, to mark a string
+   with a zero width non-joiner to the same string without the zero
+   width non-joiner:
+
    <char cp="200c">
      <var cp=""/>
    </char>
 
-3.4.1.3.  Conditional variants
+3.4.2.3.  Conditional variants
 
    At its basis, generation of variants are conditional on a specific
    code point or set of code points.  However, in some instances
@@ -535,22 +548,9 @@ Internet-Draft        IDN Table XML representation            March 2012
    arabic-final  Based on context, the code point would be presented in
         its Arabic Final form.
 
-   For example, to mark U+0673 as a variant of U+0625, but only when it
-   appears in isolated or final forms:
-
-   <char cp="0625">
-     <var cp="0673" when="arabic-isolated"/>
-     <var cp="0673" when="arabic-final"/>
-   </char>
-
-3.5.  Example table
-
-   A sample complete XML IDN table is as follows.
-
-
-
-
-
+   For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
+   (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW
+   (U+0625), but only when it appears in isolated or final forms:
 
 
 
@@ -560,6 +560,15 @@ Davies                 Expires September 11, 2012              [Page 10]
 
 Internet-Draft        IDN Table XML representation            March 2012
 
+
+   <char cp="0625">
+     <var cp="0673" when="arabic-isolated"/>
+     <var cp="0673" when="arabic-final"/>
+   </char>
+
+3.5.  Example table
+
+   A sample complete XML IDN table is as follows.
 
        <?xml version="1.0"?>
        <idntable xmlns="http://www.iana.org/idn-tables/0.1">
@@ -581,15 +590,6 @@ Internet-Draft        IDN Table XML representation            March 2012
                <char cp="00E4"/>
            </data>
        </idntable>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1127,19 +1127,6 @@ Appendix C.  Editorial Notes
 
 C.1.  Known Issues and Future Work
 
-   o  The text does not currently provide a mechanism for deriving
-      variants based on a sequence of two or more code points.  Such a
-      mechanism would be required to perform an inverse mapping from one
-      provided in this document, namely, mapping the sequence of "o" and
-      "e" to an "o with umlaut"
-
-   o  A mechanism for a specific code point only being eligible when
-      preceded or followed by a specific sequence of characters is not
-      provided.  Such a mechanism is needed to support the contextual
-      rule required by the .CAT top-level domain, which supports the
-      middle dot (U+00B7) only when both preceded and followed by the
-      letter "l" (U+006C).
-
    o  An optional mechanism for explicitly nominating the registry
       action associated with a computed variant could be added.  For
       example, an "action" attribute to the <var> element could specify
@@ -1162,6 +1149,19 @@ C.2.  Sample tables and running code
 C.3.  Change History
 
    -00  Initial draft.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
