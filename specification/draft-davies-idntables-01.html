@@ -143,8 +143,8 @@
 <table summary="layout" width="66%" border="0" cellpadding="0" cellspacing="0"><tr><td><table summary="layout" width="100%" border="0" cellpadding="2" cellspacing="1">
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
-<tr><td class="header">Intended status: Informational</td><td class="header">March 10, 2012</td></tr>
-<tr><td class="header">Expires: September 11, 2012</td><td class="header">&nbsp;</td></tr>
+<tr><td class="header">Intended status: Informational</td><td class="header">March 11, 2012</td></tr>
+<tr><td class="header">Expires: September 12, 2012</td><td class="header">&nbsp;</td></tr>
 </table></td></tr></table>
 <h1><br />Representing registration policy for IDNs using XML<br />draft-davies-idntables-01</h1>
 
@@ -173,7 +173,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on September 11, 2012.</p>
+This Internet-Draft will expire on September 12, 2012.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -607,10 +607,10 @@ Null variants</h3>
 
 <p>To specify a null variant, which is a variant string that maps to
 							no codepoint, use an empty cp attribute. For example,
-							to mark a string with a zero width non-joiner to the same string
-							without the zero width non-joiner:
+							to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the same string
+							without the ZERO WIDTH NON-JOINER:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="200c"&gt;
+&lt;char cp="200C"&gt;
   &lt;var cp=""/&gt;
 &lt;/char&gt;
 </pre></div>
@@ -936,7 +936,12 @@ Known Issues and Future Work</h3>
 </li>
 <li>The tables may benefit from a unique identifier, such as an "id" attribute on the &lt;idntables&gt; element.
 </li>
-<li>A more formal step-wise description of how variants are computed needs to be supplied.
+<li>A method of specifying the origin URI for a table, and
+						an expiration or refresh policy, as meta-data may be
+						a useful way to declare how the table will be
+						updated.
+</li>
+<li>A more formal step-wise description of how variants are computed, including the methodology for assessing contextual rules, needs to be supplied.
 </li>
 </ul><p>
 				

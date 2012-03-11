@@ -406,12 +406,12 @@
 						
 						<t>To specify a null variant, which is a variant string that maps to
 							no codepoint, use an empty cp attribute. For example,
-							to mark a string with a zero width non-joiner to the same string
-							without the zero width non-joiner:</t>
+							to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the same string
+							without the ZERO WIDTH NON-JOINER:</t>
 						
 							<figure>
 								<artwork><![CDATA[
-<char cp="200c">
+<char cp="200C">
   <var cp=""/>
 </char>
 							]]></artwork>
@@ -692,7 +692,11 @@
 				<list style="symbols">
 					<t>An optional mechanism for explicitly nominating the registry action associated with a computed variant could be added. For example, an "action" attribute to the &lt;var&gt; element could specify one of the following: "allocate", "block", "delegate", "mirror" or "withhold". Each of these actions would need to be formally defined.</t>
 					<t>The tables may benefit from a unique identifier, such as an "id" attribute on the &lt;idntables&gt; element.</t>
-					<t>A more formal step-wise description of how variants are computed needs to be supplied.</t>
+					<t>A method of specifying the origin URI for a table, and
+						an expiration or refresh policy, as meta-data may be
+						a useful way to declare how the table will be
+						updated.</t>
+					<t>A more formal step-wise description of how variants are computed, including the methodology for assessing contextual rules, needs to be supplied.</t>
 				</list>
 				</t>				
 
