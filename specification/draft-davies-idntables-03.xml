@@ -7,7 +7,7 @@
 <!ENTITY rfc4290 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4290.xml">
 <!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
 ]>
-<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-02">
+<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-03">
 	<?rfc toc="yes" ?>
 	<?rfc symrefs="yes" ?>
 	<?rfc sortrefs="yes"?>
@@ -573,7 +573,10 @@
 					</list>					
 					<list style="hanging" hangIndent="5">
 						<t hangText="-02">Add support for validity periods.</t>
-					</list>					
+					</list>
+					<list style="hanging" hangIndent="5">
+						<t hangText="-03">WIP</t>
+					</list>
 				</t>
 			</section>
 		</section>

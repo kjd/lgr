@@ -8,7 +8,7 @@ Expires: March 3, 2013
 
 
           Representing registration policy for IDNs using XML
-                       draft-davies-idntables-02
+                       draft-davies-idntables-03
 
 Abstract
 
@@ -94,7 +94,7 @@ Table of Contents
      C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 21
      C.2.  Sample tables and running code . . . . . . . . . . . . . . 21
      C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 21
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 22
+   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 23
 
 
 
@@ -1177,6 +1177,62 @@ Davies                    Expires March 3, 2013                [Page 21]
 Internet-Draft        IDN Table XML representation           August 2012
 
 
+   -03  WIP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies                    Expires March 3, 2013                [Page 22]
+
+Internet-Draft        IDN Table XML representation           August 2012
+
+
 Author's Address
 
    Kim Davies
@@ -1228,5 +1284,5 @@ Author's Address
 
 
 
-Davies                    Expires March 3, 2013                [Page 22]
+Davies                    Expires March 3, 2013                [Page 23]
 
