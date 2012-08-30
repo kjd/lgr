@@ -3,12 +3,12 @@
 
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
-Intended status: Informational                            March 11, 2012
-Expires: September 12, 2012
+Intended status: Informational                           August 30, 2012
+Expires: March 3, 2013
 
 
           Representing registration policy for IDNs using XML
-                       draft-davies-idntables-01
+                       draft-davies-idntables-02
 
 Abstract
 
@@ -35,7 +35,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 12, 2012.
+   This Internet-Draft will expire on March 3, 2013.
 
 Copyright Notice
 
@@ -52,9 +52,9 @@ Copyright Notice
 
 
 
-Davies                 Expires September 12, 2012               [Page 1]
+Davies                    Expires March 3, 2013                 [Page 1]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -108,9 +108,9 @@ Table of Contents
 
 
 
-Davies                 Expires September 12, 2012               [Page 2]
+Davies                    Expires March 3, 2013                 [Page 2]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 1.  Introduction
@@ -164,9 +164,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 3]
+Davies                    Expires March 3, 2013                 [Page 3]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 2.  Design Goals
@@ -220,9 +220,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 4]
+Davies                    Expires March 3, 2013                 [Page 4]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
       describe rules for computing code points, but does not prescribe
@@ -276,9 +276,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 5]
+Davies                    Expires March 3, 2013                 [Page 5]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 3.  IDN Table XML Format
@@ -332,9 +332,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 6]
+Davies                    Expires March 3, 2013                 [Page 6]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
    incremented with each revision of the file.
@@ -388,9 +388,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 7]
+Davies                    Expires March 3, 2013                 [Page 7]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
    There may be multiple <domain> tags used to reflect a list of
@@ -444,9 +444,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 8]
+Davies                    Expires March 3, 2013                 [Page 8]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
    for not allowing other encoding formats, including native Unicode
@@ -500,9 +500,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012               [Page 9]
+Davies                    Expires March 3, 2013                 [Page 9]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
    <char cp="006F 0065">
@@ -556,9 +556,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 10]
+Davies                    Expires March 3, 2013                [Page 10]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
    <char cp="0625">
@@ -612,9 +612,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 11]
+Davies                    Expires March 3, 2013                [Page 11]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 4.  Processing a label against a table
@@ -668,9 +668,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 12]
+Davies                    Expires March 3, 2013                [Page 12]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 5.  Conversion between other formats
@@ -724,9 +724,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 13]
+Davies                    Expires March 3, 2013                [Page 13]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 6.  IANA Considerations
@@ -780,9 +780,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 14]
+Davies                    Expires March 3, 2013                [Page 14]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 7.  Security Considerations
@@ -836,9 +836,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 15]
+Davies                    Expires March 3, 2013                [Page 15]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 8.  References
@@ -892,9 +892,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 16]
+Davies                    Expires March 3, 2013                [Page 16]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 Appendix A.  RelaxNG Schema
@@ -948,9 +948,9 @@ Appendix A.  RelaxNG Schema
 
 
 
-Davies                 Expires September 12, 2012              [Page 17]
+Davies                    Expires March 3, 2013                [Page 17]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
          <attribute name="last-cp">
@@ -1004,9 +1004,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 18]
+Davies                    Expires March 3, 2013                [Page 18]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
              </zeroOrMore>
@@ -1060,9 +1060,9 @@ Internet-Draft        IDN Table XML representation            March 2012
 
 
 
-Davies                 Expires September 12, 2012              [Page 19]
+Davies                    Expires March 3, 2013                [Page 19]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 Appendix B.  Acknowledgements
@@ -1116,9 +1116,9 @@ Appendix B.  Acknowledgements
 
 
 
-Davies                 Expires September 12, 2012              [Page 20]
+Davies                    Expires March 3, 2013                [Page 20]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 Appendix C.  Editorial Notes
@@ -1132,10 +1132,12 @@ C.1.  Known Issues and Future Work
       example, an "action" attribute to the <var> element could specify
       one of the following: "allocate", "block", "delegate", "mirror" or
       "withhold".  Each of these actions would need to be formally
-      defined.
+      defined.  See also https://github.com/kjd/idntables/issues/4
 
    o  The tables may benefit from a unique identifier, such as an "id"
-      attribute on the <idntables> element.
+      attribute on the <idntables> element.  One suggestion is to
+      include a URI for "this version" and "latest version".  See
+      https://github.com/kjd/idntables/issues/8
 
    o  A method of specifying the origin URI for a table, and an
       expiration or refresh policy, as meta-data may be a useful way to
@@ -1144,6 +1146,9 @@ C.1.  Known Issues and Future Work
    o  A more formal step-wise description of how variants are computed,
       including the methodology for assessing contextual rules, needs to
       be supplied.
+
+   o  The addition of activation/expiration dates.  See
+      https://github.com/kjd/idntables/issues
 
 C.2.  Sample tables and running code
 
@@ -1155,6 +1160,11 @@ C.3.  Change History
 
    -00  Initial draft.
 
+   -01  Add an XML Namespace, and fix other XML nits.  Add support for
+        sequences of code points.  Improve on consistently using Unicode
+        nomenclature.
+
+   -02  WIP
 
 
 
@@ -1162,28 +1172,17 @@ C.3.  Change History
 
 
 
-
-
-
-
-
-
-
-
-
-
-Davies                 Expires September 12, 2012              [Page 21]
+Davies                    Expires March 3, 2013                [Page 21]
 
-Internet-Draft        IDN Table XML representation            March 2012
+Internet-Draft        IDN Table XML representation           August 2012
 
 
 Author's Address
 
    Kim Davies
    Internet Corporation for Assigned Names and Numbers
-   4676 Admiralty Way
-   Suite 330
-   Marina del Rey, CA  90292
+   12025 Waterfront Drive
+   Los Angeles, CA  90094
    US
 
    Phone: +1 310 823 9358
@@ -1228,5 +1227,6 @@ Author's Address
 
 
 
-Davies                 Expires September 12, 2012              [Page 22]
+
+Davies                    Expires March 3, 2013                [Page 22]
 
