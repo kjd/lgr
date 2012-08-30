@@ -58,6 +58,8 @@ meta-section = element meta {
 		element date { text }? |
 		element language { language-tag }* |
 		element domain { domain-name }* |
+		element validity-start { text }? |
+		element validity-end { text }? |
 		element description {
 			attribute type { text },
 			text

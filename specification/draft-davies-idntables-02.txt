@@ -74,6 +74,7 @@ Table of Contents
        3.3.3.  The language element . . . . . . . . . . . . . . . . .  7
        3.3.4.  The domain element . . . . . . . . . . . . . . . . . .  7
        3.3.5.  The description element  . . . . . . . . . . . . . . .  8
+       3.3.6.  The validity-start and validity-end elements . . . . .  8
      3.4.  The data element . . . . . . . . . . . . . . . . . . . . .  8
        3.4.1.  Sequences  . . . . . . . . . . . . . . . . . . . . . .  9
        3.4.2.  Variants . . . . . . . . . . . . . . . . . . . . . . .  9
@@ -94,7 +95,6 @@ Table of Contents
      C.2.  Sample tables and running code . . . . . . . . . . . . . . 21
      C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 21
    Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 22
-
 
 
 
@@ -419,6 +419,16 @@ Internet-Draft        IDN Table XML representation           August 2012
    encoding.  Typical types would be "text/plain" or "text/html". "text/
    plain" will be assumed if no type attribute is specified.
 
+3.3.6.  The validity-start and validity-end elements
+
+   The "validity-start" and "validity-end" elements are optional
+   elements that describe the time period from which the contents of the
+   table become valid (i.e. are used in registry policy), and the
+   contents of the table cease to be used.
+
+   The times should conform to the format described in section 5.6 of
+   [RFC5646].  It may be comprised of a date, or a date and time stamp.
+
 3.4.  The data element
 
    The "data" element contains the code point data the comprises the
@@ -432,6 +442,13 @@ Internet-Draft        IDN Table XML representation           August 2012
    Discrete permissable code points or code point sequences may be
    stipulated with a "char" element, e.g.
 
+
+
+Davies                    Expires March 3, 2013                 [Page 8]
+
+Internet-Draft        IDN Table XML representation           August 2012
+
+
        <char cp="002D"/>
 
    Ranges of permissable code points may be stipulated with a "range"
@@ -441,14 +458,6 @@ Internet-Draft        IDN Table XML representation           August 2012
 
    Codepoints must be expressed in hexadecimal, i.e. according to the
    standard Unicode convention without the prefix "U+".  The rationale
-
-
-
-Davies                    Expires March 3, 2013                 [Page 8]
-
-Internet-Draft        IDN Table XML representation           August 2012
-
-
    for not allowing other encoding formats, including native Unicode
    encoding in XML, is explored in [UAX42].  The XML conventions used in
    this format, including the element and attribute names, mirror this
@@ -488,6 +497,14 @@ Internet-Draft        IDN Table XML representation           August 2012
    single code point.  For example, the sequence of LATIN SMALL LETTER O
    (U+006F) then LATIN SMALL LETTER E (U+0065) can be specified as a
    variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as
+
+
+
+Davies                    Expires March 3, 2013                 [Page 9]
+
+Internet-Draft        IDN Table XML representation           August 2012
+
+
    follows:
 
    <char cp="00F6">
@@ -496,14 +513,6 @@ Internet-Draft        IDN Table XML representation           August 2012
 
    Variants are specified in only on direction.  For symmetric variants,
    the inverse of the variant must be explicitly specified:
-
-
-
-
-Davies                    Expires March 3, 2013                 [Page 9]
-
-Internet-Draft        IDN Table XML representation           August 2012
-
 
    <char cp="006F 0065">
      <var cp="00F6"/>
@@ -542,15 +551,6 @@ Internet-Draft        IDN Table XML representation           August 2012
    arabic-isolated  Based on context, the code point would be presented
         in its Arabic Isolated form.
 
-   arabic-medial  Based on context, the code point would be presented in
-        its Arabic Medial form.
-
-   arabic-final  Based on context, the code point would be presented in
-        its Arabic Final form.
-
-   For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
-   (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW
-   (U+0625), but only when it appears in isolated or final forms:
 
 
 
@@ -560,6 +560,16 @@ Davies                    Expires March 3, 2013                [Page 10]
 
 Internet-Draft        IDN Table XML representation           August 2012
 
+
+   arabic-medial  Based on context, the code point would be presented in
+        its Arabic Medial form.
+
+   arabic-final  Based on context, the code point would be presented in
+        its Arabic Final form.
+
+   For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
+   (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW
+   (U+0625), but only when it appears in isolated or final forms:
 
    <char cp="0625">
      <var cp="0673" when="arabic-isolated"/>
@@ -590,16 +600,6 @@ Internet-Draft        IDN Table XML representation           August 2012
                <char cp="00E4"/>
            </data>
        </idntable>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1164,7 +1164,7 @@ C.3.  Change History
         sequences of code points.  Improve on consistently using Unicode
         nomenclature.
 
-   -02  WIP
+   -02  Add support for validity periods.
 
 
 

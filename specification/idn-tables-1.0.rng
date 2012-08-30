@@ -113,6 +113,16 @@
               <ref name="domain-name"/>
             </element>
           </zeroOrMore>
+          <optional>
+            <element name="validity-start">
+              <text/>
+            </element>
+          </optional>
+          <optional>
+            <element name="validity-end">
+              <text/>
+            </element>
+          </optional>
           <zeroOrMore>
             <element name="description">
               <attribute name="type"/>

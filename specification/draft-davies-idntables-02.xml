@@ -206,6 +206,12 @@
 					<t>The "type" attribute may be used to specify the encoding within description element. The attribute should be a valid MIME type. If supplied, it will be assumed the contents is content of that encoding. Typical types would be "text/plain" or "text/html". "text/plain" will be assumed if no type attribute is specified.</t>
 					
 				</section>
+				<section title="The validity-start and validity-end elements">
+					
+					<t>The "validity-start" and "validity-end" elements are optional elements that describe the time period from which the contents of the table become valid (i.e. are used in registry policy), and the contents of the table cease to be used.</t>
+					<t>The times should conform to the format described in section 5.6 of <xref target="RFC5646"/>. It may be comprised of a date, or a date and time stamp.</t>
+				</section>
+				
 			</section>
 			<section title="The data element">
 				
@@ -566,7 +572,7 @@
 						<t hangText="-01">Add an XML Namespace, and fix other XML nits. Add support for sequences of code points. Improve on consistently using Unicode nomenclature.</t>
 					</list>					
 					<list style="hanging" hangIndent="5">
-						<t hangText="-02">WIP</t>
+						<t hangText="-02">Add support for validity periods.</t>
 					</list>					
 				</t>
 			</section>
