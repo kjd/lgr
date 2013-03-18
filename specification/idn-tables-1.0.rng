@@ -79,6 +79,7 @@
   </start>
   <define name="idn-table">
     <element name="idntable">
+      <attribute name="id"/>
       <optional>
         <ref name="meta-section"/>
       </optional>

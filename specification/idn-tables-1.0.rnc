@@ -45,6 +45,7 @@ points = (point-single | point-multiple)+
 
 start = idn-table
 idn-table = element idntable {
+	attribute id { text },
 	meta-section?,
 	data-section
 }

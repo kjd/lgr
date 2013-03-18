@@ -34,17 +34,16 @@
 		<area>Management</area>
 		<abstract>
 			
-			<t>This memo describes a method of representing the registration policy that a zone administrator uses for registering Internationalised Domain Names using Extensible Markup Language (XML). These registry policies, commonly known as "IDN tables", are used to enforce and share policy on which specific code-points are permitted for registrations, and which alternative code-points are considered variants.</t>
-		
+			<t>This memo describes a method of representing the registration policy that a zone administrator uses for registering Internationalised Domain Names using Extensible Markup Language (XML). These registry policies, commonly known as "IDN tables" or "Label Generation Rules" (LGRs), are used to enforce and share policy on which specific Unicode code-points are permitted for registrations, which alternative code-points are considered variants, and what actions may be performed on those variants.</t>
 		</abstract>
 	</front>
 	<middle>
 		
 		<section title="Introduction">
 			
-			<t>This memo describes how to use Extensible Markup Language (XML) to describe the list of permissible code points and variants used in a zone administrator's policies.</t>
-			<t>Historically, zone administrators - such as top-level domain registries - have published their policies using text and HTML based formats loosely based around the format used to describe a Language Variant Table in <xref target="RFC3743"/>. <xref target="RFC4290"/> further posts a "Model table format" that describes a similar set of functionality.</t>
-			<t>Through the first decade of IDN deployment, experience has shown that these table formats are difficult to consistently implement and compare due to their different formats. A more universal format, such as one using a structured XML format, will assist by improving machine-readability, consistency, and maintainability of IDN tables. It will also provide for more complex conditional implementation of variants that reflects the known requirements of current zone administrator policies.</t>
+			<t>This memo describes a method of using Extensible Markup Language (XML) to describe the list of permissible code points and variants used in a zone administrator's policies.</t>
+			<t>Historically, zone administrators - such as top-level domain registries - have published their policies using text and HTML based formats loosely based around the format used to describe a Language Variant Table in <xref target="RFC3743"/>. <xref target="RFC4290"/> also provides a "Model table format" that describes a similar set of functionality.</t>
+			<t>Through the first decade of IDN deployment, experience has shown that these table formats are difficult to consistently implement and compare due to their different formats. A universal format, such as one using a structured XML format, will assist by improving machine-readability, consistency, reusability and maintainability of IDN tables. It will also provide for more complex conditional implementation of variants that reflects the known requirements of current zone administrator policies.</t>
 			
 		</section>
 		
@@ -86,6 +85,23 @@
 			</list>
 			</t>
 
+		</section>
+		
+		<section title="Requirements">
+			<t>To be able to fulfil the known utilisation of IDN tables, 
+				Existing adoption of IDN tables were reviewing to prepare this specification.</t>
+			<t>In addition, the requirements of ICANN's work to implement a "Language
+				Generation Rules" for the DNS Root Zone <xref target="LGR-PROCEDURE"/> were also considered. In Section B of that document, five specific requirements for a "label generation rules" methodology were identified:</t>
+			<t>
+				<list style="symbols">
+					<t>The ability to identify a set of code points that are permitted.</t>
+					<t>The ability to represent a list of variants, if any, for each code point.</t>
+					<t>A method of identifying code points that are related, using a tag.</t>
+					<t>The ability to describe rules regarding the possible actions that may be performed on the resulting label (such as blocked, allocatable, etc.)</t>
+					<t>The ability to describe rules that check for ill-formed combinations across the whole label.</t>
+				</list>
+			</t>
+				
 		</section>
 		
 		<section title="IDN Table XML Format">
@@ -322,6 +338,21 @@
 					]]></artwork>
 						</figure>
 					</section>
+					
+				</section>
+				<section title="Result tagging">
+					<t>Typically, tables are used to explicitly designate allowable code points, with any label with a code point not explicitly listed
+					in the table being considered an ineligible label according to the ruleset.</t>
+					<t>For more complex registry rules, there may be a need to discern code points and variants of certain types. This can be accomplished
+						by applying a "tag" attribute, and then filtering on results based on the tag.</t>
+					<t>A tag may be of any value, but the following tags are pre-defined to encourage common conventions in their application. If these tags can represent registry policy, they SHOULD be used.</t>
+					<t>
+						<list style="hanging" hangIndent="5">
+							<t hangText="block">The resulting string should be blocked from registration. This would typically apply for a derived variant that has no practical use, such as blocking confusingly similar by undesirable variants.</t>
+							<t hangText="allocate">The resulting string should be reserved for use by the same operator of the origin string, but not automatically allocated for use.</t>
+							<t hangText="activate">The resulting string should be activated for use. (This is the typical default action if no tagging is used, and is known as a "preferred" variant in <xref target="RFC3743"/>)</t>
+						</list>
+					</t>
 				</section>
 			</section>
 			<section title="Example table">
@@ -415,6 +446,7 @@
 		&rfc5646;
 		&rfc5564;
 		<reference anchor="UAX42"><front><title>Unicode Character Database in XML</title><author><organization abbrev="Unicode">Unicode Consortium</organization></author></front><format type="HTML" target="http://unicode.org/reports/tr42/"/></reference>
+		<reference anchor="LGR-PROCEDURE"><front><title>Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of IDNA Labels</title><author><organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization></author></front><format type="PDF" target="http://www.icann.org/en/resources/idn/draft-lgr-procedure-07dec12-en.pdf"/></reference>
 		</references>
 		<section title="RelaxNG Schema">
 			<figure>
@@ -484,6 +516,7 @@
   </start>
   <define name="idn-table">
     <element name="idntable">
+      <attribute name="id"/>
       <optional>
         <ref name="meta-section"/>
       </optional>
@@ -536,24 +569,38 @@
 			</figure>
 		</section>
 		<section title="Acknowledgements">
-			<t>This format builds upon the work on documenting IDN tables by a number of other parties, most significantly that of the the Joint Engineering Team published as <xref target="RFC3743"/>, and
-				<xref target="RFC5564"/> published by the Arabic-language community.</t>
-			<t>Contributions that have helped shape this document have been contributed by Francisco Arias, Mark Davis, Nicholas Ostler, Thomas Roessler, Steve Sheng and Andrew Sullivan.</t>
+			<t>This format builds upon the work on documenting IDN tables by many different registry operators. Notably, a comprehensive language table for Chinese, Japanese and Korean was developed by the "Joint Engineering Team" <xref target="RFC3743"/> that is the basis of many registry policies; and a set of guidelines for Arabic script registrations <xref target="RFC5564"/> was published by the Arabic-language community.</t>
+			<t>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas Ostler, Thomas Roessler, Steve Sheng and Andrew Sullivan.</t>
 		</section>
 		<section title="Editorial Notes">
 			<t>This appendix to be removed prior to final publication.</t>
 
 			<section title="Known Issues and Future Work">
 
-				<t>
-				<list style="symbols">
-					<t>An optional mechanism for explicitly nominating the registry action associated with a computed variant could be added. For example, an "action" attribute to the &lt;var&gt; element could specify one of the following: "allocate", "block", "delegate", "mirror" or "withhold". Each of these actions would need to be formally defined. See also https://github.com/kjd/idntables/issues/4</t>
-					<t>The tables may benefit from a unique identifier, such as an "id" attribute on the &lt;idntables&gt; element. One suggestion is to include a URI for "this version" and "latest version". See https://github.com/kjd/idntables/issues/8</t>
+				<section title="Interpretation policy">
+					
+					<t>Interpretation policy. The default assumption is that all labels that match code points listed in the table are "allowed", and all others are "disallowed". Should interpreting the table in a different way be an implementation matter, or explicit in the table format? Adding an explicit interpretation policy in 
+					the table that is machine-readable and interpretable makes the table format significantly more complex and makes writing an generic interpreter more difficult.</t>
+					<t>At a minimum, there needs to be a way of tagging characters and variants in such a way that the consumer can discern between various actions such as "allocate", "block", "delegate", "mirror" or "withhold". How these actions are performed beyond being tagged in the result set if outside the scope of the memo.</t>
+					
+					<t>A more step-wise description of how variants are computed, including the methodology for assessing contextual rules, should be supplied.</t>
+				</section>
+				
+				<section title="Metadata">
+					
 					<t>A method of specifying the origin URI for a table, and an expiration or refresh policy, as meta-data may be a useful way to declare how the table will be updated.</t>
-					<t>A more formal step-wise description of how variants are computed, including the methodology for assessing contextual rules, needs to be supplied.</t>
-					<t>The addition of activation/expiration dates. See https://github.com/kjd/idntables/issues</t>
-				</list>
-				</t>				
+					
+					<t>The addition of activation/expiration dates.</t>
+				</section>
+				
+				<section title="UAX#29 based rule application">
+					
+					<t>The LGR Procedure <xref target="LGR-PROCEDURE"/> calls for whole-string evaluation rules "based on a compatible extension of the extended grapheme
+						clusters defined in UAX#29", specifically "these rules are required to be representable by a refinement of the
+						general mechanism in UAX#29". It is not clear what the use-cases for this are in order to judge the least-complex solution
+						to the problem set.</t>
+						
+				</section>
 
 			</section>
 
@@ -575,7 +622,7 @@
 						<t hangText="-02">Add support for validity periods.</t>
 					</list>
 					<list style="hanging" hangIndent="5">
-						<t hangText="-03">WIP</t>
+						<t hangText="-03">Incorporate requirements from the Label Generation Ruleset Procedure for the DNS Root Zone.</t>
 					</list>
 				</t>
 			</section>
