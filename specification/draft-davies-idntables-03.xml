@@ -30,6 +30,12 @@
 				<uri>http://www.iana.org/</uri>
 			</address>
 		</author>
+		<author initials="A" surname="Freytag" fullname="Asmus Freytag">
+			<organization>ASMUS Inc.</organization>
+			<address>
+				<email>asmus@unicode.org</email>
+			</address>
+		</author>
 		<date/>
 		<area>Management</area>
 		<abstract>

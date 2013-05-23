@@ -3,8 +3,9 @@
 
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
-Intended status: Informational                            March 18, 2013
-Expires: September 19, 2013
+Intended status: Informational                                A. Freytag
+Expires: November 24, 2013                                    ASMUS Inc.
+                                                            May 23, 2013
 
 
           Representing registration policy for IDNs using XML
@@ -36,7 +37,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 19, 2013.
+   This Internet-Draft will expire on November 24, 2013.
 
 Copyright Notice
 
@@ -48,15 +49,15 @@ Copyright Notice
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
 
 
 
-Davies                 Expires September 19, 2013               [Page 1]
+Davies & Freytag        Expires November 24, 2013               [Page 1]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
+   to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
@@ -100,17 +101,16 @@ Table of Contents
        C.1.3.  UAX#29 based rule application  . . . . . . . . . . . . 23
      C.2.  Sample tables and running code . . . . . . . . . . . . . . 23
      C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 24
-   Author's Address . . . . . . . . . . . . . . . . . . . . . . . . . 25
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 25
 
 
 
 
 
 
-
-Davies                 Expires September 19, 2013               [Page 2]
+Davies & Freytag        Expires November 24, 2013               [Page 2]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 1.  Introduction
@@ -164,9 +164,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 3]
+Davies & Freytag        Expires November 24, 2013               [Page 3]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 2.  Design Goals
@@ -220,9 +220,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 4]
+Davies & Freytag        Expires November 24, 2013               [Page 4]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
       describe rules for computing code points, but does not prescribe
@@ -276,9 +276,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 5]
+Davies & Freytag        Expires November 24, 2013               [Page 5]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 3.  Requirements
@@ -332,9 +332,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 6]
+Davies & Freytag        Expires November 24, 2013               [Page 6]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 4.  IDN Table XML Format
@@ -388,9 +388,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 7]
+Davies & Freytag        Expires November 24, 2013               [Page 7]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
    incremented with each revision of the file.
@@ -444,9 +444,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 8]
+Davies & Freytag        Expires November 24, 2013               [Page 8]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
    There may be multiple <domain> tags used to reflect a list of
@@ -500,9 +500,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013               [Page 9]
+Davies & Freytag        Expires November 24, 2013               [Page 9]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
        <char cp="002D"/>
@@ -556,9 +556,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 10]
+Davies & Freytag        Expires November 24, 2013              [Page 10]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
    follows:
@@ -612,9 +612,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 11]
+Davies & Freytag        Expires November 24, 2013              [Page 11]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
    arabic-medial  Based on context, the code point would be presented in
@@ -668,9 +668,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 12]
+Davies & Freytag        Expires November 24, 2013              [Page 12]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
        <?xml version="1.0"?>
@@ -724,9 +724,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 13]
+Davies & Freytag        Expires November 24, 2013              [Page 13]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 5.  Processing a label against a table
@@ -780,9 +780,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 14]
+Davies & Freytag        Expires November 24, 2013              [Page 14]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 6.  Conversion between other formats
@@ -836,9 +836,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 15]
+Davies & Freytag        Expires November 24, 2013              [Page 15]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 7.  IANA Considerations
@@ -892,9 +892,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 16]
+Davies & Freytag        Expires November 24, 2013              [Page 16]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 8.  Security Considerations
@@ -948,9 +948,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 17]
+Davies & Freytag        Expires November 24, 2013              [Page 17]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 9.  References
@@ -1004,9 +1004,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 18]
+Davies & Freytag        Expires November 24, 2013              [Page 18]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 Appendix A.  RelaxNG Schema
@@ -1060,9 +1060,9 @@ Appendix A.  RelaxNG Schema
 
 
 
-Davies                 Expires September 19, 2013              [Page 19]
+Davies & Freytag        Expires November 24, 2013              [Page 19]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
          <attribute name="last-cp">
@@ -1116,9 +1116,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 20]
+Davies & Freytag        Expires November 24, 2013              [Page 20]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
                </element>
@@ -1172,9 +1172,9 @@ Internet-Draft        IDN Table XML representation            March 2013
 
 
 
-Davies                 Expires September 19, 2013              [Page 21]
+Davies & Freytag        Expires November 24, 2013              [Page 21]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 Appendix B.  Acknowledgements
@@ -1228,9 +1228,9 @@ Appendix B.  Acknowledgements
 
 
 
-Davies                 Expires September 19, 2013              [Page 22]
+Davies & Freytag        Expires November 24, 2013              [Page 22]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 Appendix C.  Editorial Notes
@@ -1284,9 +1284,9 @@ C.2.  Sample tables and running code
 
 
 
-Davies                 Expires September 19, 2013              [Page 23]
+Davies & Freytag        Expires November 24, 2013              [Page 23]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
 C.3.  Change History
@@ -1340,12 +1340,12 @@ C.3.  Change History
 
 
 
-Davies                 Expires September 19, 2013              [Page 24]
+Davies & Freytag        Expires November 24, 2013              [Page 24]
 
-Internet-Draft        IDN Table XML representation            March 2013
+Internet-Draft        IDN Table XML representation              May 2013
 
 
-Author's Address
+Authors' Addresses
 
    Kim Davies
    Internet Corporation for Assigned Names and Numbers
@@ -1358,6 +1358,10 @@ Author's Address
    URI:   http://www.iana.org/
 
 
+   Asmus Freytag
+   ASMUS Inc.
+
+   Email: asmus@unicode.org
 
 
 
@@ -1392,9 +1396,5 @@ Author's Address
 
 
 
-
-
-
-
-Davies                 Expires September 19, 2013              [Page 25]
+Davies & Freytag        Expires November 24, 2013              [Page 25]
 
