@@ -1,4 +1,4 @@
-default namespace = "http://www.iana.org/idn-tables/0.1"
+default namespace = "http://www.iana.org/lgr/0.1"
 
 # SIMPLE TYPES
 
@@ -6,6 +6,7 @@ language-tag = text       # RFC 5646 language tag (e.g. "de", "Latn", etc.)
 domain-name = text        # Domain name
 code-point = text         # A single codepoint, expressed as a hexidecimal number
 variant-condition = text  # A condition for applying the variant (TBD)
+tag = text                # Freeform text tag
 
 # STRUCTURES
 
@@ -13,6 +14,7 @@ variant-condition = text  # A condition for applying the variant (TBD)
 
 point-single = element char {
 	attribute cp { code-point },
+	attribute tag { tag },
 	point-variant*
 }
 
@@ -24,7 +26,6 @@ point-variant = element var {
 	attribute when { variant-condition }?
 }
 
-
 # Representation of a range of codepoints
 
 point-multiple = element range {
@@ -34,23 +35,47 @@ point-multiple = element range {
 }
 
 # A collection of codepoints and ranges of codepoints that comprise
-# an IDN table
+# a label generation ruleset
 
 points = (point-single | point-multiple)+
+
+any = element any {
+	attribute count { text }?
+}
+class = element class {
+	attribute count { text }?,
+	attribute name { text }?,
+	points*
+}
+choice = element choice {
+	attribute count { text }?,
+	class-matchers+
+}
+class-matchers = ( class | any | choice )+
+
+rules-declaration = element rule {
+	attribute name { text },
+	class-matchers+
+}
+action-declaration = element action {
+	attribute action { text },
+	( attribute match { text } | attribute not-match { text } )
+}
 
 # DOCUMENT STRUCTURE
 
 # Main document structure, comprised of a meta section followed by
 # a data section.
 
-start = idn-table
-idn-table = element idntable {
+start = lgr
+lgr = element lgr {
 	attribute id { text },
 	meta-section?,
-	data-section
+	data-section,
+	rules-section?
 }
 
-# Meta section - information recorded with an IDN table that does not
+# Meta section - information recorded with an label generation ruleset that does not
 # affect machine processing.
 
 meta-section = element meta {
@@ -61,6 +86,7 @@ meta-section = element meta {
 		element domain { domain-name }* |
 		element validity-start { text }? |
 		element validity-end { text }? |
+		element unicode-version { text }? |
 		element description {
 			attribute type { text },
 			text
@@ -72,4 +98,10 @@ meta-section = element meta {
 
 data-section = element data {
 	points
+}
+
+# Rules section
+
+rules-section = element rules {
+	( rule-declaration | action-declaration )*
 }

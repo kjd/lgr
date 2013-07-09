@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://www.iana.org/idn-tables/0.1" xmlns="http://relaxng.org/ns/structure/1.0">
+<grammar ns="http://www.iana.org/lgr/0.1" xmlns="http://relaxng.org/ns/structure/1.0">
   <!-- SIMPLE TYPES -->
   <define name="language-tag">
     <text/>
@@ -17,12 +17,19 @@
     <text/>
   </define>
   <!-- A condition for applying the variant (TBD) -->
+  <define name="tag">
+    <text/>
+  </define>
+  <!-- Freeform text tag -->
   <!-- STRUCTURES -->
   <!-- Representation of a single codepoint -->
   <define name="point-single">
     <element name="char">
       <attribute name="cp">
         <ref name="code-point"/>
+      </attribute>
+      <attribute name="tag">
+        <ref name="tag"/>
       </attribute>
       <zeroOrMore>
         <ref name="point-variant"/>
@@ -59,7 +66,7 @@
   </define>
   <!--
     A collection of codepoints and ranges of codepoints that comprise
-    an IDN table
+    a label generation ruleset
   -->
   <define name="points">
     <oneOrMore>
@@ -69,25 +76,84 @@
       </choice>
     </oneOrMore>
   </define>
+  <define name="any">
+    <element name="any">
+      <optional>
+        <attribute name="count"/>
+      </optional>
+    </element>
+  </define>
+  <define name="class">
+    <element name="class">
+      <optional>
+        <attribute name="count"/>
+      </optional>
+      <optional>
+        <attribute name="name"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="points"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="choice">
+    <element name="choice">
+      <optional>
+        <attribute name="count"/>
+      </optional>
+      <oneOrMore>
+        <ref name="class-matchers"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="class-matchers">
+    <oneOrMore>
+      <choice>
+        <ref name="class"/>
+        <ref name="any"/>
+        <ref name="choice"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <define name="rules-declaration">
+    <element name="rule">
+      <attribute name="name"/>
+      <oneOrMore>
+        <ref name="class-matchers"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="action-declaration">
+    <element name="action">
+      <attribute name="action"/>
+      <choice>
+        <attribute name="match"/>
+        <attribute name="not-match"/>
+      </choice>
+    </element>
+  </define>
   <!-- DOCUMENT STRUCTURE -->
   <!--
     Main document structure, comprised of a meta section followed by
     a data section.
   -->
   <start>
-    <ref name="idn-table"/>
+    <ref name="lgr"/>
   </start>
-  <define name="idn-table">
-    <element name="idntable">
+  <define name="lgr">
+    <element name="lgr">
       <attribute name="id"/>
       <optional>
         <ref name="meta-section"/>
       </optional>
       <ref name="data-section"/>
+      <optional>
+        <ref name="rules-section"/>
+      </optional>
     </element>
   </define>
   <!--
-    Meta section - information recorded with an IDN table that does not
+    Meta section - information recorded with an label generation ruleset that does not
     affect machine processing.
   -->
   <define name="meta-section">
@@ -124,6 +190,11 @@
               <text/>
             </element>
           </optional>
+          <optional>
+            <element name="unicode-version">
+              <text/>
+            </element>
+          </optional>
           <zeroOrMore>
             <element name="description">
               <attribute name="type"/>
@@ -138,6 +209,17 @@
   <define name="data-section">
     <element name="data">
       <ref name="points"/>
+    </element>
+  </define>
+  <!-- Rules section -->
+  <define name="rules-section">
+    <element name="rules">
+      <zeroOrMore>
+        <choice>
+          <ref name="rule-declaration"/>
+          <ref name="action-declaration"/>
+        </choice>
+      </zeroOrMore>
     </element>
   </define>
 </grammar>

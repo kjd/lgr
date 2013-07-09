@@ -4,23 +4,24 @@
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
 Intended status: Informational                                A. Freytag
-Expires: November 24, 2013                                    ASMUS Inc.
-                                                            May 23, 2013
+Expires: January 10, 2014                                     ASMUS Inc.
+                                                            July 9, 2013
 
 
-          Representing registration policy for IDNs using XML
+            Representing Label Generation Rulesets using XML
                        draft-davies-idntables-03
 
 Abstract
 
-   This memo describes a method of representing the registration policy
-   that a zone administrator uses for registering Internationalised
-   Domain Names using Extensible Markup Language (XML).  These registry
-   policies, commonly known as "IDN tables" or "Label Generation Rules"
-   (LGRs), are used to enforce and share policy on which specific
-   Unicode code-points are permitted for registrations, which
-   alternative code-points are considered variants, and what actions may
-   be performed on those variants.
+   This memo describes a method of representing the domain name
+   registration policy for a zone administrator using Extensible Markup
+   Language (XML).  These policies, known as "Label Generation Rulesets"
+   (LGRs), are particularly used for the implementation of
+   Internationalised Domain Names (IDNs).  The rulesets are used to
+   implement and share policy on which specific Unicode codepoints are
+   permitted for registrations, which alternative codepoints are
+   considered variants, and what actions may be performed on those
+   variants.
 
 Status of this Memo
 
@@ -37,7 +38,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 24, 2013.
+   This Internet-Draft will expire on January 10, 2014.
 
 Copyright Notice
 
@@ -48,15 +49,15 @@ Copyright Notice
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
 
 
 
-Davies & Freytag        Expires November 24, 2013               [Page 1]
+Davies & Freytag        Expires January 10, 2014                [Page 1]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
+   carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
@@ -67,72 +68,81 @@ Table of Contents
 
    1.  Introduction . . . . . . . . . . . . . . . . . . . . . . . . .  3
    2.  Design Goals . . . . . . . . . . . . . . . . . . . . . . . . .  4
-   3.  Requirements . . . . . . . . . . . . . . . . . . . . . . . . .  6
-   4.  IDN Table XML Format . . . . . . . . . . . . . . . . . . . . .  7
-     4.1.  Namespace  . . . . . . . . . . . . . . . . . . . . . . . .  7
-     4.2.  Basic structure  . . . . . . . . . . . . . . . . . . . . .  7
-     4.3.  The meta element . . . . . . . . . . . . . . . . . . . . .  7
+   3.  Requirements . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   4.  LGR Format . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+     4.1.  Namespace  . . . . . . . . . . . . . . . . . . . . . . . .  6
+     4.2.  Basic structure  . . . . . . . . . . . . . . . . . . . . .  6
+     4.3.  Metadata . . . . . . . . . . . . . . . . . . . . . . . . .  6
        4.3.1.  The version element  . . . . . . . . . . . . . . . . .  7
-       4.3.2.  The date element . . . . . . . . . . . . . . . . . . .  8
-       4.3.3.  The language element . . . . . . . . . . . . . . . . .  8
+       4.3.2.  The date element . . . . . . . . . . . . . . . . . . .  7
+       4.3.3.  The language element . . . . . . . . . . . . . . . . .  7
        4.3.4.  The domain element . . . . . . . . . . . . . . . . . .  8
-       4.3.5.  The description element  . . . . . . . . . . . . . . .  9
-       4.3.6.  The validity-start and validity-end elements . . . . .  9
-     4.4.  The data element . . . . . . . . . . . . . . . . . . . . .  9
-       4.4.1.  Sequences  . . . . . . . . . . . . . . . . . . . . . . 10
+       4.3.5.  The description element  . . . . . . . . . . . . . . .  8
+       4.3.6.  The validity-start and validity-end elements . . . . .  8
+       4.3.7.  The unicode-version element  . . . . . . . . . . . . .  8
+     4.4.  Codepoint Rules  . . . . . . . . . . . . . . . . . . . . .  9
+       4.4.1.  Sequences  . . . . . . . . . . . . . . . . . . . . . .  9
        4.4.2.  Variants . . . . . . . . . . . . . . . . . . . . . . . 10
-       4.4.3.  Result tagging . . . . . . . . . . . . . . . . . . . . 12
-     4.5.  Example table  . . . . . . . . . . . . . . . . . . . . . . 12
-   5.  Processing a label against a table . . . . . . . . . . . . . . 14
-     5.1.  Determining eligibility for a label  . . . . . . . . . . . 14
-     5.2.  Determining variants for a label . . . . . . . . . . . . . 14
-   6.  Conversion between other formats . . . . . . . . . . . . . . . 15
-     6.1.  RFC 3743 Language Variant Table  . . . . . . . . . . . . . 15
-     6.2.  RFC 4290 Model Table Format  . . . . . . . . . . . . . . . 15
-   7.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 16
-   8.  Security Considerations  . . . . . . . . . . . . . . . . . . . 17
-   9.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 18
-   Appendix A.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 19
-   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 22
-   Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 23
-     C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 23
-       C.1.1.  Interpretation policy  . . . . . . . . . . . . . . . . 23
-       C.1.2.  Metadata . . . . . . . . . . . . . . . . . . . . . . . 23
-       C.1.3.  UAX#29 based rule application  . . . . . . . . . . . . 23
-     C.2.  Sample tables and running code . . . . . . . . . . . . . . 23
-     C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 24
-   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 25
+       4.4.3.  Result tagging . . . . . . . . . . . . . . . . . . . . 11
+     4.5.  Whole Label Evaluation Rules . . . . . . . . . . . . . . . 12
+       4.5.1.  Basic concepts . . . . . . . . . . . . . . . . . . . . 12
+       4.5.2.  Character Classes  . . . . . . . . . . . . . . . . . . 12
+       4.5.3.  Context rules  . . . . . . . . . . . . . . . . . . . . 14
+       4.5.4.  Action elements  . . . . . . . . . . . . . . . . . . . 16
+     4.6.  Example table  . . . . . . . . . . . . . . . . . . . . . . 16
+   5.  Processing a label against an LGR  . . . . . . . . . . . . . . 18
+     5.1.  Determining eligibility for a label  . . . . . . . . . . . 18
+     5.2.  Determining variants for a label . . . . . . . . . . . . . 18
+   6.  Conversion between other formats . . . . . . . . . . . . . . . 19
+   7.  IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 20
+   8.  Security Considerations  . . . . . . . . . . . . . . . . . . . 21
+   9.  References . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+   Appendix A.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 23
+   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 28
+   Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 29
+     C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 29
+     C.2.  Sample tables and running code . . . . . . . . . . . . . . 29
+     C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 29
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 30
 
 
 
 
-
-
-Davies & Freytag        Expires November 24, 2013               [Page 2]
+Davies & Freytag        Expires January 10, 2014                [Page 2]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 1.  Introduction
 
    This memo describes a method of using Extensible Markup Language
-   (XML) to describe the list of permissible code points and variants
-   used in a zone administrator's policies.
+   (XML) to describe the algorithm used to determine whether a given
+   domain label is permitted, and under which circumstances.  These
+   algorithms are comprised of a list of permissible codepoints,
+   variants, and a number of conditions where certain relationships are
+   applied.  These algorithms form part of a zone administrator's
+   policies, and can be referred to as Label Generation Rulesets (LGRs),
+   or IDN tables.
 
-   Historically, zone administrators - such as top-level domain
-   registries - have published their policies using text and HTML based
-   formats loosely based around the format used to describe a Language
-   Variant Table in [RFC3743].  [RFC4290] also provides a "Model table
-   format" that describes a similar set of functionality.
+   Administrators of the zones for top-level domain registries have
+   historically published their LGRs using ASCII text or HTML.  The
+   formatting of these documents has been loosely based on the format
+   used for the Language Variant Table in [RFC3743].  [RFC4290] also
+   provides a "model table format" that describes a similar set of
+   functionality.
 
    Through the first decade of IDN deployment, experience has shown that
-   these table formats are difficult to consistently implement and
-   compare due to their different formats.  A universal format, such as
-   one using a structured XML format, will assist by improving machine-
-   readability, consistency, reusability and maintainability of IDN
-   tables.  It will also provide for more complex conditional
-   implementation of variants that reflects the known requirements of
-   current zone administrator policies.
+   LGRs derived from these formats are difficult to consistently
+   implement and compare due to their different formats.  A universal
+   format, such as one using a structured XML format, will assist by
+   improving machine-readability, consistency, reusability and
+   maintainability of LGRs.  It also provides for more complex
+   conditional implementation of variants that reflects the known
+   requirements of current zone administrator policies.
+
+   While the predominant usage of this specification is to represent IDN
+   label policy, the format may also be used for describing ASCII domain
+   name label rulesets.
 
 
 
@@ -154,19 +164,9 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires November 24, 2013               [Page 3]
+Davies & Freytag        Expires January 10, 2014                [Page 3]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 2.  Design Goals
@@ -179,125 +179,69 @@ Internet-Draft        IDN Table XML representation              May 2013
    o  The format SHOULD be able to be checked for formatting errors,
       such that common mistakes can be caught;
 
-   o  An IDN Table MUST be able to express the set of valid code points
-      that are allowed for registration under a specific zone
-      administrator's policies;
+   o  An LGR MUST be able to express the set of valid codepoints that
+      are allowed for registration under a specific zone administrator's
+      policies;
 
    o  MUST be able to express computed alternatives to a given domain
       name based on a one-to-one, or one-to-many relationship.  These
-      computed alternatives are commonly known as "IDN variants";
+      computed alternatives are commonly known as "variants";
 
-   o  IDN Variants SHOULD be able to be tagged with specific categories,
+   o  Variants SHOULD be able to be tagged with specific categories,
       such that the categories can be used to support registry policy
       (such as whether to list the computed variant in the zone, or to
       merely block it from registration);
 
-   o  IDN Variants MUST be able to stipulated based on contextual
+   o  Variants MUST be able to stipulated based on contextual
       information.  For example, specific variants may only be
-      applicable when they follow another specific code point, or when
-      the code point is displayed in a specific presentation form;
+      applicable when they follow another specific codepoint, or when
+      the codepoint is displayed in a specific presentation form;
 
-   o  The data contained within the table MUST be unambiguous, such that
+   o  The data contained within an LGR MUST be unambiguous, such that
       independent implementations that utilise the contents will arrive
       at the same results;
 
-   o  IDN Tables SHOULD be suitable for comparison and re-use, such that
-      one could easily compare the contents of two or more to see the
+   o  LGRs SHOULD be suitable for comparison and re-use, such that one
+      could easily compare the contents of two or more to see the
       differences, to merge them, and so on.
 
-   o  As many existing IDN Tables are practicable SHOULD be able to be
-      migrated to the new format with all applicable logic retained.
+   o  As many existing IDN tables are practicable SHOULD be able to be
+      migrated to the LGR format with all applicable logic retained.
 
-   It is explicitly NOT the goal of this format to:
-
-   o  Stipulate what code points should be listed in an IDN Table by a
-      zone administrator.  What registration policies are used for a
-      particular zone is outside the scope of this memo.
-
-   o  Stipulate what a consumer of an IDN Table must do when they
-      determine a particular domain is valid or invalid; or arrive at a
-      set of computed IDN variants.  IDN Tables are only used to
+   It is explicitly NOT the goal of this format to stipulate what
+   codepoints should be listed in an LGR by a zone administrator.  Which
+   registration policies are used for a particular zone is outside the
+   scope of this memo.
 
 
 
-Davies & Freytag        Expires November 24, 2013               [Page 4]
+
+
+
+
+
+Davies & Freytag        Expires January 10, 2014                [Page 4]
 
-Internet-Draft        IDN Table XML representation              May 2013
-
-
-      describe rules for computing code points, but does not prescribe
-      how registries and other parties utilise them.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires November 24, 2013               [Page 5]
-
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 3.  Requirements
 
-   To be able to fulfil the known utilisation of IDN tables, Existing
-   adoption of IDN tables were reviewing to prepare this specification.
+   To be able to fulfil the known utilisation of LGRs, the existing
+   corpus of published IDN tables were reviewed to prepare this
+   specification.
 
-   In addition, the requirements of ICANN's work to implement a
-   "Language Generation Rules" for the DNS Root Zone [LGR-PROCEDURE]
-   were also considered.  In Section B of that document, five specific
-   requirements for a "label generation rules" methodology were
-   identified:
+   In addition, the requirements of ICANN's work to implement an LGR for
+   the DNS Root Zone [LGR-PROCEDURE] were also considered.  In Section B
+   of that document, five specific requirements for an LGR methodology
+   were identified:
 
-   o  The ability to identify a set of code points that are permitted.
+   o  The ability to identify a set of codepoints that are permitted.
 
-   o  The ability to represent a list of variants, if any, for each code
-      point.
+   o  The ability to represent a list of variants, if any, for each
+      codepoint.
 
-   o  A method of identifying code points that are related, using a tag.
+   o  A method of identifying codepoints that are related, using a tag.
 
    o  The ability to describe rules regarding the possible actions that
       may be performed on the resulting label (such as blocked,
@@ -332,12 +276,14 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013               [Page 6]
+Davies & Freytag        Expires January 10, 2014                [Page 5]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
-4.  IDN Table XML Format
+4.  LGR Format
+
+   An LGR is expressed as a well-formed XML Document [XML].
 
 4.1.  Namespace
 
@@ -348,51 +294,57 @@ Internet-Draft        IDN Table XML representation              May 2013
    The basic XML framework of the document is as follows:
 
        <?xml version="1.0"?>
-       <idntable xmlns="http://www.iana.org/idn-tables/0.1">
+       <lgr xmlns="http://www.iana.org/lgr/0.1">
            ...
-       </idntable>
+       </lgr>
 
-   Within the "idntable" element rests two sub-elements.  Firstly is a
+   Within the "lgr" element rests several sub-elements.  Firstly is a
    "meta" element that contains all meta-data associated with the IDN
    table, such as its authorship, what it is used for, implementation
    notes and references.  This is followed by a "data" element that
-   contains the substantive code-point data.
+   contains the substantive codepoint data.  Finally, an optional
+   "rules" element contains information on whole-label evaluation rules,
+   if any, along with any specific rules regarding the disposition of
+   computed variants.
 
        <?xml version="1.0"?>
-       <idntable xmlns="http://www.iana.org/idn-tables/0.1">
+       <lgr xmlns="http://www.iana.org/lgr/0.1">
            <meta>
                ...
            </meta>
            <data>
                ...
            </data>
-       </idntable>
+           <rules>
+               ...
+           </rules>
+       </lgr>
 
-   A document should contain exactly one "idntable" element, and within
-   that optionally one "meta" element and exactly one "data" element.
+   A document should contain exactly one "lgr" element, and within that
+   optionally one "meta" element and exactly one "data" element.
 
-4.3.  The meta element
+4.3.  Metadata
 
    The "meta" element is used to express meta-data associated within the
-   IDN table.  It can be used to explain the author or relevant contact
+   LGR.  It can be used to explain the author or relevant contact
    person, explain what the usage of the IDN table is, provide
    implementation notes as well as references.  The data contained
-   within is not required by software consuming the IDN table in order
-   to calculate valid IDN labels, or to calculate variants.
+
+
+
+Davies & Freytag        Expires January 10, 2014                [Page 6]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+   within is not required by software consuming the LGR in order to
+   calculate valid labels, or to calculate variants.
 
 4.3.1.  The version element
 
    The "version" element is used to uniquely identify each version of
-   the table being represented.  No specific format is required, but it
-   is RECOMMENDED that it be a numerical positive integer, which is
-
-
-
-Davies & Freytag        Expires November 24, 2013               [Page 7]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
-
+   the LGR being represented.  No specific format is required, but it is
+   RECOMMENDED that it be a numerical positive integer, which is
    incremented with each revision of the file.
 
    An example of a typical first edition of a document:
@@ -401,15 +353,15 @@ Internet-Draft        IDN Table XML representation              May 2013
 
    A common alternative is to use a major-minor number scheme, where two
    decimal numbers are used to represent major and minor changes to the
-   table.  For example, "1.0" would be the first major release, "1.1"
+   LGR.  For example, "1.0" would be the first major release, "1.1"
    would be a minor update to that, and "2.0" would represent a major
    revision.
 
 4.3.2.  The date element
 
-   The "date" element is used to identify the date the table was
-   written.  The contents of this element MUST be a valid ISO 8601 date
-   string as described in [RFC3339].
+   The "date" element is used to identify the date the LGR was written.
+   The contents of this element MUST be a valid ISO 8601 date string as
+   described in [RFC3339].
 
    Example of a date:
 
@@ -417,37 +369,36 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 4.3.3.  The language element
 
-   The "language" element signals that the table is associated with a
+   The "language" element signals that the LGR is associated with a
    specific language or script.  The value of the language element must
    be a valid language tag as described in [RFC5646].  The tag may
-   simply refer to a script if the table is not referring to a specific
-   language.  There may be multiple language elements for a table if the
-   table spans multiple languages and/or scripts.
+   simply refer to a script if the LGR is not referring to a specific
+   language.  There may be multiple language elements for a LGR if it
+   spans multiple languages and/or scripts.
 
-   Example of an English language table:
+   Example of an English language LGR:
 
       <language>en</language>
 
-   If the table applies to a specific script, rather than a language,
-   the "und" language tag should be used followed by the relevant
-   [RFC5646] script subtag.  For example, for a Cyrillic script table:
+   If the LGR applies to a specific script, rather than a language, the
+   "und" language tag should be used followed by the relevant [RFC5646]
+   script subtag.  For example, for a Cyrillic script LGR:
 
       <language>und-Cyrl</language>
+
+
+
+Davies & Freytag        Expires January 10, 2014                [Page 7]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
 
 4.3.4.  The domain element
 
    This optional element refers to a domain to which this policy is
    applied.
 
-       <domain>example</domain>
-
-
-
-
-Davies & Freytag        Expires November 24, 2013               [Page 8]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
+       <domain>example.com</domain>
 
    There may be multiple <domain> tags used to reflect a list of
    domains.
@@ -456,18 +407,18 @@ Internet-Draft        IDN Table XML representation              May 2013
 
    The "description" element is a free-form element that contains any
    additional relevant description.  Typically, this field contains
-   authorship information, as well as additional context on how the
-   table was formulated (such as with references), and how it has been
+   authorship information, as well as additional context on how the LGR
+   was formulated (such as with references), and how it has been
    applied.
 
    The element has an optional "type" attribute, which refers to the
    media type of the enclosed data.  If the description lacks a type
    field, it will be assumed to be plain text.
 
-   The description elements describe information relating to the IDN
-   table that is useful for the user of the table in its interpretation.
-   This may explain the history, the rationale, reference sources etc.
-   It may also contain authorship information.
+   The description elements describe information relating to the LGR
+   that is useful for the user of the LGR in its interpretation.  This
+   may explain the history, the rationale, reference sources etc.  It
+   may also contain authorship information.
 
    The "type" attribute may be used to specify the encoding within
    description element.  The attribute should be a valid MIME type.  If
@@ -479,38 +430,54 @@ Internet-Draft        IDN Table XML representation              May 2013
 
    The "validity-start" and "validity-end" elements are optional
    elements that describe the time period from which the contents of the
-   table become valid (i.e. are used in registry policy), and the
-   contents of the table cease to be used.
+   LGR become valid (i.e. are used in registry policy), and the contents
+   of the LGR cease to be used.
 
    The times should conform to the format described in section 5.6 of
    [RFC5646].  It may be comprised of a date, or a date and time stamp.
 
-4.4.  The data element
+4.3.7.  The unicode-version element
 
-   The "data" element contains the code point data the comprises the
-   registry policy.  It describes registry policy using a series of XML
-   elements that either represent individual code points, or ranges of
-   code points.
-
-   The data may use the "char" and "range" elements to specify code
-   points, and code ranges.
-
-   Discrete permissable code points or code point sequences may be
-   stipulated with a "char" element, e.g.
+   If a given table is dependent on certain characters or functionality
+   from a given version of the Unicode standard, the minimum version
+   number MUST be listed.  If any software processing the table does not
 
 
 
-Davies & Freytag        Expires November 24, 2013               [Page 9]
+Davies & Freytag        Expires January 10, 2014                [Page 8]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
+
+   have the minimum requisite version, it MUST NOT perform any
+   operations relating to whole-label evaluation.  This is because the
+   Unicode properties for the codepoints may have changed in subsequent
+   versions.
+
+       <unicode-version>6.2</unicode-version>
+
+4.4.  Codepoint Rules
+
+   The bulk of a label generation ruleset is a description of which set
+   of codepoints are eligible for a given label.  For rulesets that
+   perform operations that result in potential variants, the codepoint-
+   level relationships between variants need to also be described.
+
+   The codepoint data is collected within a "data" element.  Within this
+   element, a series of "char" and "range" elements describe eligible
+   codepoints, or ranges of codepoints, respectively.
+
+   Discrete permissible codepoints or codepoint sequences may be
+   stipulated with a "char" element, e.g.
 
        <char cp="002D"/>
 
-   Ranges of permissable code points may be stipulated with a "range"
+   Ranges of permissible codepoints may be stipulated with a "range"
    element, e.g.
 
        <range first-cp="0030" last-cp="0039"/>
+
+   The range is inclusive of the first and last codepoints.
 
    Codepoints must be expressed in hexadecimal, i.e. according to the
    standard Unicode convention without the prefix "U+".  The rationale
@@ -521,22 +488,29 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 4.4.1.  Sequences
 
-   A sequence of two or more code points may be specified in a table,
-   when the exact sequence of code points is required to occur in order
-   for the consituent elements to be eligible.  This approach allows
-   representation of policy where a specific code point is only eligible
-   when preceded or followed by another code point.  For example, in
+   A sequence of two or more codepoints may be specified in a LGR, when
+   the exact sequence of codepoints is required to occur in order for
+   the consituent elements to be eligible.  This approach allows
+   representation of policy where a specific codepoint is only eligible
+   when preceded or followed by another codepoint.  For example, in
    order to represent the eligibility of the MIDDLE DOT (U+00B7) only
    when both preceded and followed by the LATIN SMALL LETTER L (U+006C):
 
    <char cp="006C 00B7 006C"/>
 
+
+
+Davies & Freytag        Expires January 10, 2014                [Page 9]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
 4.4.2.  Variants
 
-   While most tables typically only determine code point eligibility,
-   others additionally specify a mapping of code points to other code
-   points, known as "variants".  What constitutes a variant is a matter
-   of policy, and varies for each implementation.
+   While most LGRs typically only determine codepoint eligibility,
+   others additionally specify a mapping of codepoints to other
+   codepoints, known as "variants".  What constitutes a variant is a
+   matter of policy, and varies for each implementation.
 
 4.4.2.1.  Basic variants
 
@@ -549,32 +523,25 @@ Internet-Draft        IDN Table XML representation              May 2013
      <var cp="0076"/>
    </char>
 
-   A sequence of multiple code points can be specified as a variant of a
-   single code point.  For example, the sequence of LATIN SMALL LETTER O
+   A sequence of multiple codepoints can be specified as a variant of a
+   single codepoint.  For example, the sequence of LATIN SMALL LETTER O
    (U+006F) then LATIN SMALL LETTER E (U+0065) can be specified as a
    variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as
-
-
-
-Davies & Freytag        Expires November 24, 2013              [Page 10]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
-
    follows:
 
    <char cp="00F6">
      <var cp="006F 0065"/>
    </char>
 
-   Variants are specified in only on direction.  For symmetric variants,
-   the inverse of the variant must be explicitly specified:
+   Variants are specified in only one direction.  For symmetric
+   variants, the inverse of the variant must be explicitly specified:
 
    <char cp="006F 0065">
      <var cp="00F6"/>
    </char>
 
-   It is not possible to specify variants for ranges.
+   Both the south and target of a variant mapping may be sequences.  It
+   is not possible to specify variants for ranges.
 
 4.4.2.2.  Null variants
 
@@ -587,41 +554,40 @@ Internet-Draft        IDN Table XML representation              May 2013
      <var cp=""/>
    </char>
 
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 10]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
 4.4.2.3.  Conditional variants
 
-   At its basis, generation of variants are conditional on a specific
-   code point or set of code points.  However, in some instances
-   registries perform control based on other attributes that can not
-   solely be determined based on simple code point comparisons.  For
-   example, in some tables utilising the Arabic script, the Arabic
-   contextual form is a determinant in which variants are used.  The
-   contextual form can not be derived solely from the code point, as the
-   code point is the same for the various forms.
+   Fundamentally, variants are mappings between two sequences of
+   codepoints.  However, in some instances for a variant relationship to
+   exist, some context external to the codepoint sequence must be
+   considered.  For example, in some cases the positional context
+   determines whether two code point sequences are variants of each
+   other.  This is because Arabic characters can have different forms
+   based on position.  This position context cannot be solely derived
+   from the codepoint, as the code point is the same for the various
+   forms.
 
-   The IDN table provides for conditioning generation variants on
-   specific instances as follows, using the "when" attribute.
+   To specify a conditional variant relationship the "when" attribute is
+   used.  The variant relationship exists when the condition in the
+   "when" attribute is satisfied.
 
-   arabic-initial  Based on context, the code point would be presented
-        in its Arabic Initial form.
+   arabic-initial  The codepoint is in a context where it would be
+        presented in its Arabic Initial form.
 
-   arabic-isolated  Based on context, the code point would be presented
-        in its Arabic Isolated form.
+   arabic-isolated  The codepoint is in a context where it would be
+        presented in its Arabic Isolated form.
 
+   arabic-medial  The codepoint is in a context where it would be
+        presented in its Arabic Medial form.
 
-
-
-
-
-Davies & Freytag        Expires November 24, 2013              [Page 11]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
-
-   arabic-medial  Based on context, the code point would be presented in
-        its Arabic Medial form.
-
-   arabic-final  Based on context, the code point would be presented in
-        its Arabic Final form.
+   arabic-final  The codepoint is in a context where it would be
+        presented in its Arabic Final form.
 
    For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
    (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW
@@ -632,20 +598,265 @@ Internet-Draft        IDN Table XML representation              May 2013
      <var cp="0673" when="arabic-final"/>
    </char>
 
+   Only a single context attribute can be applied to any "var" element,
+   however, multiple "var" elements using the same mapping, but
+   different "when" attributes may be specified.
+
 4.4.3.  Result tagging
 
-   Typically, tables are used to explicitly designate allowable code
-   points, with any label with a code point not explicitly listed in the
-   table being considered an ineligible label according to the ruleset.
+   Typically, LGRs are used to explicitly designate allowable
+   codepoints, with any label with a codepoint not explicitly listed in
+   the LGR being considered an ineligible label according to the
+   ruleset.
 
-   For more complex registry rules, there may be a need to discern code
-   points and variants of certain types.  This can be accomplished by
-   applying a "tag" attribute, and then filtering on results based on
-   the tag.
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 11]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+   For more complex registry rules, there may be a need to discern
+   codepoints and variants of certain types.  This can be accomplished
+   by applying a "tag" attribute, and then filtering on results based on
+   the tag using whole label evaluation.
 
    A tag may be of any value, but the following tags are pre-defined to
    encourage common conventions in their application.  If these tags can
    represent registry policy, they SHOULD be used.
+
+4.5.  Whole Label Evaluation Rules
+
+4.5.1.  Basic concepts
+
+   The codepoints in a label sometimes need to satisfy context-based
+   rules, in order for the label to be considered valid.  Whole Label
+   Evaluation Rules (WLE) can be specified to support this validation.
+   The same validation can be applied to variants created by applying
+   the variant mapping.
+
+   The whole label evaluation rules are contained in an "wle" element,
+   which contains character class, rule and action elements.  These are
+   described below.
+
+   A Whole Label Evaluation Rule describes a complete label.  The
+   elements of the "rule" element are:
+
+   o  character classes, which defines sets of codepoints to be used for
+      context comparisons;
+
+   o  context operators, which define when character classes may appear;
+      and
+
+   o  actions, which define what actions to take based on the context.
+
+4.5.2.  Character Classes
+
+   Character classes are named sets of characters that share a
+   particular property.  They can be defined in several ways.
+
+   1.  Define the property via matching a tag in the codepoint data.
+       All characters with the same tag attribute are part of the same
+       class.
+
+   2.  Reference one of the Unicode character properties defined in the
+       Unicode Character Database (UCD).
+
+   3.  Explicitly list all the codepoints in the class.
+
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 12]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+   4.  Define a class as a combination of any number of these
+       definitions or other classes
+
+4.5.2.1.  Tag-based classes
+
+   If tags are defined using the "tag" attribute, classes are defined
+   based upon the names of the tags used.  From these classes, further
+   operations may be performed by context operators and actions.
+
+4.5.2.2.  Unicode property based classes
+
+   A class is defined in terms of Unicode properties by giving the
+   Unicode property alias and the property value or property value
+   alias.
+
+   <class name="virama" property="ccc:9">
+
+   The example above selects all characters for which the Unicode
+   canonical combining class (ccc) value is 9.  This value of the ccc is
+   assigned in the UCD to all characters that are viramas.  The string
+   "ccc" is the short-alias for the canonical combining class, as
+   defined in the file PropertyAliases.txt in the UCD.  [[Possibly
+   change those to the labels used by the XML format of the UCD -- per
+   UAX42]]
+
+   Unicode properties may, in principle, change between versions of the
+   Unicode Standard.  However, the values assigned for a given version
+   are fixed.  If Unicode Properties are used, they MUST be declared in
+   the header, and the Unicode Version must be defined.  (Note, some
+   Unicode properties are stable across versions and do not change, once
+   assigned.  Nevertheless, in order to make sure the UCD version covers
+   all the characters in the codepoint tables, it is necessary to give
+   version number in the header.).
+
+4.5.2.3.  Explicitly declared classes
+
+   A class of codepoints may also be declared by listing the codepoints
+   that are a member of the class.  This is useful when tagging can not
+   be used because codepoints are not part of the eligible set of
+   codepoints for the given LGR.
+
+   To define a class in terms of an explicit list of codepoints:
+
+   <class name="abc">
+       <char cp="0061"/>
+       <char cp="0062"/>
+       <char cp="0063"/>
+   </class>
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 13]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+   This defines a class named "abc" containing the codepoints for
+   characters "a", "b" and "c".  The ordering of the codepoints is not
+   material, but it is RECOMMENDED to list them in ascending order.
+
+   Range operators may also be used to represent a series of consecutive
+   codepoints.  The same declaration can be made as follows:
+
+   <class name="abc">
+       <range first-cp="0061" last-cp="0063"/>
+   </class>
+
+4.5.2.4.  Combined classes
+
+   Classes may be combined using logical operators for inversion, union,
+   intersection and exclusive-or.
+
+   <not class="xxx">
+   <union class="xxx" class="yyy">
+   <not class="xxx">
+   <difference class="xxx" class="yyy">
+   <symmetric-difference class="xxx" class="yyy">
+
+4.5.3.  Context rules
+
+   Context rules are comprised of a series of logical conditions that
+   must be satisfied in order to determine a label meets a given
+   context.  These rules relate to the appearance of character classes
+   defined elsewhere in the table.
+
+4.5.3.1.  The rule element
+
+   A matching rule is defined by a "rule" element, which combines
+   character classes with context operators.
+
+   A simple rule to match a label where all characters are members of
+   the class "preferred":
+
+   <rule name="preferred">
+      <class name="preferred" count="1+"/>
+   </rule>
+
+   To provide more specificity on the number of times a specific
+   character class may appear, the "count" attribute allows you to
+   specify the number of times.  This number should be an integer of 0
+   or higher.  If it is followed by a plus character (+), this means it
+   can be higher that the number stated.  Therefore, "1" would mean
+   exactly one occurrence, whereas "1+" would indicate one or more
+   occurrences.
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 14]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+   For cases where several alternates could be chosen, the <choice>
+   element can encode a list of choices:
+
+   <rule name="ldh">
+      <choice>
+          <class name="letters"/>
+          <class name="digits"/>
+          <class name="hyphen"/>
+      </choice>
+   </rule>
+
+   For cases when a match may occur against any codepoint, use any "any"
+   element:
+
+   <rule name="starting-digit">
+      <class name="digits" count="1"/>
+      <any/>
+   </rule>
+
+   By default Whole Label Evaluation Rules always match the entire
+   label.  Use attribute "match" with values "start", "anywhere" and
+   "end" to define rules that need to match in specific positions of the
+   label.
+   <any count="0+"/>
+
+   Rules are named and can be nested by reference.
+
+   Here's an example of a rule requiring that all labels be letters
+   (optionally followed by combining marks) and possibly digits.
+
+   <class name="letter" property="gc:L"/>
+   <class name="combining-mark" property="gc:M"/>
+   <class name="digit" property="gc:Nd">
+   <rule name="letter-grapheme">
+      <class name="letter" count="1+"/>
+      <class name="combining-mark" count="0+"/>
+   </rule>
+   <rule name="leading-letter>
+      <class name="letter-grapheme" count="1"/>
+      <choice count="0+">
+          <class name="letter-grapheme" count="0+"/>
+          <class name="digit" count="0+"/>
+      </choice>
+   </rule>
+
+
+
+
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 15]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+4.5.4.  Action elements
+
+   The purpose of a rule is to trigger a specific action.  Often, the
+   action simply results in blocking a label that does not match a rule.
+
+   blocking rule
+   <action action="blocked" not-match="leading-letter"/><
+
+   An action may contain precisely one "match" or "not-match" attribute,
+   but not both.  Because rules may be compound rules that contain other
+   rules, only a single rule may be named as the value of the "match" or
+   "not-match" attrbute.
+
+   The precise action taken and the name of the corresponding "action"
+   attribute are not defined here.  It is strongly RECOMMENDED to use
+   the following actions only with their conventional sense.
 
    block  The resulting string should be blocked from registration.
         This would typically apply for a derived variant that has no
@@ -660,21 +871,34 @@ Internet-Draft        IDN Table XML representation              May 2013
         the typical default action if no tagging is used, and is known
         as a "preferred" variant in [RFC3743])
 
-4.5.  Example table
+4.6.  Example table
 
-   A sample complete XML IDN table is as follows.
-
-
+   A sample complete XML LGR is as follows.
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 12]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 16]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
        <?xml version="1.0"?>
-       <idntable xmlns="http://www.iana.org/idn-tables/0.1">
+       <lgr xmlns="http://www.iana.org/lgr/0.1">
            <meta>
                 <version>1</version>
                 <date>2010-01-01</date>
@@ -692,7 +916,7 @@ Internet-Draft        IDN Table XML representation              May 2013
                <range first-cp="0061" last-cp="007A"/>
                <char cp="00E4"/>
            </data>
-       </idntable>
+       </lgr>
 
 
 
@@ -724,23 +948,22 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 13]
+Davies & Freytag        Expires January 10, 2014               [Page 17]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
-5.  Processing a label against a table
+5.  Processing a label against an LGR
 
 5.1.  Determining eligibility for a label
 
-   In order to use a table to test a specific IDN table for membership
-   in the table, a consumer of an IDN table must iterate through each
-   code point within a given U-label, and test that each code point is a
-   member of the IDN table.  If any code point is not a member of the
-   IDN Table, it shall be deemed as not eligible in accordance with the
-   table.
+   In order to use a table to test a specific domain label for
+   membership in the LGR, a consumer of the LGR must iterate through
+   each codepoint within a given U-label, and test that each codepoint
+   is a member of the LGR.  If any codepoint is not a member of the LGR,
+   it shall be deemed as not eligible in accordance with the table.
 
-   A code point is deemed a member of the table when it is listed with
+   A codepoint is deemed a member of the table when it is listed with
    the <char> element, and all necessary condition listed in "when"
    attributes are correctly satisfied.
 
@@ -748,7 +971,7 @@ Internet-Draft        IDN Table XML representation              May 2013
 
    For a given eligible label, the set of variants is deemed to be each
    possible permutation of <var> elements, whereby all "when" attributes
-   are correctly satisfied for each code point in the given permutation.
+   are correctly satisfied for each codepoint in the given permutation.
 
 
 
@@ -780,42 +1003,23 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 14]
+
+Davies & Freytag        Expires January 10, 2014               [Page 18]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 6.  Conversion between other formats
 
-6.1.  RFC 3743 Language Variant Table
+   Both [RFC3743] and [RFC4290] provide different grammars for IDN
+   tables.  These formats are unable to fully cater for the increased
+   requirements of contemporary IDN variant policies.
 
-   All attributes can be retained in conversion from an [RFC3743]
-   language variant table to this XML format.
-
-   This XML format can be converted to the format described in
-   [RFC3743], with the following caveats:
-
-   o  Version numbers not expressed as integers will not satisfy the
-      ABNF formatting for [RFC3743].
-
-   o  Much of the additional meta data can not be expressed in the text
-      format (although can be supplied as comments in the text file).
-
-   o  The [RFC3743] format only allows for two variant classes, those
-      that are preferred and those that are regular.  Other distinctions
-      will be lost.
-
-   o  No ability to retain conditional variants.
-
-6.2.  RFC 4290 Model Table Format
-
-   All attributes can be retained in conversion from the [RFC4290] model
-   table format to this XML format.
-
-   Tables similarly can be converted to the format described in
-   [RFC4290] with the same caveats as the [RFC3743] format, and
-   additionally the inability to classify variants into groups such as
-   "preferred".
+   This specification is a superset of functionality provided by these
+   IDN table formats, thus any table expressed in those formats can be
+   expressed in this format.  Automated conversion can be conducted
+   between tables conformant with the grammar specified in each
+   document.
 
 
 
@@ -836,9 +1040,29 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 15]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 19]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 7.  IANA Considerations
@@ -892,9 +1116,9 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 16]
+Davies & Freytag        Expires January 10, 2014               [Page 20]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 8.  Security Considerations
@@ -948,9 +1172,9 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 17]
+Davies & Freytag        Expires January 10, 2014               [Page 21]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 9.  References
@@ -981,6 +1205,7 @@ Internet-Draft        IDN Table XML representation              May 2013
 
    [UAX42]    Unicode Consortium, "Unicode Character Database in XML".
 
+   [XML]      "Extensible Markup Language (XML) 1.0".
 
 
 
@@ -1003,17 +1228,16 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-
-Davies & Freytag        Expires November 24, 2013              [Page 18]
+Davies & Freytag        Expires January 10, 2014               [Page 22]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 Appendix A.  RelaxNG Schema
 
 
    <?xml version="1.0" encoding="UTF-8"?>
-   <grammar ns="http://www.iana.org/idn-tables/0.1"
+   <grammar ns="http://www.iana.org/lgr/0.1"
      xmlns="http://relaxng.org/ns/structure/1.0">
      <define name="language-tag">
        <text/>
@@ -1027,16 +1251,23 @@ Appendix A.  RelaxNG Schema
      <define name="variant-condition">
        <text/>
      </define>
+     <define name="tag">
+       <text/>
+     </define>
      <define name="point-single">
        <element name="char">
          <attribute name="cp">
            <ref name="code-point"/>
+         </attribute>
+         <attribute name="tag">
+           <ref name="tag"/>
          </attribute>
          <zeroOrMore>
            <ref name="point-variant"/>
          </zeroOrMore>
        </element>
      </define>
+     <!-- Representation of a code point variant -->
      <define name="point-variant">
        <element name="var">
          <attribute name="cp">
@@ -1050,6 +1281,14 @@ Appendix A.  RelaxNG Schema
              <ref name="variant-condition"/>
            </attribute>
          </optional>
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 23]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
        </element>
      </define>
      <define name="point-multiple">
@@ -1057,14 +1296,6 @@ Appendix A.  RelaxNG Schema
          <attribute name="first-cp">
            <ref name="code-point"/>
          </attribute>
-
-
-
-Davies & Freytag        Expires November 24, 2013              [Page 19]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
-
          <attribute name="last-cp">
            <ref name="code-point"/>
          </attribute>
@@ -1079,22 +1310,97 @@ Internet-Draft        IDN Table XML representation              May 2013
          </choice>
        </oneOrMore>
      </define>
+     <define name="any">
+       <element name="any">
+         <optional>
+           <attribute name="count"/>
+         </optional>
+       </element>
+     </define>
+     <define name="class">
+       <element name="class">
+         <optional>
+           <attribute name="count"/>
+         </optional>
+         <optional>
+           <attribute name="name"/>
+         </optional>
+         <zeroOrMore>
+           <ref name="points"/>
+         </zeroOrMore>
+       </element>
+     </define>
+     <define name="choice">
+       <element name="choice">
+         <optional>
+           <attribute name="count"/>
+         </optional>
+         <oneOrMore>
+           <ref name="class-matchers"/>
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 24]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+         </oneOrMore>
+       </element>
+     </define>
+     <define name="class-matchers">
+       <oneOrMore>
+         <choice>
+           <ref name="class"/>
+           <ref name="any"/>
+           <ref name="choice"/>
+         </choice>
+       </oneOrMore>
+     </define>
+     <define name="rules-declaration">
+       <element name="rule">
+         <attribute name="name"/>
+         <oneOrMore>
+           <ref name="class-matchers"/>
+         </oneOrMore>
+       </element>
+     </define>
+     <define name="action-declaration">
+       <element name="action">
+         <attribute name="action"/>
+         <choice>
+           <attribute name="match"/>
+           <attribute name="not-match"/>
+         </choice>
+       </element>
+     </define>
      <start>
-       <ref name="idn-table"/>
+       <ref name="lgr"/>
      </start>
-     <define name="idn-table">
-       <element name="idntable">
+     <define name="lgr">
+       <element name="lgr">
          <attribute name="id"/>
          <optional>
            <ref name="meta-section"/>
          </optional>
          <ref name="data-section"/>
+         <optional>
+           <ref name="rules-section"/>
+         </optional>
        </element>
      </define>
      <define name="meta-section">
        <element name="meta">
          <zeroOrMore>
            <choice>
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 25]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
              <optional>
                <element name="version">
                  <text/>
@@ -1113,16 +1419,23 @@ Internet-Draft        IDN Table XML representation              May 2013
              <zeroOrMore>
                <element name="domain">
                  <ref name="domain-name"/>
-
-
-
-Davies & Freytag        Expires November 24, 2013              [Page 20]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
-
                </element>
              </zeroOrMore>
+             <optional>
+               <element name="validity-start">
+                 <text/>
+               </element>
+             </optional>
+             <optional>
+               <element name="validity-end">
+                 <text/>
+               </element>
+             </optional>
+             <optional>
+               <element name="unicode-version">
+                 <text/>
+               </element>
+             </optional>
              <zeroOrMore>
                <element name="description">
                  <attribute name="type"/>
@@ -1136,6 +1449,24 @@ Internet-Draft        IDN Table XML representation              May 2013
      <define name="data-section">
        <element name="data">
          <ref name="points"/>
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 26]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
+       </element>
+     </define>
+     <define name="rules-section">
+       <element name="rules">
+         <zeroOrMore>
+           <choice>
+             <ref name="rule-declaration"/>
+             <ref name="action-declaration"/>
+           </choice>
+         </zeroOrMore>
        </element>
      </define>
    </grammar>
@@ -1172,9 +1503,14 @@ Internet-Draft        IDN Table XML representation              May 2013
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 21]
+
+
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 27]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 Appendix B.  Acknowledgements
@@ -1228,9 +1564,9 @@ Appendix B.  Acknowledgements
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 22]
+Davies & Freytag        Expires January 10, 2014               [Page 28]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 Appendix C.  Editorial Notes
@@ -1239,42 +1575,12 @@ Appendix C.  Editorial Notes
 
 C.1.  Known Issues and Future Work
 
-C.1.1.  Interpretation policy
+   o  A default set of actions should be defined if they are not
+      explicitly accounted for in the table.
 
-   Interpretation policy.  The default assumption is that all labels
-   that match code points listed in the table are "allowed", and all
-   others are "disallowed".  Should interpreting the table in a
-   different way be an implementation matter, or explicit in the table
-   format?  Adding an explicit interpretation policy in the table that
-   is machine-readable and interpretable makes the table format
-   significantly more complex and makes writing an generic interpreter
-   more difficult.
-
-   At a minimum, there needs to be a way of tagging characters and
-   variants in such a way that the consumer can discern between various
-   actions such as "allocate", "block", "delegate", "mirror" or
-   "withhold".  How these actions are performed beyond being tagged in
-   the result set if outside the scope of the memo.
-
-   A more step-wise description of how variants are computed, including
-   the methodology for assessing contextual rules, should be supplied.
-
-C.1.2.  Metadata
-
-   A method of specifying the origin URI for a table, and an expiration
-   or refresh policy, as meta-data may be a useful way to declare how
-   the table will be updated.
-
-   The addition of activation/expiration dates.
-
-C.1.3.  UAX#29 based rule application
-
-   The LGR Procedure [LGR-PROCEDURE] calls for whole-string evaluation
-   rules "based on a compatible extension of the extended grapheme
-   clusters defined in UAX#29", specifically "these rules are required
-   to be representable by a refinement of the general mechanism in
-   UAX#29".  It is not clear what the use-cases for this are in order to
-   judge the least-complex solution to the problem set.
+   o  A method of specifying the origin URI for a table, and an
+      expiration or refresh policy, as meta-data may be a useful way to
+      declare how the table will be updated.
 
 C.2.  Sample tables and running code
 
@@ -1282,25 +1588,23 @@ C.2.  Sample tables and running code
    implementation of this specification, is posted at
    https://github.com/kjd/idntables
 
-
-
-Davies & Freytag        Expires November 24, 2013              [Page 23]
-
-Internet-Draft        IDN Table XML representation              May 2013
-
-
 C.3.  Change History
 
    -00  Initial draft.
 
    -01  Add an XML Namespace, and fix other XML nits.  Add support for
-        sequences of code points.  Improve on consistently using Unicode
+        sequences of codepoints.  Improve on consistently using Unicode
         nomenclature.
 
    -02  Add support for validity periods.
 
    -03  Incorporate requirements from the Label Generation Ruleset
-        Procedure for the DNS Root Zone.
+        Procedure for the DNS Root Zone.  These requirements include a
+        detailed grammar for specifying whole-label variants, and the
+        ability to explicitly declare of the actions associated with a
+        specific variant.  The document also consistently applies the
+        term "Label Generation Ruleset", rather than "IDN table", to
+        reflect the policy term now being used to describe these.
 
 
 
@@ -1316,33 +1620,9 @@ C.3.  Change History
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires November 24, 2013              [Page 24]
+Davies & Freytag        Expires January 10, 2014               [Page 29]
 
-Internet-Draft        IDN Table XML representation              May 2013
+Internet-Draft      Label Generation Rulesets in XML           July 2013
 
 
 Authors' Addresses
@@ -1396,5 +1676,5 @@ Authors' Addresses
 
 
 
-Davies & Freytag        Expires November 24, 2013              [Page 25]
+Davies & Freytag        Expires January 10, 2014               [Page 30]
 
