@@ -522,8 +522,6 @@
 				attribute "match" with values "start", "anywhere" and "end" to define rules that need to match in
                     specific positions of the label.</t>
 
-				<figure><artwork><![CDATA[<any count="0+"/>]]></artwork></figure>
-
 				<t>Rules are named and can be nested by reference.</t>
 
 				<t>Here's an example of a rule requiring that all labels be letters (optionally followed by combining marks) 

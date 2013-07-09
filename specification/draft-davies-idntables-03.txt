@@ -88,7 +88,7 @@ Table of Contents
        4.5.1.  Basic concepts . . . . . . . . . . . . . . . . . . . . 12
        4.5.2.  Character Classes  . . . . . . . . . . . . . . . . . . 12
        4.5.3.  Context rules  . . . . . . . . . . . . . . . . . . . . 14
-       4.5.4.  Action elements  . . . . . . . . . . . . . . . . . . . 16
+       4.5.4.  Action elements  . . . . . . . . . . . . . . . . . . . 15
      4.6.  Example table  . . . . . . . . . . . . . . . . . . . . . . 16
    5.  Processing a label against an LGR  . . . . . . . . . . . . . . 18
      5.1.  Determining eligibility for a label  . . . . . . . . . . . 18
@@ -808,7 +808,6 @@ Internet-Draft      Label Generation Rulesets in XML           July 2013
    label.  Use attribute "match" with values "start", "anywhere" and
    "end" to define rules that need to match in specific positions of the
    label.
-   <any count="0+"/>
 
    Rules are named and can be nested by reference.
 
@@ -830,9 +829,10 @@ Internet-Draft      Label Generation Rulesets in XML           July 2013
       </choice>
    </rule>
 
+4.5.4.  Action elements
 
-
-
+   The purpose of a rule is to trigger a specific action.  Often, the
+   action simply results in blocking a label that does not match a rule.
 
 
 
@@ -840,11 +840,6 @@ Davies & Freytag        Expires January 10, 2014               [Page 15]
 
 Internet-Draft      Label Generation Rulesets in XML           July 2013
 
-
-4.5.4.  Action elements
-
-   The purpose of a rule is to trigger a specific action.  Often, the
-   action simply results in blocking a label that does not match a rule.
 
    blocking rule
    <action action="blocked" not-match="leading-letter"/><
@@ -875,28 +870,6 @@ Internet-Draft      Label Generation Rulesets in XML           July 2013
 
    A sample complete XML LGR is as follows.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires January 10, 2014               [Page 16]
-
-Internet-Draft      Label Generation Rulesets in XML           July 2013
-
-
        <?xml version="1.0"?>
        <lgr xmlns="http://www.iana.org/lgr/0.1">
            <meta>
@@ -916,7 +889,34 @@ Internet-Draft      Label Generation Rulesets in XML           July 2013
                <range first-cp="0061" last-cp="007A"/>
                <char cp="00E4"/>
            </data>
+
+
+
+Davies & Freytag        Expires January 10, 2014               [Page 16]
+
+Internet-Draft      Label Generation Rulesets in XML           July 2013
+
+
        </lgr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
