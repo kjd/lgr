@@ -1,133 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
-<!ENTITY rfc3339 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml">
-<!ENTITY rfc3743 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3743.xml">
-<!ENTITY rfc5646 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5646.xml">
-<!ENTITY rfc4290 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4290.xml">
-<!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
-]>
+        <!ENTITY rfc3339 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml">
+        <!ENTITY rfc3743 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3743.xml">
+        <!ENTITY rfc5646 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5646.xml">
+        <!ENTITY rfc4290 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4290.xml">
+        <!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
+        ]>
 <rfc category="info" ipr="trust200902" docName="draft-davies-idntables-04">
-	<?rfc toc="yes" ?>
-	<?rfc symrefs="yes" ?>
-	<?rfc sortrefs="yes"?>
-	<?rfc iprnotified="no" ?>
-	<?rfc strict="no" ?>
+    <?rfc toc="yes" ?>
+    <?rfc symrefs="yes" ?>
+    <?rfc sortrefs="yes"?>
+    <?rfc iprnotified="no" ?>
+    <?rfc strict="no" ?>
 
-	<front>
-		<title abbrev="Label Generation Rulesets in XML">Representing Label Generation Rulesets using XML</title>
-		<author initials="K" surname="Davies" fullname="Kim Davies">
-			<organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization>
-			<address>
-				<postal>
-					<street>12025 Waterfront Drive</street>
-					<city>Los Angeles</city>
-					<region>CA</region>
-					<code>90094</code>
-					<country>US</country>
-				</postal>
-				<phone>+1 310 301 5800</phone>
-				<email>kim.davies@icann.org</email>
-				<uri>http://www.iana.org/</uri>
-			</address>
-		</author>
-		<author initials="A" surname="Freytag" fullname="Asmus Freytag">
-			<organization>ASMUS Inc.</organization>
-			<address>
-				<email>asmus@unicode.org</email>
-			</address>
-		</author>
-		<date/>
-		<area>Management</area>
-		<abstract>
-			
-			<t>This memo describes a method of representing the domain name registration policy for a zone administrator using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are particularly used for the implementation of Internationalised Domain Names (IDNs). The rulesets are used to implement and share policy on which specific Unicode codepoints are permitted for registrations, which alternative codepoints are considered variants, and what actions may be performed on those variants.</t>
-		</abstract>
-	</front>
+    <front>
+        <title abbrev="Label Generation Rulesets in XML">Representing Label Generation Rulesets using XML</title>
+        <author initials="K" surname="Davies" fullname="Kim Davies">
+            <organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization>
+            <address>
+                <postal>
+                    <street>12025 Waterfront Drive</street>
+                    <city>Los Angeles</city>
+                    <region>CA</region>
+                    <code>90094</code>
+                    <country>US</country>
+                </postal>
+                <phone>+1 310 301 5800</phone>
+                <email>kim.davies@icann.org</email>
+                <uri>http://www.iana.org/</uri>
+            </address>
+        </author>
+        <author initials="A" surname="Freytag" fullname="Asmus Freytag">
+            <organization>ASMUS Inc.</organization>
+            <address>
+                <email>asmus@unicode.org</email>
+            </address>
+        </author>
+        <date/>
+        <area>Management</area>
+        <abstract>
 
-	<middle>
-		
-		<section title="Introduction">
-			
-			<t>This memo describes a method of using Extensible Markup Language (XML) to describe the algorithm used to determine whether a given domain label is permitted, and under which circumstances. These algorithms are comprised of a list of permissible codepoints, variants, and a number of conditions where certain relationships are applied. These algorithms form part of a zone administrator's policies, and can be referred to as Label Generation Rulesets (LGRs), or IDN tables.</t>
-			<t>Administrators of the zones for top-level domain registries have historically published their LGRs using ASCII text or HTML. The formatting of these documents has been loosely based on the format used for the Language Variant Table in <xref target="RFC3743"/>. <xref target="RFC4290"/> also provides a "model table format" that describes a similar set of functionality.</t>
-			<t>Through the first decade of IDN deployment, experience has shown that LGRs derived from these formats are difficult to consistently implement and compare due to their different formats. A universal format, such as one using a structured XML format, will assist by improving machine-readability, consistency, reusability and maintainability of LGRs. It also provides for more complex conditional implementation of variants that reflects the known requirements of current zone administrator policies.</t>
-			<t>While the predominant usage of this specification is to represent IDN label policy, the format may also be used for describing ASCII domain name label rulesets.</t>
-			
-		</section>
-		
-		<section title="Design Goals">
-			
-			<t>The following items are explicit design goals of this format:</t>
-			
-			<t>
-			<list style="symbols">
-				<t>MUST be in a format that can be implemented in a reasonably straightforward manner in software;</t>
+            <t>This memo describes a method of representing the domain name registration policy for a zone administrator
+                using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are
+                particularly used for the implementation of Internationalised Domain Names (IDNs). The rulesets are used
+                to implement and share policy on which specific Unicode codepoints are permitted for registrations,
+                which alternative codepoints are considered variants, and what actions may be performed on those
+                variants.
+            </t>
+        </abstract>
+    </front>
 
-				<t>The format SHOULD be able to be checked for formatting errors, such that common mistakes can be caught;</t>
+    <middle>
 
-				<t>An LGR MUST be able to express the set of valid codepoints that are allowed for registration under a specific zone administrator's policies;</t>
+        <section title="Introduction">
 
-				<t>MUST be able to express computed alternatives to a given domain name based on a one-to-one, or one-to-many relationship. These computed alternatives are commonly known as "variants";</t>
+            <t>This memo describes a method of using Extensible Markup Language (XML) to describe the algorithm used to
+                determine whether a given domain label is permitted, and under which circumstances. These algorithms are
+                comprised of a list of permissible codepoints, variants, and a number of conditions where certain
+                relationships are applied. These algorithms form part of a zone administrator's policies, and can be
+                referred to as Label Generation Rulesets (LGRs), or IDN tables.
+            </t>
+            <t>Administrators of the zones for top-level domain registries have historically published their LGRs using
+                ASCII text or HTML. The formatting of these documents has been loosely based on the format used for the
+                Language Variant Table in<xref target="RFC3743"/>.
+                <xref target="RFC4290"/>
+                also provides a "model table format" that describes a similar set of functionality.
+            </t>
+            <t>Through the first decade of IDN deployment, experience has shown that LGRs derived from these formats are
+                difficult to consistently implement and compare due to their different formats. A universal format, such
+                as one using a structured XML format, will assist by improving machine-readability, consistency,
+                reusability and maintainability of LGRs. It also provides for more complex conditional implementation of
+                variants that reflects the known requirements of current zone administrator policies.
+            </t>
+            <t>While the predominant usage of this specification is to represent IDN label policy, the format may also
+                be used for describing ASCII domain name label rulesets.
+            </t>
 
-				<t>Variants SHOULD be able to be tagged with specific categories, such that the categories can be used to support registry policy (such as whether to list the computed variant in the zone, or to merely block it from registration);</t>
+        </section>
 
-				<t>Variants MUST be able to stipulated based on contextual information. For example, specific variants may only be applicable when they follow another specific codepoint, or when the codepoint is displayed in a specific presentation form;</t>
+        <section title="Design Goals">
 
-				<t>The data contained within an LGR MUST be unambiguous, such that independent implementations that utilise the contents will arrive at the same results;</t>
+            <t>The following items are explicit design goals of this format:</t>
 
-				<t>LGRs SHOULD be suitable for comparison and re-use, such that one could easily compare the contents of two or more to see the differences, to merge them, and so on.</t>
+            <t>
+                <list style="symbols">
+                    <t>MUST be in a format that can be implemented in a reasonably straightforward manner in software;
+                    </t>
 
-				<t>As many existing IDN tables are practicable SHOULD be able to be migrated to the LGR format with all applicable logic retained.</t>
-			</list>
-			</t>
-			
-			<t>It is explicitly NOT the goal of this format to stipulate what codepoints should be listed in an LGR by a zone administrator. Which registration policies are used for a particular zone is outside the scope of this memo.</t>
+                    <t>The format SHOULD be able to be checked for formatting errors, such that common mistakes can be
+                        caught;
+                    </t>
 
-		</section>
-		
-		<section title="Requirements">
-			<t>To be able to fulfil the known utilisation of LGRs, 
-				the existing corpus of published IDN tables were reviewed to prepare this specification.</t>
-			<t>In addition, the requirements of ICANN's work to implement an LGR for the DNS Root Zone <xref target="LGR-PROCEDURE"/> were also considered. In Section B of that document, five specific requirements for an LGR methodology were identified:</t>
-			<t>
-				<list style="symbols">
-					<t>The ability to identify a set of codepoints that are permitted.</t>
-					<t>The ability to represent a list of variants, if any, for each codepoint.</t>
-					<t>A method of identifying codepoints that are related, using a tag.</t>
-					<t>The ability to describe rules regarding the possible actions that may be performed on the resulting label (such as blocked, allocatable, etc.)</t>
-					<t>The ability to describe rules that check for ill-formed combinations across the whole label.</t>
-				</list>
-			</t>
-				
-		</section>
-		
-		<section title="LGR Format">
-		
-		<t>An LGR is expressed as a well-formed XML Document <xref target="XML"/>.</t>
-			
-			<section title="Namespace">
-				
-				<t>The XML Namespace URI is [TBD].</t>
-			
-			</section>
-			
-			<section title="Basic structure">
-				
-				<t>The basic XML framework of the document is as follows:</t>
-				<figure>
-					<artwork><![CDATA[
+                    <t>An LGR MUST be able to express the set of valid codepoints that are allowed for registration
+                        under a specific zone administrator's policies;
+                    </t>
+
+                    <t>MUST be able to express computed alternatives to a given domain name based on a one-to-one, or
+                        one-to-many relationship. These computed alternatives are commonly known as "variants";
+                    </t>
+
+                    <t>Variants SHOULD be able to be tagged with specific categories, such that the categories can be
+                        used to support registry policy (such as whether to list the computed variant in the zone, or to
+                        merely block it from registration);
+                    </t>
+
+                    <t>Variants MUST be able to stipulated based on contextual information. For example, specific
+                        variants may only be applicable when they follow another specific codepoint, or when the
+                        codepoint is displayed in a specific presentation form;
+                    </t>
+
+                    <t>The data contained within an LGR MUST be unambiguous, such that independent implementations that
+                        utilise the contents will arrive at the same results;
+                    </t>
+
+                    <t>LGRs SHOULD be suitable for comparison and re-use, such that one could easily compare the
+                        contents of two or more to see the differences, to merge them, and so on.
+                    </t>
+
+                    <t>As many existing IDN tables are practicable SHOULD be able to be migrated to the LGR format with
+                        all applicable logic retained.
+                    </t>
+                </list>
+            </t>
+
+            <t>It is explicitly NOT the goal of this format to stipulate what codepoints should be listed in an LGR by a
+                zone administrator. Which registration policies are used for a particular zone is outside the scope of
+                this memo.
+            </t>
+
+        </section>
+
+        <section title="Requirements">
+            <t>To be able to fulfil the known utilisation of LGRs,
+                the existing corpus of published IDN tables were reviewed to prepare this specification.
+            </t>
+            <t>In addition, the requirements of ICANN's work to implement an LGR for the DNS Root Zone
+                <xref target="LGR-PROCEDURE"/>
+                were also considered. In Section B of that document, five specific requirements for an LGR methodology
+                were identified:
+            </t>
+            <t>
+                <list style="symbols">
+                    <t>The ability to identify a set of codepoints that are permitted.</t>
+                    <t>The ability to represent a list of variants, if any, for each codepoint.</t>
+                    <t>A method of identifying codepoints that are related, using a tag.</t>
+                    <t>The ability to describe rules regarding the possible actions that may be performed on the
+                        resulting label (such as blocked, allocatable, etc.)
+                    </t>
+                    <t>The ability to describe rules that check for ill-formed combinations across the whole label.</t>
+                </list>
+            </t>
+
+        </section>
+
+        <section title="LGR Format">
+
+            <t>An LGR is expressed as a well-formed XML Document<xref target="XML"/>.
+            </t>
+
+            <section title="Namespace">
+
+                <t>The XML Namespace URI is [TBD].</t>
+
+            </section>
+
+            <section title="Basic structure">
+
+                <t>The basic XML framework of the document is as follows:</t>
+                <figure>
+                    <artwork><![CDATA[
     <?xml version="1.0"?>
     <lgr xmlns="http://www.iana.org/lgr/0.1">
         ...
     </lgr>
     ]]></artwork>
-				</figure>
-				
-				<t>Within the "lgr" element rests several sub-elements. Firstly is a "meta" element that contains all meta-data associated with the IDN table, such as its authorship, what it is used for, implementation notes and references. This is followed by a "data" element that contains the substantive codepoint data. Finally, an optional "rules" element contains information on whole-label evaluation rules, if any, along with any specific rules regarding the disposition of computed variants.</t>
-				
-				<figure>
-					<artwork><![CDATA[
+                </figure>
+
+                <t>Within the "lgr" element rests several sub-elements. Firstly is a "meta" element that contains all
+                    meta-data associated with the IDN table, such as its authorship, what it is used for, implementation
+                    notes and references. This is followed by a "data" element that contains the substantive codepoint
+                    data. Finally, an optional "rules" element contains information on whole-label evaluation rules, if
+                    any, along with any specific rules regarding the disposition of computed variants.
+                </t>
+
+                <figure>
+                    <artwork><![CDATA[
     <?xml version="1.0"?>
     <lgr xmlns="http://www.iana.org/lgr/0.1">
         <meta>
@@ -141,365 +199,519 @@
         </rules>
     </lgr>
 ]]></artwork>
-				</figure>
-				
-				<t>A document should contain exactly one "lgr" element, and within that optionally one "meta" element and exactly one "data" element.</t>
-				
-			</section>
-			
-			<section title="Metadata">
-				
-				<t>The "meta" element is used to express meta-data associated within the LGR. It can be used to explain the author or relevant contact person, explain what the usage of the IDN table is, provide implementation notes as well as references. The data contained within is not required by software consuming the LGR in order to calculate valid labels, or to calculate variants.</t>
-				
-				<section title="The version element">
-				
-					<t>The "version" element is used to uniquely identify each version of the LGR being represented. No specific format is required, but it is RECOMMENDED that it be a numerical positive integer, which is incremented with each revision of the file.</t>
+                </figure>
 
-					<t>An example of a typical first edition of a document:</t>
-					
-					<figure>
-						<artwork><![CDATA[
+                <t>A document should contain exactly one "lgr" element, and within that optionally one "meta" element
+                    and exactly one "data" element.
+                </t>
+
+            </section>
+
+            <section title="Metadata">
+
+                <t>The "meta" element is used to express meta-data associated within the LGR. It can be used to explain
+                    the author or relevant contact person, explain what the usage of the IDN table is, provide
+                    implementation notes as well as references. The data contained within is not required by software
+                    consuming the LGR in order to calculate valid labels, or to calculate variants.
+                </t>
+
+                <section title="The version element">
+
+                    <t>The "version" element is used to uniquely identify each version of the LGR being represented. No
+                        specific format is required, but it is RECOMMENDED that it be a numerical positive integer,
+                        which is incremented with each revision of the file.
+                    </t>
+
+                    <t>An example of a typical first edition of a document:</t>
+
+                    <figure>
+                        <artwork><![CDATA[
     <version>1</version>
     ]]></artwork>
-					</figure>
-					
-					<t>A common alternative is to use a major-minor number scheme, where two decimal numbers are used to represent major and minor changes to the LGR. For example, "1.0" would be the first major release, "1.1" would be a minor update to that, and "2.0" would represent a major revision.</t>
-					
-				</section>
-				<section title="The date element">
-					
-					<t>The "date" element is used to identify the date the LGR was written. The contents of this element MUST be a valid ISO 8601 date string as described in <xref target="RFC3339"/>.</t>
-					
-					<figure>
-						<preamble>Example of a date:</preamble>
-						<artwork><![CDATA[
+                    </figure>
+
+                    <t>A common alternative is to use a major-minor number scheme, where two decimal numbers are used to
+                        represent major and minor changes to the LGR. For example, "1.0" would be the first major
+                        release, "1.1" would be a minor update to that, and "2.0" would represent a major revision.
+                    </t>
+
+                </section>
+                <section title="The date element">
+
+                    <t>The "date" element is used to identify the date the LGR was written. The contents of this element
+                        MUST be a valid ISO 8601 date string as described in<xref target="RFC3339"/>.
+                    </t>
+
+                    <figure>
+                        <preamble>Example of a date:</preamble>
+                        <artwork><![CDATA[
     <date>2009-11-01</date>
 ]]></artwork>
-					</figure>
-					
-				</section>
-				<section title="The language element">
-					
-					<t>The "language" element signals that the LGR is associated with a specific language or script. The value of the language element must be a valid language tag as described in <xref target="RFC5646"/>. The tag may simply refer to a script if the LGR is not referring to a specific language. There may be multiple language elements for a LGR if it spans multiple languages and/or scripts.</t>
+                    </figure>
 
-					<t>Example of an English language LGR:</t>
-					
-					<figure>
-						<artwork><![CDATA[
+                </section>
+                <section title="The language element">
+
+                    <t>The "language" element signals that the LGR is associated with a specific language or script. The
+                        value of the language element must be a valid language tag as described in<xref
+                                target="RFC5646"/>. The tag may simply refer to a script if the LGR is not referring to
+                        a specific language. There may be multiple language elements for a LGR if it spans multiple
+                        languages and/or scripts.
+                    </t>
+
+                    <t>Example of an English language LGR:</t>
+
+                    <figure>
+                        <artwork><![CDATA[
    <language>en</language>
 ]]></artwork>
-					</figure>
-					
-					<t>If the LGR applies to a specific script, rather than a language, the "und" language tag should be used followed by the relevant <xref target="RFC5646"/> script subtag. For example, for a Cyrillic script LGR:</t>
-						
-					<figure>
-						<artwork><![CDATA[
+                    </figure>
+
+                    <t>If the LGR applies to a specific script, rather than a language, the "und" language tag should be
+                        used followed by the relevant
+                        <xref target="RFC5646"/>
+                        script subtag. For example, for a Cyrillic script LGR:
+                    </t>
+
+                    <figure>
+                        <artwork><![CDATA[
    <language>und-Cyrl</language>
 ]]></artwork>
-					</figure>
-						
-				</section>
+                    </figure>
 
-				<section title="The domain element">
-					
-					<t>This optional element refers to a domain to which this policy is applied.</t>
-					
-					<figure>
-						<artwork><![CDATA[
+                </section>
+
+                <section title="The domain element">
+
+                    <t>This optional element refers to a domain to which this policy is applied.</t>
+
+                    <figure>
+                        <artwork><![CDATA[
     <domain>example.com</domain>
 ]]></artwork>
-					</figure>
-					
-					<t>There may be multiple &lt;domain&gt; tags used to 
-						reflect a list of domains.</t>
-				
-				</section>
-				<section title="The description element">
-					
-					<t>The "description" element is a free-form element that contains any additional relevant description. Typically, this field contains authorship information, as well as additional context on how the LGR was formulated (such as with references), and how it has been applied.</t>
+                    </figure>
 
-					<t>The element has an optional "type" attribute, which refers to the media type of the enclosed data. If the description lacks a type field, it will be assumed to be plain text.</t>
+                    <t>There may be multiple &lt;domain&gt; tags used to
+                        reflect a list of domains.
+                    </t>
 
-					<t>The description elements describe information relating to the LGR that is useful for the user of the LGR in its interpretation. This may explain the history, the rationale, reference sources etc. It may also contain authorship information.</t>
-
-					<t>The "type" attribute may be used to specify the encoding within description element. The attribute should be a valid MIME type. If supplied, it will be assumed the contents is content of that encoding. Typical types would be "text/plain" or "text/html". "text/plain" will be assumed if no type attribute is specified.</t>
-					
-				</section>
-				<section title="The validity-start and validity-end elements">
-					
-					<t>The "validity-start" and "validity-end" elements are optional elements that describe the time period from which the contents of the LGR become valid (i.e. are used in registry policy), and the contents of the LGR cease to be used.</t>
-					<t>The times should conform to the format described in section 5.6 of <xref target="RFC5646"/>. It may be comprised of a date, or a date and time stamp.</t>
-				</section>
-                <section title="The unicode-version element">
-                    <t>If a given table is dependent on certain characters or functionality from a given version of the Unicode
-                    standard, the minimum version number MUST be listed. If any software processing the table does not have
-                    the minimum requisite version, it MUST NOT perform any operations relating to whole-label evaluation.
-                    This is because the Unicode properties for the codepoints may have changed in subsequent versions.</t>
-					<figure>
-						<artwork><![CDATA[
-    <unicode-version>6.2</unicode-version>
-]]></artwork></figure>
                 </section>
-				
-			</section>
+                <section title="The description element">
 
-			<section title="Codepoint Rules">
+                    <t>The "description" element is a free-form element that contains any additional relevant
+                        description. Typically, this field contains authorship information, as well as additional
+                        context on how the LGR was formulated (such as with references), and how it has been applied.
+                    </t>
 
-				<t>The bulk of a label generation ruleset is a description of which set of codepoints are eligible for a given label. For rulesets that perform operations that result in potential variants, the codepoint-level relationships between variants need to also be described.</t>
+                    <t>The element has an optional "type" attribute, which refers to the media type of the enclosed
+                        data. If the description lacks a type field, it will be assumed to be plain text.
+                    </t>
 
-				<t>The codepoint data is collected within a "data" element. Within this element, a series of "char" and "range" elements describe eligible codepoints, or ranges of codepoints, respectively.</t>
-				
-				<t>Discrete permissible codepoints or codepoint sequences may be stipulated with a "char" element, e.g.</t>
-				
-				<figure>
-					<artwork><![CDATA[
+                    <t>The description elements describe information relating to the LGR that is useful for the user of
+                        the LGR in its interpretation. This may explain the history, the rationale, reference sources
+                        etc. It may also contain authorship information.
+                    </t>
+
+                    <t>The "type" attribute may be used to specify the encoding within description element. The
+                        attribute should be a valid MIME type. If supplied, it will be assumed the contents is content
+                        of that encoding. Typical types would be "text/plain" or "text/html". "text/plain" will be
+                        assumed if no type attribute is specified.
+                    </t>
+
+                </section>
+                <section title="The validity-start and validity-end elements">
+
+                    <t>The "validity-start" and "validity-end" elements are optional elements that describe the time
+                        period from which the contents of the LGR become valid (i.e. are used in registry policy), and
+                        the contents of the LGR cease to be used.
+                    </t>
+                    <t>The times should conform to the format described in section 5.6 of<xref target="RFC5646"/>. It
+                        may be comprised of a date, or a date and time stamp.
+                    </t>
+                </section>
+                <section title="The unicode-version element">
+                    <t>If a given table is dependent on certain characters or functionality from a given version of the
+                        Unicode
+                        standard, the minimum version number MUST be listed. If any software processing the table does
+                        not have
+                        the minimum requisite version, it MUST NOT perform any operations relating to whole-label
+                        evaluation.
+                        This is because the Unicode properties for the codepoints may have changed in subsequent
+                        versions.
+                    </t>
+                    <figure>
+                        <artwork><![CDATA[
+    <unicode-version>6.2</unicode-version>
+]]></artwork>
+                    </figure>
+                </section>
+
+            </section>
+
+            <section title="Codepoint Rules">
+
+                <t>The bulk of a label generation ruleset is a description of which set of codepoints are eligible for a
+                    given label. For rulesets that perform operations that result in potential variants, the
+                    codepoint-level relationships between variants need to also be described.
+                </t>
+
+                <t>The codepoint data is collected within a "data" element. Within this element, a series of "char" and
+                    "range" elements describe eligible codepoints, or ranges of codepoints, respectively.
+                </t>
+
+                <t>Discrete permissible codepoints or codepoint sequences may be stipulated with a "char" element,
+                    e.g.
+                </t>
+
+                <figure>
+                    <artwork><![CDATA[
     <char cp="002D"/>
 				]]></artwork>
-				</figure>
-				
-				<t>Ranges of permissible codepoints may be stipulated with a "range" element, e.g.</t>
-				
-				<figure>
-					<artwork><![CDATA[
+                </figure>
+
+                <t>Ranges of permissible codepoints may be stipulated with a "range" element, e.g.</t>
+
+                <figure>
+                    <artwork><![CDATA[
     <range first-cp="0030" last-cp="0039"/>
 				]]></artwork>
-				</figure>
-				
-				<t>The range is inclusive of the first and last codepoints.</t>
-				
-				<t>Codepoints must be expressed in hexadecimal, i.e. according to the standard Unicode convention without the prefix "U+". The rationale for not allowing other encoding formats, including native Unicode encoding in XML, is explored in <xref target="UAX42"/>. The XML conventions used in this format, including the element and attribute names, mirror this document where practical and reasonable to do so.</t>
-				
-				<section title="Sequences">
-					
-				<t>A sequence of two or more codepoints may be specified in a LGR, when the exact sequence of codepoints is required to occur in order for the consituent elements to be eligible. This approach allows representation of policy where a specific codepoint is only eligible when preceded or followed by another codepoint. For example, in order to represent the eligibility of the MIDDLE DOT (U+00B7) only when both preceded and followed by the LATIN SMALL LETTER L (U+006C):</t>
+                </figure>
 
-				<figure>
-				<artwork><![CDATA[
+                <t>The range is inclusive of the first and last codepoints.</t>
+
+                <t>Codepoints must be expressed in hexadecimal, i.e. according to the standard Unicode convention
+                    without the prefix "U+". The rationale for not allowing other encoding formats, including native
+                    Unicode encoding in XML, is explored in<xref target="UAX42"/>. The XML conventions used in this
+                    format, including the element and attribute names, mirror this document where practical and
+                    reasonable to do so.
+                </t>
+
+                <section title="Sequences">
+
+                    <t>A sequence of two or more codepoints may be specified in a LGR, when the exact sequence of
+                        codepoints is required to occur in order for the consituent elements to be eligible. This
+                        approach allows representation of policy where a specific codepoint is only eligible when
+                        preceded or followed by another codepoint. For example, in order to represent the eligibility of
+                        the MIDDLE DOT (U+00B7) only when both preceded and followed by the LATIN SMALL LETTER L
+                        (U+006C):
+                    </t>
+
+                    <figure>
+                        <artwork><![CDATA[
 <char cp="006C 00B7 006C"/>
 ]]></artwork>
-				</figure>
-			</section>
+                    </figure>
+                </section>
 
-				<section title="Variants">
-					<t>While most LGRs typically only determine codepoint eligibility, others additionally specify a mapping of codepoints to other codepoints, known as "variants". What constitutes a variant is a matter of policy, and varies for each implementation.</t>
-					<section title="Basic variants">
-						<t>Variants are specified as one of more children of a "char" element.</t>
-						<t>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U (U+0075):</t>
-						<figure>
-							<artwork><![CDATA[
+                <section title="Variants">
+                    <t>While most LGRs typically only determine codepoint eligibility, others additionally specify a
+                        mapping of codepoints to other codepoints, known as "variants". What constitutes a variant is a
+                        matter of policy, and varies for each implementation.
+                    </t>
+                    <section title="Basic variants">
+                        <t>Variants are specified as one of more children of a "char" element.</t>
+                        <t>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U
+                            (U+0075):
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <char cp="0075">
   <var cp="0076"/>
 </char>
 									]]></artwork>
-						</figure>
-						<t>A sequence of multiple codepoints can be specified as a variant of a single codepoint. For example, the sequence of LATIN SMALL LETTER O (U+006F) then LATIN SMALL LETTER E (U+0065) can be specified as a variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as follows:</t>
-						<figure>
-							<artwork><![CDATA[
+                        </figure>
+                        <t>A sequence of multiple codepoints can be specified as a variant of a single codepoint. For
+                            example, the sequence of LATIN SMALL LETTER O (U+006F) then LATIN SMALL LETTER E (U+0065)
+                            can be specified as a variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as
+                            follows:
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <char cp="00F6">
   <var cp="006F 0065"/>
 </char>
 						]]></artwork>
-						</figure>
-						
-						<t>Variants are specified in only one direction. For symmetric variants, the inverse of the variant must be explicitly specified:</t>
+                        </figure>
 
-						<figure>
-							<artwork><![CDATA[
+                        <t>Variants are specified in only one direction. For symmetric variants, the inverse of the
+                            variant must be explicitly specified:
+                        </t>
+
+                        <figure>
+                            <artwork><![CDATA[
 <char cp="006F 0065">
   <var cp="00F6"/>
 </char>
 						]]></artwork>
-						</figure>
-						
-					
-						<t>Both the south and target of a variant mapping may be sequences. It is not possible to specify variants for ranges.</t>
+                        </figure>
 
-					</section>
-					
-					<section title="Null variants">
-						
-						<t>To specify a null variant, which is a variant string that maps to no codepoint, use an empty cp attribute. For example, to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the same string without the ZERO WIDTH NON-JOINER:</t>
-						
-							<figure>
-								<artwork><![CDATA[
+
+                        <t>Both the south and target of a variant mapping may be sequences. It is not possible to
+                            specify variants for ranges.
+                        </t>
+
+                    </section>
+
+                    <section title="Null variants">
+
+                        <t>To specify a null variant, which is a variant string that maps to no codepoint, use an empty
+                            cp attribute. For example, to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the
+                            same string without the ZERO WIDTH NON-JOINER:
+                        </t>
+
+                        <figure>
+                            <artwork><![CDATA[
 <char cp="200C">
   <var cp=""/>
 </char>
 							]]></artwork>
-							</figure>
-							
-							
-					</section>
-					
-					<section title="Conditional variants">
-						<t>Fundamentally, variants are mappings between two
-							sequences of codepoints. However, in some
-							instances for a variant relationship to exist, some
-							context external to the codepoint sequence must be
-							considered. For example, in some cases the
-							positional context determines whether two code
-							point sequences are variants of each other. This is
-							because Arabic characters can have different forms
-							based on position. This position context cannot be
-							solely derived from the codepoint, as the code
-							point is the same for the various forms.</t>
-						
-						<t>To specify a conditional variant relationship the
-							"when" attribute is used. The variant relationship
-							exists when the condition in the "when" attribute
-							is satisfied.</t>
-						<t>
-							<list style="hanging" hangIndent="5">
-								<t hangText="arabic-initial">The codepoint is in a context where it would be presented in its Arabic Initial form.</t>
-								<t hangText="arabic-isolated">The codepoint is in a context where it would be presented in its Arabic Isolated form.</t>
-								<t hangText="arabic-medial">The codepoint is in a context where it would be presented in its Arabic Medial form.</t>
-								<t hangText="arabic-final">The codepoint is in a context where it would be presented in its Arabic Final form.</t>
-							</list>
-						</t>
-						<t>For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW (U+0625), but only when it appears in
-						isolated or final forms:</t>
-						<figure>
-							<artwork><![CDATA[
+                        </figure>
+
+
+                    </section>
+
+                    <section title="Conditional variants">
+                        <t>Fundamentally, variants are mappings between two
+                            sequences of codepoints. However, in some
+                            instances for a variant relationship to exist, some
+                            context external to the codepoint sequence must be
+                            considered. For example, in some cases the
+                            positional context determines whether two code
+                            point sequences are variants of each other. This is
+                            because Arabic characters can have different forms
+                            based on position. This position context cannot be
+                            solely derived from the codepoint, as the code
+                            point is the same for the various forms.
+                        </t>
+
+                        <t>To specify a conditional variant relationship the
+                            "when" attribute is used. The variant relationship
+                            exists when the condition in the "when" attribute
+                            is satisfied.
+                        </t>
+                        <t>
+                            <list style="hanging" hangIndent="5">
+                                <t hangText="arabic-initial">The codepoint is in a context where it would be presented
+                                    in its Arabic Initial form.
+                                </t>
+                                <t hangText="arabic-isolated">The codepoint is in a context where it would be presented
+                                    in its Arabic Isolated form.
+                                </t>
+                                <t hangText="arabic-medial">The codepoint is in a context where it would be presented in
+                                    its Arabic Medial form.
+                                </t>
+                                <t hangText="arabic-final">The codepoint is in a context where it would be presented in
+                                    its Arabic Final form.
+                                </t>
+                            </list>
+                        </t>
+                        <t>For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW (U+0673) as a variant of ARABIC
+                            LETTER ALEF WITH HAMZA BELOW (U+0625), but only when it appears in
+                            isolated or final forms:
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <char cp="0625">
   <var cp="0673" when="arabic-isolated"/>
   <var cp="0673" when="arabic-final"/>
 </char>
 ]]></artwork>
-			</figure>
-			<t>Only a single context attribute can be applied to any "var"
-				element, however, multiple "var" elements using the same
-				mapping, but different "when" attributes may be specified.</t>
-					</section>
-					
-				</section>
-				<section title="Result tagging">
-					<t>Typically, LGRs are used to explicitly designate allowable codepoints, with any label with a codepoint not explicitly listed
-					in the LGR being considered an ineligible label according to the ruleset.</t>
-					<t>For more complex registry rules, there may be a need to discern codepoints and variants of certain types. This can be accomplished
-						by applying a "tag" attribute, and then filtering on results based on the tag using whole label evaluation.</t>
-					<t>A tag may be of any value, but the following tags are pre-defined to encourage common conventions in their application. If these tags can represent registry policy, they SHOULD be used.</t>
-				</section>
-			</section>
+                        </figure>
+                        <t>Only a single context attribute can be applied to any "var"
+                            element, however, multiple "var" elements using the same
+                            mapping, but different "when" attributes may be specified.
+                        </t>
+                    </section>
 
-
-			<section title="Whole Label Evaluation Rules">
-				<section title="Basic concepts">
-				<t>The codepoints in a label sometimes need to satisfy context-based rules, in order for the label to be
-				considered valid. Whole Label Evaluation Rules (WLE) can be specified to support this validation. The same validation
-				can be applied to variants created by applying the variant mapping.</t>
-
-				<t>The whole label evaluation rules are contained in an "wle" element, which contains character class, rule and action elements. These are
-				described below.</t>
-
-				<t>A Whole Label Evaluation Rule describes a complete label. The elements of the "rule" element are:</t>
-                <t>
-                <list style="symbols">
-					<t>character classes, which defines sets of codepoints to be used for context comparisons;</t>
-					<t>context operators, which define when character classes may appear; and</t>
-                    <t>actions, which define what actions to take based on the context.</t>
-			    </list>
-                </t>
-				</section>
-				<section title="Character Classes">
-				<t>Character classes are named sets of characters that share a particular property. They can be defined in 
-				several ways.</t>
-                <t>
-                <list style="numbers">
-
-				<t>Define the property via matching a tag in the codepoint data. All characters with the same tag
-					attribute are part of the same class.</t>
-				<t>Reference one of the Unicode character properties defined in the Unicode Character Database (UCD).</t>
-				<t>Explicitly list all the codepoints in the class.</t>
-				<t>Define a class as a combination of any number of these definitions or other classes</t>
-                </list>
-                </t>
-
-                <section title="Tag-based classes">
-                <t>If tags are defined using the "tag" attribute, classes are defined based upon the names of the tags
-                    used. From these classes, further operations may be performed by context operators and actions.</t>
-<!-- 					<figure><preamble>Defining a class in terms of a common attribute* in the codepoint* table.</preamble><artwork><![CDATA[<class name"aaa" attribute*="aaa/>]]></artwork></figure> -->
                 </section>
+                <section title="Result tagging">
+                    <t>Typically, LGRs are used to explicitly designate allowable codepoints, with any label with a
+                        codepoint not explicitly listed
+                        in the LGR being considered an ineligible label according to the ruleset.
+                    </t>
+                    <t>For more complex registry rules, there may be a need to discern codepoints and variants of
+                        certain types. This can be accomplished
+                        by applying a "tag" attribute, and then filtering on results based on the tag using whole label
+                        evaluation.
+                    </t>
+                    <t>A tag may be of any value, but the following tags are pre-defined to encourage common conventions
+                        in their application. If these tags can represent registry policy, they SHOULD be used.
+                    </t>
+                </section>
+            </section>
 
-                <section title="Unicode property based classes">
- 				<t>A class is defined in terms of Unicode properties by giving the Unicode property alias and the property value or property value alias.</t>
-					<figure><artwork><![CDATA[
+
+            <section title="Whole Label Evaluation Rules">
+                <section title="Basic concepts">
+                    <t>The codepoints in a label sometimes need to satisfy context-based rules, in order for the label
+                        to be
+                        considered valid. Whole Label Evaluation Rules (WLE) can be specified to support this
+                        validation. The same validation
+                        can be applied to variants created by applying the variant mapping.
+                    </t>
+
+                    <t>The whole label evaluation rules are contained in an "wle" element, which contains character
+                        class, rule and action elements. These are
+                        described below.
+                    </t>
+
+                    <t>A Whole Label Evaluation Rule describes a complete label. The elements of the "rule" element
+                        are:
+                    </t>
+                    <t>
+                        <list style="symbols">
+                            <t>character classes, which defines sets of codepoints to be used for context comparisons;
+                            </t>
+                            <t>context operators, which define when character classes may appear; and</t>
+                            <t>actions, which define what actions to take based on the context.</t>
+                        </list>
+                    </t>
+                </section>
+                <section title="Character Classes">
+                    <t>Character classes are named sets of characters that share a particular property. They can be
+                        defined in
+                        several ways.
+                    </t>
+                    <t>
+                        <list style="numbers">
+
+                            <t>Define the property via matching a tag in the codepoint data. All characters with the
+                                same tag
+                                attribute are part of the same class.
+                            </t>
+                            <t>Reference one of the Unicode character properties defined in the Unicode Character
+                                Database (UCD).
+                            </t>
+                            <t>Explicitly list all the codepoints in the class.</t>
+                            <t>Define a class as a combination of any number of these definitions or other classes</t>
+                        </list>
+                    </t>
+
+                    <section title="Tag-based classes">
+                        <t>If tags are defined using the "tag" attribute, classes are defined based upon the names of
+                            the tags
+                            used. From these classes, further operations may be performed by context operators and
+                            actions.
+                        </t>
+                        <!-- 					<figure><preamble>Defining a class in terms of a common attribute* in the codepoint* table.</preamble><artwork><![CDATA[<class name"aaa" attribute*="aaa/>]]></artwork></figure> -->
+                    </section>
+
+                    <section title="Unicode property based classes">
+                        <t>A class is defined in terms of Unicode properties by giving the Unicode property alias and
+                            the property value or property value alias.
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <class name="virama" property="ccc:9">
-]]></artwork></figure>
-                <t>The example above selects all characters for which the Unicode canonical combining class (ccc) value is 9.
-				   This value of the ccc is assigned in the UCD to all characters that are viramas. The string "ccc" is the short-alias
-				   for the canonical combining class, as defined in the file PropertyAliases.txt in the UCD. [[Possibly
-				   change those to the labels used by the XML format of the UCD -- per UAX42]]</t>
+]]></artwork>
+                        </figure>
+                        <t>The example above selects all characters for which the Unicode canonical combining class
+                            (ccc) value is 9.
+                            This value of the ccc is assigned in the UCD to all characters that are viramas. The string
+                            "ccc" is the short-alias
+                            for the canonical combining class, as defined in the file PropertyAliases.txt in the UCD.
+                            [[Possibly
+                            change those to the labels used by the XML format of the UCD -- per UAX42]]
+                        </t>
 
-				<t>Unicode properties may, in principle, change between versions of the Unicode Standard. However, the values
-				   assigned for a given version are fixed. If Unicode Properties are used, they MUST be declared in the
-				   header, and the Unicode Version must be defined. (Note, some Unicode properties are stable across versions
-			       and do not change, once assigned. Nevertheless, in order to make sure the UCD version covers all the
-				   characters in the codepoint tables, it is necessary to give version number in the header.).</t>
+                        <t>Unicode properties may, in principle, change between versions of the Unicode Standard.
+                            However, the values
+                            assigned for a given version are fixed. If Unicode Properties are used, they MUST be
+                            declared in the
+                            header, and the Unicode Version must be defined. (Note, some Unicode properties are stable
+                            across versions
+                            and do not change, once assigned. Nevertheless, in order to make sure the UCD version covers
+                            all the
+                            characters in the codepoint tables, it is necessary to give version number in the header.).
+                        </t>
 
-                </section>
+                    </section>
 
-                <section title="Explicitly declared classes">
-                <t>A class of codepoints may also be declared by listing the codepoints that are a member of the class.
-                This is useful when tagging can not be used because codepoints are not part of the eligible set of
-                codepoints for the given LGR.</t>
-                    				<t>To define a class in terms of an explicit list of codepoints:</t>
-				<figure><artwork><![CDATA[
+                    <section title="Explicitly declared classes">
+                        <t>A class of codepoints may also be declared by listing the codepoints that are a member of the
+                            class.
+                            This is useful when tagging can not be used because codepoints are not part of the eligible
+                            set of
+                            codepoints for the given LGR.
+                        </t>
+                        <t>To define a class in terms of an explicit list of codepoints:</t>
+                        <figure>
+                            <artwork><![CDATA[
 <class name="abc">
     <char cp="0061"/>
     <char cp="0062"/>
     <char cp="0063"/>
 </class>
-]]></artwork></figure>
-                <t>This defines a class named "abc" containing the codepoints for characters "a", "b" and "c".
-                The ordering of the codepoints is not material, but it is RECOMMENDED to list them in ascending
-                order.</t>
-                <t>Range operators may also be used to represent a series of consecutive codepoints. The same
-                declaration can be made as follows:</t>
-<figure><artwork><![CDATA[
+]]></artwork>
+                        </figure>
+                        <t>This defines a class named "abc" containing the codepoints for characters "a", "b" and "c".
+                            The ordering of the codepoints is not material, but it is RECOMMENDED to list them in
+                            ascending
+                            order.
+                        </t>
+                        <t>Range operators may also be used to represent a series of consecutive codepoints. The same
+                            declaration can be made as follows:
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <class name="abc">
     <range first-cp="0061" last-cp="0063"/>
 </class>
-]]></artwork></figure>
+]]></artwork>
+                        </figure>
 
-				</section>
+                    </section>
 
-                <section title="Combined classes">
-                <t>Classes may be combined using logical operators for inversion, union, intersection and exclusive-or.</t>
-				<figure><artwork><![CDATA[
+                    <section title="Combined classes">
+                        <t>Classes may be combined using logical operators for inversion, union, intersection and
+                            exclusive-or.
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <not class="xxx">
 <union class="xxx" class="yyy">
 <not class="xxx">
 <difference class="xxx" class="yyy">
 <symmetric-difference class="xxx" class="yyy">
-]]></artwork></figure>
+]]></artwork>
+                        </figure>
 
+                    </section>
                 </section>
-                </section>
 
-				<section title="Context rules">
-                <t>Context rules are comprised of a series of logical conditions that must be satisfied in order to
-                determine a label meets a given context. These rules relate to the appearance of character classes
-                    defined elsewhere in the table.</t>
+                <section title="Context rules">
+                    <t>Context rules are comprised of a series of logical conditions that must be satisfied in order to
+                        determine a label meets a given context. These rules relate to the appearance of character
+                        classes
+                        defined elsewhere in the table.
+                    </t>
 
-				<section title="The rule element">
-				<t>A matching rule is defined by a "rule" element, which combines character classes with context operators.</t>
+                    <section title="The rule element">
+                        <t>A matching rule is defined by a "rule" element, which combines character classes with context
+                            operators.
+                        </t>
 
-                <t>A simple rule to match a label where all characters are members of the class "preferred":</t>
-				<figure><artwork><![CDATA[
+                        <t>A simple rule to match a label where all characters are members of the class "preferred":</t>
+                        <figure>
+                            <artwork><![CDATA[
 <rule name="preferred">
    <class name="preferred" count="1+"/>
 </rule>]]>
-</artwork></figure>
+                            </artwork>
+                        </figure>
 
-                <t>To provide more specificity on the number of times a specific character class may appear,
-                the "count" attribute allows you to specify the number of times. This number should be an
-                integer of 0 or higher. If it is followed by a plus character (+), this means it can be
-                higher that the number stated. Therefore, "1" would mean exactly one occurrence, whereas
-                "1+" would indicate one or more occurrences.</t>
+                        <t>To provide more specificity on the number of times a specific character class may appear,
+                            the "count" attribute allows you to specify the number of times. This number should be an
+                            integer of 0 or higher. If it is followed by a plus character (+), this means it can be
+                            higher that the number stated. Therefore, "1" would mean exactly one occurrence, whereas
+                            "1+" would indicate one or more occurrences.
+                        </t>
 
-                <t>For cases where several alternates could be chosen, the &lt;choice&gt; element can
-                encode a list of choices:</t>
-                    <figure><artwork><![CDATA[
+                        <t>For cases where several alternates could be chosen, the &lt;choice&gt; element can
+                            encode a list of choices:
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <rule name="ldh">
    <choice>
        <class name="letters"/>
@@ -507,26 +719,34 @@
        <class name="hyphen"/>
    </choice>
 </rule>]]>
-</artwork></figure>
+                            </artwork>
+                        </figure>
 
-                <t>For cases when a match may occur against any codepoint, use any "any" element:</t>
-                    <figure><artwork><![CDATA[
+                        <t>For cases when a match may occur against any codepoint, use any "any" element:</t>
+                        <figure>
+                            <artwork><![CDATA[
 <rule name="starting-digit">
    <class name="digits" count="1"/>
    <any/>
 </rule>]]>
-</artwork></figure>
+                            </artwork>
+                        </figure>
 
 
-				<t>By default Whole Label Evaluation Rules always match the entire label. Use
-				attribute "match" with values "start", "anywhere" and "end" to define rules that need to match in
-                    specific positions of the label.</t>
+                        <t>By default Whole Label Evaluation Rules always match the entire label. Use
+                            attribute "match" with values "start", "anywhere" and "end" to define rules that need to
+                            match in
+                            specific positions of the label.
+                        </t>
 
-				<t>Rules are named and can be nested by reference.</t>
+                        <t>Rules are named and can be nested by reference.</t>
 
-				<t>Here's an example of a rule requiring that all labels be letters (optionally followed by combining marks) 
-				and possibly digits.</t>
-				<figure><artwork><![CDATA[
+                        <t>Here's an example of a rule requiring that all labels be letters (optionally followed by
+                            combining marks)
+                            and possibly digits.
+                        </t>
+                        <figure>
+                            <artwork><![CDATA[
 <class name="letter" property="gc:L"/>
 <class name="combining-mark" property="gc:M"/>
 <class name="digit" property="gc:Nd">
@@ -540,122 +760,176 @@
        <class name="letter-grapheme" count="0+"/>
        <class name="digit" count="0+"/>
    </choice>
-</rule>]]></artwork></figure>
-</section>
+</rule>]]></artwork>
+                        </figure>
                     </section>
+                </section>
 
-<section title="Action elements">
-<t>The purpose of a rule is to trigger a specific action. Often, the action simply results in blocking a 
-label that does not match a rule.</t>
+                <section title="Action elements">
+                    <t>The purpose of a rule is to trigger a specific action. Often, the action simply results in
+                        blocking a
+                        label that does not match a rule.
+                    </t>
 
-	<figure><preamble>blocking rule</preamble><artwork><![CDATA[<action action="blocked" not-match="leading-letter"/><]]></artwork></figure>
+                    <figure>
+                        <preamble>blocking rule</preamble>
+                        <artwork><![CDATA[<action action="blocked" not-match="leading-letter"/><]]></artwork>
+                    </figure>
 
-<t>An action may contain precisely one "match" or "not-match" attribute, but not both. Because rules may be compound rules that contain other rules, 
-only a single rule may be named as the value of the "match" or "not-match" attrbute.</t>
+                    <t>An action may contain precisely one "match" or "not-match" attribute, but not both. Because rules
+                        may be compound rules that contain other rules,
+                        only a single rule may be named as the value of the "match" or "not-match" attrbute.
+                    </t>
 
-<t>The precise action taken and the name of the corresponding "action" attribute are not defined here. It is strongly RECOMMENDED
-to use the following actions only with their conventional sense.</t>
+                    <t>The precise action taken and the name of the corresponding "action" attribute are not defined
+                        here. It is strongly RECOMMENDED
+                        to use the following actions only with their conventional sense.
+                    </t>
 
-        					<t>
-						<list style="hanging" hangIndent="5">
-							<t hangText="block">The resulting string should be blocked from registration. This would typically apply for a derived variant that has no practical use, such as blocking confusingly similar by undesirable variants.</t>
-							<t hangText="allocate">The resulting string should be reserved for use by the same operator of the origin string, but not automatically allocated for use.</t>
-							<t hangText="activate">The resulting string should be activated for use. (This is the typical default action if no tagging is used, and is known as a "preferred" variant in <xref target="RFC3743"/>)</t>
-						</list>
-					</t>
+                    <t>
+                        <list style="hanging" hangIndent="5">
+                            <t hangText="block">The resulting string should be blocked from registration. This would
+                                typically apply for a derived variant that has no practical use, such as blocking
+                                confusingly similar by undesirable variants.
+                            </t>
+                            <t hangText="allocate">The resulting string should be reserved for use by the same operator
+                                of the origin string, but not automatically allocated for use.
+                            </t>
+                            <t hangText="activate">The resulting string should be activated for use. (This is the
+                                typical default action if no tagging is used, and is known as a "preferred" variant in
+                                <xref target="RFC3743"/>)
+                            </t>
+                        </list>
+                    </t>
 
-</section>
+                </section>
 
 
+            </section>
 
-		</section>
+            <section title="Example table">
+                <t>A sample complete XML LGR is as follows.</t>
+                <figure>
+                    <artwork>
+                        &lt;?xml version="1.0"?&gt;
+                        &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+                        &lt;meta&gt;
+                        &lt;version&gt;1&lt;/version&gt;
+                        &lt;date&gt;2010-01-01&lt;/date&gt;
+                        &lt;language&gt;sv&lt;/language&gt;
+                        &lt;domain&gt;example&lt;/domain&gt;
+                        &lt;description type="text/html"&gt;
+                        &lt;![CDATA[
+                        This language table was developed with the
+                        &lt;a href="http://swedish.example/"&gt;Swedish
+                        examples institute&lt;/a&gt;.
+                        ]]&gt;
+                        &lt;/description&gt;
+                        &lt;/meta&gt;
+                        &lt;data&gt;
+                        &lt;range first-cp="0061" last-cp="007A"/&gt;
+                        &lt;char cp="00E4"/&gt;
+                        &lt;/data&gt;
+                        &lt;/lgr&gt;</artwork>
+                </figure>
+            </section>
 
-			<section title="Example table">
-				<t>A sample complete XML LGR is as follows.</t>
-				<figure>
-					<artwork>
-    &lt;?xml version="1.0"?&gt;
-    &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
-        &lt;meta&gt;
-             &lt;version&gt;1&lt;/version&gt;
-             &lt;date&gt;2010-01-01&lt;/date&gt;
-             &lt;language&gt;sv&lt;/language&gt;
-             &lt;domain&gt;example&lt;/domain&gt;
-             &lt;description type="text/html"&gt;
-             &lt;![CDATA[
-                 This language table was developed with the 
-                 &lt;a href="http://swedish.example/"&gt;Swedish 
-                 examples institute&lt;/a&gt;.
-             ]]&gt;
-             &lt;/description&gt;
-        &lt;/meta&gt;
-        &lt;data&gt;
-            &lt;range first-cp="0061" last-cp="007A"/&gt;
-            &lt;char cp="00E4"/&gt;
-        &lt;/data&gt;
-    &lt;/lgr&gt;</artwork>
-				</figure>
-			</section>
+        </section>
 
-		</section>
-        
-		<section title="Processing a label against an LGR">
-			
-			<section title="Determining eligibility for a label">
+        <section title="Processing a label against an LGR">
 
-				<t>In order to use a table to test a specific domain label for membership in the LGR, a consumer of the LGR must iterate through each codepoint within a given U-label, and test that each codepoint is a member of the LGR. If any codepoint is not a member of the LGR, it shall be deemed as not eligible in accordance with the table.</t>
-			
-				<t>A codepoint is deemed a member of the table when it is listed with the &lt;char&gt; element, and all necessary condition listed in "when" attributes are correctly satisfied.</t>
-				
-			</section>
-		
-			<section title="Determining variants for a label">
-			
-				<t>For a given eligible label, the set of variants is deemed to be each possible permutation of &lt;var&gt; elements, whereby all "when" attributes are correctly satisfied for each codepoint in the given permutation.</t>
-			
-			</section>
+            <section title="Determining eligibility for a label">
 
-		</section>
+                <t>In order to use a table to test a specific domain label for membership in the LGR, a consumer of the
+                    LGR must iterate through each codepoint within a given U-label, and test that each codepoint is a
+                    member of the LGR. If any codepoint is not a member of the LGR, it shall be deemed as not eligible
+                    in accordance with the table.
+                </t>
 
-		<section title="Conversion between other formats">
-			
-			<t>Both <xref target="RFC3743"/> and <xref target="RFC4290"/>
-				provide different grammars for IDN tables. These formats are unable
-				to fully cater for the increased requirements of contemporary
-				IDN variant policies.</t>
+                <t>A codepoint is deemed a member of the table when it is listed with the &lt;char&gt; element, and all
+                    necessary condition listed in "when" attributes are correctly satisfied.
+                </t>
 
-			<t>This specification is a superset of functionality provided by
-				these IDN table formats, thus any table expressed in those formats can be
-				expressed in this format. Automated conversion can be conducted
-			between tables conformant with the grammar specified in each
-			document.</t>
+            </section>
 
-		</section>
-		
-		<section title="IANA Considerations">
-			<t>This document does not specify any IANA actions.</t>
-		</section>
+            <section title="Determining variants for a label">
 
-		<section title="Security Considerations">
-			<t>There are no security considerations for this memo.</t>
-		</section>
+                <t>For a given eligible label, the set of variants is deemed to be each possible permutation of &lt;var&gt;
+                    elements, whereby all "when" attributes are correctly satisfied for each codepoint in the given
+                    permutation.
+                </t>
 
-	</middle>
+            </section>
 
-	<back>
-		<references>
-		&rfc3339;
-		&rfc3743;
-		&rfc4290;
-		&rfc5646;
-		&rfc5564;
-		<reference anchor="UAX42"><front><title>Unicode Character Database in XML</title><author><organization abbrev="Unicode">Unicode Consortium</organization></author></front><format type="HTML" target="http://unicode.org/reports/tr42/"/></reference>
-		<reference anchor="LGR-PROCEDURE"><front><title>Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of IDNA Labels</title><author><organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization></author></front><format type="PDF" target="http://www.icann.org/en/resources/idn/draft-lgr-procedure-07dec12-en.pdf"/></reference>
-		<reference anchor="XML"><front><title>Extensible Markup Language (XML) 1.0</title></front><format type="HTML" target="http://www.w3.org/TR/REC-xml/"/></reference>
-		</references>
-		<section title="RelaxNG Schema">
-			<figure>
-				<artwork><![CDATA[
+        </section>
+
+        <section title="Conversion between other formats">
+
+            <t>Both
+                <xref target="RFC3743"/>
+                and
+                <xref target="RFC4290"/>
+                provide different grammars for IDN tables. These formats are unable
+                to fully cater for the increased requirements of contemporary
+                IDN variant policies.
+            </t>
+
+            <t>This specification is a superset of functionality provided by
+                these IDN table formats, thus any table expressed in those formats can be
+                expressed in this format. Automated conversion can be conducted
+                between tables conformant with the grammar specified in each
+                document.
+            </t>
+
+        </section>
+
+        <section title="IANA Considerations">
+            <t>This document does not specify any IANA actions.</t>
+        </section>
+
+        <section title="Security Considerations">
+            <t>There are no security considerations for this memo.</t>
+        </section>
+
+    </middle>
+
+    <back>
+        <references>
+            &rfc3339;
+            &rfc3743;
+            &rfc4290;
+            &rfc5646;
+            &rfc5564;
+            <reference anchor="UAX42">
+                <front>
+                    <title>Unicode Character Database in XML</title>
+                    <author>
+                        <organization abbrev="Unicode">Unicode Consortium</organization>
+                    </author>
+                </front>
+                <format type="HTML" target="http://unicode.org/reports/tr42/"/>
+            </reference>
+            <reference anchor="LGR-PROCEDURE">
+                <front>
+                    <title>Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of
+                        IDNA Labels
+                    </title>
+                    <author>
+                        <organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization>
+                    </author>
+                </front>
+                <format type="PDF" target="http://www.icann.org/en/resources/idn/draft-lgr-procedure-07dec12-en.pdf"/>
+            </reference>
+            <reference anchor="XML">
+                <front>
+                    <title>Extensible Markup Language (XML) 1.0</title>
+                </front>
+                <format type="HTML" target="http://www.w3.org/TR/REC-xml/"/>
+            </reference>
+        </references>
+        <section title="RelaxNG Schema">
+            <figure>
+                <artwork><![CDATA[
 
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar ns="http://www.iana.org/lgr/0.1"
@@ -862,49 +1136,71 @@ to use the following actions only with their conventional sense.</t>
 
 
 ]]></artwork>
-			</figure>
-		</section>
-		<section title="Acknowledgements">
-			<t>This format builds upon the work on documenting IDN tables by many different registry operators. Notably, a comprehensive language table for Chinese, Japanese and Korean was developed by the "Joint Engineering Team" <xref target="RFC3743"/> that is the basis of many registry policies; and a set of guidelines for Arabic script registrations <xref target="RFC5564"/> was published by the Arabic-language community.</t>
-			<t>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas Ostler, Thomas Roessler, Steve Sheng and Andrew Sullivan.</t>
-		</section>
-		<section title="Editorial Notes">
-			<t>This appendix to be removed prior to final publication.</t>
+            </figure>
+        </section>
+        <section title="Acknowledgements">
+            <t>This format builds upon the work on documenting IDN tables by many different registry operators. Notably,
+                a comprehensive language table for Chinese, Japanese and Korean was developed by the "Joint Engineering
+                Team"
+                <xref target="RFC3743"/>
+                that is the basis of many registry policies; and a set of guidelines for Arabic script registrations
+                <xref target="RFC5564"/>
+                was published by the Arabic-language community.
+            </t>
+            <t>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas
+                Ostler, Thomas Roessler, Steve Sheng and Andrew Sullivan.
+            </t>
+        </section>
+        <section title="Editorial Notes">
+            <t>This appendix to be removed prior to final publication.</t>
 
-			<section title="Known Issues and Future Work">
+            <section title="Known Issues and Future Work">
 
-            <t>
-				<list style="symbols">
-					<t>A default set of actions should be defined if they are not explicitly accounted for in the table.</t>
-					<t>A method of specifying the origin URI for a table, and an expiration or refresh policy, as meta-data may be a useful way to declare how the table will be updated.</t>
-				</list>
-			</t>
+                <t>
+                    <list style="symbols">
+                        <t>A default set of actions should be defined if they are not explicitly accounted for in the
+                            table.
+                        </t>
+                        <t>A method of specifying the origin URI for a table, and an expiration or refresh policy, as
+                            meta-data may be a useful way to declare how the table will be updated.
+                        </t>
+                    </list>
+                </t>
 
-			</section>
+            </section>
 
-			<section title="Sample tables and running code">
-			
-				<t>Some sample tables using this format, as well as a basic implementation of this specification, is posted at https://github.com/kjd/idntables</t>
-			
-			</section>
-			
-			<section title="Change History">
-				<t>
-					<list style="hanging" hangIndent="5">
-						<t hangText="-00">Initial draft.</t>
-					</list>					
-					<list style="hanging" hangIndent="5">
-						<t hangText="-01">Add an XML Namespace, and fix other XML nits. Add support for sequences of codepoints. Improve on consistently using Unicode nomenclature.</t>
-					</list>					
-					<list style="hanging" hangIndent="5">
-						<t hangText="-02">Add support for validity periods.</t>
-					</list>
-					<list style="hanging" hangIndent="5">
-						<t hangText="-03">Incorporate requirements from the Label Generation Ruleset Procedure for the DNS Root Zone. These requirements include a detailed grammar for specifying whole-label variants, and the ability to explicitly declare of the actions associated with a specific variant. The document also consistently applies the term "Label Generation Ruleset", rather than "IDN table", to reflect the policy term now being used to describe these.</t>
-					</list>
-				</t>
-			</section>
-		</section>
-	</back>
+            <section title="Sample tables and running code">
+
+                <t>Some sample tables using this format, as well as a basic implementation of this specification, is
+                    posted at https://github.com/kjd/idntables
+                </t>
+
+            </section>
+
+            <section title="Change History">
+                <t>
+                    <list style="hanging" hangIndent="5">
+                        <t hangText="-00">Initial draft.</t>
+                    </list>
+                    <list style="hanging" hangIndent="5">
+                        <t hangText="-01">Add an XML Namespace, and fix other XML nits. Add support for sequences of
+                            codepoints. Improve on consistently using Unicode nomenclature.
+                        </t>
+                    </list>
+                    <list style="hanging" hangIndent="5">
+                        <t hangText="-02">Add support for validity periods.</t>
+                    </list>
+                    <list style="hanging" hangIndent="5">
+                        <t hangText="-03">Incorporate requirements from the Label Generation Ruleset Procedure for the
+                            DNS Root Zone. These requirements include a detailed grammar for specifying whole-label
+                            variants, and the ability to explicitly declare of the actions associated with a specific
+                            variant. The document also consistently applies the term "Label Generation Ruleset", rather
+                            than "IDN table", to reflect the policy term now being used to describe these.
+                        </t>
+                    </list>
+                </t>
+            </section>
+        </section>
+    </back>
 
 </rfc>
