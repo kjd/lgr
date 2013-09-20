@@ -144,14 +144,20 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: January 10, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">July 9, 2013</td></tr>
+<tr><td class="header">Expires: March 24, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">September 20, 2013</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-04</h1>
 
 <h3>Abstract</h3>
 
-<p>This memo describes a method of representing the domain name registration policy for a zone administrator using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are particularly used for the implementation of Internationalised Domain Names (IDNs). The rulesets are used to implement and share policy on which specific Unicode codepoints are permitted for registrations, which alternative codepoints are considered variants, and what actions may be performed on those variants.
+<p>This memo describes a method of representing the domain name registration policy for a zone administrator
+                using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are
+                particularly used for the implementation of Internationalised Domain Names (IDNs). The rulesets are used
+                to implement and share policy on which specific Unicode code points are permitted for registrations,
+                which alternative code points are considered variants, and what actions may be performed on those
+                variants.
+            
 </p>
 <h3>Status of this Memo</h3>
 <p>
@@ -168,7 +174,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on January 10, 2014.</p>
+This Internet-Draft will expire on March 24, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -215,51 +221,85 @@ The description element<br />
 The validity-start and validity-end elements<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor14">4.3.7.</a>&nbsp;
 The unicode-version element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor15">4.4.</a>&nbsp;
-Codepoint Rules<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">4.4.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#references">4.3.8.</a>&nbsp;
+The references element<br />
+<a href="#anchor15">5.</a>&nbsp;
+Code Point Rules<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#sequences">5.1.</a>&nbsp;
 Sequences<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">4.4.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor16">5.2.</a>&nbsp;
 Variants<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor21">4.4.3.</a>&nbsp;
-Result tagging<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor22">4.5.</a>&nbsp;
-Whole Label Evaluation Rules<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">4.5.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor17">5.2.1.</a>&nbsp;
+Basic variants<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor18">5.2.2.</a>&nbsp;
+Null variants<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor19">5.2.3.</a>&nbsp;
+Dispositions<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor20">5.2.4.</a>&nbsp;
+The ref attribute<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#when">5.2.5.</a>&nbsp;
+Conditional variants<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#comment">5.2.6.</a>&nbsp;
+The comment attribute<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tagging">5.3.</a>&nbsp;
+Code point tagging<br />
+<a href="#anchor21">6.</a>&nbsp;
+Whole Label and Context Evaluation<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor22">6.1.</a>&nbsp;
 Basic concepts<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">4.5.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">6.2.</a>&nbsp;
 Character Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">4.5.3.</a>&nbsp;
-Context rules<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">4.5.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">6.2.1.</a>&nbsp;
+Tag-based classes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">6.2.2.</a>&nbsp;
+Unicode property based classes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">6.2.3.</a>&nbsp;
+Explicitly declared classes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">6.2.4.</a>&nbsp;
+Combined classes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">6.3.</a>&nbsp;
+Whole Label and Context Rules<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rule">6.3.1.</a>&nbsp;
+The rule element<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#parameterized_context_rule">6.3.2.</a>&nbsp;
+Parameterized Context or When Rule<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#actions">6.4.</a>&nbsp;
 Action elements<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor32">4.6.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor38">6.4.1.</a>&nbsp;
+Recommended Disposition Values<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor39">6.4.2.</a>&nbsp;
+Precedence<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#implied_actions">6.4.3.</a>&nbsp;
+Implied actions<br />
+<a href="#anchor40">7.</a>&nbsp;
 Example table<br />
-<a href="#anchor33">5.</a>&nbsp;
+<a href="#processing">8.</a>&nbsp;
 Processing a label against an LGR<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor34">5.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor41">8.1.</a>&nbsp;
 Determining eligibility for a label<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor35">5.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor42">8.2.</a>&nbsp;
 Determining variants for a label<br />
-<a href="#anchor36">6.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor43">8.3.</a>&nbsp;
+Determining a disposition for a label or variant label<br />
+<a href="#anchor44">9.</a>&nbsp;
 Conversion between other formats<br />
-<a href="#anchor37">7.</a>&nbsp;
+<a href="#anchor45">10.</a>&nbsp;
 IANA Considerations<br />
-<a href="#anchor38">8.</a>&nbsp;
+<a href="#anchor46">11.</a>&nbsp;
 Security Considerations<br />
-<a href="#rfc.references1">9.</a>&nbsp;
+<a href="#rfc.references1">12.</a>&nbsp;
 References<br />
-<a href="#anchor40">Appendix&nbsp;A.</a>&nbsp;
+<a href="#anchor48">Appendix&nbsp;A.</a>&nbsp;
 RelaxNG Schema<br />
-<a href="#anchor41">Appendix&nbsp;B.</a>&nbsp;
+<a href="#anchor49">Appendix&nbsp;B.</a>&nbsp;
 Acknowledgements<br />
-<a href="#anchor42">Appendix&nbsp;C.</a>&nbsp;
+<a href="#anchor50">Appendix&nbsp;C.</a>&nbsp;
 Editorial Notes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor43">C.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor51">C.1.</a>&nbsp;
 Known Issues and Future Work<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor44">C.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor52">C.2.</a>&nbsp;
 Sample tables and running code<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor45">C.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor53">C.3.</a>&nbsp;
 Change History<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -271,13 +311,31 @@ Authors' Addresses<br />
 <a name="rfc.section.1"></a><h3>1.&nbsp;
 Introduction</h3>
 
-<p>This memo describes a method of using Extensible Markup Language (XML) to describe the algorithm used to determine whether a given domain label is permitted, and under which circumstances. These algorithms are comprised of a list of permissible codepoints, variants, and a number of conditions where certain relationships are applied. These algorithms form part of a zone administrator's policies, and can be referred to as Label Generation Rulesets (LGRs), or IDN tables.
+<p>This memo describes a method of using Extensible Markup Language (XML) to describe the algorithm used to
+                determine whether a given domain label is permitted, and under which conditions based on the code points
+                it contains and their context. These algorithms are comprised of a list of permissible code points,
+                variants, and a number of rules describing where certain relationships are applied. These algorithms
+                form part of a zone administrator's policies, and can be referred to as Label Generation Rulesets
+                (LGRs), or IDN tables.
+            
 </p>
-<p>Administrators of the zones for top-level domain registries have historically published their LGRs using ASCII text or HTML. The formatting of these documents has been loosely based on the format used for the Language Variant Table in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>. <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a> also provides a "model table format" that describes a similar set of functionality.
+<p>Administrators of the zones for top-level domain registries have historically published their LGRs using
+                ASCII text or HTML. The formatting of these documents has been loosely based on the format used for the
+                Language Variant Table in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
+                <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a>
+                also provides a "model table format" that describes a similar set of functionality.
+            
 </p>
-<p>Through the first decade of IDN deployment, experience has shown that LGRs derived from these formats are difficult to consistently implement and compare due to their different formats. A universal format, such as one using a structured XML format, will assist by improving machine-readability, consistency, reusability and maintainability of LGRs. It also provides for more complex conditional implementation of variants that reflects the known requirements of current zone administrator policies.
+<p>Through the first decade of IDN deployment, experience has shown that LGRs derived from these formats are
+                difficult to consistently implement and compare due to their differing formats. A universal format, such
+                as one using a structured XML format, will assist by improving machine-readability, consistency,
+                reusability and maintainability of LGRs. It also provides for more complex conditional implementation of
+                variants that reflects the known requirements of current zone administrator policies.
+            
 </p>
-<p>While the predominant usage of this specification is to represent IDN label policy, the format may also be used for describing ASCII domain name label rulesets.
+<p>While the predominant usage of this specification is to represent IDN label policy, the format is not
+                limited to IDN usage may also be used for describing ASCII domain name label rulesets.
+            
 </p>
 <a name="anchor2"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -287,63 +345,98 @@ Design Goals</h3>
 <p>The following items are explicit design goals of this format:
 </p>
 <p>
-			</p>
+                </p>
 <ul class="text">
 <li>MUST be in a format that can be implemented in a reasonably straightforward manner in software;
+                    
 </li>
-<li>The format SHOULD be able to be checked for formatting errors, such that common mistakes can be caught;
+<li>The format SHOULD be able to be checked for formatting errors, such that common mistakes can be
+                        caught;
+                    
 </li>
-<li>An LGR MUST be able to express the set of valid codepoints that are allowed for registration under a specific zone administrator's policies;
+<li>An LGR MUST be able to express the set of valid code points that are allowed for registration
+                        under a specific zone administrator's policies;
+                    
 </li>
-<li>MUST be able to express computed alternatives to a given domain name based on a one-to-one, or one-to-many relationship. These computed alternatives are commonly known as "variants";
+<li>MUST be able to express computed alternatives to a given domain name based on a one-to-one, or
+                        one-to-many relationship. These computed alternatives are commonly known as "variants";
+                    
 </li>
-<li>Variants SHOULD be able to be tagged with specific categories, such that the categories can be used to support registry policy (such as whether to list the computed variant in the zone, or to merely block it from registration);
+<li>Variants SHOULD be able to be tagged with specific categories, such that the categories can be
+                        used to support registry policy (such as whether to list the computed variant in the zone, or to
+                        merely block it from registration);
+                    
 </li>
-<li>Variants MUST be able to stipulated based on contextual information. For example, specific variants may only be applicable when they follow another specific codepoint, or when the codepoint is displayed in a specific presentation form;
+<li>Variants MUST be able to stipulated based on contextual information. For example, specific
+                        variants may only be applicable when they follow another specific code point, or when the code
+                        point is displayed in a specific presentation form;
+                    
 </li>
-<li>The data contained within an LGR MUST be unambiguous, such that independent implementations that utilise the contents will arrive at the same results;
+<li>The data contained within an LGR MUST be unambiguous, such that independent implementations that
+                        utilise the contents will arrive at the same results;
+                    
 </li>
-<li>LGRs SHOULD be suitable for comparison and re-use, such that one could easily compare the contents of two or more to see the differences, to merge them, and so on.
+<li>LGRs SHOULD be suitable for comparison and re-use, such that one could easily compare the
+                        contents of two or more to see the differences, to merge them, and so on.
+                    
 </li>
-<li>As many existing IDN tables are practicable SHOULD be able to be migrated to the LGR format with all applicable logic retained.
+<li>As many existing IDN tables are practicable SHOULD be able to be migrated to the LGR format with
+                        all applicable logic retained.
+                    
 </li>
 </ul><p>
-			
+            
 </p>
-<p>It is explicitly NOT the goal of this format to stipulate what codepoints should be listed in an LGR by a zone administrator. Which registration policies are used for a particular zone is outside the scope of this memo.
+<p>It is explicitly NOT the goal of this format to stipulate what code points should be listed in an LGR by
+                a zone administrator. Which registration policies are used for a particular zone is outside the scope of
+                this memo.
+            
 </p>
 <a name="anchor3"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.3"></a><h3>3.&nbsp;
 Requirements</h3>
 
-<p>To be able to fulfil the known utilisation of LGRs, 
-				the existing corpus of published IDN tables were reviewed to prepare this specification.
+<p>To be able to fulfil the known utilisation of LGRs,
+                the existing corpus of published IDN tables were reviewed to prepare this specification.
+            
 </p>
-<p>In addition, the requirements of ICANN's work to implement an LGR for the DNS Root Zone <a class='info' href='#LGR-PROCEDURE'>[LGR&#8209;PROCEDURE]<span> (</span><span class='info'>Internet Corporation for Assigned Names and Numbers, &ldquo;Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of IDNA Labels,&rdquo; .</span><span>)</span></a> were also considered. In Section B of that document, five specific requirements for an LGR methodology were identified:
+<p>In addition, the requirements of ICANN's work to implement an LGR for the DNS Root Zone
+                <a class='info' href='#LGR-PROCEDURE'>[LGR&#8209;PROCEDURE]<span> (</span><span class='info'>Internet Corporation for Assigned Names and Numbers, &ldquo;Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of                         IDNA Labels,&rdquo; .</span><span>)</span></a>
+                were also considered. In Section B of that document, five specific requirements for an LGR methodology
+                were identified:
+            
 </p>
 <p>
-				</p>
+                </p>
 <ul class="text">
-<li>The ability to identify a set of codepoints that are permitted.
+<li>The ability to identify a set of code points that are permitted.
 </li>
-<li>The ability to represent a list of variants, if any, for each codepoint.
+<li>The ability to represent a list of variants, if any, for each code point.
 </li>
-<li>A method of identifying codepoints that are related, using a tag.
+<li>A method of identifying code points that are related, using a tag.
 </li>
-<li>The ability to describe rules regarding the possible actions that may be performed on the resulting label (such as blocked, allocatable, etc.)
+<li>The ability to describe rules regarding the possible actions that may be performed on the
+                        resulting label (such as blocked, allocatable, etc.)
+                    
 </li>
 <li>The ability to describe rules that check for ill-formed combinations across the whole label.
 </li>
 </ul><p>
-			
+            
+</p>
+<p>Finally, the syntax and rules in
+                <a class='info' href='#RFC5892'>[RFC5892]<span> (</span><span class='info'>Faltstrom, P., &ldquo;The Unicode Code Points and Internationalized Domain Names for Applications (IDNA),&rdquo; August&nbsp;2010.</span><span>)</span></a>
+                were reviewed.
+            
 </p>
 <a name="anchor4"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4"></a><h3>4.&nbsp;
 LGR Format</h3>
 
-<p>An LGR is expressed as a well-formed XML Document <a class='info' href='#XML'>[XML]<span> (</span><span class='info'>, &ldquo;Extensible Markup Language (XML) 1.0,&rdquo; .</span><span>)</span></a>.
+<p>An LGR is expressed as a well-formed XML Document<a class='info' href='#XML'>[XML]<span> (</span><span class='info'>, &ldquo;Extensible Markup Language (XML) 1.0,&rdquo; .</span><span>)</span></a>.
+            
 </p>
 <a name="anchor5"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -364,7 +457,12 @@ Basic structure</h3>
         ...
     &lt;/lgr&gt;
 </pre></div>
-<p>Within the "lgr" element rests several sub-elements. Firstly is a "meta" element that contains all meta-data associated with the IDN table, such as its authorship, what it is used for, implementation notes and references. This is followed by a "data" element that contains the substantive codepoint data. Finally, an optional "rules" element contains information on whole-label evaluation rules, if any, along with any specific rules regarding the disposition of computed variants.
+<p>Within the "lgr" element rests several sub-elements. Firstly is a "meta" element that contains all
+                    meta-data associated with the IDN table, such as its authorship, what it is used for, implementation
+                    notes and references. This is followed by a "data" element that contains the substantive code point
+                    data. Finally, an optional "rules" element contains information on whole-label evaluation rules, if
+                    any, along with any specific rules regarding the disposition of computed variants.
+                
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
     &lt;?xml version="1.0"?&gt;
     &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
@@ -379,34 +477,49 @@ Basic structure</h3>
         &lt;/rules&gt;
     &lt;/lgr&gt;
 </pre></div>
-<p>A document should contain exactly one "lgr" element, and within that optionally one "meta" element and exactly one "data" element.
+<p>A document MUST contain exactly one "lgr" element. Each "lgr" element MUST contain exactly one "data"
+                    element, optionally preceded by one "meta" element and optionally followed by one "rules" element.
+                
 </p>
 <a name="anchor7"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
 Metadata</h3>
 
-<p>The "meta" element is used to express meta-data associated within the LGR. It can be used to explain the author or relevant contact person, explain what the usage of the IDN table is, provide implementation notes as well as references. The data contained within is not required by software consuming the LGR in order to calculate valid labels, or to calculate variants.
+<p>The "meta" element is used to express meta-data associated within the LGR. It can be used to identify
+                    the author or relevant contact person, explain the intended usage of the LGR, and provide
+                    implementation notes as well as references. The data contained within is not required by software
+                    consuming the LGR in order to calculate valid labels, or to calculate variants. However, the
+                    "unicode-version" element should be used to identify whether a consumer of the table has the right
+                    Unicode data to perform operations on the table.
+                
 </p>
 <a name="anchor8"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.1"></a><h3>4.3.1.&nbsp;
 The version element</h3>
 
-<p>The "version" element is used to uniquely identify each version of the LGR being represented. No specific format is required, but it is RECOMMENDED that it be a numerical positive integer, which is incremented with each revision of the file.
+<p>The "version" element is used to uniquely identify each version of the LGR being represented. No
+                        specific format is required, but it is RECOMMENDED that it be a numerical positive integer,
+                        which is incremented with each revision of the file.
+                    
 </p>
 <p>An example of a typical first edition of a document:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
     &lt;version&gt;1&lt;/version&gt;
-</pre></div>
-<p>A common alternative is to use a major-minor number scheme, where two decimal numbers are used to represent major and minor changes to the LGR. For example, "1.0" would be the first major release, "1.1" would be a minor update to that, and "2.0" would represent a major revision.
+</pre></div><p>
+
 </p>
 <a name="anchor9"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.2"></a><h3>4.3.2.&nbsp;
 The date element</h3>
 
-<p>The "date" element is used to identify the date the LGR was written. The contents of this element MUST be a valid ISO 8601 date string as described in <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+<p>The "date" element is used to identify the date the LGR was posted. The contents of this element
+                        MUST be a valid ISO 8601 date string as described in<a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+                    
 </p>
 <p>Example of a date:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
@@ -417,15 +530,36 @@ The date element</h3>
 <a name="rfc.section.4.3.3"></a><h3>4.3.3.&nbsp;
 The language element</h3>
 
-<p>The "language" element signals that the LGR is associated with a specific language or script. The value of the language element must be a valid language tag as described in <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. The tag may simply refer to a script if the LGR is not referring to a specific language. There may be multiple language elements for a LGR if it spans multiple languages and/or scripts.
+<p>The "language" element signals that the LGR is associated with a specific language or script. The
+                        value of the language element must be a valid language tag as described in<a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. The tag may simply refer to a script if the LGR is not referring to
+                        a specific language.
+                    
 </p>
 <p>Example of an English language LGR:
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
    &lt;language&gt;en&lt;/language&gt;
 </pre></div>
-<p>If the LGR applies to a specific script, rather than a language, the "und" language tag should be used followed by the relevant <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a> script subtag. For example, for a Cyrillic script LGR:
+<p>If the LGR applies to a specific script, rather than a language, the "und" language tag should be
+                        used followed by the relevant
+                        <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>
+                        script subtag. For example, for a Cyrillic script LGR:
+                    
 </p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
    &lt;language&gt;und-Cyrl&lt;/language&gt;
+</pre></div>
+<p>If the LGR covers a specific set of multiple languages or scripts, the language element can be
+                        repeated. However, for cases of insignificant admixture of characters from other scripts, the
+                        use of a single "language" element identifying the predominant script is RECOMMENDED. In the
+                        exceptional case where no script is predominant, use Zyyy (Common):
+                    
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+   &lt;language&gt;und-Zyyy&lt;/language&gt;
+</pre></div>
+<p>Note that that for the particular case of Japanese, a script tag "Japn" exists that matches the
+                        mixture of scripts used in writing that language. The preferred language element would be:
+                    
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+   &lt;language&gt;und-Japn&lt;/language&gt;
 </pre></div>
 <a name="anchor11"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -433,493 +567,1263 @@ The language element</h3>
 The domain element</h3>
 
 <p>This optional element refers to a domain to which this policy is applied.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-    &lt;domain&gt;example.com&lt;/domain&gt;
-</pre></div>
-<p>There may be multiple &lt;domain&gt; tags used to 
-						reflect a list of domains.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;domain&gt;example.com&lt;/domain&gt;</pre></div><p>
+
+</p>
+<p>There may be multiple &lt;domain&gt; tags used to
+                        reflect a list of domains.
+                    
 </p>
 <a name="anchor12"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.5"></a><h3>4.3.5.&nbsp;
 The description element</h3>
 
-<p>The "description" element is a free-form element that contains any additional relevant description. Typically, this field contains authorship information, as well as additional context on how the LGR was formulated (such as with references), and how it has been applied.
+<p>The "description" element is a free-form element that contains any additional relevant
+                        description that is useful for the user in its interpretation. Typically, this field contains
+                        authorship information, as well as additional context on how the LGR was formulated (such as
+                        citations and references), and how it has been applied.
+                    
 </p>
-<p>The element has an optional "type" attribute, which refers to the media type of the enclosed data. If the description lacks a type field, it will be assumed to be plain text.
+<p>The element has an optional "type" attribute, which refers to the media type of the enclosed
+                        data. If the description lacks a type field, it will be assumed to be plain text.
+                    
 </p>
-<p>The description elements describe information relating to the LGR that is useful for the user of the LGR in its interpretation. This may explain the history, the rationale, reference sources etc. It may also contain authorship information.
-</p>
-<p>The "type" attribute may be used to specify the encoding within description element. The attribute should be a valid MIME type. If supplied, it will be assumed the contents is content of that encoding. Typical types would be "text/plain" or "text/html". "text/plain" will be assumed if no type attribute is specified.
+<p>The "type" attribute may be used to specify the encoding within description element. The
+                        attribute should be a valid MIME type. If supplied, it will be assumed the contents is content
+                        of that encoding. Typical types would be "text/plain" or "text/html". "text/plain" will be
+                        assumed if no type attribute is specified.
+                    
 </p>
 <a name="anchor13"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.6"></a><h3>4.3.6.&nbsp;
 The validity-start and validity-end elements</h3>
 
-<p>The "validity-start" and "validity-end" elements are optional elements that describe the time period from which the contents of the LGR become valid (i.e. are used in registry policy), and the contents of the LGR cease to be used.
+<p>The "validity-start" and "validity-end" elements are optional elements that describe the time
+                        period from which the contents of the LGR become valid (i.e. are used in registry policy), and
+                        the contents of the LGR cease to be used.
+                    
 </p>
-<p>The times should conform to the format described in section 5.6 of <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. It may be comprised of a date, or a date and time stamp.
+<p>The times should conform to the format described in section 5.6 of <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. It
+                        may be comprised of a date, or a date and time stamp.
+                    
 </p>
 <a name="anchor14"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.7"></a><h3>4.3.7.&nbsp;
 The unicode-version element</h3>
 
-<p>If a given table is dependent on certain characters or functionality from a given version of the Unicode
-                    standard, the minimum version number MUST be listed. If any software processing the table does not have
-                    the minimum requisite version, it MUST NOT perform any operations relating to whole-label evaluation.
-                    This is because the Unicode properties for the codepoints may have changed in subsequent versions.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-    &lt;unicode-version&gt;6.2&lt;/unicode-version&gt;
-</pre></div>
+<p>Whenever an IDN table depends on character properties from a given version of the Unicode
+                        standard, the minimum version number MUST be listed. If any software processing the table does
+                        not have
+                        the minimum requisite version, it MUST NOT perform any operations relating to whole-label
+                        evaluation.
+                        This is because some Unicode code points may not have been assigned in an earlier version,
+                        leaving properties for these code points undefined. It is RECOMMENDED to only reference stable
+                        or immutable properties as other may change between versions.
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;unicode-version&gt;6.2&lt;/unicode-version&gt;
+</pre></div><p>
+
+</p>
+<p>It is not necessary to include a "unicode-version" element for files that do not make use of
+                        Unicode properties. Because Unicode has been strictly additive from Version 1.1, the required
+                        minimum version for the repertoire can be uniquely determined by checking the code point values
+                        in any "cp" attributes against the DerivedCharacterAge.txt file in <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>.
+                    
+</p>
+<a name="references"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.4.3.8"></a><h3>4.3.8.&nbsp;
+The references element</h3>
+
+<p>An IDN table may define a list of references in an optional "references" element. The references
+                        element contains any number of "reference" elements, each containing an "id" attribute. It is
+                        RECOMMENDED that the "id" attribute be an integer. The "id" attributes MUST be unique. The value
+                        of the element may a citation of a standard, dictionary or other specification, in any suitable
+                        format. A reference can be associated with many elements contained in the "data" or "rules"
+                        elements, by using an optional "ref" attribute.
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;references&gt;
+      &lt;reference id="0"&gt;The Unicode Standard, Version 7.0&lt;/reference&gt;
+      &lt;reference id="1"&gt;Big-5: Computer Chinese Glyph and Character
+         Code Mapping Table, Technical Report C-26, 1984&lt;/reference&gt;
+      &lt;reference id="2"&gt;ISO/IEC 10646:2012 3rd edition&lt;/reference&gt;
+      ...
+    &lt;/references&gt;
+    ...
+    &lt;data&gt;
+      &lt;char cp="0620" ref="0" /&gt;
+      ...
+    &lt;/data&gt;</pre></div><p>
+
+</p>
+<p>A "ref" attribute may not occur on elements that are named references to character classes and
+                        rules and on certain specific other element types. See description of these elements below.
+                    
+</p>
 <a name="anchor15"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4"></a><h3>4.4.&nbsp;
-Codepoint Rules</h3>
+<a name="rfc.section.5"></a><h3>5.&nbsp;
+Code Point Rules</h3>
 
-<p>The bulk of a label generation ruleset is a description of which set of codepoints are eligible for a given label. For rulesets that perform operations that result in potential variants, the codepoint-level relationships between variants need to also be described.
+<p>The bulk of a label generation ruleset is a description of which set of code points are eligible for a
+                given label. For rulesets that perform operations that result in potential variants, the code
+                point-level relationships between variants need to also be described.
+            
 </p>
-<p>The codepoint data is collected within a "data" element. Within this element, a series of "char" and "range" elements describe eligible codepoints, or ranges of codepoints, respectively.
+<p>The code point data is collected within a "data" element. Within this element, a series of "char" and
+                "range" elements describe eligible code points, or ranges of code points, respectively.
+            
 </p>
-<p>Discrete permissible codepoints or codepoint sequences may be stipulated with a "char" element, e.g.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-    &lt;char cp="002D"/&gt;
-</pre></div>
-<p>Ranges of permissible codepoints may be stipulated with a "range" element, e.g.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-    &lt;range first-cp="0030" last-cp="0039"/&gt;
-</pre></div>
-<p>The range is inclusive of the first and last codepoints.
+<p>Discrete permissible code points or code point sequences are declared with a "char" element, e.g.
 </p>
-<p>Codepoints must be expressed in hexadecimal, i.e. according to the standard Unicode convention without the prefix "U+". The rationale for not allowing other encoding formats, including native Unicode encoding in XML, is explored in <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>. The XML conventions used in this format, including the element and attribute names, mirror this document where practical and reasonable to do so.
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="002D"/&gt;</pre></div><p>
+
+</p>
+<p>Ranges of permissible code points may be stipulated with a "range" element, e.g.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;range first-cp="0030" last-cp="0039"/&gt;</pre></div><p>
+
+</p>
+<p>The range is inclusive of the first and last code points. Whether code points are specified individually
+                or as
+                part of a range makes no difference in processing the data, and tools reading or writing the XML format
+                may
+                not retain a distinction. All attributes defined for a range element are as if applied to each code
+                point within.
+            
+</p>
+<p>Code points must be expressed in uppercase, hexadecimal, and zero padded to a minimum of 4 digits - in
+                other words according to the standard Unicode convention but without the prefix "U+". The rationale for
+                not allowing other encoding formats, including native Unicode encoding in XML, is explored in<a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>. The XML conventions used in this format, including the element and attribute
+                names, mirror this document where practical and reasonable to do so.
+            
+</p>
+<a name="sequences"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
+Sequences</h3>
+
+<p>A sequence of two or more code points may be specified in a LGR,, for example, when defining the
+                    source for n:m variant mappings. Another use of sequences would be in cases when the exact sequence
+                    of code points is required to occur in order for the constituent elements to be eligible, such as
+                    when a specific code point is only eligible when preceded or followed by another code point. The
+                    following would define the eligibility of the MIDDLE DOT (U+00B7) only when both preceded and
+                    followed by the LATIN SMALL LETTER L (U+006C):
+                
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="006C 00B7 006C" comment="Catalan middle dot"/&gt;</pre></div><p>
+
+</p>
+<p>As an alternative to using sequences to define a required context, a "char" or "range" element may
+                    specify conditional context in a "when" attribute as described below in<a class='info' href='#when'>Section&nbsp;5.2.5<span> (</span><span class='info'>Conditional variants</span><span>)</span></a>. The
+                    latter method is more flexible in that such conditional context is not limited to specific code
+                    point. and allows prohibited, as well as required context to be specified.
+                
 </p>
 <a name="anchor16"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4.1"></a><h3>4.4.1.&nbsp;
-Sequences</h3>
-
-<p>A sequence of two or more codepoints may be specified in a LGR, when the exact sequence of codepoints is required to occur in order for the consituent elements to be eligible. This approach allows representation of policy where a specific codepoint is only eligible when preceded or followed by another codepoint. For example, in order to represent the eligibility of the MIDDLE DOT (U+00B7) only when both preceded and followed by the LATIN SMALL LETTER L (U+006C):
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="006C 00B7 006C"/&gt;
-</pre></div>
-<a name="anchor17"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4.2"></a><h3>4.4.2.&nbsp;
+<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
 Variants</h3>
 
-<p>While most LGRs typically only determine codepoint eligibility, others additionally specify a mapping of codepoints to other codepoints, known as "variants". What constitutes a variant is a matter of policy, and varies for each implementation.
+<p>While most LGRs typically only determine code point eligibility, others additionally specify a
+                    mapping of code points to other code points, known as "variants". What constitutes a variant is a
+                    matter of policy, and varies for each implementation. The following examples are intended to
+                    demonstrate the syntax; they are not necessarily typical.
+                
+</p>
+<a name="anchor17"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.2.1"></a><h3>5.2.1.&nbsp;
+Basic variants</h3>
+
+<p>Variants are specified using one of more "var" elements as children of a "char" element.
+</p>
+<p>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U
+                        (U+0075):
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="0075"&gt;
+        &lt;var cp="0076"/&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>A sequence of multiple code points can be specified as a variant of a single code point. For
+                        example, the sequence of LATIN SMALL LETTER O (U+006F) then LATIN SMALL LETTER E (U+0065) might
+                        hypothetically be specified as a variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as
+                        follows:
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="00F6"&gt;
+        &lt;var cp="006F 0065"/&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>The "var" element specifies Variants in only one direction, even though the variant relation is
+                        usually considered symmetric, that is, if A is a variant of B then B is typically also a variant
+                        of A. The format requires that the inverse of the variant is given explicitly to fully specify
+                        symmetric variant relations in the IDN table. This has the beneficial side effect of making the
+                        symmetry explicit:
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="006F 0065"&gt;
+        &lt;var cp="00F6"/&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>Both the source and target of a variant mapping may be sequences. As it is not possible to
+                        specify variants for ranges, ranges cannot be used for characters for which variant relations
+                        need to be defined.
+                    
 </p>
 <a name="anchor18"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4.2.1"></a><h3>4.4.2.1.&nbsp;
-Basic variants</h3>
+<a name="rfc.section.5.2.2"></a><h3>5.2.2.&nbsp;
+Null variants</h3>
 
-<p>Variants are specified as one of more children of a "char" element.
+<p>To specify a null variant, which is a variant string that maps to no code point, use an empty cp
+                        attribute. For example, to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the same
+                        string without the ZERO WIDTH NON-JOINER:
+                    
 </p>
-<p>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U (U+0075):
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="0075"&gt;
-  &lt;var cp="0076"/&gt;
-&lt;/char&gt;
-</pre></div>
-<p>A sequence of multiple codepoints can be specified as a variant of a single codepoint. For example, the sequence of LATIN SMALL LETTER O (U+006F) then LATIN SMALL LETTER E (U+0065) can be specified as a variant for an LATIN SMALL LETTER O WITH DIAERESIS (U+00F6) as follows:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="00F6"&gt;
-  &lt;var cp="006F 0065"/&gt;
-&lt;/char&gt;
-</pre></div>
-<p>Variants are specified in only one direction. For symmetric variants, the inverse of the variant must be explicitly specified:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="006F 0065"&gt;
-  &lt;var cp="00F6"/&gt;
-&lt;/char&gt;
-</pre></div>
-<p>Both the south and target of a variant mapping may be sequences. It is not possible to specify variants for ranges.
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="200C"&gt;
+        &lt;var cp=""/&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>The symmetric form of a null variant cannot be expressed in the IDN table format.
 </p>
 <a name="anchor19"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4.2.2"></a><h3>4.4.2.2.&nbsp;
-Null variants</h3>
+<a name="rfc.section.5.2.3"></a><h3>5.2.3.&nbsp;
+Dispositions</h3>
 
-<p>To specify a null variant, which is a variant string that maps to no codepoint, use an empty cp attribute. For example, to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the same string without the ZERO WIDTH NON-JOINER:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="200C"&gt;
-  &lt;var cp=""/&gt;
-&lt;/char&gt;
-</pre></div>
+<p>Variants may be given dispositions. These describe the policy state for a variant label that was
+                        generated using a particular variant. The dispositions are the same as described below in<a class='info' href='#actions'>Section&nbsp;6.4<span> (</span><span class='info'>Action elements</span><span>)</span></a>.
+                    
+</p>
+<p>A disposition may be of any value, but several conventional dispositions are predefined below in
+                        <a class='info' href='#actions'>Section&nbsp;6.4<span> (</span><span class='info'>Action elements</span><span>)</span></a>
+                        to encourage common conventions in their application. If these values can represent registry
+                        policy, they SHOULD be used.
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="767C"&gt;
+        &lt;var cp="53D1" disposition="allocate"/&gt;
+        &lt;var cp="5F42" disposition="block"/&gt;
+        &lt;var cp="9AEA" disposition="block"/&gt;
+        &lt;var cp="9AEE" disposition="block"/&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>Usually, if a variant label contains any instance of one of the blocked variants the label would
+                        be blocked, but if it contained only instances of allocated variants it could be allocated. See
+                        the discussion about implied actions in<a class='info' href='#implied_actions'>Section&nbsp;6.4.3<span> (</span><span class='info'>Implied actions</span><span>)</span></a>.
+                    
+</p>
 <a name="anchor20"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4.2.3"></a><h3>4.4.2.3.&nbsp;
+<a name="rfc.section.5.2.4"></a><h3>5.2.4.&nbsp;
+The ref attribute</h3>
+
+<p>Reference information may optionally be specified by a "ref" attribute, consisting of a space
+                        delimited sequence of reference identifiers.
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="522A" ref="0"&gt;
+        &lt;var cp="5220" ref="2 3"/&gt;
+        &lt;var cp="5220" ref="2 3"/&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>This facility is typically used to give source information for characters or variant relations.
+                        This information is ignored when machine-processing an LGR. Specifying a "ref" attribute on a
+                        range element is equivalent to specifying the same ref attribute on every single code point of
+                        the range. The reference identifiers MUST match those declared in the "references" element (see
+                        <a class='info' href='#references'>Section&nbsp;4.3.8<span> (</span><span class='info'>The references element</span><span>)</span></a>).
+                    
+</p>
+<p>In addition to "char", "range" and "var" elements in the data section, a ref attribute may be
+                        present for literals ("char" inside a rule) as well as rules and class definitions, but not for
+                        named references to them.
+                    
+</p>
+<a name="when"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.2.5"></a><h3>5.2.5.&nbsp;
 Conditional variants</h3>
 
-<p>Fundamentally, variants are mappings between two
-							sequences of codepoints. However, in some
-							instances for a variant relationship to exist, some
-							context external to the codepoint sequence must be
-							considered. For example, in some cases the
-							positional context determines whether two code
-							point sequences are variants of each other. This is
-							because Arabic characters can have different forms
-							based on position. This position context cannot be
-							solely derived from the codepoint, as the code
-							point is the same for the various forms.
+<p>Fundamentally, variants are mappings between two sequences of code points. However, in some
+                        instances for a variant relationship to exist, some context external to the code point sequence
+                        must be considered. For example, in some cases the positional context determines whether two
+                        code point sequences are variants of each other. An example are the Arabic characters, which can
+                        have different forms based on position. This positional context cannot be solely derived from
+                        the code point, as the code point is the same for the various forms.
+                    
 </p>
-<p>To specify a conditional variant relationship the
-							"when" attribute is used. The variant relationship
-							exists when the condition in the "when" attribute
-							is satisfied.
+<p>To specify a conditional variant relationship the "when" attribute is used. The variant
+                        relationship exists when the condition in the "when" attribute is satisfied. A "not-when"
+                        attribute may be used for conditions that must not be satisfied. The value of each "when" or
+                        "not-when" attributes is a a parameterized context rule as described below in<a class='info' href='#parameterized_context_rule'>Section&nbsp;6.3.2<span> (</span><span class='info'>Parameterized Context or When Rule</span><span>)</span></a>.
+                    
 </p>
-<p>
-							</p>
-<blockquote class="text"><dl>
-<dt>arabic-initial</dt>
-<dd>The codepoint is in a context where it would be presented in its Arabic Initial form.
-</dd>
-<dt>arabic-isolated</dt>
-<dd>The codepoint is in a context where it would be presented in its Arabic Isolated form.
-</dd>
-<dt>arabic-medial</dt>
-<dd>The codepoint is in a context where it would be presented in its Arabic Medial form.
-</dd>
-<dt>arabic-final</dt>
-<dd>The codepoint is in a context where it would be presented in its Arabic Final form.
-</dd>
-</dl></blockquote><p>
-						
+<p>Assuming the "rules" element contains suitably defined rules for "arabic-isolated" and
+                        "arabic-final", the following example shows how to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
+                        (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW (U+0625), but only when it appears
+                        in isolated or final forms:
+                    
 </p>
-<p>For example, to mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW (U+0673) as a variant of ARABIC LETTER ALEF WITH HAMZA BELOW (U+0625), but only when it appears in
-						isolated or final forms:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;char cp="0625"&gt;
-  &lt;var cp="0673" when="arabic-isolated"/&gt;
-  &lt;var cp="0673" when="arabic-final"/&gt;
-&lt;/char&gt;
-</pre></div>
-<p>Only a single context attribute can be applied to any "var"
-				element, however, multiple "var" elements using the same
-				mapping, but different "when" attributes may be specified.
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="0625"&gt;
+        &lt;var cp="0673" when="arabic-isolated"/&gt;
+        &lt;var cp="0673" when="arabic-final"/&gt;
+    &lt;/char&gt;
+</pre></div><p>
+
+</p>
+<p>Only a single "when" or "not-when" attribute can be applied to any "var"
+                        element, however, multiple "var" elements using the same
+                        mapping, but different "when" or "not-when" attributes may be specified.
+                    
+</p>
+<p>While currently Arabic is the only script known for which such conditional variants are defined.
+                        there are other scripts, such as Mongolian, which share the concept of positional forms. By
+                        requiring explicit definitions for these rules, this mechanism can easily handle any additional
+                        types of conditional variants that are required.
+                    
+</p>
+<p>As described in
+                        <a class='info' href='#sequences'>Section&nbsp;5.1<span> (</span><span class='info'>Sequences</span><span>)</span></a>
+                        a "when" or "not-when" attribute may also be specified to any "char" element in the data section
+                        to define required or prohibited contextual conditions under which a code point is valid.
+                    
+</p>
+<a name="comment"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.2.6"></a><h3>5.2.6.&nbsp;
+The comment attribute</h3>
+
+<p>Any "char", "range" or "variant" element may contain a comment in a "comment" attribute. The
+                        contents of a comment attribute are free-form plain text. Comments are ignored in machine
+                        processing of the table. Comment attributes may also be placed on certain elements in the
+                        "rules" section of the document, such as actions and literals ("char"), as well as definitions
+                        of classes and rules, but not named references to them. Finally, in the metadata the "version"
+                        and "reference" elements may have comment attributes to match the syntax in
+                        <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>
+                    
+</p>
+<a name="tagging"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
+Code point tagging</h3>
+
+<p>Typically, LGRs are used to explicitly designate allowable code points, with any label with a code
+                    point not explicitly listed in the LGR being considered an ineligible label according to the
+                    ruleset.
+                
+</p>
+<p>For more complex registry rules, there may be a need to discern code points of certain types. This
+                    can be accomplished by applying a "tag" attribute, and then filtering on results based on the tag
+                    using whole label evaluation. Tag attributes may be of any value, and multiple values are separated
+                    by space.
+                
+</p>
+<p>A simple example would be to label preferred code points (as in<a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>) by adding
+                    "preferred" to the tag, and then using a rule such as shown in
+                    <a class='info' href='#rule'>Section&nbsp;6.3.1<span> (</span><span class='info'>The rule element</span><span>)</span></a>
+                    to filter out labels that consist entirely of such preferred code points.
+                
 </p>
 <a name="anchor21"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.4.3"></a><h3>4.4.3.&nbsp;
-Result tagging</h3>
+<a name="rfc.section.6"></a><h3>6.&nbsp;
+Whole Label and Context Evaluation</h3>
 
-<p>Typically, LGRs are used to explicitly designate allowable codepoints, with any label with a codepoint not explicitly listed
-					in the LGR being considered an ineligible label according to the ruleset.
-</p>
-<p>For more complex registry rules, there may be a need to discern codepoints and variants of certain types. This can be accomplished
-						by applying a "tag" attribute, and then filtering on results based on the tag using whole label evaluation.
-</p>
-<p>A tag may be of any value, but the following tags are pre-defined to encourage common conventions in their application. If these tags can represent registry policy, they SHOULD be used.
-</p>
 <a name="anchor22"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5"></a><h3>4.5.&nbsp;
-Whole Label Evaluation Rules</h3>
-
-<a name="anchor23"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.1"></a><h3>4.5.1.&nbsp;
+<a name="rfc.section.6.1"></a><h3>6.1.&nbsp;
 Basic concepts</h3>
 
-<p>The codepoints in a label sometimes need to satisfy context-based rules, in order for the label to be
-				considered valid. Whole Label Evaluation Rules (WLE) can be specified to support this validation. The same validation
-				can be applied to variants created by applying the variant mapping.
+<p>The code points in a label sometimes need to satisfy context-based rules, for example for the label
+                    to be considered valid, or to satisfy the context for a variant mapping (see the description of the
+                    "when" attribute in<a class='info' href='#parameterized_context_rule'>Section&nbsp;6.3.2<span> (</span><span class='info'>Parameterized Context or When Rule</span><span>)</span></a>).
+                
 </p>
-<p>The whole label evaluation rules are contained in an "wle" element, which contains character class, rule and action elements. These are
-				described below.
+<p>A Whole Label Evaluation rule (WLE) is applied to the whole label. It is used to validate both
+                    original labels and variant labels derived from them. A conditional context rules is a specialized
+                    form of WLE specific to the context around a single code point or code point sequence. For example,
+                    if a rule is referenced in the "when" attribute of a variant mapping it is used to describe the
+                    conditional context under which the particular variant mapping is defined to exist.
+                
 </p>
-<p>A Whole Label Evaluation Rule describes a complete label. The elements of the "rule" element are:
+<p>Each rule is defined in a "rule" element. A rule may contain the following as child elements:
+                
 </p>
 <p>
-                </p>
+                    </p>
 <ul class="text">
-<li>character classes, which defines sets of codepoints to be used for context comparisons;
+<li>literal code points or code point sequences
 </li>
-<li>context operators, which define when character classes may appear; and
+<li>character classes, which defines sets of code points to be used for context comparisons;
+                            and
+                        
 </li>
-<li>actions, which define what actions to take based on the context.
+<li>context operators, which define when character classes and literals may appear
 </li>
 </ul><p>
                 
 </p>
-<a name="anchor24"></a><br /><hr />
+<a name="anchor23"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.2"></a><h3>4.5.2.&nbsp;
+<a name="rfc.section.6.2"></a><h3>6.2.&nbsp;
 Character Classes</h3>
 
-<p>Character classes are named sets of characters that share a particular property. They can be defined in 
-				several ways.
+<p>Character classes are sets of characters, that often share a particular property. They can be
+                    specified in
+                    several ways:
+                
 </p>
 <p>
-                </p>
+                    </p>
 <ol class="text">
-<li>Define the property via matching a tag in the codepoint data. All characters with the same tag
-					attribute are part of the same class.
+<li>by defining the property via matching a tag in the code point data. All characters with the
+                            same tag attribute are part of the same class.
+                        
 </li>
-<li>Reference one of the Unicode character properties defined in the Unicode Character Database (UCD).
+<li>by referencing one of the Unicode character properties defined in the Unicode Character
+                            Database<a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>;
+                        
 </li>
-<li>Explicitly list all the codepoints in the class.
+<li>by explicitly listing all the code points in the class; or
 </li>
-<li>Define a class as a combination of any number of these definitions or other classes
+<li>by defining the class as a combination of any number of these definitions or other classes.
+                        
 </li>
 </ol><p>
                 
 </p>
-<a name="anchor25"></a><br /><hr />
+<p>A character class has an optional "name" attribute, consisting of a single identifier not containing
+                    spaces. If it is omitted, the class is anonymous and exists only inside the rule or combined class
+                    where it is defined. A named character class is defined independently and can be referenced by name
+                    by both rules and other character classes.
+                
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="example" comment="an example class definition"&gt;
+        &lt;char cp="0061" /&gt;
+        &lt;char cp="4E00" /&gt;
+    &lt;/class&gt;
+    ...
+    &lt;rule&gt;
+        &lt;class name="example" /&gt;
+    &lt;/rule&gt;
+</pre></div><p>
+
+</p>
+<p>An empty "class" element with a name attribute is a reference to an existing named class. Such an
+                    element MUST not have either "comment" or "ref" attributes as those may only be placed on a class
+                    definition.
+                
+</p>
+<a name="anchor24"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.2.1"></a><h3>4.5.2.1.&nbsp;
+<a name="rfc.section.6.2.1"></a><h3>6.2.1.&nbsp;
 Tag-based classes</h3>
 
-<p>If tags are defined using the "tag" attribute, classes are defined based upon the names of the tags
-                    used. From these classes, further operations may be performed by context operators and actions.
+<p>The char element may contain a tag attribute that consists of one or more space separated
+                        identifiers, for example:
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="0061" tag="letter lower"/&gt;
+    &lt;char cp="4E00" tag="letter"/&gt;
+</pre></div><p>
+
+</p>
+<p>This defines two tags for use with code point U+0061, the tag "letter" and the tag "lower".
+                        Implicitly, this defines two named character classes, the class "letter" and the class "lower",
+                        the first with 0061 and 4E00 as elements and the latter with 0061, but not 4E00 as an element.
+                        The document MUST not contain an explicitly named class definition of the same name as an
+                        implicitly named tag-derived class.
+                    
+</p>
+<a name="anchor25"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.2.2"></a><h3>6.2.2.&nbsp;
+Unicode property based classes</h3>
+
+<p>A class is defined in terms of Unicode properties by giving the Unicode property alias and the
+                        property value or property value alias, separated by a colon.
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="virama" property="ccc:9" /&gt;
+</pre></div><p>
+
+</p>
+<p>The example above selects all characters for which the Unicode canonical combining class (ccc)
+                        value is 9. This value of the ccc is assigned in the to all characters that are viramas. The
+                        string "ccc" is the short-alias for the canonical combining class, as defined in the Unicode
+                        Character Database <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>.
+                    
+</p>
+<p>Unicode properties may, in principle, change between versions of the Unicode Standard. However,
+                        the values assigned for a given version are fixed. If Unicode Properties are used, a minimum
+                        Unicode version MUST be declared in the header. (Note, some Unicode properties are by definition
+                        stable across versions and do not change once assigned.)
+                    
 </p>
 <a name="anchor26"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.2.2"></a><h3>4.5.2.2.&nbsp;
-Unicode property based classes</h3>
+<a name="rfc.section.6.2.3"></a><h3>6.2.3.&nbsp;
+Explicitly declared classes</h3>
 
-<p>A class is defined in terms of Unicode properties by giving the Unicode property alias and the property value or property value alias.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;class name="virama" property="ccc:9"&gt;
-</pre></div>
-<p>The example above selects all characters for which the Unicode canonical combining class (ccc) value is 9.
-				   This value of the ccc is assigned in the UCD to all characters that are viramas. The string "ccc" is the short-alias
-				   for the canonical combining class, as defined in the file PropertyAliases.txt in the UCD. [[Possibly
-				   change those to the labels used by the XML format of the UCD -- per UAX42]]
+<p>A class of code points may also be declared by listing the code points that are a member of the
+                        class. This is useful when tagging cannot be used because code points are not listed
+                        individually as part of the eligible set of code points for the given LGR, for example because
+                        they only occur in code point sequences.
+                    
 </p>
-<p>Unicode properties may, in principle, change between versions of the Unicode Standard. However, the values
-				   assigned for a given version are fixed. If Unicode Properties are used, they MUST be declared in the
-				   header, and the Unicode Version must be defined. (Note, some Unicode properties are stable across versions
-			       and do not change, once assigned. Nevertheless, in order to make sure the UCD version covers all the
-				   characters in the codepoint tables, it is necessary to give version number in the header.).
+<p>To define a class in terms of an explicit list of code points:
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="abc"&gt;
+        &lt;char cp="0061"/&gt;
+        &lt;char cp="0062"/&gt;
+        &lt;char cp="0063"/&gt;
+   &lt;/class&gt;
+</pre></div><p>
+
+</p>
+<p>This defines a class named "abc" containing the code points for characters "a", "b" and "c".
+                        The ordering of the code points is not material, but it is RECOMMENDED to list them in ascending
+                        order.
+                    
+</p>
+<p>Range operators may also be used to represent any series of consecutive code points. The same
+                        declaration can be made as follows:
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="abc"&gt;
+        &lt;range first-cp="0061" last-cp="0063"/&gt;
+    &lt;/class&gt;
+</pre></div><p>
+
+</p>
+<p>Range and code point declarations can be freely intermixed. A shorthand notation exists where
+                        code points are directly represented by space separated hexadecimal values, and ranges are
+                        represented by a start and end value separated by a hyphen.
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="abc"&gt;0061 0062-0063&lt;/class&gt;
+</pre></div><p>
+
+</p>
+<p>would be a more streamlined expression of the same class using the shorthand notation.
 </p>
 <a name="anchor27"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.2.3"></a><h3>4.5.2.3.&nbsp;
-Explicitly declared classes</h3>
-
-<p>A class of codepoints may also be declared by listing the codepoints that are a member of the class.
-                This is useful when tagging can not be used because codepoints are not part of the eligible set of
-                codepoints for the given LGR.
-</p>
-<p>To define a class in terms of an explicit list of codepoints:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;class name="abc"&gt;
-    &lt;char cp="0061"/&gt;
-    &lt;char cp="0062"/&gt;
-    &lt;char cp="0063"/&gt;
-&lt;/class&gt;
-</pre></div>
-<p>This defines a class named "abc" containing the codepoints for characters "a", "b" and "c".
-                The ordering of the codepoints is not material, but it is RECOMMENDED to list them in ascending
-                order.
-</p>
-<p>Range operators may also be used to represent a series of consecutive codepoints. The same
-                declaration can be made as follows:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;class name="abc"&gt;
-    &lt;range first-cp="0061" last-cp="0063"/&gt;
-&lt;/class&gt;
-</pre></div>
-<a name="anchor28"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.2.4"></a><h3>4.5.2.4.&nbsp;
+<a name="rfc.section.6.2.4"></a><h3>6.2.4.&nbsp;
 Combined classes</h3>
 
-<p>Classes may be combined using logical operators for inversion, union, intersection and exclusive-or.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;not class="xxx"&gt;
-&lt;union class="xxx" class="yyy"&gt;
-&lt;not class="xxx"&gt;
-&lt;difference class="xxx" class="yyy"&gt;
-&lt;symmetric-difference class="xxx" class="yyy"&gt;
-</pre></div>
+<p>Classes may be combined using logical operators for inversion, union, intersection, difference
+                        and symmetric difference (exclusive-or).
+                    
+</p>
+<p>
+                        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
++-------------------+------------------------------------+
+| Logical Operation | Example                            |
++-------------------+------------------------------------+
+| Inversion         | &lt;not&gt;&lt;class name="xxx"&gt;&lt;/not&gt;      |
++-------------------+------------------------------------+
+| Union             | &lt;union&gt;                            |
+|                   |    &lt;class name="class-1"/&gt;         |
+|                   |    &lt;class name="class-2"/&gt;         |
+|                   | &lt;/union&gt;                           |
++-------------------+------------------------------------+
+| Intersection      | &lt;intersection&gt;                     |
+|                   |    &lt;class name="class-1"/&gt;         |
+|                   |    &lt;class name="class-2"/&gt;         |
+|                   | &lt;/intersection&gt;                    |
++-------------------+------------------------------------+
+| Difference        | &lt;difference&gt;                       |
+|                   |    &lt;class name="class-1"/&gt;         |
+|                   |    &lt;class name="class-2"/&gt;         |
+|                   | &lt;/difference&gt;                      |
++-------------------+------------------------------------+
+| Symmetric         | &lt;symmetric-difference&gt;             |
+| Difference        |    &lt;class name="class-1"/&gt;         |
+|                   |    &lt;class name="class-2"/&gt;         |
+|                   | &lt;/symmetric-difference&gt;            |
++-------------------+------------------------------------+
+</pre></div><p>
+
+                    
+</p>
+<p>Combinations can be anonymous or named.
+</p>
+<p>
+                        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;union name="xxxyyy"&gt;
+        &lt;class name="xxx"/&gt;
+        &lt;class name="yyy"/&gt;
+    &lt;/union&gt;
+</pre></div><p>
+
+                    
+</p>
+<p>This creates a named class that represents the union of classes "xxx" and "yyy", and which can be
+                        referenced in other classes or rules as &lt;class name="xxxyyy"/&gt;.
+                    
+</p>
+<p>Note that the reference to a named class is always via a "class" element, independent of how the
+                        character class was defined.
+                    
+</p>
+<p>An "intersection", "symmetric-difference" or "difference" element MUST contain precisely two, and
+                        a "not" element MUST contain precisely one "class" or one of the operator elements, while a
+                        "union" element MUST contain two or more elements.
+                    
+</p>
+<a name="anchor28"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
+Whole Label and Context Rules</h3>
+
+<p>Each rule is comprised of a series of matching operators that must be satisfied in order to determine
+                    whether a label meets a given condition. Rules may reference other rules or character classes
+                    defined elsewhere in the table.
+                
+</p>
+<a name="rule"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3.1"></a><h3>6.3.1.&nbsp;
+The rule element</h3>
+
+<p>A matching rule is defined by a "rule" element, which contains combinations character classes
+                        with literal code point sequences and context operators contained in child elements. In
+                        evaluating a rule, each child element is matched in order.
+                    
+</p>
+<p>Rules may optionally be named using a "name" attribute containing a single identifier string with
+                        no spaces. If the name attribute is omitted, the rule is anonymous and may not incorporated by
+                        reference into another rule or referenced by an action or "when" attribute.
+                    
+</p>
+<p>A simple rule to match a label where all characters are members of the class "preferred":
+</p>
+<p>
+                        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule name="preferred" match="whole-label"&gt;
+        &lt;class name="preferred" count="1+"/&gt;
+    &lt;/rule&gt;
+</pre></div><p>
+
+                    
+</p>
+<p>Rules are paired with explicit and implied actions, triggering these actions when a rule matches
+                        a label. For example, a simple explicit action for the rule shown above would be:
+                    
+</p>
+<p>
+                        </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;action disposition="preferred" match="preferred" /&gt;
+</pre></div><p>
+
+                    
+</p>
+<p>which has the effect of setting the policy disposition for a label made up entirely of
+                        "preferred" code points, to "preferred". Explicit actions are further discussed in
+                        <a class='info' href='#actions'>Section&nbsp;6.4<span> (</span><span class='info'>Action elements</span><span>)</span></a>
+                        and use of rules in conditional context for implied actions is discussed in
+                        <a class='info' href='#when'>Section&nbsp;5.2.5<span> (</span><span class='info'>Conditional variants</span><span>)</span></a>
+                        and
+                        <a class='info' href='#implied_actions'>Section&nbsp;6.4.3<span> (</span><span class='info'>Implied actions</span><span>)</span></a>.
+                    
+</p>
 <a name="anchor29"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.3"></a><h3>4.5.3.&nbsp;
-Context rules</h3>
+<a name="rfc.section.6.3.1.1"></a><h3>6.3.1.1.&nbsp;
+The count attribute</h3>
 
-<p>Context rules are comprised of a series of logical conditions that must be satisfied in order to
-                determine a label meets a given context. These rules relate to the appearance of character classes
-                    defined elsewhere in the table.
+<p>The number of times a specific character class or rule may appear in an expression defined by
+                            a rule is given by the "count" attribute. The attribute consists of a number, optionally
+                            followed by a "+" sign. The number MUST be an integer of value 0 or higher, and gives the
+                            number of times the class or rule may appear in matching. If the number is followed by a
+                            plus sign ("+"), it means that any number of additional occurrences are allowed beyond the
+                            number stated. Therefore, "1" would mean exactly one occurrence, whereas "1+" would indicate
+                            one or more occurrences.
+                        
+</p>
+<p>If no count attribute is specified, the number of occurrences is "1".
 </p>
 <a name="anchor30"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.3.1"></a><h3>4.5.3.1.&nbsp;
-The rule element</h3>
+<a name="rfc.section.6.3.1.2"></a><h3>6.3.1.2.&nbsp;
+The choice element</h3>
 
-<p>A matching rule is defined by a "rule" element, which combines character classes with context operators.
+<p>For cases where several alternates could be chosen, the "choice" element can
+                            encode a list of choices:
+                        
 </p>
-<p>A simple rule to match a label where all characters are members of the class "preferred":
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;rule name="preferred"&gt;
-   &lt;class name="preferred" count="1+"/&gt;
-&lt;/rule&gt;
-</pre></div>
-<p>To provide more specificity on the number of times a specific character class may appear,
-                the "count" attribute allows you to specify the number of times. This number should be an
-                integer of 0 or higher. If it is followed by a plus character (+), this means it can be
-                higher that the number stated. Therefore, "1" would mean exactly one occurrence, whereas
-                "1+" would indicate one or more occurrences.
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule name="ldh"&gt;
+       &lt;choice count="1+"&gt;
+           &lt;class name="letters"/&gt;
+           &lt;class name="digits"/&gt;
+           &lt;char cp="002D"/&gt;
+       &lt;/choice&gt;
+    &lt;/rule&gt;
+</pre></div><p>
+
 </p>
-<p>For cases where several alternates could be chosen, the &lt;choice&gt; element can
-                encode a list of choices:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;rule name="ldh"&gt;
-   &lt;choice&gt;
-       &lt;class name="letters"/&gt;
-       &lt;class name="digits"/&gt;
-       &lt;class name="hyphen"/&gt;
-   &lt;/choice&gt;
-&lt;/rule&gt;
-</pre></div>
-<p>For cases when a match may occur against any codepoint, use any "any" element:
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;rule name="starting-digit"&gt;
-   &lt;class name="digits" count="1"/&gt;
-   &lt;any/&gt;
-&lt;/rule&gt;
-</pre></div>
-<p>By default Whole Label Evaluation Rules always match the entire label. Use
-				attribute "match" with values "start", "anywhere" and "end" to define rules that need to match in
-                    specific positions of the label.
+<p>Each child element of a "choice" represents one alternative. The first matching alternative
+                            determines the match for the choice element. To express a choice where one alternative
+                            consists of a sequence of elements, they can be wrapped in an anonymous rule.
+                        
 </p>
-<p>Rules are named and can be nested by reference.
-</p>
-<p>Here's an example of a rule requiring that all labels be letters (optionally followed by combining marks) 
-				and possibly digits.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;class name="letter" property="gc:L"/&gt;
-&lt;class name="combining-mark" property="gc:M"/&gt;
-&lt;class name="digit" property="gc:Nd"&gt;
-&lt;rule name="letter-grapheme"&gt;
-   &lt;class name="letter" count="1+"/&gt;
-   &lt;class name="combining-mark" count="0+"/&gt;
-&lt;/rule&gt;
-&lt;rule name="leading-letter&gt;
-   &lt;class name="letter-grapheme" count="1"/&gt;
-   &lt;choice count="0+"&gt;
-       &lt;class name="letter-grapheme" count="0+"/&gt;
-       &lt;class name="digit" count="0+"/&gt;
-   &lt;/choice&gt;
-&lt;/rule&gt;</pre></div>
 <a name="anchor31"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.5.4"></a><h3>4.5.4.&nbsp;
-Action elements</h3>
+<a name="rfc.section.6.3.1.3"></a><h3>6.3.1.3.&nbsp;
+Literal code point sequences</h3>
 
-<p>The purpose of a rule is to trigger a specific action. Often, the action simply results in blocking a 
-label that does not match a rule.
-</p>
-<p>blocking rule
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;action action="blocked" not-match="leading-letter"/&gt;&lt;</pre></div>
-<p>An action may contain precisely one "match" or "not-match" attribute, but not both. Because rules may be compound rules that contain other rules, 
-only a single rule may be named as the value of the "match" or "not-match" attrbute.
-</p>
-<p>The precise action taken and the name of the corresponding "action" attribute are not defined here. It is strongly RECOMMENDED
-to use the following actions only with their conventional sense.
-</p>
-<p>
-						</p>
-<blockquote class="text"><dl>
-<dt>block</dt>
-<dd>The resulting string should be blocked from registration. This would typically apply for a derived variant that has no practical use, such as blocking confusingly similar by undesirable variants.
-</dd>
-<dt>allocate</dt>
-<dd>The resulting string should be reserved for use by the same operator of the origin string, but not automatically allocated for use.
-</dd>
-<dt>activate</dt>
-<dd>The resulting string should be activated for use. (This is the typical default action if no tagging is used, and is known as a "preferred" variant in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>)
-</dd>
-</dl></blockquote><p>
-					
+<p>A literal code point sequence matches a single code point or a sequence. It is defined by a
+                            "char" element, with the code point or sequence to be matched given by the "cp" attribute.
+                            When used as a literal, a "char" element may contain a "count" in addition to the "cp"
+                            attribute, comments or references, but no conditional contexts or child elements.
+                        
 </p>
 <a name="anchor32"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.4.6"></a><h3>4.6.&nbsp;
-Example table</h3>
+<a name="rfc.section.6.3.1.4"></a><h3>6.3.1.4.&nbsp;
+The any element</h3>
 
-<p>A sample complete XML LGR is as follows.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-    &lt;?xml version="1.0"?&gt;
-    &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
-        &lt;meta&gt;
-             &lt;version&gt;1&lt;/version&gt;
-             &lt;date&gt;2010-01-01&lt;/date&gt;
-             &lt;language&gt;sv&lt;/language&gt;
-             &lt;domain&gt;example&lt;/domain&gt;
-             &lt;description type="text/html"&gt;
-             &lt;![CDATA[
-                 This language table was developed with the
-                 &lt;a href="http://swedish.example/"&gt;Swedish
-                 examples institute&lt;/a&gt;.
-             ]]&gt;
-             &lt;/description&gt;
-        &lt;/meta&gt;
-        &lt;data&gt;
-            &lt;range first-cp="0061" last-cp="007A"/&gt;
-            &lt;char cp="00E4"/&gt;
-        &lt;/data&gt;
-    &lt;/lgr&gt;</pre></div>
+<p>The "any" element matches any single code point. It may have a "count" attribute. For an
+                            example see
+                            <a class='info' href='#IDNA2008-example'>Section&nbsp;6.3.1.8<span> (</span><span class='info'>Example rule from IDNA2008</span><span>)</span></a>
+                        
+</p>
+<p>The "any" element" may have neither a "comment" nor a "ref" attribute.
+</p>
 <a name="anchor33"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5"></a><h3>5.&nbsp;
-Processing a label against an LGR</h3>
+<a name="rfc.section.6.3.1.5"></a><h3>6.3.1.5.&nbsp;
+The start and end elements</h3>
 
+<p>To match the beginning or end of a label, use the "start" or "end" element.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule name="empty-label"&gt;
+        &lt;start/&gt;
+        &lt;end/&gt;
+    &lt;/rule&gt;
+</pre></div><p>
+
+</p>
+<p>Start and end elements do not have a "count" or any other attribute. When their use is not
+                            required, it is RECOMMENDED to us the "match" attribute instead. One case where start or end
+                            elements are required is when only some, but not all of the alternatives in a "choice" need
+                            to match beginning or end of a label.
+                        
+</p>
 <a name="anchor34"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.1"></a><h3>5.1.&nbsp;
-Determining eligibility for a label</h3>
+<a name="rfc.section.6.3.1.6"></a><h3>6.3.1.6.&nbsp;
+The match attribute</h3>
 
-<p>In order to use a table to test a specific domain label for membership in the LGR, a consumer of the LGR must iterate through each codepoint within a given U-label, and test that each codepoint is a member of the LGR. If any codepoint is not a member of the LGR, it shall be deemed as not eligible in accordance with the table.
+<p>Whole Label Evaluation Rules in principle always apply to the entire label, but in practice,
+                            for example to express a requirement to not start a label with a digit, some rules do not
+                            need to cover the whole label. Use
+                            attribute "match" with value "whole-label" to identify a rule applicable to the entire
+                            label. For other rules use "from-start", "anywhere" and "to-end" to define rules that need
+                            to match in specific positions of the label. Certain parameterized context rules (see
+                            <a class='info' href='#parameterized_context_rule'>Section&nbsp;6.3.2<span> (</span><span class='info'>Parameterized Context or When Rule</span><span>)</span></a>) have a match attribute value of "context".
+                            The defaults is "anywhere".
+                        
 </p>
-<p>A codepoint is deemed a member of the table when it is listed with the &lt;char&gt; element, and all necessary condition listed in "when" attributes are correctly satisfied.
+<p>A "match" attribute present in the definition of a rule is ignored if a rule is referenced by
+                            name inside another rule. An anonymous rule may not have a "match" attribute.
+                        
 </p>
 <a name="anchor35"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
-Determining variants for a label</h3>
+<a name="rfc.section.6.3.1.7"></a><h3>6.3.1.7.&nbsp;
+The name attribute</h3>
 
-<p>For a given eligible label, the set of variants is deemed to be each possible permutation of &lt;var&gt; elements, whereby all "when" attributes are correctly satisfied for each codepoint in the given permutation.
+<p>Rules and classes may be named using a "name" attribute and can be nested either directly or,
+                            if named, by reference.
+                        
+</p>
+<p>Here's an example of a rule requiring that all labels be letters (optionally followed by
+                            combining marks)
+                            and possibly digits. The example shows rules and classes referenced by name.
+                        
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="letter" property="gc:L"/&gt;
+    &lt;class name="combining-mark" property="gc:M"/&gt;
+    &lt;class name="digit" property="gc:Nd"&gt;
+    &lt;rule name="letter-grapheme"&gt;
+       &lt;class name="letter" count="1+"/&gt;
+       &lt;class name="combining-mark" count="0+"/&gt;
+    &lt;/rule&gt;
+    &lt;rule name="leading-letter" match="whole-label"&gt;
+       &lt;rule name="letter-grapheme" count="1"/&gt;
+       &lt;choice count="0+"&gt;
+           &lt;rule name="letter-grapheme" count="0+"/&gt;
+           &lt;class name="digit" count="0+"/&gt;
+       &lt;/choice&gt;
+    &lt;/rule&gt;</pre></div><p>
+
+</p>
+<a name="IDNA2008-example"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3.1.8"></a><h3>6.3.1.8.&nbsp;
+Example rule from IDNA2008</h3>
+
+<p>This sections shows an example of the whole label evaluation rule from<a class='info' href='#RFC5892'>[RFC5892]<span> (</span><span class='info'>Faltstrom, P., &ldquo;The Unicode Code Points and Internationalized Domain Names for Applications (IDNA),&rdquo; August&nbsp;2010.</span><span>)</span></a>forbidding the mixture of the Arabic-Indic and extended Arabic-Indic
+                            digits in the same label.
+                        
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;data&gt;
+        &lt;range first-cp="0660" last-cp="0669" not-when="mixed-digits"
+             tag="arabic-indic-digits" /&gt;
+        &lt;range first-cp="06F0" last-cp="06F9" not-when="mixed-digits"
+             tag="extended-arabic-indic-digits" /&gt;
+    &lt;/data&gt;
+    &lt;rules&gt;
+    &lt;rule name="mixed-digits" match="anywhere"&gt;
+        &lt;choice&gt;
+            &lt;rule&gt;
+                &lt;class name="arabic-indic-digits"/&gt;
+                &lt;any count="0+"/&gt;
+                &lt;class name="extended-arabic-indic-digits"/&gt;
+            &lt;/rule&gt;
+            &lt;rule&gt;
+                &lt;class name="extended-arabic-indic-digits"/&gt;
+                &lt;any count="0+"/&gt;
+                &lt;class name="arabic-indic-digits"/&gt;
+            &lt;/rule&gt;
+        &lt;/choice&gt;
+    &lt;/rule&gt;</pre></div><p>
+
+</p>
+<p>The preceding example also demonstrates several instances of the use of anonymous rules for
+                            grouping.
+                        
+</p>
+<a name="parameterized_context_rule"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3.2"></a><h3>6.3.2.&nbsp;
+Parameterized Context or When Rule</h3>
+
+<p>A special type of rule provides a context for evaluating the validity of a code point or variant
+                        mapping. This rule is invoked by the "when" attribute described in<a class='info' href='#when'>Section&nbsp;5.2.5<span> (</span><span class='info'>Conditional variants</span><span>)</span></a>. For a
+                        context rule, the match attribute is normally "context". Such "when rules" contain a special
+                        place holder, represented by a "match" element (not to be confused with the "match" attribute).
+                        When evaluated, the "match" element is replaced by a literal corresponding to the "cp" attribute
+                        of the element for which the rule in its "when" attribute is being evaluated.
+                    
+</p>
+<p>For example, the Greek lower numeral sign is invalid if not immediately preceding a character in
+                        the Greek script. This is most naturally addressed with a when rule using look-ahead:
+                    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="0375" when="preceding-greek"/&gt;
+    ...
+    &lt;class name="greek-script" property="sc:Grek"/&gt;
+    &lt;rule name="preceding-greek" match="context"&gt;
+        &lt;match/&gt;
+        &lt;look-ahead&gt;
+            &lt;class name="greek-script"/&gt;
+        &lt;/look-ahead&gt;
+    &lt;/rule&gt;</pre></div><p>
+
+</p>
+<p>In evaluating this rule, the "match" element is treated as if it was replaced by a literal
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="0375"/&gt;</pre></div><p>
+
+</p>
+<p>The action implied by a context rule is always a disposition of "invalid" if the when rule is not
+                        matched.
+                        Unlike other rules, these rules may not be associated with arbitrary actions via "action"
+                        elements.
+                    
 </p>
 <a name="anchor36"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.6"></a><h3>6.&nbsp;
-Conversion between other formats</h3>
+<a name="rfc.section.6.3.2.1"></a><h3>6.3.2.1.&nbsp;
+The look-behind and look-ahead elements</h3>
 
-<p>Both <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a> and <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a>
-				provide different grammars for IDN tables. These formats are unable
-				to fully cater for the increased requirements of contemporary
-				IDN variant policies.
+<p>Context rules use the "look-behind" and "look-ahead" elements to define context before and
+                            after the
+                            code point sequence matched by the "match" element. If the "match" element is omitted,
+                            neither the
+                            "look-behind" nor the "look-ahead" element may be present.
+                        
 </p>
-<p>This specification is a superset of functionality provided by
-				these IDN table formats, thus any table expressed in those formats can be
-				expressed in this format. Automated conversion can be conducted
-			between tables conformant with the grammar specified in each
-			document.
+<p>Here is an example of a rule that defines an "initial" context for an Arabic code point:
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="transparent" property="jt:T"/&gt;
+    &lt;class name="right-joining" property="jt:R"/&gt;
+    &lt;class name="left-joining" property="jt:L"/&gt;
+    &lt;class name="dual-joining" property="jt:D"/&gt;
+    &lt;class name="non-joining" property="jt:U"/&gt;
+    &lt;rule name="Arabic-initial" match="context"&gt;
+      &lt;look-behind&gt;
+        &lt;choice&gt;
+          &lt;start/&gt;
+          &lt;rule&gt;
+            &lt;class name="transparent" count="0+"/&gt;
+            &lt;class name="non-joining"/&gt;
+          &lt;/rule&gt;
+        &lt;/choice&gt;
+      &lt;/look-behind&gt;
+      &lt;match /&gt;
+      &lt;look-ahead&gt;
+        &lt;class name="transparent" count="0+" /&gt;
+        &lt;choice&gt;
+          &lt;class name="right-joining" /&gt;
+          &lt;class name="dual-joining" /&gt;
+        &lt;/choice&gt;
+      &lt;/look ahead&gt;
+    &lt;/rule&gt;</pre></div><p>
+
+</p>
+<p>A when rule contains any combination of "look-ahead" , "match" and "look-behind" elements in
+                            that order. Each of these elements occurs at most once, and none have a "count" attribute.
+                            If a context rule contains a look-ahead or look-behind element, it MUST contain a "match"
+                            element. If a "match" element is present the rule MUST have a "match" attribute with a value
+                            of "context".
+                        
 </p>
 <a name="anchor37"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.3.2.2"></a><h3>6.3.2.2.&nbsp;
+Omitting the match element</h3>
+
+<p>
+                            If the "match" element is omitted, the evaluation of the context rule is not tied to the
+                            position of the code point or sequence associated with the "when" attribute.
+                        
+</p>
+<p>Katakana middle dot is invalid in any label not containing at least one Japanese character
+                            anywhere in the label. Because this requirement is independent of the position of the middle
+                            dot, the rule does not require a "match" element and the "match" attribute is "anywhere".
+                        
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="30FB" when="japanese-in-label"/&gt;
+    &lt;rule name="japanese-in-label" match="anywhere"&gt;
+        &lt;union&gt;
+            &lt;class property="sc:Hani"/&gt;
+            &lt;class property="sc:Kata"/&gt;
+            &lt;class property="sc:Hira"/&gt;
+        &lt;/union&gt;
+    &lt;/rule&gt;</pre></div>
+<p>The Katakana middle dot is used only with Han, Katakana or Hiragana. The "when" rule requires
+                            that at least one code point in the label is in one of these scripts. (Note that the
+                            Katakana middle dot itself is of script Common).
+                        
+</p>
+<a name="actions"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.4"></a><h3>6.4.&nbsp;
+Action elements</h3>
+
+<p>The purpose of a rule is to trigger a specific action. Often, the action simply results in blocking a
+                    label that does not match a rule. An example of an action invalidating a label:
+                
+</p>
+<p>
+                    </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;action disposition="invalid" not-match="leading-letter"/&gt;</pre></div><p>
+
+                
+</p>
+<p>An action may contain precisely one "match" or "not-match" attribute, but not both. Because rules may
+                    be compound rules that contain other rules, only a single rule may be named as the value of the
+                    "match" or "not-match" attribute.
+                
+</p>
+<p>An action may contain either one of a set of optional attributes matching the variant disposition
+                    from the "disposition" attributed of any "var" element used in generating the variant label being
+                    evaluated. Assuming all variants have been given suitable "disposition" attributes of "blocked" or
+                    "allocate" and that a rule is defined matching labels consisting entirely of code points tagged as
+                    "preferred" the following actions evaluate the disposition for the variant label:
+                
+</p>
+<p>
+                    </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;action disposition="blocked" any-variant="blocked" /&gt;
+    &lt;action disposition="activate" all-variants="allocate"
+        match="preferred" /&gt;</pre></div><p>
+
+                
+</p>
+<p>The first action matches any variant label for which at least one of the code point variants carries
+                    the disposition "blocked". The second matches any variant label for which all of the code point
+                    variants carry the disposition "allocate". Neither action matches a label that is not a variant
+                    label. If necessary repeat an action so it applies to an ordinary label:
+                
+</p>
+<p>
+                    </p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;action disposition="activate"  match="preferred" /&gt;</pre></div><p>
+
+                
+</p>
+<a name="anchor38"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.4.1"></a><h3>6.4.1.&nbsp;
+Recommended Disposition Values</h3>
+
+<p>The precise nature of the policy action taken in response to a disposition and the name of the
+                        corresponding "disposition" attributes are only partially defined here. It is strongly
+                        RECOMMENDED to use the following actions only with their conventional sense.
+                    
+</p>
+<p>
+                        </p>
+<blockquote class="text"><dl>
+<dt>invalid</dt>
+<dd>The resulting string is not a valid label. This disposition may be
+                                assigned implicitly, see<a class='info' href='#implied_actions'>Section&nbsp;6.4.3<span> (</span><span class='info'>Implied actions</span><span>)</span></a>.
+                            
+</dd>
+<dt>block</dt>
+<dd>The resulting string is a valid label, but should be blocked from
+                                registration. This would typically apply for a derived variant that has no practical
+                                use, such as blocking confusingly similar by undesirable variants.
+                            
+</dd>
+<dt>allocate</dt>
+<dd>The resulting string should be reserved for use by the same operator
+                                of the origin string, but not automatically allocated for use.
+                            
+</dd>
+<dt>activate</dt>
+<dd>The resulting string should be activated for use. (This is the
+                                typical default action if no tagging is used, and is known as a "preferred" variant in
+                                <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>)
+                            
+</dd>
+</dl></blockquote><p>
+                    
+</p>
+<a name="anchor39"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.4.2"></a><h3>6.4.2.&nbsp;
+Precedence</h3>
+
+<p>Actions are applied in the order of their appearance in the file. This defines their relative
+                        precedence. The first action for which the rule is matched or not-matched as required for a
+                        particular label defines the disposition for that label. The conventional order of precedence
+                        for the actions defined here is "invalid", "block", "allocate", "activate". In order to define a
+                        different order of precedence or when additional actions are defined, list the actions in the
+                        appropriate order.
+                    
+</p>
+<a name="implied_actions"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.6.4.3"></a><h3>6.4.3.&nbsp;
+Implied actions</h3>
+
+<p>The context, or "when" rules carry an implied action with a disposition of "invalid". These rules
+                        are evaluated at the time a label's code points and variants are checked for validity (see<a class='info' href='#processing'>Section&nbsp;8<span> (</span><span class='info'>Processing a label against an LGR</span><span>)</span></a>) . In other words, before any whole-label evaluation rules and
+                        with higher precedence. The context rules for variant mappings are evaluated when variants are
+                        generated and / or when variant tables are made symmetric and transitive. They have an implied
+                        action with a disposition of "invalid" which means a putative variant mapping doesn't exist in
+                        the given context.
+                    
+</p>
+<p>Note that such non-existing variant mapping is different from a blocked variant, which is variant
+                        code point mapping that exists, but results in a label that may not be allocated.
+                    
+</p>
+<p>Variant mappings may be given a disposition attribute . An implied action relates these to the
+                        disposition for the entire variant label. For example, a variant label in which any variant code
+                        point is a blocked code point variant is blocked. The default order of precedence for evaluating
+                        dispositions is as given above. The default precedence applies if no actions are defined that
+                        match specific variant dispositions.
+                    
+</p>
+<a name="anchor40"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.7"></a><h3>7.&nbsp;
+Example table</h3>
+
+<p>[TODO: This needs to be updated or supplemented with a larger example.]
+</p>
+<p>A sample complete XML LGR is as follows.
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+                    &lt;?xml version="1.0"?&gt;
+                    &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+                    &lt;meta&gt;
+                    &lt;version&gt;1&lt;/version&gt;
+                    &lt;date&gt;2010-01-01&lt;/date&gt;
+                    &lt;language&gt;sv&lt;/language&gt;
+                    &lt;domain&gt;example&lt;/domain&gt;
+                    &lt;description type="text/html"&gt;
+                    &lt;![CDATA[
+                    This language table was developed with the
+                    &lt;a href="http://swedish.example/"&gt;Swedish
+                    examples institute&lt;/a&gt;.
+                    ]]&gt;
+                    &lt;/description&gt;
+                    &lt;/meta&gt;
+                    &lt;data&gt;
+                    &lt;range first-cp="0061" last-cp="007A"/&gt;
+                    &lt;char cp="00E4"/&gt;
+                    &lt;/data&gt;
+                    &lt;/lgr&gt;</pre></div>
+<a name="processing"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8"></a><h3>8.&nbsp;
+Processing a label against an LGR</h3>
+
+<a name="anchor41"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.1"></a><h3>8.1.&nbsp;
+Determining eligibility for a label</h3>
+
+<p>In order to use a table to test a specific domain label for membership in the LGR, a consumer of the
+                    LGR must iterate through each code point within a given U-label, and test that each code point is a
+                    member of the LGR. If any code point is not a member of the LGR, it shall be deemed as not eligible
+                    in accordance with the table.
+                
+</p>
+<p>A code point is deemed a member of the table when it is listed with the "char" element, and all
+                    necessary condition listed in "when" or "not-when" attributes are correctly satisfied.
+                
+</p>
+<a name="anchor42"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.2"></a><h3>8.2.&nbsp;
+Determining variants for a label</h3>
+
+<p>For a given eligible label, the set of variants is deemed to be each possible permutation of "var"
+                    elements, whereby all "when" and "not-when" attributes are correctly satisfied for each var element
+                    in the given permutation and all applicable whole label evaluation rules are satisfied as follows:
+                    </p>
+<ul class="text">
+<li>Create each possible permutation of a label, by substituting each code point or code point
+                            sequence in turn by any defined variant mapping
+                        
+</li>
+<li>Apply variant mappings with "when" or "not-when" attributes only if the conditions are
+                            satisfied
+                        
+</li>
+<li>Record each of the "disposition" values on the variant mappings used in creating a given
+                            variant label
+                        
+</li>
+<li>Evaluate each variant against any actions for which the disposition is "invalid", remove any
+                            that satisfy the conditions.
+                        
+</li>
+</ul><p>
+                
+</p>
+<a name="anchor43"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.8.3"></a><h3>8.3.&nbsp;
+Determining a disposition for a label or variant label</h3>
+
+<p>For a given label, the disposition for the is determined by evaluating in order of their appearance
+                    all actions for which the label or variant label satisfies the conditions.
+                    </p>
+<ul class="text">
+<li>For any label, the "disposition" value for the first action applies, for which the label
+                            matches or doesn't match the whole label evaluation rule, given in the "match" or
+                            "not-match" attribute for that action,
+                        
+</li>
+<li>For any variant label, the "disposition" value for the first action applies, for which the
+                            label matches or doesn't match the whole label evaluation rule, given in the "match" or
+                            "not-match" attribute, and for which any or all of the recorded variant dispositions match
+                            the conditions for that action.
+                        
+</li>
+<li>For any remaining variant label, assign the variant label the disposition matching the most
+                            restrictive disposition recorded. for any of its variants The order from most restrictive to
+                            least is "invalid", "blocked", "allocated", "active".
+                        
+</li>
+<li>Variants dispositions outside the predefined default set, and for which no action is defined
+                            are ignored.
+                        
+</li>
+</ul><p>
+                
+</p>
+<a name="anchor44"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.9"></a><h3>9.&nbsp;
+Conversion between other formats</h3>
+
+<p>Both
+                <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>
+                and
+                <a class='info' href='#RFC4290'>[RFC4290]<span> (</span><span class='info'>Klensin, J., &ldquo;Suggested Practices for Registration of Internationalized Domain Names (IDN),&rdquo; December&nbsp;2005.</span><span>)</span></a>
+                provide different grammars for IDN tables. These formats are unable
+                to fully cater for the increased requirements of contemporary
+                IDN variant policies.
+            
+</p>
+<p>This specification is a superset of functionality provided by
+                these IDN table formats, thus any table expressed in those formats can be
+                expressed in this format. Automated conversion can be conducted
+                between tables conformant with the grammar specified in each
+                document.
+            
+</p>
+<a name="anchor45"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.10"></a><h3>10.&nbsp;
 IANA Considerations</h3>
 
 <p>This document does not specify any IANA actions.
 </p>
-<a name="anchor38"></a><br /><hr />
+<a name="anchor46"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.8"></a><h3>8.&nbsp;
+<a name="rfc.section.11"></a><h3>11.&nbsp;
 Security Considerations</h3>
 
 <p>There are no security considerations for this memo.
 </p>
 <a name="rfc.references1"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<h3>9.&nbsp;References</h3>
+<h3>12.&nbsp;References</h3>
 <table width="99%" border="0">
 <tr><td class="author-text" valign="top"><a name="LGR-PROCEDURE">[LGR-PROCEDURE]</a></td>
-<td class="author-text">Internet Corporation for Assigned Names and Numbers, &ldquo;<a href="http://www.icann.org/en/resources/idn/draft-lgr-procedure-07dec12-en.pdf">Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of IDNA Labels</a>.&rdquo;</td></tr>
+<td class="author-text">Internet Corporation for Assigned Names and Numbers, &ldquo;<a href="http://www.icann.org/en/resources/idn/draft-lgr-procedure-07dec12-en.pdf">Procedure to Develop and Maintain the Label Generation Rules for the Root Zone in Respect of
+                        IDNA Labels</a>.&rdquo;</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC3339">[RFC3339]</a></td>
 <td class="author-text"><a href="mailto:GK@ACM.ORG">Klyne, G., Ed.</a> and <a href="mailto:chris.newman@sun.com">C. Newman</a>, &ldquo;<a href="http://tools.ietf.org/html/rfc3339">Date and Time on the Internet: Timestamps</a>,&rdquo; RFC&nbsp;3339, July&nbsp;2002 (<a href="http://www.rfc-editor.org/rfc/rfc3339.txt">TXT</a>, <a href="http://xml.resource.org/public/rfc/html/rfc3339.html">HTML</a>, <a href="http://xml.resource.org/public/rfc/xml/rfc3339.xml">XML</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC3743">[RFC3743]</a></td>
@@ -930,17 +1834,21 @@ Security Considerations</h3>
 <td class="author-text">El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman, &ldquo;<a href="http://tools.ietf.org/html/rfc5564">Linguistic Guidelines for the Use of the Arabic Language in Internet Domains</a>,&rdquo; RFC&nbsp;5564, February&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5564.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC5646">[RFC5646]</a></td>
 <td class="author-text">Phillips, A. and M. Davis, &ldquo;<a href="http://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a>,&rdquo; BCP&nbsp;47, RFC&nbsp;5646, September&nbsp;2009 (<a href="http://www.rfc-editor.org/rfc/rfc5646.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="RFC5892">[RFC5892]</a></td>
+<td class="author-text">Faltstrom, P., &ldquo;<a href="http://tools.ietf.org/html/rfc5892">The Unicode Code Points and Internationalized Domain Names for Applications (IDNA)</a>,&rdquo; RFC&nbsp;5892, August&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5892.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="UAX42">[UAX42]</a></td>
 <td class="author-text">Unicode Consortium, &ldquo;<a href="http://unicode.org/reports/tr42/">Unicode Character Database in XML</a>.&rdquo;</td></tr>
 <tr><td class="author-text" valign="top"><a name="XML">[XML]</a></td>
 <td class="author-text">&ldquo;<a href="http://www.w3.org/TR/REC-xml/">Extensible Markup Language (XML) 1.0</a>.&rdquo;</td></tr>
 </table>
 
-<a name="anchor40"></a><br /><hr />
+<a name="anchor48"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
 RelaxNG Schema</h3>
-<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
+
+<p>[TODO: this needs to be updated to reflect additions to the syntax.]
+</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
 
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;grammar ns="http://www.iana.org/lgr/0.1"
@@ -1147,75 +2055,104 @@ RelaxNG Schema</h3>
 
 
 </pre></div>
-<a name="anchor41"></a><br /><hr />
+<a name="anchor49"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.B"></a><h3>Appendix B.&nbsp;
 Acknowledgements</h3>
 
-<p>This format builds upon the work on documenting IDN tables by many different registry operators. Notably, a comprehensive language table for Chinese, Japanese and Korean was developed by the "Joint Engineering Team" <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a> that is the basis of many registry policies; and a set of guidelines for Arabic script registrations <a class='info' href='#RFC5564'>[RFC5564]<span> (</span><span class='info'>El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman, &ldquo;Linguistic Guidelines for the Use of the Arabic Language in Internet Domains,&rdquo; February&nbsp;2010.</span><span>)</span></a> was published by the Arabic-language community.
+<p>This format builds upon the work on documenting IDN tables by many different registry operators. Notably,
+                a comprehensive language table for Chinese, Japanese and Korean was developed by the "Joint Engineering
+                Team"
+                <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>
+                that is the basis of many registry policies; and a set of guidelines for Arabic script registrations
+                <a class='info' href='#RFC5564'>[RFC5564]<span> (</span><span class='info'>El-Sherbiny, A., Farah, M., Oueichek, I., and A. Al-Zoman, &ldquo;Linguistic Guidelines for the Use of the Arabic Language in Internet Domains,&rdquo; February&nbsp;2010.</span><span>)</span></a>
+                was published by the Arabic-language community.
+            
 </p>
-<p>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas Ostler, Thomas Roessler, Steve Sheng and Andrew Sullivan.
+<p>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas
+                Ostler, Thomas Roessler, Steve Sheng, Michel Suignard, John Yunker and Andrew Sullivan.
+            
 </p>
-<a name="anchor42"></a><br /><hr />
+<a name="anchor50"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C"></a><h3>Appendix C.&nbsp;
 Editorial Notes</h3>
 
 <p>This appendix to be removed prior to final publication.
 </p>
-<a name="anchor43"></a><br /><hr />
+<a name="anchor51"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C.1"></a><h3>C.1.&nbsp;
 Known Issues and Future Work</h3>
 
 <p>
-				</p>
+                    </p>
 <ul class="text">
-<li>A default set of actions should be defined if they are not explicitly accounted for in the table.
+<li>A default set of actions should be defined if they are not explicitly accounted for in the
+                            table.
+                        
 </li>
-<li>A method of specifying the origin URI for a table, and an expiration or refresh policy, as meta-data may be a useful way to declare how the table will be updated.
+<li>A method of specifying the origin URI for a table, and an expiration or refresh policy, as
+                            meta-data may be a useful way to declare how the table will be updated.
+                        
 </li>
 </ul><p>
-			
+                
 </p>
-<a name="anchor44"></a><br /><hr />
+<a name="anchor52"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C.2"></a><h3>C.2.&nbsp;
 Sample tables and running code</h3>
 
-<p>Some sample tables using this format, as well as a basic implementation of this specification, is posted at https://github.com/kjd/idntables
+<p>Some sample tables using this format, as well as a basic implementation of this specification, is
+                    posted at https://github.com/kjd/idntables
+                
 </p>
-<a name="anchor45"></a><br /><hr />
+<a name="anchor53"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C.3"></a><h3>C.3.&nbsp;
 Change History</h3>
 
 <p>
-					</p>
+                    </p>
 <blockquote class="text"><dl>
 <dt>-00</dt>
 <dd>Initial draft.
 </dd>
-</dl></blockquote><p>					
-					</p>
+</dl></blockquote><p>
+                    </p>
 <blockquote class="text"><dl>
 <dt>-01</dt>
-<dd>Add an XML Namespace, and fix other XML nits. Add support for sequences of codepoints. Improve on consistently using Unicode nomenclature.
+<dd>Add an XML Namespace, and fix other XML nits. Add support for sequences of
+                            code points. Improve on consistently using Unicode nomenclature.
+                        
 </dd>
-</dl></blockquote><p>					
-					</p>
+</dl></blockquote><p>
+                    </p>
 <blockquote class="text"><dl>
 <dt>-02</dt>
 <dd>Add support for validity periods.
 </dd>
 </dl></blockquote><p>
-					</p>
+                    </p>
 <blockquote class="text"><dl>
 <dt>-03</dt>
-<dd>Incorporate requirements from the Label Generation Ruleset Procedure for the DNS Root Zone. These requirements include a detailed grammar for specifying whole-label variants, and the ability to explicitly declare of the actions associated with a specific variant. The document also consistently applies the term "Label Generation Ruleset", rather than "IDN table", to reflect the policy term now being used to describe these.
+<dd>Incorporate requirements from the Label Generation Ruleset Procedure for the
+                            DNS Root Zone. These requirements include a detailed grammar for specifying whole-label
+                            variants, and the ability to explicitly declare of the actions associated with a specific
+                            variant. The document also consistently applies the term "Label Generation Ruleset", rather
+                            than "IDN table", to reflect the policy term now being used to describe these.
+                        
 </dd>
 </dl></blockquote><p>
-				
+                    </p>
+<blockquote class="text"><dl>
+<dt>-04</dt>
+<dd>Support reference information. Updated description in response to feedback.
+                        
+</dd>
+</dl></blockquote><p>
+                
 </p>
 <a name="rfc.authors"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
