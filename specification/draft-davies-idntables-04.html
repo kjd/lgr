@@ -144,8 +144,8 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: March 24, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">September 20, 2013</td></tr>
+<tr><td class="header">Expires: March 26, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">September 22, 2013</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-04</h1>
 
@@ -174,7 +174,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on March 24, 2014.</p>
+This Internet-Draft will expire on March 26, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -455,8 +455,7 @@ Basic structure</h3>
     &lt;?xml version="1.0"?&gt;
     &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
         ...
-    &lt;/lgr&gt;
-</pre></div>
+    &lt;/lgr&gt;</pre></div>
 <p>Within the "lgr" element rests several sub-elements. Firstly is a "meta" element that contains all
                     meta-data associated with the IDN table, such as its authorship, what it is used for, implementation
                     notes and references. This is followed by a "data" element that contains the substantive code point
@@ -634,7 +633,7 @@ The unicode-version element</h3>
 <p>It is not necessary to include a "unicode-version" element for files that do not make use of
                         Unicode properties. Because Unicode has been strictly additive from Version 1.1, the required
                         minimum version for the repertoire can be uniquely determined by checking the code point values
-                        in any "cp" attributes against the DerivedCharacterAge.txt file in <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>.
+                        in any "cp" attributes against the "age" property in <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>.
                     
 </p>
 <a name="references"></a><br /><hr />
@@ -1294,8 +1293,7 @@ The choice element</h3>
            &lt;class name="digits"/&gt;
            &lt;char cp="002D"/&gt;
        &lt;/choice&gt;
-    &lt;/rule&gt;
-</pre></div><p>
+    &lt;/rule&gt;</pre></div><p>
 
 </p>
 <p>Each child element of a "choice" represents one alternative. The first matching alternative
@@ -1337,8 +1335,7 @@ The start and end elements</h3>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule name="empty-label"&gt;
         &lt;start/&gt;
         &lt;end/&gt;
-    &lt;/rule&gt;
-</pre></div><p>
+    &lt;/rule&gt;</pre></div><p>
 
 </p>
 <p>Start and end elements do not have a "count" or any other attribute. When their use is not
@@ -1677,30 +1674,94 @@ Implied actions</h3>
 <a name="rfc.section.7"></a><h3>7.&nbsp;
 Example table</h3>
 
-<p>[TODO: This needs to be updated or supplemented with a larger example.]
+<p>The following presents a sample XML LGR showing a near complete collection of most of the elements and
+                attributes defined in this specification in somewhat typical context.
 </p>
-<p>A sample complete XML LGR is as follows.
-</p><div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-                    &lt;?xml version="1.0"?&gt;
-                    &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
-                    &lt;meta&gt;
-                    &lt;version&gt;1&lt;/version&gt;
-                    &lt;date&gt;2010-01-01&lt;/date&gt;
-                    &lt;language&gt;sv&lt;/language&gt;
-                    &lt;domain&gt;example&lt;/domain&gt;
-                    &lt;description type="text/html"&gt;
-                    &lt;![CDATA[
-                    This language table was developed with the
-                    &lt;a href="http://swedish.example/"&gt;Swedish
-                    examples institute&lt;/a&gt;.
-                    ]]&gt;
-                    &lt;/description&gt;
-                    &lt;/meta&gt;
-                    &lt;data&gt;
-                    &lt;range first-cp="0061" last-cp="007A"/&gt;
-                    &lt;char cp="00E4"/&gt;
-                    &lt;/data&gt;
-                    &lt;/lgr&gt;</pre></div>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+
+  &lt;meta&gt;
+    &lt;version&gt;1&lt;/version&gt;
+    &lt;date&gt;2010-01-01&lt;/date&gt;
+    &lt;language&gt;sv&lt;/language&gt;
+    &lt;domain&gt;example&lt;/domain&gt;
+    &lt;description type="text/html"&gt;
+        &lt;![CDATA[
+        This language table was developed with the
+        &lt;a href="http://swedish.example/"&gt;Swedish
+        examples institute&lt;/a&gt;.
+        ]]&gt;
+    &lt;/description&gt;
+    &lt;references&gt;
+      &lt;reference id="0" &gt;The Unicode Standard 6.3&lt;/reference&gt;
+      &lt;reference id="1" &gt;RFC 5892&lt;/reference&gt;
+      &lt;reference id="2" &gt;Big-5: Computer Chinese Glyph and Character
+         Code Mapping Table, Technical Report C-26, 1984&lt;/reference&gt;
+    &lt;/references&gt;
+ &lt;/meta&gt;
+  &lt;data&gt;
+    &lt;char cp="002D" ref="1" comment="HYPHEN" /&gt;
+    &lt;range first-cp="0030" last-cp="0039" ref="1" tag="digit" /&gt;
+    &lt;range  first-cp="0061" last-cp="007A" ref ="1" tag="letter" /&gt;
+    &lt;range first-cp="0370" last-cp="0380"  /&gt;
+    &lt;char cp="00B7" when="catalan-middle-dot" /&gt;
+    &lt;char cp="200D" when="joiner" /&gt;
+    &lt;char cp="4E16" tag="preferred" ref="0"&gt;
+      &lt;var cp="4E17" disposition="blocked" ref="2" /&gt;
+      &lt;var cp="534B" disposition="allocate" ref="2" /&gt;
+    &lt;/char&gt;
+    &lt;char cp="4E17" ref="0"&gt;
+      &lt;var cp="4E16" disposition="allocate" ref="2" /&gt;
+      &lt;var cp="534B" disposition="allocate" ref="2" /&gt;
+    &lt;/char&gt;
+    &lt;char cp="534B" ref="0"&gt;
+      &lt;var cp="4E16" disposition="allocate" ref="2" /&gt;
+      &lt;var cp="4E17" disposition="blocked" ref="2" /&gt;
+    &lt;/char&gt;
+  &lt;/data&gt;
+  &lt;rules&gt;
+    &lt;class name="virama" property="ccc:9" /&gt;
+    &lt;rule name="catalan-middle-dot" match="context" ref="0"&gt;
+        &lt;look-behind&gt;
+            &lt;char cp="006C" /&gt;
+        &lt;/look-behind&gt;
+        &lt;match /&gt;
+        &lt;look-ahead&gt;
+            &lt;char cp="006C" /&gt;
+        &lt;/look-ahead&gt;
+    &lt;/rule&gt;
+    &lt;rule name="joiner" match="context" ref="1" &gt;
+        &lt;look-behind&gt;
+            &lt;class name="virama" /&gt;
+        &lt;/look-behind&gt;
+    &lt;/rule&gt;
+    &lt;rule name="example" &gt;
+        &lt;difference&gt;
+            &lt;not&gt;
+                &lt;class comment="use shorthand class notation"&gt;
+                    006E 0070-0078
+                &lt;/class&gt;
+            &lt;/not&gt;
+            &lt;class comment="use standard notation"&gt;
+                &lt;range first-cp="0000" last-cp="001F" /&gt;
+                &lt;char cp="007F" /&gt;
+            &lt;/class&gt;
+        &lt;/difference&gt;
+    &lt;/rule&gt;
+    &lt;rule name="preferred"
+          comment="non-empty lablel of preferred code points"&gt;
+        &lt;class name="preferred" count="1+" /&gt;
+    &lt;/rule&gt;
+    &lt;action disposition="example" match="example" /&gt;
+    &lt;action disposition="blocked" any-variant="blocked" /&gt;
+    &lt;action disposition="activate" all-variants="allocate"
+          match="preferred" /&gt;
+    &lt;action disposition="activate"  match="preferred" /&gt;
+  &lt;/rules&gt;
+&lt;/lgr&gt;</pre></div><p>
+
+</p>
 <a name="processing"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.8"></a><h3>8.&nbsp;
@@ -2088,10 +2149,6 @@ Known Issues and Future Work</h3>
 <p>
                     </p>
 <ul class="text">
-<li>A default set of actions should be defined if they are not explicitly accounted for in the
-                            table.
-                        
-</li>
 <li>A method of specifying the origin URI for a table, and an expiration or refresh policy, as
                             meta-data may be a useful way to declare how the table will be updated.
                         
@@ -2148,7 +2205,11 @@ Change History</h3>
                     </p>
 <blockquote class="text"><dl>
 <dt>-04</dt>
-<dd>Support reference information. Updated description in response to feedback.
+<dd>Support reference information per <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>. Update 
+						description in response to feedback. Extend the context rules to "char" elements and allow
+						for inverse matching ("not-when"). Extend the description of label processing and implied actions,
+						and allow for actions that reference disposition attributes on any or all variant mappings used
+						in the generation of a variant label.
                         
 </dd>
 </dl></blockquote><p>

@@ -178,8 +178,7 @@
     <?xml version="1.0"?>
     <lgr xmlns="http://www.iana.org/lgr/0.1">
         ...
-    </lgr>
-    ]]></artwork>
+    </lgr>]]></artwork>
                 </figure>
 
                 <t>Within the "lgr" element rests several sub-elements. Firstly is a "meta" element that contains all
@@ -359,7 +358,7 @@
                     <t>It is not necessary to include a "unicode-version" element for files that do not make use of
                         Unicode properties. Because Unicode has been strictly additive from Version 1.1, the required
                         minimum version for the repertoire can be uniquely determined by checking the code point values
-                        in any "cp" attributes against the DerivedCharacterAge.txt file in <xref target="UAX42"/>.
+                        in any "cp" attributes against the "age" property in <xref target="UAX42"/>.
                     </t>
                 </section>
                 <section title="The references element" anchor="references">
@@ -897,8 +896,7 @@
            <class name="digits"/>
            <char cp="002D"/>
        </choice>
-    </rule>]]>
-                            </artwork>
+    </rule>]]></artwork>
                         </figure></t>
                         <t>Each child element of a "choice" represents one alternative. The first matching alternative
                             determines the match for the choice element. To express a choice where one alternative
@@ -925,8 +923,7 @@
                             <artwork><![CDATA[    <rule name="empty-label">
         <start/>
         <end/>
-    </rule>
-]]></artwork>
+    </rule>]]></artwork>
                         </figure></t>
                         <t>Start and end elements do not have a "count" or any other attribute. When their use is not
                             required, it is RECOMMENDED to us the "match" attribute instead. One case where start or end
@@ -1202,31 +1199,92 @@
         </section>
 
         <section title="Example table">
-            <t>[TODO: This needs to be updated or supplemented with a larger example.]</t>
-            <t>A sample complete XML LGR is as follows.</t>
-            <figure>
-                <artwork>
-                    &lt;?xml version="1.0"?&gt;
-                    &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
-                    &lt;meta&gt;
-                    &lt;version&gt;1&lt;/version&gt;
-                    &lt;date&gt;2010-01-01&lt;/date&gt;
-                    &lt;language&gt;sv&lt;/language&gt;
-                    &lt;domain&gt;example&lt;/domain&gt;
-                    &lt;description type="text/html"&gt;
-                    &lt;![CDATA[
-                    This language table was developed with the
-                    &lt;a href="http://swedish.example/"&gt;Swedish
-                    examples institute&lt;/a&gt;.
-                    ]]&gt;
-                    &lt;/description&gt;
-                    &lt;/meta&gt;
-                    &lt;data&gt;
-                    &lt;range first-cp="0061" last-cp="007A"/&gt;
-                    &lt;char cp="00E4"/&gt;
-                    &lt;/data&gt;
-                    &lt;/lgr&gt;</artwork>
-            </figure>
+            <t>The following presents a sample XML LGR showing a near complete collection of most of the elements and
+                attributes defined in this specification in somewhat typical context.</t>
+            <t><figure>
+                <artwork>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+
+  &lt;meta&gt;
+    &lt;version&gt;1&lt;/version&gt;
+    &lt;date&gt;2010-01-01&lt;/date&gt;
+    &lt;language&gt;sv&lt;/language&gt;
+    &lt;domain&gt;example&lt;/domain&gt;
+    &lt;description type="text/html"&gt;
+        &lt;![CDATA[
+        This language table was developed with the
+        &lt;a href="http://swedish.example/"&gt;Swedish
+        examples institute&lt;/a&gt;.
+        ]]&gt;
+    &lt;/description&gt;
+    &lt;references&gt;
+      &lt;reference id="0" &gt;The Unicode Standard 6.3&lt;/reference&gt;
+      &lt;reference id="1" &gt;RFC 5892&lt;/reference&gt;
+      &lt;reference id="2" &gt;Big-5: Computer Chinese Glyph and Character
+         Code Mapping Table, Technical Report C-26, 1984&lt;/reference&gt;
+    &lt;/references&gt;
+ &lt;/meta&gt;
+  &lt;data&gt;
+    &lt;char cp="002D" ref="1" comment="HYPHEN" /&gt;
+    &lt;range first-cp="0030" last-cp="0039" ref="1" tag="digit" /&gt;
+    &lt;range  first-cp="0061" last-cp="007A" ref ="1" tag="letter" /&gt;
+    &lt;range first-cp="0370" last-cp="0380"  /&gt;
+    &lt;char cp="00B7" when="catalan-middle-dot" /&gt;
+    &lt;char cp="200D" when="joiner" /&gt;
+    &lt;char cp="4E16" tag="preferred" ref="0"&gt;
+      &lt;var cp="4E17" disposition="blocked" ref="2" /&gt;
+      &lt;var cp="534B" disposition="allocate" ref="2" /&gt;
+    &lt;/char&gt;
+    &lt;char cp="4E17" ref="0"&gt;
+      &lt;var cp="4E16" disposition="allocate" ref="2" /&gt;
+      &lt;var cp="534B" disposition="allocate" ref="2" /&gt;
+    &lt;/char&gt;
+    &lt;char cp="534B" ref="0"&gt;
+      &lt;var cp="4E16" disposition="allocate" ref="2" /&gt;
+      &lt;var cp="4E17" disposition="blocked" ref="2" /&gt;
+    &lt;/char&gt;
+  &lt;/data&gt;
+  &lt;rules&gt;
+    &lt;class name="virama" property="ccc:9" /&gt;
+    &lt;rule name="catalan-middle-dot" match="context" ref="0"&gt;
+        &lt;look-behind&gt;
+            &lt;char cp="006C" /&gt;
+        &lt;/look-behind&gt;
+        &lt;match /&gt;
+        &lt;look-ahead&gt;
+            &lt;char cp="006C" /&gt;
+        &lt;/look-ahead&gt;
+    &lt;/rule&gt;
+    &lt;rule name="joiner" match="context" ref="1" &gt;
+        &lt;look-behind&gt;
+            &lt;class name="virama" /&gt;
+        &lt;/look-behind&gt;
+    &lt;/rule&gt;
+    &lt;rule name="example" &gt;
+        &lt;difference&gt;
+            &lt;not&gt;
+                &lt;class comment="use shorthand class notation"&gt;
+                    006E 0070-0078
+                &lt;/class&gt;
+            &lt;/not&gt;
+            &lt;class comment="use standard notation"&gt;
+                &lt;range first-cp="0000" last-cp="001F" /&gt;
+                &lt;char cp="007F" /&gt;
+            &lt;/class&gt;
+        &lt;/difference&gt;
+    &lt;/rule&gt;
+    &lt;rule name="preferred"
+          comment="non-empty lablel of preferred code points"&gt;
+        &lt;class name="preferred" count="1+" /&gt;
+    &lt;/rule&gt;
+    &lt;action disposition="example" match="example" /&gt;
+    &lt;action disposition="blocked" any-variant="blocked" /&gt;
+    &lt;action disposition="activate" all-variants="allocate"
+          match="preferred" /&gt;
+    &lt;action disposition="activate"  match="preferred" /&gt;
+  &lt;/rules&gt;
+&lt;/lgr&gt;</artwork>
+            </figure></t>
         </section>
 
 
@@ -1592,9 +1650,6 @@
 
                 <t>
                     <list style="symbols">
-                        <t>A default set of actions should be defined if they are not explicitly accounted for in the
-                            table.
-                        </t>
                         <t>A method of specifying the origin URI for a table, and an expiration or refresh policy, as
                             meta-data may be a useful way to declare how the table will be updated.
                         </t>
@@ -1633,7 +1688,11 @@
                         </t>
                     </list>
                     <list style="hanging" hangIndent="5">
-                        <t hangText="-04">Support reference information. Updated description in response to feedback.
+                        <t hangText="-04">Support reference information per <xref target="RFC3743" />. Update 
+						description in response to feedback. Extend the context rules to "char" elements and allow
+						for inverse matching ("not-when"). Extend the description of label processing and implied actions,
+						and allow for actions that reference disposition attributes on any or all variant mappings used
+						in the generation of a variant label.
                         </t>
                     </list>
                 </t>
