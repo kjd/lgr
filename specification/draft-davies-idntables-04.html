@@ -144,8 +144,8 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: March 26, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">September 22, 2013</td></tr>
+<tr><td class="header">Expires: March 27, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">September 23, 2013</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-04</h1>
 
@@ -174,7 +174,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on March 26, 2014.</p>
+This Internet-Draft will expire on March 27, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -298,8 +298,6 @@ Editorial Notes<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor51">C.1.</a>&nbsp;
 Known Issues and Future Work<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor52">C.2.</a>&nbsp;
-Sample tables and running code<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor53">C.3.</a>&nbsp;
 Change History<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -1914,21 +1912,29 @@ RelaxNG Schema</h3>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;grammar ns="http://www.iana.org/lgr/0.1"
   xmlns="http://relaxng.org/ns/structure/1.0"&gt;
+  &lt;!-- SIMPLE TYPES --&gt;
   &lt;define name="language-tag"&gt;
     &lt;text/&gt;
   &lt;/define&gt;
+  &lt;!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) --&gt;
   &lt;define name="domain-name"&gt;
     &lt;text/&gt;
   &lt;/define&gt;
+  &lt;!-- Domain name --&gt;
   &lt;define name="code-point"&gt;
     &lt;text/&gt;
   &lt;/define&gt;
+  &lt;!-- A single codepoint, expressed as a hexidecimal number --&gt;
   &lt;define name="variant-condition"&gt;
     &lt;text/&gt;
   &lt;/define&gt;
+  &lt;!-- A condition for applying the variant (TBD) --&gt;
   &lt;define name="tag"&gt;
     &lt;text/&gt;
   &lt;/define&gt;
+  &lt;!-- Freeform text tag --&gt;
+  &lt;!-- STRUCTURES --&gt;
+  &lt;!-- Representation of a single codepoint --&gt;
   &lt;define name="point-single"&gt;
     &lt;element name="char"&gt;
       &lt;attribute name="cp"&gt;
@@ -1937,6 +1943,9 @@ RelaxNG Schema</h3>
       &lt;attribute name="tag"&gt;
         &lt;ref name="tag"/&gt;
       &lt;/attribute&gt;
+      &lt;optional&gt;
+        &lt;attribute name="ref"/&gt;
+      &lt;/optional&gt;
       &lt;zeroOrMore&gt;
         &lt;ref name="point-variant"/&gt;
       &lt;/zeroOrMore&gt;
@@ -1956,8 +1965,18 @@ RelaxNG Schema</h3>
           &lt;ref name="variant-condition"/&gt;
         &lt;/attribute&gt;
       &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="comment"/&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="disposition"/&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="ref"/&gt;
+      &lt;/optional&gt;
     &lt;/element&gt;
   &lt;/define&gt;
+  &lt;!-- Representation of a range of codepoints --&gt;
   &lt;define name="point-multiple"&gt;
     &lt;element name="range"&gt;
       &lt;attribute name="first-cp"&gt;
@@ -1969,6 +1988,37 @@ RelaxNG Schema</h3>
       &lt;text/&gt;
     &lt;/element&gt;
   &lt;/define&gt;
+  &lt;define name="logical-operators"&gt;
+    &lt;choice&gt;
+      &lt;element name="not"&gt;
+        &lt;ref name="class-points"/&gt;
+      &lt;/element&gt;
+      &lt;element name="union"&gt;
+        &lt;oneOrMore&gt;
+          &lt;ref name="class-points"/&gt;
+        &lt;/oneOrMore&gt;
+      &lt;/element&gt;
+      &lt;element name="intersection"&gt;
+        &lt;oneOrMore&gt;
+          &lt;ref name="class-points"/&gt;
+        &lt;/oneOrMore&gt;
+      &lt;/element&gt;
+      &lt;element name="difference"&gt;
+        &lt;oneOrMore&gt;
+          &lt;ref name="class-points"/&gt;
+        &lt;/oneOrMore&gt;
+      &lt;/element&gt;
+      &lt;element name="symmetric-difference"&gt;
+        &lt;oneOrMore&gt;
+          &lt;ref name="class-points"/&gt;
+        &lt;/oneOrMore&gt;
+      &lt;/element&gt;
+    &lt;/choice&gt;
+  &lt;/define&gt;
+  &lt;!--
+    A collection of codepoints and ranges of codepoints that comprise
+    a label generation ruleset
+  --&gt;
   &lt;define name="points"&gt;
     &lt;oneOrMore&gt;
       &lt;choice&gt;
@@ -1976,6 +2026,13 @@ RelaxNG Schema</h3>
         &lt;ref name="point-multiple"/&gt;
       &lt;/choice&gt;
     &lt;/oneOrMore&gt;
+  &lt;/define&gt;
+  &lt;define name="class-points"&gt;
+    &lt;choice&gt;
+      &lt;ref name="point-single"/&gt;
+      &lt;ref name="point-multiple"/&gt;
+      &lt;ref name="logical-operators"/&gt;
+    &lt;/choice&gt;
   &lt;/define&gt;
   &lt;define name="any"&gt;
     &lt;element name="any"&gt;
@@ -1992,9 +2049,19 @@ RelaxNG Schema</h3>
       &lt;optional&gt;
         &lt;attribute name="name"/&gt;
       &lt;/optional&gt;
-      &lt;zeroOrMore&gt;
-        &lt;ref name="points"/&gt;
-      &lt;/zeroOrMore&gt;
+      &lt;optional&gt;
+        &lt;attribute name="comment"/&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="ref"/&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="property"/&gt;
+      &lt;/optional&gt;
+      &lt;choice&gt;
+        &lt;ref name="class-points"/&gt;
+        &lt;text/&gt;
+      &lt;/choice&gt;
     &lt;/element&gt;
   &lt;/define&gt;
   &lt;define name="choice"&gt;
@@ -2033,6 +2100,11 @@ RelaxNG Schema</h3>
       &lt;/choice&gt;
     &lt;/element&gt;
   &lt;/define&gt;
+  &lt;!-- DOCUMENT STRUCTURE --&gt;
+  &lt;!--
+    Main document structure, comprised of a meta section followed by
+    a data section.
+  --&gt;
   &lt;start&gt;
     &lt;ref name="lgr"/&gt;
   &lt;/start&gt;
@@ -2048,6 +2120,10 @@ RelaxNG Schema</h3>
       &lt;/optional&gt;
     &lt;/element&gt;
   &lt;/define&gt;
+  &lt;!--
+    Meta section - information recorded with an label
+    generation ruleset that does not affect machine processing.
+  --&gt;
   &lt;define name="meta-section"&gt;
     &lt;element name="meta"&gt;
       &lt;zeroOrMore&gt;
@@ -2093,15 +2169,27 @@ RelaxNG Schema</h3>
               &lt;text/&gt;
             &lt;/element&gt;
           &lt;/zeroOrMore&gt;
+          &lt;optional&gt;
+            &lt;element name="references"&gt;
+              &lt;zeroOrMore&gt;
+                &lt;element name="reference"&gt;
+                  &lt;attribute name="id"/&gt;
+                  &lt;text/&gt;
+                &lt;/element&gt;
+              &lt;/zeroOrMore&gt;
+            &lt;/element&gt;
+          &lt;/optional&gt;
         &lt;/choice&gt;
       &lt;/zeroOrMore&gt;
     &lt;/element&gt;
   &lt;/define&gt;
+  &lt;!-- Data section - the actual code point data of the table. --&gt;
   &lt;define name="data-section"&gt;
     &lt;element name="data"&gt;
       &lt;ref name="points"/&gt;
     &lt;/element&gt;
   &lt;/define&gt;
+  &lt;!-- Rules section --&gt;
   &lt;define name="rules-section"&gt;
     &lt;element name="rules"&gt;
       &lt;zeroOrMore&gt;
@@ -2159,15 +2247,6 @@ Known Issues and Future Work</h3>
 <a name="anchor52"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C.2"></a><h3>C.2.&nbsp;
-Sample tables and running code</h3>
-
-<p>Some sample tables using this format, as well as a basic implementation of this specification, is
-                    posted at https://github.com/kjd/idntables
-                
-</p>
-<a name="anchor53"></a><br /><hr />
-<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.C.3"></a><h3>C.3.&nbsp;
 Change History</h3>
 
 <p>

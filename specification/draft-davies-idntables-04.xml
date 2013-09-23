@@ -1426,21 +1426,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar ns="http://www.iana.org/lgr/0.1"
   xmlns="http://relaxng.org/ns/structure/1.0">
+  <!-- SIMPLE TYPES -->
   <define name="language-tag">
     <text/>
   </define>
+  <!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) -->
   <define name="domain-name">
     <text/>
   </define>
+  <!-- Domain name -->
   <define name="code-point">
     <text/>
   </define>
+  <!-- A single codepoint, expressed as a hexidecimal number -->
   <define name="variant-condition">
     <text/>
   </define>
+  <!-- A condition for applying the variant (TBD) -->
   <define name="tag">
     <text/>
   </define>
+  <!-- Freeform text tag -->
+  <!-- STRUCTURES -->
+  <!-- Representation of a single codepoint -->
   <define name="point-single">
     <element name="char">
       <attribute name="cp">
@@ -1449,6 +1457,9 @@
       <attribute name="tag">
         <ref name="tag"/>
       </attribute>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
       <zeroOrMore>
         <ref name="point-variant"/>
       </zeroOrMore>
@@ -1468,8 +1479,18 @@
           <ref name="variant-condition"/>
         </attribute>
       </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="disposition"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
     </element>
   </define>
+  <!-- Representation of a range of codepoints -->
   <define name="point-multiple">
     <element name="range">
       <attribute name="first-cp">
@@ -1481,6 +1502,37 @@
       <text/>
     </element>
   </define>
+  <define name="logical-operators">
+    <choice>
+      <element name="not">
+        <ref name="class-points"/>
+      </element>
+      <element name="union">
+        <oneOrMore>
+          <ref name="class-points"/>
+        </oneOrMore>
+      </element>
+      <element name="intersection">
+        <oneOrMore>
+          <ref name="class-points"/>
+        </oneOrMore>
+      </element>
+      <element name="difference">
+        <oneOrMore>
+          <ref name="class-points"/>
+        </oneOrMore>
+      </element>
+      <element name="symmetric-difference">
+        <oneOrMore>
+          <ref name="class-points"/>
+        </oneOrMore>
+      </element>
+    </choice>
+  </define>
+  <!--
+    A collection of codepoints and ranges of codepoints that comprise
+    a label generation ruleset
+  -->
   <define name="points">
     <oneOrMore>
       <choice>
@@ -1488,6 +1540,13 @@
         <ref name="point-multiple"/>
       </choice>
     </oneOrMore>
+  </define>
+  <define name="class-points">
+    <choice>
+      <ref name="point-single"/>
+      <ref name="point-multiple"/>
+      <ref name="logical-operators"/>
+    </choice>
   </define>
   <define name="any">
     <element name="any">
@@ -1504,9 +1563,19 @@
       <optional>
         <attribute name="name"/>
       </optional>
-      <zeroOrMore>
-        <ref name="points"/>
-      </zeroOrMore>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
+      <optional>
+        <attribute name="property"/>
+      </optional>
+      <choice>
+        <ref name="class-points"/>
+        <text/>
+      </choice>
     </element>
   </define>
   <define name="choice">
@@ -1545,6 +1614,11 @@
       </choice>
     </element>
   </define>
+  <!-- DOCUMENT STRUCTURE -->
+  <!--
+    Main document structure, comprised of a meta section followed by
+    a data section.
+  -->
   <start>
     <ref name="lgr"/>
   </start>
@@ -1560,6 +1634,10 @@
       </optional>
     </element>
   </define>
+  <!--
+    Meta section - information recorded with an label
+    generation ruleset that does not affect machine processing.
+  -->
   <define name="meta-section">
     <element name="meta">
       <zeroOrMore>
@@ -1605,15 +1683,27 @@
               <text/>
             </element>
           </zeroOrMore>
+          <optional>
+            <element name="references">
+              <zeroOrMore>
+                <element name="reference">
+                  <attribute name="id"/>
+                  <text/>
+                </element>
+              </zeroOrMore>
+            </element>
+          </optional>
         </choice>
       </zeroOrMore>
     </element>
   </define>
+  <!-- Data section - the actual code point data of the table. -->
   <define name="data-section">
     <element name="data">
       <ref name="points"/>
     </element>
   </define>
+  <!-- Rules section -->
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>

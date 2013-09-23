@@ -4,8 +4,8 @@
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
 Intended status: Informational                                A. Freytag
-Expires: March 26, 2014                                       ASMUS Inc.
-                                                      September 22, 2013
+Expires: March 27, 2014                                       ASMUS Inc.
+                                                      September 23, 2013
 
 
             Representing Label Generation Rulesets using XML
@@ -38,7 +38,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 26, 2014.
+   This Internet-Draft will expire on March 27, 2014.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 1]
+Davies & Freytag         Expires March 27, 2014                 [Page 1]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 2]
+Davies & Freytag         Expires March 27, 2014                 [Page 2]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -123,11 +123,11 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
    11. Security Considerations  . . . . . . . . . . . . . . . . . . . 36
    12. References . . . . . . . . . . . . . . . . . . . . . . . . . . 37
    Appendix A.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 38
-   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 43
-   Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 44
-     C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 44
-     C.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 44
-   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 45
+   Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 45
+   Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 46
+     C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 46
+     C.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 46
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 47
 
 
 
@@ -164,7 +164,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 3]
+Davies & Freytag         Expires March 27, 2014                 [Page 3]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -220,7 +220,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 4]
+Davies & Freytag         Expires March 27, 2014                 [Page 4]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -276,7 +276,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 5]
+Davies & Freytag         Expires March 27, 2014                 [Page 5]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -332,7 +332,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 6]
+Davies & Freytag         Expires March 27, 2014                 [Page 6]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -388,7 +388,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 7]
+Davies & Freytag         Expires March 27, 2014                 [Page 7]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -444,7 +444,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 8]
+Davies & Freytag         Expires March 27, 2014                 [Page 8]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -500,7 +500,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                 [Page 9]
+Davies & Freytag         Expires March 27, 2014                 [Page 9]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -556,7 +556,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 10]
+Davies & Freytag         Expires March 27, 2014                [Page 10]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -612,7 +612,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 11]
+Davies & Freytag         Expires March 27, 2014                [Page 11]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -668,7 +668,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 12]
+Davies & Freytag         Expires March 27, 2014                [Page 12]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -724,7 +724,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 13]
+Davies & Freytag         Expires March 27, 2014                [Page 13]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -780,7 +780,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 14]
+Davies & Freytag         Expires March 27, 2014                [Page 14]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -836,7 +836,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 15]
+Davies & Freytag         Expires March 27, 2014                [Page 15]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -892,7 +892,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 16]
+Davies & Freytag         Expires March 27, 2014                [Page 16]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -948,7 +948,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 17]
+Davies & Freytag         Expires March 27, 2014                [Page 17]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1004,7 +1004,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 18]
+Davies & Freytag         Expires March 27, 2014                [Page 18]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1060,7 +1060,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 19]
+Davies & Freytag         Expires March 27, 2014                [Page 19]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1116,7 +1116,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 20]
+Davies & Freytag         Expires March 27, 2014                [Page 20]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1172,7 +1172,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 21]
+Davies & Freytag         Expires March 27, 2014                [Page 21]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1228,7 +1228,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 22]
+Davies & Freytag         Expires March 27, 2014                [Page 22]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1284,7 +1284,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 23]
+Davies & Freytag         Expires March 27, 2014                [Page 23]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1340,7 +1340,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 24]
+Davies & Freytag         Expires March 27, 2014                [Page 24]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1396,7 +1396,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 25]
+Davies & Freytag         Expires March 27, 2014                [Page 25]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1452,7 +1452,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 26]
+Davies & Freytag         Expires March 27, 2014                [Page 26]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1508,7 +1508,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 27]
+Davies & Freytag         Expires March 27, 2014                [Page 27]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1564,7 +1564,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 28]
+Davies & Freytag         Expires March 27, 2014                [Page 28]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1620,7 +1620,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 29]
+Davies & Freytag         Expires March 27, 2014                [Page 29]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1676,7 +1676,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 30]
+Davies & Freytag         Expires March 27, 2014                [Page 30]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1732,7 +1732,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 31]
+Davies & Freytag         Expires March 27, 2014                [Page 31]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1788,7 +1788,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 32]
+Davies & Freytag         Expires March 27, 2014                [Page 32]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1844,7 +1844,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 33]
+Davies & Freytag         Expires March 27, 2014                [Page 33]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1900,7 +1900,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 34]
+Davies & Freytag         Expires March 27, 2014                [Page 34]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -1956,7 +1956,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 35]
+Davies & Freytag         Expires March 27, 2014                [Page 35]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -2012,7 +2012,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 36]
+Davies & Freytag         Expires March 27, 2014                [Page 36]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -2068,7 +2068,7 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 37]
+Davies & Freytag         Expires March 27, 2014                [Page 37]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -2081,21 +2081,29 @@ Appendix A.  RelaxNG Schema
    <?xml version="1.0" encoding="UTF-8"?>
    <grammar ns="http://www.iana.org/lgr/0.1"
      xmlns="http://relaxng.org/ns/structure/1.0">
+     <!-- SIMPLE TYPES -->
      <define name="language-tag">
        <text/>
      </define>
+     <!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) -->
      <define name="domain-name">
        <text/>
      </define>
+     <!-- Domain name -->
      <define name="code-point">
        <text/>
      </define>
+     <!-- A single codepoint, expressed as a hexidecimal number -->
      <define name="variant-condition">
        <text/>
      </define>
+     <!-- A condition for applying the variant (TBD) -->
      <define name="tag">
        <text/>
      </define>
+     <!-- Freeform text tag -->
+     <!-- STRUCTURES -->
+     <!-- Representation of a single codepoint -->
      <define name="point-single">
        <element name="char">
          <attribute name="cp">
@@ -2104,12 +2112,23 @@ Appendix A.  RelaxNG Schema
          <attribute name="tag">
            <ref name="tag"/>
          </attribute>
+         <optional>
+           <attribute name="ref"/>
+         </optional>
          <zeroOrMore>
            <ref name="point-variant"/>
          </zeroOrMore>
        </element>
      </define>
      <!-- Representation of a code point variant -->
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 38]
+
+Internet-Draft      Label Generation Rulesets in XML      September 2013
+
+
      <define name="point-variant">
        <element name="var">
          <attribute name="cp">
@@ -2121,18 +2140,20 @@ Appendix A.  RelaxNG Schema
          <optional>
            <attribute name="when">
              <ref name="variant-condition"/>
-
-
-
-Davies & Freytag         Expires March 26, 2014                [Page 38]
-
-Internet-Draft      Label Generation Rulesets in XML      September 2013
-
-
            </attribute>
+         </optional>
+         <optional>
+           <attribute name="comment"/>
+         </optional>
+         <optional>
+           <attribute name="disposition"/>
+         </optional>
+         <optional>
+           <attribute name="ref"/>
          </optional>
        </element>
      </define>
+     <!-- Representation of a range of codepoints -->
      <define name="point-multiple">
        <element name="range">
          <attribute name="first-cp">
@@ -2144,6 +2165,45 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
          <text/>
        </element>
      </define>
+     <define name="logical-operators">
+       <choice>
+         <element name="not">
+           <ref name="class-points"/>
+         </element>
+         <element name="union">
+           <oneOrMore>
+             <ref name="class-points"/>
+           </oneOrMore>
+         </element>
+         <element name="intersection">
+           <oneOrMore>
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 39]
+
+Internet-Draft      Label Generation Rulesets in XML      September 2013
+
+
+             <ref name="class-points"/>
+           </oneOrMore>
+         </element>
+         <element name="difference">
+           <oneOrMore>
+             <ref name="class-points"/>
+           </oneOrMore>
+         </element>
+         <element name="symmetric-difference">
+           <oneOrMore>
+             <ref name="class-points"/>
+           </oneOrMore>
+         </element>
+       </choice>
+     </define>
+     <!--
+       A collection of codepoints and ranges of codepoints that comprise
+       a label generation ruleset
+     -->
      <define name="points">
        <oneOrMore>
          <choice>
@@ -2151,6 +2211,13 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
            <ref name="point-multiple"/>
          </choice>
        </oneOrMore>
+     </define>
+     <define name="class-points">
+       <choice>
+         <ref name="point-single"/>
+         <ref name="point-multiple"/>
+         <ref name="logical-operators"/>
+       </choice>
      </define>
      <define name="any">
        <element name="any">
@@ -2166,10 +2233,28 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
          </optional>
          <optional>
            <attribute name="name"/>
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 40]
+
+Internet-Draft      Label Generation Rulesets in XML      September 2013
+
+
          </optional>
-         <zeroOrMore>
-           <ref name="points"/>
-         </zeroOrMore>
+         <optional>
+           <attribute name="comment"/>
+         </optional>
+         <optional>
+           <attribute name="ref"/>
+         </optional>
+         <optional>
+           <attribute name="property"/>
+         </optional>
+         <choice>
+           <ref name="class-points"/>
+           <text/>
+         </choice>
        </element>
      </define>
      <define name="choice">
@@ -2177,14 +2262,6 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
          <optional>
            <attribute name="count"/>
          </optional>
-
-
-
-Davies & Freytag         Expires March 26, 2014                [Page 39]
-
-Internet-Draft      Label Generation Rulesets in XML      September 2013
-
-
          <oneOrMore>
            <ref name="class-matchers"/>
          </oneOrMore>
@@ -2212,10 +2289,23 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
          <attribute name="action"/>
          <choice>
            <attribute name="match"/>
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 41]
+
+Internet-Draft      Label Generation Rulesets in XML      September 2013
+
+
            <attribute name="not-match"/>
          </choice>
        </element>
      </define>
+     <!-- DOCUMENT STRUCTURE -->
+     <!--
+       Main document structure, comprised of a meta section followed by
+       a data section.
+     -->
      <start>
        <ref name="lgr"/>
      </start>
@@ -2231,16 +2321,12 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
          </optional>
        </element>
      </define>
+     <!--
+       Meta section - information recorded with an label
+       generation ruleset that does not affect machine processing.
+     -->
      <define name="meta-section">
        <element name="meta">
-
-
-
-Davies & Freytag         Expires March 26, 2014                [Page 40]
-
-Internet-Draft      Label Generation Rulesets in XML      September 2013
-
-
          <zeroOrMore>
            <choice>
              <optional>
@@ -2259,6 +2345,14 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
                </element>
              </zeroOrMore>
              <zeroOrMore>
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 42]
+
+Internet-Draft      Label Generation Rulesets in XML      September 2013
+
+
                <element name="domain">
                  <ref name="domain-name"/>
                </element>
@@ -2284,25 +2378,37 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
                  <text/>
                </element>
              </zeroOrMore>
+             <optional>
+               <element name="references">
+                 <zeroOrMore>
+                   <element name="reference">
+                     <attribute name="id"/>
+                     <text/>
+                   </element>
+                 </zeroOrMore>
+               </element>
+             </optional>
            </choice>
          </zeroOrMore>
        </element>
      </define>
+     <!-- Data section - the actual code point data of the table. -->
      <define name="data-section">
-
-
-
-Davies & Freytag         Expires March 26, 2014                [Page 41]
-
-Internet-Draft      Label Generation Rulesets in XML      September 2013
-
-
        <element name="data">
          <ref name="points"/>
        </element>
      </define>
+     <!-- Rules section -->
      <define name="rules-section">
        <element name="rules">
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 43]
+
+Internet-Draft      Label Generation Rulesets in XML      September 2013
+
+
          <zeroOrMore>
            <choice>
              <ref name="rule-declaration"/>
@@ -2348,7 +2454,13 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 42]
+
+
+
+
+
+
+Davies & Freytag         Expires March 27, 2014                [Page 44]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -2404,7 +2516,7 @@ Appendix B.  Acknowledgements
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 43]
+Davies & Freytag         Expires March 27, 2014                [Page 45]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -2460,7 +2572,7 @@ C.2.  Change History
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 44]
+Davies & Freytag         Expires March 27, 2014                [Page 46]
 
 Internet-Draft      Label Generation Rulesets in XML      September 2013
 
@@ -2516,5 +2628,5 @@ Authors' Addresses
 
 
 
-Davies & Freytag         Expires March 26, 2014                [Page 45]
+Davies & Freytag         Expires March 27, 2014                [Page 47]
 
