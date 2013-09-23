@@ -1658,6 +1658,7 @@
 
             </section>
 
+            <!--
             <section title="Sample tables and running code">
 
                 <t>Some sample tables using this format, as well as a basic implementation of this specification, is
@@ -1665,6 +1666,7 @@
                 </t>
 
             </section>
+            -->
 
             <section title="Change History">
                 <t>

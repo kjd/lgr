@@ -126,9 +126,9 @@ Internet-Draft      Label Generation Rulesets in XML      September 2013
    Appendix B.  Acknowledgements  . . . . . . . . . . . . . . . . . . 43
    Appendix C.  Editorial Notes . . . . . . . . . . . . . . . . . . . 44
      C.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 44
-     C.2.  Sample tables and running code . . . . . . . . . . . . . . 44
-     C.3.  Change History . . . . . . . . . . . . . . . . . . . . . . 44
+     C.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 44
    Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 45
+
 
 
 
@@ -2419,13 +2419,7 @@ C.1.  Known Issues and Future Work
       expiration or refresh policy, as meta-data may be a useful way to
       declare how the table will be updated.
 
-C.2.  Sample tables and running code
-
-   Some sample tables using this format, as well as a basic
-   implementation of this specification, is posted at
-   https://github.com/kjd/idntables
-
-C.3.  Change History
+C.2.  Change History
 
    -00  Initial draft.
 
@@ -2450,6 +2444,12 @@ C.3.  Change History
         allow for actions that reference disposition attributes on any
         or all variant mappings used in the generation of a variant
         label.
+
+
+
+
+
+
 
 
 
