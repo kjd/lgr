@@ -9,7 +9,7 @@ Expires: March 27, 2014                                       ASMUS Inc.
 
 
             Representing Label Generation Rulesets using XML
-                       draft-davies-idntables-04
+                       draft-davies-idntables-05
 
 Abstract
 
@@ -2557,7 +2557,7 @@ C.2.  Change History
         or all variant mappings used in the generation of a variant
         label.
 
-
+   -05  TBD
 
 
 
