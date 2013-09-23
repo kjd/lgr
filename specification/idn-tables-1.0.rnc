@@ -15,6 +15,7 @@ tag = text                # Freeform text tag
 point-single = element char {
 	attribute cp { code-point },
 	attribute tag { tag },
+	attribute ref { text }?,
 	point-variant*
 }
 
@@ -23,7 +24,10 @@ point-single = element char {
 point-variant = element var {
 	attribute cp { code-point },
 	attribute type { text }?,
-	attribute when { variant-condition }?
+	attribute when { variant-condition }?,
+	attribute comment { text }?,
+	attribute disposition { text }?,
+	attribute ref { text }?
 }
 
 # Representation of a range of codepoints
@@ -34,10 +38,15 @@ point-multiple = element range {
 	text
 }
 
+logical-operators = (
+    element not { class-points } | element union { class-points+ } | element intersection { class-points+ }
+        | element difference { class-points+ } | element symmetric-difference { class-points+ }
+)
 # A collection of codepoints and ranges of codepoints that comprise
 # a label generation ruleset
 
 points = (point-single | point-multiple)+
+class-points = (point-single | point-multiple | logical-operators )
 
 any = element any {
 	attribute count { text }?
@@ -45,7 +54,10 @@ any = element any {
 class = element class {
 	attribute count { text }?,
 	attribute name { text }?,
-	points*
+	attribute comment { text }?,
+	attribute ref { text }?,
+	attribute property { text }?,
+	( class-points | text )
 }
 choice = element choice {
 	attribute count { text }?,
@@ -90,7 +102,13 @@ meta-section = element meta {
 		element description {
 			attribute type { text },
 			text
-		}*
+		}* |
+		element references {
+		    element reference {
+		        attribute id { text },
+		        text
+		    }*
+		}?
 	)*
 }
 
