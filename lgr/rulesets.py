@@ -1,27 +1,26 @@
 import datetime
 import re
 
-from idntables.codepoints import *
-from idntables.idna import IDN
-import idntables.etree as etree
-
+from .codepoints import *
+from .idna import IDN
+from . import etree
 
 xml_header = "<?xml version=\"1.0\"?>\n"
-xml_namespace = "http://www.iana.org/idn-tables/0.1"
+xml_namespace = "http://www.iana.org/lgr/0.1"
 
 class InvalidDomain(Exception): pass
-class InvalidIDNTable(Exception): pass
+class InvalidRuleset(Exception): pass
 class XMLValidationError(Exception): pass
 
 
-class IDNTable(object):
+class Ruleset(object):
 
 	
 	def __init__(self, filename=None):
 		
 		self._codepoints = set()
 		self._variants = {}
-		self.meta = IDNTableMetadata()
+		self.meta = RulesetMetadata()
 
 		if filename:
 			self.load(filename)
@@ -179,7 +178,7 @@ class IDNTable(object):
 				position += 1
 				if not codepoint in self._codepoints:
 					if exceptions:
-						raise InvalidDomain, "Codepoint U+%04X at position %d not allowed per table" % (codepoint, position)
+						raise InvalidDomain, "Codepoint U+%04X at position %d not allowed per ruleset" % (codepoint, position)
 					return False
 			return True
 
@@ -198,7 +197,7 @@ class IDNTable(object):
 		variants = [codepoint]
 		
 		if not codepoint in self._codepoints:
-			raise InvalidDomain, "Domain not allowed per table"
+			raise InvalidDomain, "Domain not allowed per ruleset"
 			
 		if self._variants.has_key(codepoint):
 			for (variant, category, condition) in self._variants[codepoint]:
@@ -216,24 +215,24 @@ class IDNTable(object):
 				yield [variant]
 
 
-	def merge(self, table):
+	def merge(self, ruleset):
 
 		# TODO: Add merge functionality.
 		raise NotImplementedError
 
 
-	def diff(self, table):
+	def diff(self, ruleset):
 		
-		diff_table = IDNTableDiff(self, table)
-		return diff_table
+		diff_ruleset = RulesetDiff(self, ruleset)
+		return diff_ruleset
 
 
 	def xml(self, xmlns=xml_namespace):
 
 		if xmlns:
-			xml = etree.Element('idntable', xmlns=xmlns)
+			xml = etree.Element('lgr', xmlns=xmlns)
 		else:
-			xml = etree.Element('idntable')
+			xml = etree.Element('lgr')
 		meta = etree.Element('meta')
 		data = etree.Element('data')
 		
@@ -315,16 +314,16 @@ class IDNTable(object):
 			data = f.read()
 			f.close()
 		except IOError, e:
-			raise InvalidIDNTable(e)
+			raise InvalidRuleset(e)
 		
 		try:
 			self.parse(data)	
 		except Exception, e:
-			raise InvalidIDNTable(e)
+			raise InvalidRuleset(e)
 
 
 
-class IDNTableMetadata(object):
+class RulesetMetadata(object):
 	
 	def __init__(self):
 		
@@ -401,19 +400,19 @@ class IDNTableMetadata(object):
 
 
 
-class IDNTableDiff(object):
+class RulesetDiff(object):
 	
-	def __init__(self, first_table=None, second_table=None):
+	def __init__(self, first_ruleset=None, second_ruleset=None):
 		
-		self.first_table = first_table
-		self.second_table = second_table
+		self.first_ruleset = first_ruleset
+		self.second_ruleset = second_ruleset
 		
 		self.changed = []
 		self.unchanged = []
 		self.added = []
 		self.deleted = []
 		
-		if first_table and second_table:
+		if first_ruleset and second_ruleset:
 			self.compare()
 
 
@@ -425,7 +424,7 @@ class IDNTableDiff(object):
 
 def load(filename):
 
-	return IDNTable(filename=filename)
+	return Ruleset(filename=filename)
 
 
 def _xml_indent(element, level=0):

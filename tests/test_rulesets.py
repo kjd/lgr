@@ -1,24 +1,24 @@
 import unittest
-import idntables
-from idntables.codepoints import InvalidCodepoint
+import lgr
+from lgr.codepoints import InvalidCodepoint
 
-class IDNTablesTestCase(unittest.TestCase):
+class LGRTestCase(unittest.TestCase):
 
 
 	def testAdd(self):
 
-		i = idntables.IDNTable()
+		i = lgr.Ruleset()
 		i.add('a')
 		i.add('a-z')
 		i.add('U+0061')
 		i.add('U+0061-U+0074')
-		self.assertRaises(idntables.codepoints.InvalidCodepoint, i.add, '-z')
-		self.assertRaises(idntables.codepoints.InvalidCodepoint, i.add, 'z-')
-		self.assertRaises(idntables.codepoints.InvalidCodepoint, i.add, 'U+XXXX')
+		self.assertRaises(lgr.codepoints.InvalidCodepoint, i.add, '-z')
+		self.assertRaises(lgr.codepoints.InvalidCodepoint, i.add, 'z-')
+		self.assertRaises(lgr.codepoints.InvalidCodepoint, i.add, 'U+XXXX')
 
 	def testContains(self):
 
-		i = idntables.IDNTable()
+		i = lgr.Ruleset()
 		i.add('a-z')
 		self.assertTrue('b' in i)
 		self.assertTrue('ab' in i)
@@ -29,7 +29,7 @@ class IDNTablesTestCase(unittest.TestCase):
 
 	def testTableLength(self):
 
-		i = idntables.IDNTable()
+		i = lgr.Ruleset()
 		self.assertEqual(len(i), 0)
 		i.add('a')
 		self.assertEqual(len(i), 1)

@@ -1,9 +1,9 @@
 """
 This library provides the ability to generate, manipulate and check against
-"IDN Tables", which are formal descriptions of which code points are
-available for registration by internationalised domain name registries.
-These tables can also specify contextual rules, as well as rules for
-generating sets of labels derived from nominated code point variants.
+"Label Generation Rulesets", which are formal descriptions of which code points
+are available for registration by domain name registries. These tables can also
+specify contextual rules, as well as rules for generating sets of labels derived
+from nominated code point variants.
 """
 
 import sys
@@ -19,16 +19,16 @@ def main():
 	if python_version < (2,5):
 		raise SystemExit("Sorry, Python 2.5 or newer required")
 
-	from idntables import __version__
+	from lgr import __version__
 
 	arguments = {
-		'name': 'idntables',
+		'name': 'lgr',
 		'packages': find_packages(),
-		'provides': ['idntables'],
+		'provides': ['lgr'],
 		'version': __version__,
 		'entry_points': {
 			'console_scripts': [
-				'idntables = idntables.commandline:main',
+				'lgr = lgr.commandline:main',
 			],
 		},
 		'install_requires': [
@@ -40,12 +40,12 @@ def main():
 		],
 		'test_suite': 'nose.collector',
 		
-		'description': 'IDN Table Toolkit',
+		'description': 'Label Generation Ruleset Toolkit',
 		'long_description': __doc__,
 		'author': 'Kim Davies',
 		'author_email': 'kim.davies@icann.org',
 		'license': 'BSD-like',
-		'url': 'https://github.com/kjd/idntables',
+		'url': 'https://github.com/kjd/lgr',
 		'classifiers': [
 			'Development Status :: 3 - Alpha',
 			'Intended Audience :: Developers',
