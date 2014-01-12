@@ -7,6 +7,7 @@ domain-name = text        # Domain name
 code-point = text         # A single codepoint, expressed as a hexidecimal number
 variant-condition = text  # A condition for applying the variant (TBD)
 tag = text                # Freeform text tag
+date = text
 
 # STRUCTURES
 
@@ -14,7 +15,8 @@ tag = text                # Freeform text tag
 
 point-single = element char {
 	attribute cp { code-point },
-	attribute tag { tag },
+	attribute tag { tag }?,
+	attribute comment { text }?,
 	attribute ref { text }?,
 	point-variant*
 }
@@ -25,8 +27,9 @@ point-variant = element var {
 	attribute cp { code-point },
 	attribute type { text }?,
 	attribute when { variant-condition }?,
+	attribute not-when { variant-condition }?,
 	attribute comment { text }?,
-	attribute disposition { text }?,
+	attribute disp { text }?,
 	attribute ref { text }?
 }
 
@@ -39,8 +42,11 @@ point-multiple = element range {
 }
 
 logical-operators = (
-    element not { class-points } | element union { class-points+ } | element intersection { class-points+ }
-        | element difference { class-points+ } | element symmetric-difference { class-points+ }
+    element complement { class-points }
+        | element union { class-points+ }
+        | element intersection { class-points+ }
+        | element difference { class-points+ }
+        | element symmetric-difference { class-points+ }
 )
 # A collection of codepoints and ranges of codepoints that comprise
 # a label generation ruleset
@@ -54,6 +60,7 @@ any = element any {
 class = element class {
 	attribute count { text }?,
 	attribute name { text }?,
+	attribute tag { tag }?,
 	attribute comment { text }?,
 	attribute ref { text }?,
 	attribute property { text }?,
@@ -62,16 +69,39 @@ class = element class {
 choice = element choice {
 	attribute count { text }?,
 	class-matchers+
+
 }
-class-matchers = ( class | any | choice )+
+look-ahead = element look-ahead {
+    class-matchers+
+}
+look-behind = element look-behind {
+    class-matchers+
+}
+
+class-matchers = ( any
+                    | choice
+                    | element \start { empty }
+                    | element end { empty }
+                    | point-single
+                    | class
+                    | rules-declaration
+                    | element anchor { empty }
+                    | look-ahead
+                    | look-behind
+                 )+
 
 rules-declaration = element rule {
 	attribute name { text },
 	class-matchers+
 }
 action-declaration = element action {
-	attribute action { text },
-	( attribute match { text } | attribute not-match { text } )
+	attribute disp { text },
+	( attribute match { text }
+	    | attribute not-match { text }
+	    | attribute any-variant { text }
+	    | attribute only-variants { text }
+	    | attribute all-variants { text }
+	)
 }
 
 # DOCUMENT STRUCTURE
@@ -87,17 +117,19 @@ lgr = element lgr {
 	rules-section?
 }
 
-# Meta section - information recorded with an label generation ruleset that does not
-# affect machine processing.
+# Meta-data section
 
 meta-section = element meta {
 	(
-		element version { text }? |
-		element date { text }? |
+		element version {
+		    attribute comment { text },
+		    text
+		}? |
+		element date { date }? |
 		element language { language-tag }* |
 		element domain { domain-name }* |
-		element validity-start { text }? |
-		element validity-end { text }? |
+		element validity-start { date }? |
+		element validity-end { date }? |
 		element unicode-version { text }? |
 		element description {
 			attribute type { text },

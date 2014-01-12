@@ -21,6 +21,9 @@
     <text/>
   </define>
   <!-- Freeform text tag -->
+  <define name="date">
+    <text/>
+  </define>
   <!-- STRUCTURES -->
   <!-- Representation of a single codepoint -->
   <define name="point-single">
@@ -28,9 +31,14 @@
       <attribute name="cp">
         <ref name="code-point"/>
       </attribute>
-      <attribute name="tag">
-        <ref name="tag"/>
-      </attribute>
+      <optional>
+        <attribute name="tag">
+          <ref name="tag"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
       <optional>
         <attribute name="ref"/>
       </optional>
@@ -54,10 +62,15 @@
         </attribute>
       </optional>
       <optional>
+        <attribute name="not-when">
+          <ref name="variant-condition"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="comment"/>
       </optional>
       <optional>
-        <attribute name="disposition"/>
+        <attribute name="disp"/>
       </optional>
       <optional>
         <attribute name="ref"/>
@@ -78,7 +91,7 @@
   </define>
   <define name="logical-operators">
     <choice>
-      <element name="not">
+      <element name="complement">
         <ref name="class-points"/>
       </element>
       <element name="union">
@@ -138,6 +151,11 @@
         <attribute name="name"/>
       </optional>
       <optional>
+        <attribute name="tag">
+          <ref name="tag"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="comment"/>
       </optional>
       <optional>
@@ -162,12 +180,39 @@
       </oneOrMore>
     </element>
   </define>
+  <define name="look-ahead">
+    <element name="look-ahead">
+      <oneOrMore>
+        <ref name="class-matchers"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="look-behind">
+    <element name="look-behind">
+      <oneOrMore>
+        <ref name="class-matchers"/>
+      </oneOrMore>
+    </element>
+  </define>
   <define name="class-matchers">
     <oneOrMore>
       <choice>
-        <ref name="class"/>
         <ref name="any"/>
         <ref name="choice"/>
+        <element name="start">
+          <empty/>
+        </element>
+        <element name="end">
+          <empty/>
+        </element>
+        <ref name="point-single"/>
+        <ref name="class"/>
+        <ref name="rules-declaration"/>
+        <element name="anchor">
+          <empty/>
+        </element>
+        <ref name="look-ahead"/>
+        <ref name="look-behind"/>
       </choice>
     </oneOrMore>
   </define>
@@ -181,10 +226,13 @@
   </define>
   <define name="action-declaration">
     <element name="action">
-      <attribute name="action"/>
+      <attribute name="disp"/>
       <choice>
         <attribute name="match"/>
         <attribute name="not-match"/>
+        <attribute name="any-variant"/>
+        <attribute name="only-variants"/>
+        <attribute name="all-variants"/>
       </choice>
     </element>
   </define>
@@ -208,22 +256,20 @@
       </optional>
     </element>
   </define>
-  <!--
-    Meta section - information recorded with an label generation ruleset that does not
-    affect machine processing.
-  -->
+  <!-- Meta-data section -->
   <define name="meta-section">
     <element name="meta">
       <zeroOrMore>
         <choice>
           <optional>
             <element name="version">
+              <attribute name="comment"/>
               <text/>
             </element>
           </optional>
           <optional>
             <element name="date">
-              <text/>
+              <ref name="date"/>
             </element>
           </optional>
           <zeroOrMore>
@@ -238,12 +284,12 @@
           </zeroOrMore>
           <optional>
             <element name="validity-start">
-              <text/>
+              <ref name="date"/>
             </element>
           </optional>
           <optional>
             <element name="validity-end">
-              <text/>
+              <ref name="date"/>
             </element>
           </optional>
           <optional>
