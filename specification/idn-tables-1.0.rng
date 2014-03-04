@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://www.iana.org/lgr/0.1" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+<grammar ns="http://www.iana.org/lgr/0.1" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!-- SIMPLE TYPES -->
   <define name="language-tag">
     <data type="token"/>
   </define>
-  <!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) -->
   <define name="domain-name">
     <text/>
   </define>
-  <!-- Domain name -->
   <define name="code-point">
     <data type="token">
-      <!-- A single code point -->
       <param name="pattern">[0-9A-F]{4,6}</param>
     </data>
   </define>
   <define name="code-point-sequence">
     <data type="token">
-      <!-- A sequence of code points -->
       <param name="pattern">[0-9A-F]{4,6}( [0-9A-F]{4,6})+</param>
     </data>
   </define>
@@ -30,14 +26,11 @@
   <define name="variant-condition">
     <text/>
   </define>
-  <!-- A condition for applying the variant (TBD) -->
   <define name="tag">
     <text/>
   </define>
-  <!-- Freeform text tag -->
   <define name="date">
     <data type="token">
-      <!-- ISO 8601 date -->
       <param name="pattern">\d{4}-\d\d-\d\d</param>
     </data>
   </define>
@@ -60,7 +53,6 @@
   </define>
   <!-- STRUCTURES -->
   <define name="char">
-    <a:documentation>Representation of a single code point, or a sequence of code points</a:documentation>
     <element name="char">
       <attribute name="cp">
         <ref name="code-point-literal"/>
@@ -92,7 +84,6 @@
     </element>
   </define>
   <define name="char-single">
-    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed)</a:documentation>
     <element name="char">
       <attribute name="cp">
         <ref name="code-point"/>
@@ -109,7 +100,6 @@
     </element>
   </define>
   <define name="range">
-    <a:documentation>Representation of a range of code points</a:documentation>
     <element name="range">
       <attribute name="first-cp">
         <ref name="code-point-literal"/>
@@ -132,7 +122,6 @@
     </element>
   </define>
   <define name="variant">
-    <a:documentation>Representation of a variant code point or sequence</a:documentation>
     <element name="var">
       <attribute name="cp">
         <ref name="code-point-literal"/>
@@ -161,16 +150,8 @@
       </optional>
     </element>
   </define>
-  <!--
-    
-    Classes
-    
-  -->
+  <!-- Classes -->
   <define name="class-invocation">
-    <a:documentation>a "class" element that references the name of another "class"
-(or set-operator like "union") defined elsewhere.
-This could also be used as a matcher (appearing under a "rule"
-element), ## in which case the "count" attribute may be present.</a:documentation>
     <element name="class">
       <attribute name="byref">
         <ref name="class-ref"/>
@@ -186,15 +167,8 @@ element), ## in which case the "count" attribute may be present.</a:documentatio
     </element>
   </define>
   <define name="class-declaration">
-    <a:documentation>defines a new class (set of code points) using Unicode property or
-code point literals</a:documentation>
     <element name="class">
       <optional>
-        <!--
-          "name" attribute should be present if this is a "top-level" class
-          declaration, i.e. appearing directly under the "rules" element.
-          Otherwise, it should be absent.
-        -->
         <attribute name="name">
           <ref name="identifier"/>
         </attribute>
@@ -203,16 +177,13 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <choice>
-        <!-- define the class by property, OR -->
         <attribute name="property"/>
         <oneOrMore>
-          <!-- list of single code points and ranges, OR -->
           <choice>
             <ref name="char-single"/>
             <ref name="range"/>
           </choice>
         </oneOrMore>
-        <!-- free form text node to allow for shorthand notation e.g. "0061 0062-0063" -->
         <text/>
       </choice>
     </element>
@@ -241,10 +212,6 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
-        <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
-        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -263,17 +230,12 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
-        <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
-        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
       </optional>
       <ref name="class-or-set-operator-nested"/>
       <oneOrMore>
-        <!-- needs two or more child elements -->
         <ref name="class-or-set-operator-nested"/>
       </oneOrMore>
     </element>
@@ -289,10 +251,6 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
-        <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
-        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -312,10 +270,6 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
-        <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
-        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -335,10 +289,6 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
-        <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
-        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -348,7 +298,6 @@ code point literals</a:documentation>
     </element>
   </define>
   <define name="set-operator">
-    <a:documentation>operators that transform class(es) into a new class.</a:documentation>
     <choice>
       <ref name="complement-operator"/>
       <ref name="union-operator"/>
@@ -357,11 +306,6 @@ code point literals</a:documentation>
       <ref name="symmetric-difference-operator"/>
     </choice>
   </define>
-  <!--
-    
-    Match operators (matchers)
-    
-  -->
   <define name="any-matcher">
     <element name="any">
       <optional>
@@ -442,7 +386,6 @@ code point literals</a:documentation>
     Rules
     
   -->
-  <!-- top-level rule must have "name" attribute -->
   <define name="rule-declaration-top">
     <element name="rule">
       <attribute name="name">
@@ -457,7 +400,6 @@ code point literals</a:documentation>
     </element>
   </define>
   <define name="rule-matcher">
-    <a:documentation>rule element used as a matcher (either byref or contains other match operators itself)</a:documentation>
     <element name="rule">
       <optional>
         <attribute name="count">
@@ -522,9 +464,6 @@ code point literals</a:documentation>
     </element>
   </define>
   <define name="meta-section">
-    <a:documentation>Meta section - information recorded with an label
-generation ruleset that generally does not affect machine processing
-(except for unicode-version).</a:documentation>
     <element name="meta">
       <zeroOrMore>
         <choice>
@@ -589,7 +528,6 @@ generation ruleset that generally does not affect machine processing
       </zeroOrMore>
     </element>
   </define>
-  <!-- Data section - the actual code point data of the table. -->
   <define name="data-section">
     <element name="data">
       <oneOrMore>
@@ -600,7 +538,6 @@ generation ruleset that generally does not affect machine processing
       </oneOrMore>
     </element>
   </define>
-  <!-- Rules section -->
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>

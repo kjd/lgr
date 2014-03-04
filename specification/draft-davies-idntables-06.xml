@@ -2070,63 +2070,150 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
         </section>
 
         <section title="RelaxNG Schema">
-            <t>[TODO: this needs to be updated to reflect additions to the syntax.]</t>
-            <figure> 
+            <figure>
                 <artwork><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar ns="http://www.iana.org/lgr/0.1"
-  xmlns="http://relaxng.org/ns/structure/1.0">
+   xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+   xmlns="http://relaxng.org/ns/structure/1.0"
+   datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <!-- SIMPLE TYPES -->
   <define name="language-tag">
-    <text/>
+    <data type="token"/>
   </define>
-  <!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) -->
   <define name="domain-name">
     <text/>
   </define>
-  <!-- Domain name -->
   <define name="code-point">
-    <text/>
+    <data type="token">
+      <param name="pattern">[0-9A-F]{4,6}</param>
+    </data>
   </define>
-  <!-- A single code point, expressed as a hexadecimal number -->
+  <define name="code-point-sequence">
+    <data type="token">
+      <param name="pattern">[0-9A-F]{4,6}( [0-9A-F]{4,6})+</param>
+    </data>
+  </define>
+  <define name="code-point-literal">
+    <choice>
+      <ref name="code-point"/>
+      <ref name="code-point-sequence"/>
+    </choice>
+  </define>
   <define name="variant-condition">
     <text/>
   </define>
-  <!-- A condition for applying the variant (TBD) -->
   <define name="tag">
     <text/>
   </define>
-  <!-- Freeform text tag -->
+  <define name="date">
+    <data type="token">
+      <param name="pattern">\d{4}-\d\d-\d\d</param>
+    </data>
+  </define>
+  <define name="rule-ref">
+    <data type="IDREF"/>
+  </define>
+  <define name="tag">
+    <text/>
+  </define>
+  <define name="identifier">
+    <data type="ID"/>
+  </define>
+  <define name="class-ref">
+    <text/>
+  </define>
+  <define name="count-pattern">
+    <data type="token">
+      <param name="pattern">\d+(\+|:\d+)?</param>
+    </data>
+  </define>
   <!-- STRUCTURES -->
-  <!-- Representation of a single code point -->
-  <define name="point-single">
+  <define name="char">
     <element name="char">
       <attribute name="cp">
-        <ref name="code-point"/>
+        <ref name="code-point-literal"/>
       </attribute>
-      <attribute name="tag">
-        <ref name="tag"/>
-      </attribute>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="when">
+          <ref name="rule-ref"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="not-when">
+          <ref name="rule-ref"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="tag">
+          <ref name="tag"/>
+        </attribute>
+      </optional>
       <optional>
         <attribute name="ref"/>
       </optional>
       <zeroOrMore>
-        <ref name="point-variant"/>
+        <ref name="variant"/>
       </zeroOrMore>
     </element>
   </define>
-  <!-- Representation of a code point variant -->
-  <define name="point-variant">
-    <element name="var">
+  <define name="char-single">
+    <element name="char">
       <attribute name="cp">
         <ref name="code-point"/>
+      </attribute>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="variant"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="range">
+    <element name="range">
+      <attribute name="first-cp">
+        <ref name="code-point-literal"/>
+      </attribute>
+      <attribute name="last-cp">
+        <ref name="code-point-literal"/>
+      </attribute>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="tag">
+          <ref name="tag"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="variant">
+    <element name="var">
+      <attribute name="cp">
+        <ref name="code-point-literal"/>
       </attribute>
       <optional>
         <attribute name="type"/>
       </optional>
       <optional>
         <attribute name="when">
-          <ref name="variant-condition"/>
+          <ref name="rule-ref"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="not-when">
+          <ref name="rule-ref"/>
         </attribute>
       </optional>
       <optional>
@@ -2140,141 +2227,310 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </optional>
     </element>
   </define>
-  <!-- Representation of a range of code points -->
-  <define name="point-multiple">
-    <element name="range">
-      <attribute name="first-cp">
-        <ref name="code-point"/>
+  <!-- Classes -->
+  <define name="class-invocation">
+    <element name="class">
+      <attribute name="byref">
+        <ref name="class-ref"/>
       </attribute>
-      <attribute name="last-cp">
-        <ref name="code-point"/>
-      </attribute>
-      <text/>
-    </element>
-  </define>
-  <define name="logical-operators">
-    <choice>
-      <element name="complement">
-        <ref name="class-points"/>
-      </element>
-      <element name="union">
-        <oneOrMore>
-          <ref name="class-points"/>
-        </oneOrMore>
-      </element>
-      <element name="intersection">
-        <oneOrMore>
-          <ref name="class-points"/>
-        </oneOrMore>
-      </element>
-      <element name="difference">
-        <oneOrMore>
-          <ref name="class-points"/>
-        </oneOrMore>
-      </element>
-      <element name="symmetric-difference">
-        <oneOrMore>
-          <ref name="class-points"/>
-        </oneOrMore>
-      </element>
-    </choice>
-  </define>
-  <!--
-    A collection of code points and ranges of code points that comprise
-    a label generation ruleset
-  -->
-  <define name="points">
-    <oneOrMore>
-      <choice>
-        <ref name="point-single"/>
-        <ref name="point-multiple"/>
-      </choice>
-    </oneOrMore>
-  </define>
-  <define name="class-points">
-    <choice>
-      <ref name="point-single"/>
-      <ref name="point-multiple"/>
-      <ref name="logical-operators"/>
-    </choice>
-  </define>
-  <define name="any">
-    <element name="any">
       <optional>
-        <attribute name="count"/>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
       </optional>
     </element>
   </define>
-  <define name="class">
+  <define name="class-declaration">
     <element name="class">
       <optional>
-        <attribute name="count"/>
+        <attribute name="name">
+          <ref name="identifier"/>
+        </attribute>
       </optional>
       <optional>
-        <attribute name="name"/>
+        <attribute name="comment"/>
       </optional>
+      <choice>
+        <attribute name="property"/>
+        <oneOrMore>
+          <choice>
+            <ref name="char-single"/>
+            <ref name="range"/>
+          </choice>
+        </oneOrMore>
+        <text/>
+      </choice>
+    </element>
+  </define>
+  <define name="class-or-set-operator-nested">
+    <choice>
+      <ref name="class-invocation"/>
+      <ref name="class-declaration"/>
+      <ref name="set-operator"/>
+    </choice>
+  </define>
+  <define name="class-or-set-operator-declaration">
+    <choice>
+      <ref name="class-declaration"/>
+      <ref name="set-operator"/>
+    </choice>
+  </define>
+  <define name="complement-operator">
+    <element name="complement">
+      <optional>
+        <attribute name="name">
+          <ref name="identifier"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <ref name="class-or-set-operator-nested"/>
+    </element>
+  </define>
+  <define name="union-operator">
+    <element name="union">
+      <optional>
+        <attribute name="name">
+          <ref name="identifier"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <ref name="class-or-set-operator-nested"/>
+      <oneOrMore>
+        <ref name="class-or-set-operator-nested"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="intersection-operator">
+    <element name="intersection">
+      <optional>
+        <attribute name="name">
+          <ref name="identifier"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <ref name="class-or-set-operator-nested"/>
+      <ref name="class-or-set-operator-nested"/>
+    </element>
+  </define>
+  <define name="difference-operator">
+    <element name="difference">
+      <optional>
+        <attribute name="name">
+          <ref name="identifier"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <ref name="class-or-set-operator-nested"/>
+      <ref name="class-or-set-operator-nested"/>
+    </element>
+  </define>
+  <define name="symmetric-difference-operator">
+    <element name="symmetric-difference">
+      <optional>
+        <attribute name="name">
+          <ref name="identifier"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <ref name="class-or-set-operator-nested"/>
+      <ref name="class-or-set-operator-nested"/>
+    </element>
+  </define>
+  <define name="set-operator">
+    <choice>
+      <ref name="complement-operator"/>
+      <ref name="union-operator"/>
+      <ref name="intersection-operator"/>
+      <ref name="difference-operator"/>
+      <ref name="symmetric-difference-operator"/>
+    </choice>
+  </define>
+  <define name="any-matcher">
+    <element name="any">
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+    </element>
+  </define>
+  <define name="choice-matcher">
+    <element name="choice">
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <!-- two or more match operators -->
+      <ref name="match-operator"/>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="char-matcher">
+    <element name="char">
+      <attribute name="cp">
+        <ref name="code-point-literal"/>
+      </attribute>
       <optional>
         <attribute name="comment"/>
       </optional>
       <optional>
         <attribute name="ref"/>
       </optional>
-      <optional>
-        <attribute name="property"/>
-      </optional>
-      <choice>
-        <ref name="class-points"/>
-        <text/>
-      </choice>
     </element>
   </define>
-  <define name="choice">
-    <element name="choice">
-      <optional>
-        <attribute name="count"/>
-      </optional>
-      <oneOrMore>
-        <ref name="class-matchers"/>
-      </oneOrMore>
+  <define name="start-matcher">
+    <element name="start">
+      <empty/>
     </element>
   </define>
-  <define name="class-matchers">
-    <oneOrMore>
-      <choice>
-        <ref name="class"/>
-        <ref name="any"/>
-        <ref name="choice"/>
-      </choice>
-    </oneOrMore>
+  <define name="end-matcher">
+    <element name="end">
+      <empty/>
+    </element>
   </define>
-  <define name="rules-declaration">
+  <define name="anchor-matcher">
+    <element name="anchor">
+      <empty/>
+    </element>
+  </define>
+  <define name="look-ahead-matcher">
+    <element name="look-ahead">
+      <empty/>
+    </element>
+  </define>
+  <define name="look-behind-matcher">
+    <element name="look-behind">
+      <empty/>
+    </element>
+  </define>
+  <define name="match-operator">
+    <choice>
+      <ref name="any-matcher"/>
+      <ref name="choice-matcher"/>
+      <ref name="start-matcher"/>
+      <ref name="end-matcher"/>
+      <ref name="char-matcher"/>
+      <ref name="class-or-set-operator-nested"/>
+      <ref name="rule-matcher"/>
+      <ref name="anchor-matcher"/>
+      <ref name="look-ahead-matcher"/>
+      <ref name="look-behind-matcher"/>
+    </choice>
+  </define>
+  <!--
+
+    Rules
+
+  -->
+  <define name="rule-declaration-top">
     <element name="rule">
-      <attribute name="name"/>
+      <attribute name="name">
+        <ref name="identifier"/>
+      </attribute>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
       <oneOrMore>
-        <ref name="class-matchers"/>
+        <ref name="match-operator"/>
       </oneOrMore>
     </element>
   </define>
+  <define name="rule-matcher">
+    <element name="rule">
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <choice>
+        <attribute name="byref">
+          <ref name="rule-ref"/>
+        </attribute>
+        <oneOrMore>
+          <ref name="match-operator"/>
+        </oneOrMore>
+      </choice>
+    </element>
+  </define>
+  <!--
+
+    Actions
+
+  -->
   <define name="action-declaration">
     <element name="action">
-      <attribute name="action"/>
-      <choice>
-        <attribute name="match"/>
-        <attribute name="not-match"/>
-      </choice>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <attribute name="disp"/>
+      <optional>
+        <choice>
+          <attribute name="match"/>
+          <attribute name="not-match"/>
+        </choice>
+      </optional>
+      <optional>
+        <choice>
+          <attribute name="any-variant"/>
+          <attribute name="all-variants"/>
+          <attribute name="only-variants"/>
+        </choice>
+      </optional>
     </element>
   </define>
   <!-- DOCUMENT STRUCTURE -->
-  <!--
-    Main document structure, comprised of a meta section followed by
-    a data section.
-  -->
   <start>
     <ref name="lgr"/>
   </start>
   <define name="lgr">
     <element name="lgr">
-      <attribute name="id"/>
+      <optional>
+        <attribute name="id"/>
+      </optional>
       <optional>
         <ref name="meta-section"/>
       </optional>
@@ -2284,22 +2540,19 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </optional>
     </element>
   </define>
-  <!--
-    Meta section - information recorded with an label
-    generation ruleset that does not affect machine processing.
-  -->
   <define name="meta-section">
     <element name="meta">
       <zeroOrMore>
         <choice>
-          <optional>
-            <element name="version">
-              <text/>
-            </element>
-          </optional>
+          <element name="version">
+            <optional>
+              <attribute name="comment"/>
+            </optional>
+            <text/>
+          </element>
           <optional>
             <element name="date">
-              <text/>
+              <ref name="date"/>
             </element>
           </optional>
           <zeroOrMore>
@@ -2322,14 +2575,16 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
               <text/>
             </element>
           </optional>
-          <optional>
+          <zeroOrMore>
             <element name="unicode-version">
               <text/>
             </element>
-          </optional>
+          </zeroOrMore>
           <zeroOrMore>
             <element name="description">
-              <attribute name="type"/>
+              <optional>
+                <attribute name="type"/>
+              </optional>
               <text/>
             </element>
           </zeroOrMore>
@@ -2338,6 +2593,9 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
               <zeroOrMore>
                 <element name="reference">
                   <attribute name="id"/>
+                  <optional>
+                    <attribute name="comment"/>
+                  </optional>
                   <text/>
                 </element>
               </zeroOrMore>
@@ -2347,18 +2605,22 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </zeroOrMore>
     </element>
   </define>
-  <!-- Data section - the actual code point data of the table. -->
   <define name="data-section">
     <element name="data">
-      <ref name="points"/>
+      <oneOrMore>
+        <choice>
+          <ref name="char"/>
+          <ref name="range"/>
+        </choice>
+      </oneOrMore>
     </element>
   </define>
-  <!-- Rules section -->
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>
         <choice>
-          <ref name="rule-declaration"/>
+          <ref name="class-or-set-operator-declaration"/>
+          <ref name="rule-declaration-top"/>
           <ref name="action-declaration"/>
         </choice>
       </zeroOrMore>
