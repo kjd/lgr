@@ -144,8 +144,8 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: May 24, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">November 20, 2013</td></tr>
+<tr><td class="header">Expires: September 5, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">March 4, 2014</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-06</h1>
 
@@ -174,11 +174,11 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on May 24, 2014.</p>
+This Internet-Draft will expire on September 5, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
-Copyright (c) 2013 IETF Trust and the persons identified as the
+Copyright (c) 2014 IETF Trust and the persons identified as the
 document authors.  All rights reserved.</p>
 <p>
 This document is subject to BCP 78 and the IETF Trust's Legal
@@ -237,8 +237,8 @@ Null Variants<br />
 Dispositions<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ref">5.2.4.</a>&nbsp;
 The ref Attribute<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#identity_mapping">5.2.5.</a>&nbsp;
-Variants with Identity Mapping<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#reflexive_mapping">5.2.5.</a>&nbsp;
+Variants with Reflexive Mapping<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#when">5.2.6.</a>&nbsp;
 Conditional Variants<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#comment">5.2.7.</a>&nbsp;
@@ -251,39 +251,39 @@ Whole Label and Context Evaluation<br />
 Basic Concepts<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor22">6.2.</a>&nbsp;
 Character Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">6.2.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tag_based_classes">6.2.1.</a>&nbsp;
 Tag-based Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">6.2.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">6.2.2.</a>&nbsp;
 Unicode Property-based Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">6.2.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">6.2.3.</a>&nbsp;
 Explicitly Declared Classes<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#combined_classes">6.2.4.</a>&nbsp;
 Combined Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">6.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">6.3.</a>&nbsp;
 Whole Label and Context Rules<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rule">6.3.1.</a>&nbsp;
 The rule Element<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#match_operators">6.3.2.</a>&nbsp;
 The Match Operators<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">6.3.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">6.3.3.</a>&nbsp;
 The count Attribute<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">6.3.4.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">6.3.4.</a>&nbsp;
 The name and byref Attributes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">6.3.5.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">6.3.5.</a>&nbsp;
 The choice Element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor30">6.3.6.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">6.3.6.</a>&nbsp;
 Literal Code Point Sequences<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">6.3.7.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor30">6.3.7.</a>&nbsp;
 The any Element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor32">6.3.8.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">6.3.8.</a>&nbsp;
 The start and end Elements<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#IDNA2008-example">6.3.9.</a>&nbsp;
 Example rule from IDNA2008<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#parameterized_context_rule">6.4.</a>&nbsp;
 Parameterized Context or When Rules<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor33">6.4.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor32">6.4.1.</a>&nbsp;
 The anchor Element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor34">6.4.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor33">6.4.2.</a>&nbsp;
 The look-behind and look-ahead Elements<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#omitting">6.4.3.</a>&nbsp;
 Omitting the anchor Element<br />
@@ -307,33 +307,35 @@ Implied Actions<br />
 Default Actions<br />
 <a href="#processing">8.</a>&nbsp;
 Processing a Label Against an LGR<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor35">8.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor34">8.1.</a>&nbsp;
 Determining Eligibility for a Label<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor36">8.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor35">8.2.</a>&nbsp;
 Determining Variants for a Label<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#determining_dispositions">8.3.</a>&nbsp;
 Determining a  Disposition for a Label or variant Label<br />
-<a href="#anchor37">9.</a>&nbsp;
+<a href="#anchor36">9.</a>&nbsp;
 Conversion to and from Other Formats<br />
-<a href="#anchor38">10.</a>&nbsp;
+<a href="#anchor37">10.</a>&nbsp;
 IANA Considerations<br />
-<a href="#anchor39">11.</a>&nbsp;
+<a href="#anchor38">11.</a>&nbsp;
 Security Considerations<br />
 <a href="#rfc.references1">12.</a>&nbsp;
 References<br />
-<a href="#anchor41">Appendix&nbsp;A.</a>&nbsp;
+<a href="#anchor40">Appendix&nbsp;A.</a>&nbsp;
 Example Table<br />
 <a href="#translate_rfc3743">Appendix&nbsp;B.</a>&nbsp;
 How to Translate RFC 3743 based Tables into the XML Format<br />
-<a href="#anchor42">Appendix&nbsp;C.</a>&nbsp;
+<a href="#indic_syllable">Appendix&nbsp;C.</a>&nbsp;
+Indic Syllable Structure Example<br />
+<a href="#anchor41">Appendix&nbsp;D.</a>&nbsp;
 RelaxNG Schema<br />
-<a href="#anchor43">Appendix&nbsp;D.</a>&nbsp;
+<a href="#anchor42">Appendix&nbsp;E.</a>&nbsp;
 Acknowledgements<br />
-<a href="#anchor44">Appendix&nbsp;E.</a>&nbsp;
+<a href="#anchor43">Appendix&nbsp;F.</a>&nbsp;
 Editorial Notes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor45">E.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor44">F.1.</a>&nbsp;
 Known Issues and Future Work<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor46">E.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor45">F.2.</a>&nbsp;
 Change History<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -428,7 +430,7 @@ Design Goals</h3>
                         concerned.
                     
 </li>
-<li>As many existing IDN tables are practicable SHOULD be able to be migrated to the LGR format with
+<li>As many existing IDN tables as practicable SHOULD be able to be migrated to the LGR format with
                         all applicable logic retained.
                     
 </li>
@@ -474,7 +476,7 @@ Requirements</h3>
 </li>
 <li>The ability to assign a single disposition or categorization for each variants
 </li>
-<li>The ability to assign variants with the identity mapping.
+<li>The ability to assign variants with reflexive mappings.
 </li>
 <li>The ability to assign variants that have a code point sequence as target.
 </li>
@@ -640,7 +642,9 @@ The language Element</h3>
 <a name="rfc.section.4.3.4"></a><h3>4.3.4.&nbsp;
 The domain Element</h3>
 
-<p>This optional element refers to a domain to which this policy is applied.
+<p>This optional element refers to a domain to which this policy is applied. The value must be a valid 
+                    domain name that represents the apex of the zone to which the domain is applied, and in the case of
+                    the root zone, should be represented as ".".
 </p>
 <p></p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;domain&gt;example.com&lt;/domain&gt;</pre></div><p>
@@ -662,7 +666,7 @@ The description Element</h3>
                     
 </p>
 <p>The element has an optional "type" attribute, which refers to the internet media type of the enclosed
-                        data. Typical types would be "text/plain" or "text/html". The attribute SHOULD	be a valid MIME 
+                        data. Typical types would be "text/plain" or "text/html". The attribute SHOULD    be a valid MIME 
                         type. If supplied, it will be assumed the contents is content
                         of that media type.  If the description lacks a type field, it will 
                         be assumed to be plain text ("text/plain").
@@ -688,13 +692,21 @@ The validity-start and validity-end Elements</h3>
 The unicode-version Element</h3>
 
 <p>Whenever an IDN table depends on character properties from a given version of the Unicode
-                        standard, the minimum version number MUST be listed. If any software processing the table does
+                        standard, the version number used in creating the LGR MUST be listed. If any software processing the table does
                         not have access to character property data of 
-                        the minimum requisite version, or later, it MUST NOT perform any operations relating to whole-label
+                        the requisite version, it MUST NOT perform any operations relating to whole-label
                         evaluation.
-                        This is because some Unicode code points may not have been assigned in an earlier version,
-                        leaving properties for these code points undefined. It is RECOMMENDED to only reference stable
-                        or immutable properties as others may change between versions.
+                        While, some Unicode code points may not have been assigned in an earlier version,
+                        leaving properties for these code points undefined, in other cases their properties may have
+                        been updated in the Unicode standard between versions. It is RECOMMENDED to only reference stable
+                        or immutable properties. For a given LGR, the property
+                        values for the code points in the actual repertoire may be unchanged in a later version of Unicode,
+                        even though other changes were made in that standard. If that fact can be established, it MAY
+                        be acceptable to use tools based on a later version of Unicode.
+                        
+</p>
+<p>
+                        [[TODO: A method of indicating  arange of permissible Unicode versions should be descirbed.]]
                     
 </p>
 <p></p>
@@ -908,15 +920,16 @@ Null Variants</h3>
 Dispositions</h3>
 
 <p>Variants may be given dispositions. These describe the policy state for a variant label that was
-                        generated using a particular variant. The dispositions are the same as described below in <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>.
-                    
+                    generated using a particular variant. The dispositions are the same as described below in
+                    <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>. 
+                
 </p>
-<p>A disposition may be of any non-empty value not starting with an underscore and not containing spaces.
-                    Within these restrictions a disposition may have any value, but several conventional dispositions are predefined below in
-                        <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>
-                        to encourage common conventions in their application. If these values can represent registry
-                        policy, they SHOULD be used. (See also <a class='info' href='#default_actions'>Section&nbsp;7.6<span> (</span><span class='info'>Default Actions</span><span>)</span></a>).
-                      
+<p>A disposition may be of any non-empty value not starting with an underscore and not containing 
+                     spaces.                  Within these restrictions a disposition may have any value, but several conventional dispositions are
+                     predefined below in  <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>  to encourage common conventions in their application. If these values can represent registry
+                    policy, they SHOULD be used. (See also
+                    <a class='info' href='#default_actions'>Section&nbsp;7.6<span> (</span><span class='info'>Default Actions</span><span>)</span></a>
+                    ). 
 </p>
 <p></p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="767C"&gt;
@@ -927,8 +940,8 @@ Dispositions</h3>
     &lt;/char&gt;</pre></div><p>
 
 </p>
-<p>Usually, if a variant label contains any instance of one of the block variants the label would
-                        be block, but if it contained only instances of allocated variants it could be allocated. See
+<p>Usually, if a variant label contains any instance of one of the variants that are to be blocked the label would
+                        be blocked, but if it contained only instances of variants to be allocated it could be allocated. See
                         the discussion about implied actions in <a class='info' href='#default_actions'>Section&nbsp;7.6<span> (</span><span class='info'>Default Actions</span><span>)</span></a>.
                     
 </p>
@@ -963,17 +976,28 @@ The ref Attribute</h3>
                         named references to them.
                     
 </p>
-<a name="identity_mapping"></a><br /><hr />
+<a name="reflexive_mapping"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2.5"></a><h3>5.2.5.&nbsp;
-Variants with Identity Mapping</h3>
+Variants with Reflexive Mapping</h3>
 
 <p>At first sight there seems to be no call for adding variant mappings for which source and target
-                code points are the same. Yet they occur frequently in LGRs that follow <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
-                By using variants with identity mappings that specification enables both a disposition and a reference id
-                to be provided for any context where the code point in a given position of the label is still the same code
-                point as in the original (non-variant) label. While the reference id is not used in processing, the disposition
-                value can be used to trigger actions.
+                code points are the same, that is for which the mapping is reflexive, or, in other words, an identity mapping.
+                Yet such reflexive mappings occur frequently in LGRs that follow <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
+                
+</p>
+<p>
+                Adding a "var" element  allows both a disposition and a reference id
+                to be specified for it. While the reference id is not used in processing, the disposition value can be used
+                to trigger actions. In permuting the label to generate all possible variants, the disposition value associated
+                with a reflexive    variant mapping is applied to any of the permuted labels containing the original code point.
+</p>
+<p>
+                In the following example, the code point U+3473 exists both as a variant of  U+3447 and as a
+                variant of itself (reflexive mapping). Assuming an original label of "3473 3447", the permuted variant "3473 3473"
+                would consist of the reflexive variant of 3473 followed by a variant of 3447. Accordingly, the
+                dispositions for both of the variant mappings used to generate that particular permutation would
+                have the value "preferred" given the following definitions of variant mappings:
 </p>
 <p></p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>     &lt;char cp="3447" ref="0"&gt;
@@ -985,10 +1009,18 @@ Variants with Identity Mapping</h3>
     &lt;/char&gt;</pre></div><p>
 
 </p>
-<p>Having established the disposition values in this way, actions can be defined that return different
-                    disposition values for two otherwise identical labels based solely on whether any variant mappings
-                    were executed in order to generate one but not the other. (For details on how to define actions based
-                    on variant dispositions see <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>).
+<p>Having established the disposition values in this way, a set of actions could be defined that return 
+                    a disposition of "allocate" or "activate" for a label consisting exclusively of variants with disposition
+                    "preferred" for example. (For details on how to define actions based
+                    on variant dispositions see <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>.)
+</p>
+<p>
+                    In general, using reflexive variant mappings in this manner, makes it possible to calculate disposition
+                    values using a uniform approach for all labels, whether they consist of mapped variant code point,
+                    original code points, or a mixture of both. In particular, the disposition values for two otherwise identical labels
+                    may differ based on which variant mappings were executed in order to generate each of them.
+                    (For details on how to generate variants and evaluate dispositions, see <a class='info' href='#processing'>Section&nbsp;8<span> (</span><span class='info'>Processing a Label Against an LGR</span><span>)</span></a>.)
+                    
 </p>
 <a name="when"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1062,21 +1094,23 @@ The comment Attribute</h3>
 <a name="rfc.section.5.3"></a><h3>5.3.&nbsp;
 Code Point Tagging</h3>
 
-<p>Typically, LGRs are used to explicitly designate allowable code points, with any label with a code
-                    point not explicitly listed in the LGR being considered an ineligible label according to the
+<p>Typically, LGRs are used to explicitly designate allowable code points, where any label that contains a code
+                    point not explicitly listed in the LGR is considered an ineligible label according to the
                     ruleset.
                 
 </p>
-<p>For more complex registry rules, there may be a need to discern code points of certain types. This
-                    can be accomplished by applying a "tag" attribute to char or range elements, and then filtering on results based on the tag
-                    using whole label evaluation. Tag attributes may be of any value, and multiple values are separated
-                    by space.
+<p>For more complex registry rules, there may be a need to discern on or more subsets code points. This
+                    can be accomplished by applying a "tag" attribute to char or range elements, thereby defining character 
+                    classes (see <a class='info' href='#tag_based_classes'>Section&nbsp;6.2.1<span> (</span><span class='info'>Tag-based Classes</span><span>)</span></a>) which can then be used in whole label evaluation
+                    rules (see <a class='info' href='#match_operators'>Section&nbsp;6.3.2<span> (</span><span class='info'>The Match Operators</span><span>)</span></a>). Tag attributes may be of any value, and multiple values are
+                    separated by space. Code point sequences not being proper members of a set of code points, a "tag"  attribute
+                    MUST NOT be present in a char element defining a code point sequence.
                 
 </p>
-<p>A simple example would be to label preferred code points (as in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>) by adding
-                    "preferred" to the tag, and then using a rule such as shown in
-                    <a class='info' href='#rule'>Section&nbsp;6.3.1<span> (</span><span class='info'>The rule Element</span><span>)</span></a>
-                    to filter out labels that consist entirely of such preferred code points.
+<p>A simple example of tag use would be to label preferred code points (as in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>) 
+                   by adding "preferred" to the tag, and then using a rule such as shown in  <a class='info' href='#rule'>Section&nbsp;6.3.1<span> (</span><span class='info'>The rule Element</span><span>)</span></a> to single
+                   out labels for allocation that consist entirely of such preferred code points. For a variety of reasons, actual
+                   tables use a different approach.
                 
 </p>
 <a name="anchor20"></a><br /><hr />
@@ -1159,7 +1193,7 @@ Character Classes</h3>
 <p>A character class has an optional "name" attribute, consisting of a single identifier not containing
                     spaces. If it is omitted, the class is anonymous and exists only inside the rule or combined class
                     where it is defined. A named character class is defined independently and can be referenced by name
-                    by both rules and character class definitions.
+                    from within any rules or as part of other character class definitions.
                 
 </p>
 <p></p>
@@ -1176,10 +1210,10 @@ Character Classes</h3>
 </p>
 <p>An empty "class" element with a "byref" attribute is a reference to an existing named class. Such an
                     element MUST NOT have either "comment" or "ref" attributes as those may only be placed on a class
-                    definition.  
+                    definition.  A "byref" and a "name" attribute MUST NOT occur in the same element.
                 
 </p>
-<a name="anchor23"></a><br /><hr />
+<a name="tag_based_classes"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2.1"></a><h3>6.2.1.&nbsp;
 Tag-based Classes</h3>
@@ -1201,7 +1235,7 @@ Tag-based Classes</h3>
                         implicitly named tag-derived class.
                     
 </p>
-<a name="anchor24"></a><br /><hr />
+<a name="anchor23"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2.2"></a><h3>6.2.2.&nbsp;
 Unicode Property-based Classes</h3>
@@ -1227,7 +1261,7 @@ Unicode Property-based Classes</h3>
                         stable across versions and do not change once assigned.)
                     
 </p>
-<a name="anchor25"></a><br /><hr />
+<a name="anchor24"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2.3"></a><h3>6.2.3.&nbsp;
 Explicitly Declared Classes</h3>
@@ -1278,7 +1312,7 @@ Explicitly Declared Classes</h3>
 <p>would be a more streamlined expression of the same class using the shorthand notation.
 </p>
 <p>A class element either contains any combination of char and range elements and no other elements,
-                    or a text node with the	shorthand notation.
+                    or a text node with the    shorthand notation.
 </p>
 <a name="combined_classes"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1372,7 +1406,7 @@ Combined Classes</h3>
                     to it always uses the "class" element. That is, a named class is always referenced via an empty "class" element
                     using the "byref" attribute containing the name of the class to be referenced. 
 </p>
-<a name="anchor26"></a><br /><hr />
+<a name="anchor25"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
 Whole Label and Context Rules</h3>
@@ -1392,9 +1426,9 @@ The rule Element</h3>
                     
 </p>
 <p>Rules may optionally be named using a "name" attribute containing a single identifier string with
-                        no spaces. A named rule may be incorporated into another rule by reference. If the name attribute is omitted, the rule 
-                        is anonymous and may not incorporated by
-                        reference into another rule or referenced by an action or "when" attribute.
+                        no spaces. A named rule may be incorporated into another rule by reference. If the name attribute is omitted,
+                        the rule is anonymous and may not be incorporated by reference into another rule or referenced by an action
+                        or "when" attribute.
                     
 </p>
 <p>A simple rule to match a label where all characters are members of the class "preferred":
@@ -1477,30 +1511,46 @@ The Match Operators</h3>
                     column of the table above do not support child elements of their own; otherwise match operators may be nested.
                     In particular, anonymous rule elements can be used for grouping.
 </p>
-<a name="anchor27"></a><br /><hr />
+<a name="anchor26"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.3"></a><h3>6.3.3.&nbsp;
 The count Attribute</h3>
 
-<p>The number of times a match operator may be used to match input  is given by the
-                         "count" attribute. The attribute consists of a number, optionally
-                            followed by a "+" sign. The number MUST be an integer of value 0 or higher. If no count attribute is specified, 
-                            the number of times the match operator may be applied in matching is "1".
-                            
-</p>
-<p>
-                             If the number is followed by a
-                            plus sign ("+"), it means that any number of additional occurrences are allowed beyond the
-                            number stated.	A count attribute of "1" would mean exactly one occurrence, whereas "1+" would indicate
-                            one or more occurrences and that the match operator is applied as many times as possible (greedy match).
+<p>The count attribute specifies the minimally required or maximal permitted number of
+                        times a match operator is used to match input. If the count attribute is</p>
+<blockquote class="text"><dl>
+<dt>n or n:n</dt>
+<dd>
+                        the match operator matches the input exactly n times, where n is 1 or greater.
                         
+</dd>
+<dt>n+</dt>
+<dd>
+                        the match operator matches the input at least n times, where n is 0 or greater.
+                        
+</dd>
+<dt>n:m</dt>
+<dd>
+                        the match operator matches the input at least n times where n is 0 or greater, but matches the input
+                        up to m times in total, where m > n.
+                        
+</dd>
+<dt>missing</dt>
+<dd>
+                        the match operator matches the input exactly once.
+                        
+</dd>
+</dl></blockquote><p>
+                        In matching, greedy evaluation is used in the sense defined for regular expressions:  beyond the required
+                        number or times, the input is matched as many times as possible, but not so often as to prevent a match
+                        of the remainder of the rule. 
 </p>
-<p>The count attribute may not be applied to match operators of type "start", "end", "anchor", "look-ahead"
+<p>The count attribute MUST NOT be applied to match operators of type "start", "end", "anchor", "look-ahead"
                         and "look-behind". It may be applied to "class" and "rule" elements only if they do not have a "name" attribute,
                         that is to anonymous rules and classes or any invocation of predefined rules or classes by reference.
                         
 </p>
-<a name="anchor28"></a><br /><hr />
+<a name="anchor27"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.4"></a><h3>6.3.4.&nbsp;
 The name and byref Attributes</h3>
@@ -1536,7 +1586,7 @@ The name and byref Attributes</h3>
     &lt;/rule&gt;</pre></div><p>
 
 </p>
-<a name="anchor29"></a><br /><hr />
+<a name="anchor28"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.5"></a><h3>6.3.5.&nbsp;
 The choice Element</h3>
@@ -1560,7 +1610,7 @@ The choice Element</h3>
                             consists of a sequence of elements, they can be wrapped in an anonymous rule.
                         
 </p>
-<a name="anchor30"></a><br /><hr />
+<a name="anchor29"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.6"></a><h3>6.3.6.&nbsp;
 Literal Code Point Sequences</h3>
@@ -1571,7 +1621,7 @@ Literal Code Point Sequences</h3>
                             attribute, comments or references, but no conditional contexts or child elements.
                         
 </p>
-<a name="anchor31"></a><br /><hr />
+<a name="anchor30"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.7"></a><h3>6.3.7.&nbsp;
 The any Element</h3>
@@ -1583,7 +1633,7 @@ The any Element</h3>
 </p>
 <p>The "any" element" may have neither a "comment" nor a "ref" attribute.
 </p>
-<a name="anchor32"></a><br /><hr />
+<a name="anchor31"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.8"></a><h3>6.3.8.&nbsp;
 The start and end Elements</h3>
@@ -1651,9 +1701,9 @@ Parameterized Context or When Rules</h3>
                         mapping. This rule is invoked by the "when" attribute described in <a class='info' href='#when'>Section&nbsp;5.2.6<span> (</span><span class='info'>Conditional Variants</span><span>)</span></a>. An  
                         action implied by a context rule always has a disposition of "invalid" whenever the rule is not
                         matched (see <a class='info' href='#implied_actions'>Section&nbsp;7.5<span> (</span><span class='info'>Implied Actions</span><span>)</span></a>). Conversely, a "not-when" attribute results 
-                        in a disposition	of invalid whenever the rule is matched.
+                        in a disposition    of invalid whenever the rule is matched.
 </p>
-<a name="anchor33"></a><br /><hr />
+<a name="anchor32"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.4.1"></a><h3>6.4.1.&nbsp;
 The anchor Element</h3>
@@ -1698,7 +1748,7 @@ The anchor Element</h3>
                     "when" or "not-when" attribute. (See <a class='info' href='#omitting'>Section&nbsp;6.4.3<span> (</span><span class='info'>Omitting the anchor Element</span><span>)</span></a>)
                     
 </p>
-<a name="anchor34"></a><br /><hr />
+<a name="anchor33"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.4.2"></a><h3>6.4.2.&nbsp;
 The look-behind and look-ahead Elements</h3>
@@ -1838,7 +1888,8 @@ Variant Disposition triggers</h3>
 <p>Any single match may trigger an action that contains an "any-variant" attribute, while for an "all-variants",
                     "only-variants" attribute, the dispositions for all variant code points must match one or several of the
                     dispositions specified in the attribute value to trigger the action. An "only-variants" attribute will trigger
-                    the action only if the variant label	contains no original code points other than those with an identity mapping.
+                    the action only if the variant label    contains no original code points other than those with a reflexive mapping (see 
+                    <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>).
 </p>
 <p>One of these variant disposition triggers may be used by itself or in conjunction with an attribute matching or
                     not-matching a rule. If variant triggers and rule-matching triggers are used together, the label MUST "match" or respectively
@@ -1851,9 +1902,9 @@ Variant Disposition triggers</h3>
 <a name="rfc.section.7.2.2"></a><h3>7.2.2.&nbsp;
 Example for RFC3743-style Tables</h3>
 
-<p>This section gives an example of using variant disposition triggers, combined with variants with identity
-                 mappings <a class='info' href='#identity_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Identity Mapping</span><span>)</span></a> to achieve LGRs that implement tables defined
-                 according to <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a> where the goal is to allow only variants that consist entirely of simplified or
+<p>This section gives an example of using variant disposition triggers, combined with variants with reflexive
+                 mappings <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a> to achieve LGRs that implement tables like those defined
+                 according to <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a> where the l is to allow only variants that consist entirely of simplified or
                  traditional variants, in addition to the original label. 
 </p>
 <p>Assuming an LGR where all variants have been given suitable "disp" attributes
@@ -1873,17 +1924,25 @@ Example for RFC3743-style Tables</h3>
 </p>
 <p>The first action matches any variant label for which at least one of the code point variants carries
                     the disposition "block". The second matches any variant label for which all of the code point
-                    variants carry the disposition "simplified" or "both", in other words an all-simplified lablel. The third matches any label for which all
+                    variants carry the disposition "simplified" or "both", in other words an all-simplified label. The third matches any
+                     label for which all
                     variants carry the disposition "traditional" or "both", or all traditional. These two actions are not triggered by any
                     variant labels containing some original code points, unless the code point has a variant defined with
-                    an identity mapping. 
+                    a reflexive mapping (<a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>). 
 </p>
 <p>The final two actions rely on the fact that actions are evaluated in sequence, and that the first
-                    action triggered also defines the final disposition for a variant label (see <a class='info' href='#precedence'>Section&nbsp;7.4<span> (</span><span class='info'>Precedence</span><span>)</span></a>.
-                    They further rely on the assumption that the
-                    only variants with disposition "both" are also identity variants.  Any remaining simplified or traditional
+                    action triggered also defines the final disposition for a variant label (see <a class='info' href='#precedence'>Section&nbsp;7.4<span> (</span><span class='info'>Precedence</span><span>)</span></a>).
+                    They further rely on the assumption that the only variants with disposition "both" are also identity 
+                    variants.
+</p>
+<p>
+                     Given these assumptions, any remaining simplified or traditional
                     variants must then be part of a mixed label, and so are blocked; all labels surviving to the last action are
-                    original code points only (that is the original label). For a more complete example, see <a class='info' href='#translate_rfc3743'>Appendix&nbsp;B<span> (</span><span class='info'>How to Translate RFC 3743 based Tables into the XML Format</span><span>)</span></a>.
+                    original code points only (that is the original label). 
+</p>
+<p>The assumption on identity mapping made above does not necessarily hold, so this scheme needs
+                     some refinements to cover tables where it is violated. For a more complete example,
+                     see <a class='info' href='#translate_rfc3743'>Appendix&nbsp;B<span> (</span><span class='info'>How to Translate RFC 3743 based Tables into the XML Format</span><span>)</span></a>.
 </p>
 <a name="recommended_disposition_values"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1993,7 +2052,7 @@ Default Actions</h3>
 <a name="rfc.section.8"></a><h3>8.&nbsp;
 Processing a Label Against an LGR</h3>
 
-<a name="anchor35"></a><br /><hr />
+<a name="anchor34"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.8.1"></a><h3>8.1.&nbsp;
 Determining Eligibility for a Label</h3>
@@ -2011,18 +2070,24 @@ Determining Eligibility for a Label</h3>
 <p>A label must also not trigger any action that results in a disposition of "invalid" or equivalent, otherwise
                 it is deemed not eligible. (This step may be deferred, until dispositions are determined)
 </p>
-<a name="anchor36"></a><br /><hr />
+<p>For LGRs that contain reflexive variant mappings (defined in <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>) the evaluation
+                of dispositions must be deferred until variants are generated. In essence, tables that use this feature treat the original
+                as the (identity) variant of itself. For such tables, the ordinary iteration over code points can at best be used to exclude
+                a subset of invalid labels, effectively a pre-screening.
+</p>
+<a name="anchor35"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.8.2"></a><h3>8.2.&nbsp;
 Determining Variants for a Label</h3>
 
-<p>For a given eligible label, the set of variant labels is deemed to consist of each possible permutation of original code points and "var"
+<p>For a given eligible label, the set of variant labels is deemed to consist of each possible permutation of
+                  original code points and "var"
                     elements, whereby all "when" and "not-when" attributes are correctly satisfied for each code point or var element
                     in the given permutation and all applicable whole label evaluation rules are satisfied as follows:
                     </p>
 <ul class="text">
 <li>Create each possible permutation of a label, by substituting each code point or code point
-                            sequence in turn by any defined variant mapping
+                            sequence in turn by any defined variant mapping (including any reflexive mappings).
                         
 </li>
 <li>Apply variant mappings with "when" or "not-when" attributes only if the conditions are
@@ -2030,8 +2095,8 @@ Determining Variants for a Label</h3>
                         
 </li>
 <li>Record each of the "disp" values on the variant mappings used in creating a given variant label; 
-                        for any unmapped code point record the "disp" value of any variant with identity mapping
-                        (see <a class='info' href='#identity_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Identity Mapping</span><span>)</span></a>)
+                        for any unmapped code point record the "disp" value of any variant with a reflexive mapping
+                        (see <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>)
                         
 </li>
 <li>Determine the disposition for each variant label per <a class='info' href='#determining_dispositions'>Section&nbsp;8.3<span> (</span><span class='info'>Determining a  Disposition for a Label or variant Label</span><span>)</span></a>
@@ -2090,7 +2155,7 @@ Determining a  Disposition for a Label or variant Label</h3>
 </ul><p>
                 
 </p>
-<a name="anchor37"></a><br /><hr />
+<a name="anchor36"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.9"></a><h3>9.&nbsp;
 Conversion to and from Other Formats</h3>
@@ -2113,14 +2178,14 @@ Conversion to and from Other Formats</h3>
 </p>
 <p>For notes on how to translate an RFC 3743-style table, see <a class='info' href='#translate_rfc3743'>Appendix&nbsp;B<span> (</span><span class='info'>How to Translate RFC 3743 based Tables into the XML Format</span><span>)</span></a>.
 </p>
-<a name="anchor38"></a><br /><hr />
+<a name="anchor37"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.10"></a><h3>10.&nbsp;
 IANA Considerations</h3>
 
 <p>This document does not specify any IANA actions.
 </p>
-<a name="anchor39"></a><br /><hr />
+<a name="anchor38"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.11"></a><h3>11.&nbsp;
 Security Considerations</h3>
@@ -2148,13 +2213,15 @@ Security Considerations</h3>
 <td class="author-text">Phillips, A. and M. Davis, &ldquo;<a href="http://tools.ietf.org/html/rfc5646">Tags for Identifying Languages</a>,&rdquo; BCP&nbsp;47, RFC&nbsp;5646, September&nbsp;2009 (<a href="http://www.rfc-editor.org/rfc/rfc5646.txt">TXT</a>).</td></tr>
 <tr><td class="author-text" valign="top"><a name="RFC5892">[RFC5892]</a></td>
 <td class="author-text">Faltstrom, P., &ldquo;<a href="http://tools.ietf.org/html/rfc5892">The Unicode Code Points and Internationalized Domain Names for Applications (IDNA)</a>,&rdquo; RFC&nbsp;5892, August&nbsp;2010 (<a href="http://www.rfc-editor.org/rfc/rfc5892.txt">TXT</a>).</td></tr>
+<tr><td class="author-text" valign="top"><a name="TDIL-HINDI">[TDIL-HINDI]</a></td>
+<td class="author-text">Technology Development for Indian Languages (TDIL) Programme, &ldquo;Devanagari Script Behaviour for Hindi.&rdquo;</td></tr>
 <tr><td class="author-text" valign="top"><a name="UAX42">[UAX42]</a></td>
 <td class="author-text">Unicode Consortium, &ldquo;<a href="http://unicode.org/reports/tr42/">Unicode Character Database in XML</a>.&rdquo;</td></tr>
 <tr><td class="author-text" valign="top"><a name="XML">[XML]</a></td>
 <td class="author-text">World Wide Web Consortium, &ldquo;<a href="http://www.w3.org/TR/REC-xml/">Extensible Markup Language (XML) 1.0</a>.&rdquo;</td></tr>
 </table>
 
-<a name="anchor41"></a><br /><hr />
+<a name="anchor40"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
 Example Table</h3>
@@ -2283,7 +2350,7 @@ How to Translate RFC 3743 based Tables into the XML Format</h3>
 <p>The following shows the relevant section of the Chinese language table published by the .ASIA registry <a class='info' href='#ASIA-TABLE'>[ASIA&#8209;TABLE]<span> (</span><span class='info'>DotAsia Organisation, &ldquo;.ASIA ZH IDN Language Table,&rdquo; .</span><span>)</span></a>.
        Its entries read:
 </p>
-<p>	</p>
+<p>    </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre> &lt;codepoint&gt;;&lt;simpl-variant(s)&gt;;&lt;trad-variant(s)&gt;;&lt;other-variant(s)&gt;</pre></div><p>
 
 </p>
@@ -2304,63 +2371,64 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6</pre></div><p>
 <p>
     </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;data&gt;
-    &lt;char cp="4E7E" comment="乾" &gt;
-    &lt;var cp="4E7E" disp="both-preferred" comment="identity" /&gt;
+    &lt;char cp="4E7E"&gt;
+    &lt;var cp="4E7E" disp="both" comment="identity" /&gt;
     &lt;var cp="4E81" disp="block" /&gt;
-    &lt;var cp="5E72" disp="s-preferred" /&gt;
+    &lt;var cp="5E72" disp="simp" /&gt;
     &lt;var cp="5E79" disp="block" /&gt;
     &lt;var cp="69A6" disp="block" /&gt;
     &lt;var cp="6F27" disp="block" /&gt;
     &lt;/char&gt;
-    &lt;char cp="4E81" &gt;
-    &lt;var cp="4E7E" disp="t-preferred" /&gt;
-    &lt;var cp="5E72" disp="s-preferred" /&gt;
+    &lt;char cp="4E81"&gt;
+    &lt;var cp="4E7E" disp="trad" /&gt;
+    &lt;var cp="5E72" disp="simp" /&gt;
     &lt;var cp="5E79" disp="block" /&gt;
     &lt;var cp="69A6" disp="block" /&gt;
     &lt;var cp="6F27" disp="block" /&gt;
     &lt;/char&gt;
     &lt;char cp="5E72"&gt;
-    &lt;var cp="4E7E" disp="t-preferred"/&gt;
+    &lt;var cp="4E7E" disp="trad"/&gt;
     &lt;var cp="4E81" disp="block"/&gt;
-    &lt;var cp="5E72" disp="both-preferred" comment="identity"/&gt;
-    &lt;var cp="5E79" disp="t-preferred"/&gt;
+    &lt;var cp="5E72" disp="both" comment="identity"/&gt;
+    &lt;var cp="5E79" disp="trad"/&gt;
     &lt;var cp="69A6" disp="block"/&gt;
     &lt;var cp="6F27" disp="block"/&gt;
     &lt;/char&gt;
     &lt;char cp="5E79"&gt;
     &lt;var cp="4E7E" disp="block"/&gt;
     &lt;var cp="4E81" disp="block"/&gt;
-    &lt;var cp="5E72" disp="s-preferred"/&gt;
-    &lt;var cp="5E79" disp="t-preferred" comment="identity"/&gt;
+    &lt;var cp="5E72" disp="simp"/&gt;
+    &lt;var cp="5E79" disp="trad" comment="identity"/&gt;
     &lt;var cp="69A6" disp="block"/&gt;
     &lt;var cp="6F27" disp="block"/&gt;
     &lt;/char&gt;
     &lt;char cp="69A6"&gt;
     &lt;var cp="4E7E" disp="block"/&gt;
     &lt;var cp="4E81" disp="block"/&gt;
-    &lt;var cp="5E72" disp="s-preferred"/&gt;
+    &lt;var cp="5E72" disp="simp"/&gt;
     &lt;var cp="5E79" disp="block"/&gt;
-    &lt;var cp="69A6" disp="t-preferred" comment="identity"/&gt;
+    &lt;var cp="69A6" disp="trad" comment="identity"/&gt;
     &lt;var cp="6F27" disp="block"/&gt;
     &lt;/char&gt;
     &lt;char cp="6F27"&gt;
-    &lt;var cp="4E7E" disp="s-preferred"/&gt;
+    &lt;var cp="4E7E" disp="simp"/&gt;
     &lt;var cp="4E81" disp="block"/&gt;
     &lt;var cp="5E72" disp="block"/&gt;
     &lt;var cp="5E79" disp="block"/&gt;
     &lt;var cp="69A6" disp="block"/&gt;
-    &lt;var cp="6F27" disp="t-preferred" comment="identity"/&gt;
+    &lt;var cp="6F27" disp="trad" comment="identity"/&gt;
     &lt;/char&gt;
   &lt;/data&gt;</pre></div><p>
 
 </p>
 <p>
-    Here the simplified variants have been given a disposition of "s-preferred",
-    the traditional variants one of "t-preferred" and all other ones are given "block".
+    Here the simplified variants have been given a disposition of "simp",
+    the traditional variants one of "trad" and all other ones are given "block".
     
 </p>
 <p>
-    Note that some variant mappings map to themselves (identity).
+    Note that some variant mappings map to themselves (identity), that is
+    the mapping is reflexive (see <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>).
     In creating the permutation of all variant labels, these mappings have
     no effect, other than adding a value to the variant disposition list
     for the variant label containing them.
@@ -2369,11 +2437,11 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6</pre></div><p>
 <p>
     Because some variant mappings show in more than one column, while
     the XML format allows only a single disposition value, they have
-    been given the disposition of "both-preferred".
+    been given the disposition of "both".
     
 </p>
-<p>
-    These are invariably also identity mappings.
+<p>In the example so far, all of these are  also mappings where source
+    and target are identical that is, reflexive mappings as defined in <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>.
     
 </p>
 <p>
@@ -2382,7 +2450,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6</pre></div><p>
      implemented in domain registries:
 </p>
 <p></p>
-<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    Original label:     U+4E7E U+4E8
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    Original label:     U+4E7E U+4E81
     Simplified label 1: U+4E7E U+5E72
     Simplified label 2: U+5E72 U+5E72
     Traditional label:  U+4E7E U+4E7E</pre></div><p>
@@ -2390,24 +2458,22 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6</pre></div><p>
 </p>
 <p>
     However, If we generated allocatable labels without regard to the 
-    simplified-to-traditional variants, we would end up with an extra allocatable label:
-
-</p>
-<p>The label "U+5E72 U+4E7E" is comprised of an SC character and a TC character which shouldn't be allocatable.
-</p>
-<p>
-    This would the result of a straight permutation of all variants with disposition other than disp="block".
+    simplified-to-traditional variants, we would end up with an extra allocatable
+    label: "U+5E72 U+4E7E". That label is comprised of an SC character and a TC
+    character which shouldn't be allocatable, but it would be the result of a straight
+    permutation of all variants with disposition other than disp="block".
 
 </p>
 <p>
-    To correctly resolve the dispositions requires several actions to be defined as described in <a class='info' href='#rfc3743_example'>Section&nbsp;7.2.2<span> (</span><span class='info'>Example for RFC3743-style Tables</span><span>)</span></a> in addition
-    to blocking all variant labels containing a blocked variant. These actions will first allocate all labels that
-    consist entirely of variants (including identity) that are "s-preferred" or "both-preferred", then do
-    likewise for labels that are entirely "t-preferred" or "both-preferred". All surviving labels containing
-    any one of the dispositions s- or t- preferred are now known to be part of an undesirable mixed
+    To more fully resolve the dispositions requires several actions to be defined as 
+    described in <a class='info' href='#rfc3743_example'>Section&nbsp;7.2.2<span> (</span><span class='info'>Example for RFC3743-style Tables</span><span>)</span></a>. After blocking all labels that
+    contain a variant with disposition "block", these actions will first allocate all labels that
+    consist entirely of variants (including variants with reflexive mappings) that are "simp" or "both", then do
+    likewise for labels that are entirely "trad" or "both". All surviving labels containing
+    any one of the dispositions "simp" or "trad" are now known to be part of an undesirable mixed
     simplified/traditional label and are blocked. Finally, the remaining labels must be code points without
-    variants or identity variants of type "both-preferred", in other words, the original label.
-    
+    variants or reflexive variants of type "both", in other words, the original label.
+
 </p>
 <p></p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>  &lt;rules&gt;
@@ -2415,24 +2481,214 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6</pre></div><p>
     &lt;action disp="block" any-variant="block"
         comment="filter out by blocked code point" /&gt;
     &lt;action disp="allocate"
-        only-variants="s-preferred both-preferred"
-        comment="only allocate if s-referred variant,
-        including identity mapping" /&gt;
+        only-variants="simp both"
+        comment="only allocate if simplified variant
+        including reflexive (identity) mapping" /&gt;
     &lt;action disp="allocate"
-        only-variants="t-preferred both-preferred"
-        comment="only allocate if t-preferred variant,
-        including identity mapping" /&gt;
+        only-variants="trad both"
+        comment="only allocate if traditional variant,
+        including reflexive (identity) mapping" /&gt;
     &lt;action disp="block"
-        any-variant="s-preferred t-preferred"
+        any-variant="simp trad"
         comment="filter out any remaining variant code point" /&gt;
     &lt;action disp="activate" comment="surviving labels must be
         original labels" /&gt;
   &lt;/rules&gt;</pre></div><p>
 
 </p>
-<a name="anchor42"></a><br /><hr />
+<p>In the example above, variants with the disposition "both" occur only as part of identity 
+ mappings (as pointed out in the comments). The scheme described so far relies on the assumption
+ that this is always the case. However, consider the following set of variants:
+ 
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    U+62E0;U+636E;U+636E;U+64DA
+    U+636E;U+636E;U+64DA;U+62E0
+    U+64DA;U+636E;U+64DA;U+62E0</pre></div><p>
+
+</p>
+<p>for which the corresponding XML would be:
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;char cp="62E0"&gt;
+    &lt;var cp="636E" disp="both" comment=" BOTH, but NOT identity" /&gt;
+    &lt;var cp="64DA" disp="block" /&gt;
+    &lt;/char&gt;
+    &lt;char cp="636E"&gt;
+    &lt;var cp="636E" disp="simp" comment="identity, but not BOTH" /&gt;
+    &lt;var cp="64DA" disp="trad" /&gt;
+    &lt;var cp="62E0" disp="block" /&gt;
+    &lt;/char&gt;
+    &lt;char cp="64DA"&gt;
+    &lt;var cp="636E" disp="simp" /&gt;
+    &lt;var cp="64DA" disp="trad" comment="identity" /&gt;
+    &lt;var cp="62E0" disp="block" /&gt;
+    &lt;/char&gt;</pre></div><p>
+
+</p>
+<p>
+    What is needed to make such variant sets work is a way to capture when a
+    disposition is associated with an identity or reflexive mapping, and when it is associated with an
+    ordinary variant mapping. This can be done by adding a prefix "i-" in front of the disposition
+    whenever the mapping is an identity mapping, for example the last "trad" in the
+    preceding figure would become "i-trad".
+</p>
+<p>
+    With all the dispositions prepared in this way, only a slight modification to the actions
+    is needed to yield the correct set of allocatable labels:
+    
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;action disp="block" any-variant="block" /&gt;
+    &lt;action disp="allocate" only-variants="simp i-simp both i-both" /&gt;
+    &lt;action disp="allocate" only-variants="trad i-trad both i-both" /&gt;
+    &lt;action disp="block" all-variants="simp trad both" /&gt;
+    &lt;action disp="allocate" /&gt;
+</pre></div><p>
+
+</p>
+<p>The first three actions get triggered by the same labels as before.
+</p>
+<p>
+          The fourth action blocks any label that combines an original code point
+          with any of the variant mappings, yet lets through all labels that are a
+          combination of only  original code points (everything having either no variant
+          mapping or one of the identity mappings). These are the original labels
+          and they are allocated in the last action.
+</p>
+<p>With this modification all RFC 3743-style tables can be converted
+          to XML and, by using the above set of actions, the result will be that
+          all variants consisting completely of variants preferred for simplified
+          or traditional, respectively, will be allocated, as will be the original label.
+          All other variant labels will be blocked.
+</p>
+<a name="indic_syllable"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.C"></a><h3>Appendix C.&nbsp;
+Indic Syllable Structure Example</h3>
+
+<p>
+        In LGRs for Indic scripts it may be desirable to restrict valid labels to sequences
+        of valid Indic syllables, or aksharas. This appendix gives a sample set of rules
+        designed to enforce this restriction.
+        
+</p>
+<p>We start with the following BNF form for an akshara which has been
+        published in “Devanagari Script Behavior for Hindi" <a class='info' href='#TDIL-HINDI'>[TDIL&#8209;HINDI]<span> (</span><span class='info'>Technology Development for Indian Languages (TDIL) Programme, &ldquo;Devanagari Script Behaviour for Hindi,&rdquo; .</span><span>)</span></a> but which,
+        if not directly valid for other languages and scripts used in India is at least similar
+        to equivalent definitions used for them.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    V[m]|{C[N]H}C[N](H|[v][m])</pre></div><p>
+
+</p>
+<p>Where:
+</p>
+<p>
+        </p>
+<blockquote class="text"><dl>
+<dt>V</dt>
+<dd>(upper case) is any independent vowel
+</dd>
+<dt>m</dt>
+<dd> is any vowel modifier (Devanagari Anusvara, Visarga, and Candrabindu)
+</dd>
+<dt>C</dt>
+<dd> is any consonant (with inherent vowel)
+</dd>
+<dt>N</dt>
+<dd> is Nukta
+</dd>
+<dt>H</dt>
+<dd> is a Halant (or Virama)
+</dd>
+<dt>v</dt>
+<dd> (lower case) is any dependent vowel sign (matra)
+</dd>
+<dt>{}</dt>
+<dd> encloses items which may be repeated one or more times
+</dd>
+<dt>[ ]</dt>
+<dd> encloses items which may or may not be present
+</dd>
+<dt>|</dt>
+<dd> separates items, out of which only one can be present
+</dd>
+</dl></blockquote><p>
+	
+</p>
+<p>
+     By using the Unicode property "InSC" or "Indic_Syllable_Category" which corresponds
+     rather directly to the classification of characters in the BNF above, we can directly
+     translate the BNF into a set of WLE rules matching the definition of an akshara.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre> &lt;rules&gt;
+    &lt;!--Character Class Definitions go here--&gt;
+    &lt;class name="halant" property="InSC:Virama" /&gt;
+    &lt;union name="vowel-modifier"&gt;
+      &lt;class property="InSC:Visarga" /&gt;
+      &lt;class property="InSC:Bindu" comment="includes anusvara" /&gt;
+    &lt;/union&gt;
+    &lt;!--Whole label evaluation and Context rules go here--&gt;
+    &lt;rule name="consonant-with-optional-nukta"&gt;
+        &lt;class byref="InSC:Consonant" /&gt;
+        &lt;class byref="InSC:Nukta"  count="0:1"/&gt;
+    &lt;/rule&gt;
+    &lt;rule name="independent-vowel-with-optional-modifier"&gt;
+        &lt;class byref="InSC:Vowel_Independent" /&gt;
+        &lt;class byref="vowel-modifier"  count="0:1" /&gt;
+    &lt;/rule&gt;
+    &lt;rule name="optional-dependent-vowel-with-optional-modifier" &gt;
+      &lt;class byref="InSC:Vowel_Dependent" count="0:1" /&gt;
+      &lt;class byref="vowel-modifier" count="0:1"  /&gt;
+    &lt;/rule&gt;
+    &lt;rule name="consonant-cluster"&gt;
+      &lt;rule count="0+"&gt;
+        &lt;rule byref="consonant-with-optional-nukta" /&gt;
+        &lt;class byref="halant" /&gt;
+      &lt;/rule&gt;
+      &lt;rule byref="consonant-with-optional-nukta" /&gt;
+      &lt;choice&gt;
+        &lt;class byref="halant" /&gt;
+        &lt;rule byref="optional-dependent-vowel-with-optional-modifier" /&gt;
+      &lt;/choice&gt;
+    &lt;/rule&gt;
+    &lt;rule name="akshara"&gt;
+      &lt;choice&gt;
+        &lt;rule byref="independent-vowel-with-optional-modifier" /&gt;
+        &lt;rule byref="consonant-cluster" /&gt;
+      &lt;/choice&gt;
+    &lt;/rule&gt;
+    &lt;rule name="WLE-akshara-or-other" comment="series of one or
+        more aksharas, possibly alternating with other types of
+        code points such as digits"&gt;
+      &lt;start /&gt;
+      &lt;choice count="1+"&gt;
+        &lt;class property="InSC:other"  /&gt;
+        &lt;rule byref="akshara"  /&gt;
+      &lt;/choice&gt;
+      &lt;end /&gt;
+    &lt;/rule&gt;
+    &lt;!--Action elements go here - order defines precedence--&gt;
+    &lt;action disp="invalid" not-match="WLE-akshara-or-other" /&gt;
+  &lt;/rules&gt;</pre></div><p>
+
+</p>
+<p>
+    With the rules and classes as defined above, the final action assigns a disposition of "invalid" to
+    all labels that are not composed of a sequence of well-formed aksharas, optionally interspersed
+    with other characters, perhaps digits, for example.
+</p>
+<p>
+    The relevant Unicode property is as of this writing still considered provisional;
+    however, it could be replicated by tagging repertoire values directly in the LGR
+    which would remove the dependency on the Unicode Standard altogether.
+    
+</p>
+<a name="anchor41"></a><br /><hr />
+<table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
+<a name="rfc.section.D"></a><h3>Appendix D.&nbsp;
 RelaxNG Schema</h3>
 
 <p>[TODO: this needs to be updated to reflect additions to the syntax.]
@@ -2732,9 +2988,9 @@ RelaxNG Schema</h3>
 
 
 </pre></div>
-<a name="anchor43"></a><br /><hr />
+<a name="anchor42"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.D"></a><h3>Appendix D.&nbsp;
+<a name="rfc.section.E"></a><h3>Appendix E.&nbsp;
 Acknowledgements</h3>
 
 <p>This format builds upon the work on documenting IDN tables by many different registry operators. Notably,
@@ -2750,41 +3006,38 @@ Acknowledgements</h3>
                 Ostler, Thomas Roessler, Steve Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and John Yunker.
             
 </p>
-<a name="anchor44"></a><br /><hr />
+<a name="anchor43"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.E"></a><h3>Appendix E.&nbsp;
+<a name="rfc.section.F"></a><h3>Appendix F.&nbsp;
 Editorial Notes</h3>
 
 <p>This appendix to be removed prior to final publication.
 </p>
-<a name="anchor45"></a><br /><hr />
+<a name="anchor44"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.E.1"></a><h3>E.1.&nbsp;
+<a name="rfc.section.F.1"></a><h3>F.1.&nbsp;
 Known Issues and Future Work</h3>
 
 <p>
                     </p>
 <ul class="text">
-<li>A method of specifying the origin URI for a table, and an expiration or refresh policy, as
-                            meta-data may be a useful way to declare how the table will be updated.
-                        
+<li>A method of specifying the origin URI for a table, and an expiration or refresh policy, as meta-data may
+                        be a useful way to declare how the table will be updated.
 </li>
-<li>The "domain" element should be specified as absolute, so that the Root can be identified
-                        as needed for the Root Zone LGR.
+<li>The "domain" element should be specified
+                        as absolute, so that the Root can be identified as needed for the Root Zone LGR.
 </li>
-<li>The recommended names for disposition ("block" and "allocate") deviate from the name
-                        in the Root Zone LGR Procedure ("blocked" and "allocatable"). The latter were chosen to
-                        highlight that the machine processing of the LGR table is just the first step, actual allocation
-                        requires additional actions, hence "allocatable". This should be resolved.
-</li>
-<li>The RelaxNG schema needs to be updated, it is badly out of date at this point.
+<li>The recommended names for disposition ("block" and "allocate") deviate from the name in the Root Zone
+                        LGR Procedure ("blocked" and "allocatable"). The latter were chosen to highlight that the machine
+                        processing of the LGR table is just the first step, actual allocation requires additional actions, hence
+                        "allocatable". This should be resolved.
 </li>
 </ul><p>
                 
 </p>
-<a name="anchor46"></a><br /><hr />
+<a name="anchor45"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
-<a name="rfc.section.E.2"></a><h3>E.2.&nbsp;
+<a name="rfc.section.F.2"></a><h3>F.2.&nbsp;
 Change History</h3>
 
 <p>
@@ -2844,6 +3097,15 @@ Change History</h3>
                         attribute on actions as well as the generic term Match Operator. Augmented the examples relevant to <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
 </dd>
 </dl></blockquote><p>
+                    </p>
+<blockquote class="text"><dl>
+<dt>-06</dt>
+<dd>Extend the discussion of reflexive variants and their use; includes update of the appendix on
+                    converting  tables in the style of <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>. Improve description of tagging and
+                     clarify that it doesn't apply to sequences. Specify that root zone uses ".". Add an appendix with an Indic Syllable
+                     Structure example. Extend count attribute to allow maximal counts.
+</dd>
+</dl></blockquote><p>
                 
 </p>
 <a name="rfc.authors"></a><br /><hr />
@@ -2865,7 +3127,7 @@ Change History</h3>
 <tr><td class="author" align="right">Email:&nbsp;</td>
 <td class="author-text"><a href="mailto:kim.davies@icann.org">kim.davies@icann.org</a></td></tr>
 <tr><td class="author" align="right">URI:&nbsp;</td>
-<td class="author-text"><a href="http://www.iana.org/">http://www.iana.org/</a></td></tr>
+<td class="author-text"><a href="http://www.icann.org/">http://www.icann.org/</a></td></tr>
 <tr cellpadding="3"><td>&nbsp;</td><td>&nbsp;</td></tr>
 <tr><td class="author-text">&nbsp;</td>
 <td class="author-text">Asmus Freytag</td></tr>
