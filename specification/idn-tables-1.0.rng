@@ -1,58 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://www.iana.org/lgr/0.1" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- SIMPLE TYPES -->
+<!--
+  
+  LGR XML Schema 1.0 (internal version 0.5a - based on draft-davies-idntables-06)
+  
+-->
+<grammar ns="http://www.iana.org/lgr/0.1" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <!--
+    
+    SIMPLE TYPES
+    
+  -->
+  <!-- RFC 5646 language tag (e.g. "de", "Latn", etc.) -->
   <define name="language-tag">
     <data type="token"/>
   </define>
   <define name="domain-name">
+    <a:documentation>domain to which this LGR applies</a:documentation>
     <text/>
   </define>
   <define name="code-point">
+    <a:documentation>a single code point</a:documentation>
     <data type="token">
       <param name="pattern">[0-9A-F]{4,6}</param>
     </data>
   </define>
   <define name="code-point-sequence">
+    <a:documentation>a space-separated sequence of code points</a:documentation>
     <data type="token">
       <param name="pattern">[0-9A-F]{4,6}( [0-9A-F]{4,6})+</param>
     </data>
   </define>
   <define name="code-point-literal">
+    <a:documentation>single code point, or a sequence of code points</a:documentation>
     <choice>
       <ref name="code-point"/>
       <ref name="code-point-sequence"/>
     </choice>
   </define>
-  <define name="variant-condition">
-    <text/>
-  </define>
-  <define name="tag">
-    <text/>
-  </define>
   <define name="date">
+    <a:documentation>dates are used in information fields in the meta section.</a:documentation>
     <data type="token">
       <param name="pattern">\d{4}-\d\d-\d\d</param>
     </data>
   </define>
   <define name="rule-ref">
+    <a:documentation>reference to a rule name (used in "when" and "not-when" attributes, as well
+as the "byref" attribute of the "rule" element.)</a:documentation>
     <data type="IDREF"/>
   </define>
   <define name="tag">
+    <a:documentation>space-separated freeform tags</a:documentation>
     <text/>
   </define>
   <define name="identifier">
+    <a:documentation>an identifier type (used by "name" attributes).</a:documentation>
     <data type="ID"/>
   </define>
   <define name="class-ref">
+    <a:documentation>Alias class "byref" attributes types to text. Even though they are
+closer to xsd:IDREF lexically and semantically, tag-based classes do
+not use xsd:ID and therefore would not be recognized by the validator.
+Note, though, that class-ref should not contain spaces.</a:documentation>
     <text/>
   </define>
   <define name="count-pattern">
+    <a:documentation>count attribute pattern ("n", "n+" or "n:m")</a:documentation>
     <data type="token">
       <param name="pattern">\d+(\+|:\d+)?</param>
     </data>
   </define>
-  <!-- STRUCTURES -->
+  <!--
+    
+    STRUCTURES
+    
+  -->
   <define name="char">
+    <a:documentation>Representation of a single code point, or a sequence of code points</a:documentation>
     <element name="char">
       <attribute name="cp">
         <ref name="code-point-literal"/>
@@ -84,6 +107,8 @@
     </element>
   </define>
   <define name="char-single">
+    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed).
+This is used when defining the set of characters that constitute a class.</a:documentation>
     <element name="char">
       <attribute name="cp">
         <ref name="code-point"/>
@@ -94,12 +119,10 @@
       <optional>
         <attribute name="ref"/>
       </optional>
-      <zeroOrMore>
-        <ref name="variant"/>
-      </zeroOrMore>
     </element>
   </define>
   <define name="range">
+    <a:documentation>Representation of a range of code points</a:documentation>
     <element name="range">
       <attribute name="first-cp">
         <ref name="code-point-literal"/>
@@ -122,6 +145,7 @@
     </element>
   </define>
   <define name="variant">
+    <a:documentation>Representation of a variant code point or sequence</a:documentation>
     <element name="var">
       <attribute name="cp">
         <ref name="code-point-literal"/>
@@ -150,8 +174,16 @@
       </optional>
     </element>
   </define>
-  <!-- Classes -->
+  <!--
+    
+    Classes
+    
+  -->
   <define name="class-invocation">
+    <a:documentation>a "class" element that references the name of another "class"
+(or set-operator like "union") defined elsewhere.
+If used as a matcher (appearing under a "rule" ## element),
+the "count" attribute may be present.</a:documentation>
     <element name="class">
       <attribute name="byref">
         <ref name="class-ref"/>
@@ -167,23 +199,45 @@
     </element>
   </define>
   <define name="class-declaration">
+    <a:documentation>defines a new class (set of code points) using Unicode property or
+code point literals</a:documentation>
     <element name="class">
       <optional>
+        <!--
+          "name" attribute MUST be present if this is a "top-level" class
+          declaration, i.e. appearing directly under the "rules" element.
+          Otherwise, it MUST be absent.
+        -->
         <attribute name="name">
           <ref name="identifier"/>
         </attribute>
       </optional>
       <optional>
+        <!--
+          If used as a matcher (appearing in a "rule" element), the "count"
+          attribute may be present. Otherwise, it MUST be absent.
+        -->
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="comment"/>
       </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
       <choice>
+        <!-- define the class by property, OR -->
         <attribute name="property"/>
         <oneOrMore>
+          <!-- list of single code points and ranges, OR -->
           <choice>
             <ref name="char-single"/>
             <ref name="range"/>
           </choice>
         </oneOrMore>
+        <!-- free form text node to allow for shorthand notation e.g. "0061 0062-0063" -->
         <text/>
       </choice>
     </element>
@@ -197,10 +251,19 @@
   </define>
   <define name="class-or-set-operator-declaration">
     <choice>
+      <!--
+        a "class" element or set operator (effectively defining a class)
+        directly in the "rules" element.
+      -->
       <ref name="class-declaration"/>
       <ref name="set-operator"/>
     </choice>
   </define>
+  <!--
+    
+    Set operators
+    
+  -->
   <define name="complement-operator">
     <element name="complement">
       <optional>
@@ -212,6 +275,10 @@
         <attribute name="comment"/>
       </optional>
       <optional>
+        <!--
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
+        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -230,12 +297,17 @@
         <attribute name="comment"/>
       </optional>
       <optional>
+        <!--
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
+        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
       </optional>
       <ref name="class-or-set-operator-nested"/>
       <oneOrMore>
+        <!-- needs two or more child elements -->
         <ref name="class-or-set-operator-nested"/>
       </oneOrMore>
     </element>
@@ -251,6 +323,10 @@
         <attribute name="comment"/>
       </optional>
       <optional>
+        <!--
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
+        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -270,6 +346,10 @@
         <attribute name="comment"/>
       </optional>
       <optional>
+        <!--
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
+        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -289,6 +369,10 @@
         <attribute name="comment"/>
       </optional>
       <optional>
+        <!--
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
+        -->
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
@@ -298,6 +382,7 @@
     </element>
   </define>
   <define name="set-operator">
+    <a:documentation>operators that transform class(es) into a new class.</a:documentation>
     <choice>
       <ref name="complement-operator"/>
       <ref name="union-operator"/>
@@ -306,6 +391,11 @@
       <ref name="symmetric-difference-operator"/>
     </choice>
   </define>
+  <!--
+    
+    Match operators (matchers)
+    
+  -->
   <define name="any-matcher">
     <element name="any">
       <optional>
@@ -330,10 +420,20 @@
     </element>
   </define>
   <define name="char-matcher">
+    <!-- for use as a matcher - like "char", except without the "tag" attribute -->
     <element name="char">
       <attribute name="cp">
         <ref name="code-point-literal"/>
       </attribute>
+      <optional>
+        <!--
+          If used as a matcher (appearing in a "rule" element), the "count"
+          attribute may be present. Otherwise, it MUST be absent.
+        -->
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
       <optional>
         <attribute name="comment"/>
       </optional>
@@ -359,12 +459,22 @@
   </define>
   <define name="look-ahead-matcher">
     <element name="look-ahead">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="look-behind-matcher">
     <element name="look-behind">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="match-operator">
@@ -386,6 +496,7 @@
     Rules
     
   -->
+  <!-- top-level rule must have "name" attribute -->
   <define name="rule-declaration-top">
     <element name="rule">
       <attribute name="name">
@@ -394,12 +505,16 @@
       <optional>
         <attribute name="comment"/>
       </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
       <oneOrMore>
         <ref name="match-operator"/>
       </oneOrMore>
     </element>
   </define>
   <define name="rule-matcher">
+    <a:documentation>rule element used as a matcher (either byref or contains other match operators itself)</a:documentation>
     <element name="rule">
       <optional>
         <attribute name="count">
@@ -464,6 +579,11 @@
     </element>
   </define>
   <define name="meta-section">
+    <a:documentation>Meta section - information recorded with an label
+generation ruleset that generally does not affect machine processing
+(except for unicode-version).
+However, if any "class-declaration" uses the "property" attribute,
+one or more unicode-version MUST be present.</a:documentation>
     <element name="meta">
       <zeroOrMore>
         <choice>
@@ -541,11 +661,13 @@
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>
-        <choice>
-          <ref name="class-or-set-operator-declaration"/>
-          <ref name="rule-declaration-top"/>
-          <ref name="action-declaration"/>
-        </choice>
+        <ref name="class-or-set-operator-declaration"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="rule-declaration-top"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="action-declaration"/>
       </zeroOrMore>
     </element>
   </define>
