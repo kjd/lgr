@@ -9,7 +9,7 @@ Expires: September 6, 2014                                    ASMUS Inc.
 
 
             Representing Label Generation Rulesets using XML
-                       draft-davies-idntables-06
+                       draft-davies-idntables-07
 
 Abstract
 

@@ -8,7 +8,7 @@
         <!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
         <!ENTITY rfc5892 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5892.xml">
         ]>
-<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-06">
+<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-07">
     <?rfc toc="yes" ?>
     <?rfc symrefs="yes" ?>
     <?rfc sortrefs="yes"?>
