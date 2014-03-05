@@ -144,8 +144,8 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: September 5, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">March 4, 2014</td></tr>
+<tr><td class="header">Expires: September 6, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">March 5, 2014</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-06</h1>
 
@@ -174,7 +174,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on September 5, 2014.</p>
+This Internet-Draft will expire on September 6, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -2691,12 +2691,9 @@ Indic Syllable Structure Example</h3>
 <a name="rfc.section.D"></a><h3>Appendix D.&nbsp;
 RelaxNG Schema</h3>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;grammar ns="http://www.iana.org/lgr/0.1"
-   xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-   xmlns="http://relaxng.org/ns/structure/1.0"
+&lt;grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+   xmlns="http://relaxng.org/ns/structure/1.0" ns="http://www.iana.org/lgr/0.1"
    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"&gt;
-  &lt;!-- SIMPLE TYPES --&gt;
   &lt;define name="language-tag"&gt;
     &lt;data type="token"/&gt;
   &lt;/define&gt;
@@ -2718,12 +2715,6 @@ RelaxNG Schema</h3>
       &lt;ref name="code-point"/&gt;
       &lt;ref name="code-point-sequence"/&gt;
     &lt;/choice&gt;
-  &lt;/define&gt;
-  &lt;define name="variant-condition"&gt;
-    &lt;text/&gt;
-  &lt;/define&gt;
-  &lt;define name="tag"&gt;
-    &lt;text/&gt;
   &lt;/define&gt;
   &lt;define name="date"&gt;
     &lt;data type="token"&gt;
@@ -2747,7 +2738,6 @@ RelaxNG Schema</h3>
       &lt;param name="pattern"&gt;\d+(\+|:\d+)?&lt;/param&gt;
     &lt;/data&gt;
   &lt;/define&gt;
-  &lt;!-- STRUCTURES --&gt;
   &lt;define name="char"&gt;
     &lt;element name="char"&gt;
       &lt;attribute name="cp"&gt;
@@ -2790,9 +2780,6 @@ RelaxNG Schema</h3>
       &lt;optional&gt;
         &lt;attribute name="ref"/&gt;
       &lt;/optional&gt;
-      &lt;zeroOrMore&gt;
-        &lt;ref name="variant"/&gt;
-      &lt;/zeroOrMore&gt;
     &lt;/element&gt;
   &lt;/define&gt;
   &lt;define name="range"&gt;
@@ -2846,7 +2833,6 @@ RelaxNG Schema</h3>
       &lt;/optional&gt;
     &lt;/element&gt;
   &lt;/define&gt;
-  &lt;!-- Classes --&gt;
   &lt;define name="class-invocation"&gt;
     &lt;element name="class"&gt;
       &lt;attribute name="byref"&gt;
@@ -2870,7 +2856,15 @@ RelaxNG Schema</h3>
         &lt;/attribute&gt;
       &lt;/optional&gt;
       &lt;optional&gt;
+        &lt;attribute name="count"&gt;
+          &lt;ref name="count-pattern"/&gt;
+        &lt;/attribute&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
         &lt;attribute name="comment"/&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="ref"/&gt;
       &lt;/optional&gt;
       &lt;choice&gt;
         &lt;attribute name="property"/&gt;
@@ -3018,7 +3012,6 @@ RelaxNG Schema</h3>
           &lt;ref name="count-pattern"/&gt;
         &lt;/attribute&gt;
       &lt;/optional&gt;
-      &lt;!-- two or more match operators --&gt;
       &lt;ref name="match-operator"/&gt;
       &lt;oneOrMore&gt;
         &lt;ref name="match-operator"/&gt;
@@ -3030,6 +3023,11 @@ RelaxNG Schema</h3>
       &lt;attribute name="cp"&gt;
         &lt;ref name="code-point-literal"/&gt;
       &lt;/attribute&gt;
+      &lt;optional&gt;
+        &lt;attribute name="count"&gt;
+          &lt;ref name="count-pattern"/&gt;
+        &lt;/attribute&gt;
+      &lt;/optional&gt;
       &lt;optional&gt;
         &lt;attribute name="comment"/&gt;
       &lt;/optional&gt;
@@ -3055,12 +3053,22 @@ RelaxNG Schema</h3>
   &lt;/define&gt;
   &lt;define name="look-ahead-matcher"&gt;
     &lt;element name="look-ahead"&gt;
-      &lt;empty/&gt;
+      &lt;optional&gt;
+        &lt;attribute name="comment"/&gt;
+      &lt;/optional&gt;
+      &lt;oneOrMore&gt;
+        &lt;ref name="match-operator"/&gt;
+      &lt;/oneOrMore&gt;
     &lt;/element&gt;
   &lt;/define&gt;
   &lt;define name="look-behind-matcher"&gt;
     &lt;element name="look-behind"&gt;
-      &lt;empty/&gt;
+      &lt;optional&gt;
+        &lt;attribute name="comment"/&gt;
+      &lt;/optional&gt;
+      &lt;oneOrMore&gt;
+        &lt;ref name="match-operator"/&gt;
+      &lt;/oneOrMore&gt;
     &lt;/element&gt;
   &lt;/define&gt;
   &lt;define name="match-operator"&gt;
@@ -3077,11 +3085,6 @@ RelaxNG Schema</h3>
       &lt;ref name="look-behind-matcher"/&gt;
     &lt;/choice&gt;
   &lt;/define&gt;
-  &lt;!--
-
-    Rules
-
-  --&gt;
   &lt;define name="rule-declaration-top"&gt;
     &lt;element name="rule"&gt;
       &lt;attribute name="name"&gt;
@@ -3089,6 +3092,9 @@ RelaxNG Schema</h3>
       &lt;/attribute&gt;
       &lt;optional&gt;
         &lt;attribute name="comment"/&gt;
+      &lt;/optional&gt;
+      &lt;optional&gt;
+        &lt;attribute name="ref"/&gt;
       &lt;/optional&gt;
       &lt;oneOrMore&gt;
         &lt;ref name="match-operator"/&gt;
@@ -3115,11 +3121,6 @@ RelaxNG Schema</h3>
       &lt;/choice&gt;
     &lt;/element&gt;
   &lt;/define&gt;
-  &lt;!--
-
-    Actions
-
-  --&gt;
   &lt;define name="action-declaration"&gt;
     &lt;element name="action"&gt;
       &lt;optional&gt;
@@ -3141,7 +3142,6 @@ RelaxNG Schema</h3>
       &lt;/optional&gt;
     &lt;/element&gt;
   &lt;/define&gt;
-  &lt;!-- DOCUMENT STRUCTURE --&gt;
   &lt;start&gt;
     &lt;ref name="lgr"/&gt;
   &lt;/start&gt;
@@ -3237,17 +3237,17 @@ RelaxNG Schema</h3>
   &lt;define name="rules-section"&gt;
     &lt;element name="rules"&gt;
       &lt;zeroOrMore&gt;
-        &lt;choice&gt;
-          &lt;ref name="class-or-set-operator-declaration"/&gt;
-          &lt;ref name="rule-declaration-top"/&gt;
-          &lt;ref name="action-declaration"/&gt;
-        &lt;/choice&gt;
+        &lt;ref name="class-or-set-operator-declaration"/&gt;
+      &lt;/zeroOrMore&gt;
+      &lt;zeroOrMore&gt;
+        &lt;ref name="rule-declaration-top"/&gt;
+      &lt;/zeroOrMore&gt;
+      &lt;zeroOrMore&gt;
+        &lt;ref name="action-declaration"/&gt;
       &lt;/zeroOrMore&gt;
     &lt;/element&gt;
   &lt;/define&gt;
 &lt;/grammar&gt;
-
-
 </pre></div>
 <a name="anchor42"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>

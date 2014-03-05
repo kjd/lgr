@@ -2072,12 +2072,9 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
         <section title="RelaxNG Schema">
             <figure>
                 <artwork><![CDATA[
-<?xml version="1.0" encoding="UTF-8"?>
-<grammar ns="http://www.iana.org/lgr/0.1"
-   xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-   xmlns="http://relaxng.org/ns/structure/1.0"
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+   xmlns="http://relaxng.org/ns/structure/1.0" ns="http://www.iana.org/lgr/0.1"
    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <!-- SIMPLE TYPES -->
   <define name="language-tag">
     <data type="token"/>
   </define>
@@ -2099,12 +2096,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <ref name="code-point"/>
       <ref name="code-point-sequence"/>
     </choice>
-  </define>
-  <define name="variant-condition">
-    <text/>
-  </define>
-  <define name="tag">
-    <text/>
   </define>
   <define name="date">
     <data type="token">
@@ -2128,7 +2119,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <param name="pattern">\d+(\+|:\d+)?</param>
     </data>
   </define>
-  <!-- STRUCTURES -->
   <define name="char">
     <element name="char">
       <attribute name="cp">
@@ -2171,9 +2161,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <optional>
         <attribute name="ref"/>
       </optional>
-      <zeroOrMore>
-        <ref name="variant"/>
-      </zeroOrMore>
     </element>
   </define>
   <define name="range">
@@ -2227,7 +2214,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </optional>
     </element>
   </define>
-  <!-- Classes -->
   <define name="class-invocation">
     <element name="class">
       <attribute name="byref">
@@ -2251,7 +2237,15 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
         </attribute>
       </optional>
       <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <choice>
         <attribute name="property"/>
@@ -2399,7 +2393,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
           <ref name="count-pattern"/>
         </attribute>
       </optional>
-      <!-- two or more match operators -->
       <ref name="match-operator"/>
       <oneOrMore>
         <ref name="match-operator"/>
@@ -2411,6 +2404,11 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <attribute name="cp">
         <ref name="code-point-literal"/>
       </attribute>
+      <optional>
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
       <optional>
         <attribute name="comment"/>
       </optional>
@@ -2436,12 +2434,22 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
   </define>
   <define name="look-ahead-matcher">
     <element name="look-ahead">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="look-behind-matcher">
     <element name="look-behind">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="match-operator">
@@ -2458,11 +2466,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <ref name="look-behind-matcher"/>
     </choice>
   </define>
-  <!--
-
-    Rules
-
-  -->
   <define name="rule-declaration-top">
     <element name="rule">
       <attribute name="name">
@@ -2470,6 +2473,9 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </attribute>
       <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <oneOrMore>
         <ref name="match-operator"/>
@@ -2496,11 +2502,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </choice>
     </element>
   </define>
-  <!--
-
-    Actions
-
-  -->
   <define name="action-declaration">
     <element name="action">
       <optional>
@@ -2522,7 +2523,6 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       </optional>
     </element>
   </define>
-  <!-- DOCUMENT STRUCTURE -->
   <start>
     <ref name="lgr"/>
   </start>
@@ -2618,17 +2618,17 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>
-        <choice>
-          <ref name="class-or-set-operator-declaration"/>
-          <ref name="rule-declaration-top"/>
-          <ref name="action-declaration"/>
-        </choice>
+        <ref name="class-or-set-operator-declaration"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="rule-declaration-top"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="action-declaration"/>
       </zeroOrMore>
     </element>
   </define>
 </grammar>
-
-
 ]]></artwork>
             </figure>
         </section>
