@@ -1,157 +1,341 @@
+#
+# LGR XML Schema Version 0.5 - based on draft-davies-idntables-06 (to be published)
+#
+
 default namespace = "http://www.iana.org/lgr/0.1"
 
+#
 # SIMPLE TYPES
+#
 
-language-tag = text       # RFC 5646 language tag (e.g. "de", "Latn", etc.)
-domain-name = text        # Domain name
-code-point = text         # A single codepoint, expressed as a hexidecimal number
-variant-condition = text  # A condition for applying the variant (TBD)
-tag = text                # Freeform text tag
+# RFC 5646 language tag (e.g. "de", "Latn", etc.)
+language-tag = xsd:token
+
+## domain to which this LGR applies
+domain-name = text
+
+## a single code point
+code-point-literal-single =
+  # XXX: perhaps we should only support 4-hex or 6-hex, i.e. "[0-9A-F]{4}|[0-9A-F]{6}"?
+  xsd:token {
+    pattern = "[0-9A-F]{4,6}"
+  }
+
+## a sequence of code points
+code-point-literal-sequence =
+  # a space-separated sequence of code-point-literal-single
+  xsd:token {
+    pattern = "[0-9A-F]{4,6}( [0-9A-F]{4,6})+"
+  }
+
+## single code point, or a sequence of code points
+code-point-literal = code-point-literal-single | code-point-literal-sequence
+
+## reference to a rule name (used in "when" and "not-when" attributes, as well
+## as the "byref" attribute of the "rule" element.)
+rule-ref = xsd:IDREF
+
+## space-separated freeform tags
+tag = text
+
+## dates are used in information fields in the meta section.
 date = text
 
+## an identifier type (used by "name" attributes).
+identifier = xsd:ID
+
+## Alias class "byref" attributes types to text. Even though they are
+## closer to xsd:IDREF lexically and semantically, tag-based classes do
+## not use xsd:ID and therefore would not be recognized by the validator
+class-ref = text
+
+## count attribute pattern ("n", "n+" or "n:m")
+count-pattern = xsd:token {
+    pattern = "\d+(\+|:\d+)?"
+  }
+
+#
 # STRUCTURES
+#
 
-# Representation of a single codepoint
+## Representation of a single code point, or a sequence of code points
+char =
+  element char {
+    attribute cp { code-point-literal },
+    attribute comment { text }?,
+    attribute when { rule-ref }?,
+    attribute not-when { rule-ref }?,
+    attribute tag { tag }?,
+    attribute ref { text }?,
+    variant*
+  }
 
-point-single = element char {
-	attribute cp { code-point },
-	attribute tag { tag }?,
-	attribute comment { text }?,
-	attribute ref { text }?,
-	point-variant*
-}
+## Representation of a single code point (no sequences allowed, and no tag attribute allowed)
+char-single =
+  element char {
+    attribute cp { code-point-literal-single },
+    attribute comment { text }?,
+    attribute ref { text }?,
+    variant*
+  }
 
-# Representation of a code point variant
+## Representation of a range of code points
+range =
+  element range {
+    attribute first-cp { code-point-literal },
+    attribute last-cp { code-point-literal },
+    attribute comment { text }?,
+    attribute tag { tag }?,
+    attribute ref { text }?,
+    text
+  }
 
-point-variant = element var {
-	attribute cp { code-point },
-	attribute type { text }?,
-	attribute when { variant-condition }?,
-	attribute not-when { variant-condition }?,
-	attribute comment { text }?,
-	attribute disp { text }?,
-	attribute ref { text }?
-}
+## Representation of a variant code point or sequence
+variant =
+  element var {
+    attribute cp { code-point-literal },
+    attribute type { text }?,
+    attribute when { rule-ref }?,
+    attribute not-when { rule-ref }?,
+    attribute comment { text }?,
+    attribute disp { text }?,
+    attribute ref { text }?
+  }
 
-# Representation of a range of codepoints
 
-point-multiple = element range {
-	attribute first-cp { code-point },
-	attribute last-cp { code-point },
-	text
-}
+#
+# Classes
+#
 
-logical-operators = (
-    element complement { class-points }
-        | element union { class-points+ }
-        | element intersection { class-points+ }
-        | element difference { class-points+ }
-        | element symmetric-difference { class-points+ }
+
+## a "class" element that references the name of another "class"
+## (or set-operator like "union") defined elsewhere.
+## This could also be used as a matcher (appearing under a "rule"
+## element), ## in which case the "count" attribute may be present.
+class-invocation =
+  element class {
+    attribute byref { class-ref },
+    attribute count { count-pattern }?,
+    attribute comment { text }?
+  }
+
+## defines a new class (set of code points) using Unicode property or
+## code point literals
+class-declaration =
+  element class {
+    # "name" attribute should be present if this is a "top-level" class
+    # declaration, i.e. appearing directly under the "rules" element.
+    # Otherwise, it should be absent.
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    (
+      # define the class by property, OR
+      attribute property { text }
+      # list of single code points and ranges, OR
+      | (char-single | range)+
+      # free form text node to allow for shorthand notation e.g. "0061 0062-0063"
+      | text
+    )
+  }
+
+class-or-set-operator-nested = 
+  class-invocation | class-declaration | set-operator
+
+class-or-set-operator-declaration = 
+  # a "class" element or logical operator (effectively defining a class)
+  # directly in a "rule" element.
+  class-declaration | set-operator
+
+
+#
+# Set operators
+#
+
+complement-operator =
+  element complement {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    # "count" attribute should only be used when this set-operator is
+    # used as a matcher (i.e. directly within a <rule> element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested
+  }
+
+union-operator =
+  element union {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    # "count" attribute should only be used when this set-operator is
+    # used as a matcher (i.e. directly within a <rule> element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    # needs two or more child elements
+    class-or-set-operator-nested+
+  }
+
+intersection-operator =
+  element intersection {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    # "count" attribute should only be used when this set-operator is
+    # used as a matcher (i.e. directly within a <rule> element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    class-or-set-operator-nested
+  }
+
+difference-operator =
+  element difference {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    # "count" attribute should only be used when this set-operator is
+    # used as a matcher (i.e. directly within a <rule> element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    class-or-set-operator-nested
+  }
+
+symmetric-difference-operator =
+  element symmetric-difference {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    # "count" attribute should only be used when this set-operator is
+    # used as a matcher (i.e. directly within a <rule> element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    class-or-set-operator-nested
+  }
+
+## operators that transform class(es) into a new class.
+set-operator =
+  complement-operator
+  | union-operator
+  | intersection-operator
+  | difference-operator
+  | symmetric-difference-operator
+
+#
+# Match operators (matchers)
+#
+
+any-matcher =
+  element any {
+    attribute count { count-pattern }?
+  }
+
+choice-matcher =
+  element choice {
+    attribute count { count-pattern }?,
+    # two or more match operators
+    match-operator,
+    match-operator+
+  }
+
+
+char-matcher =
+  # for used as a matcher - like "char", except without the "tag" attribute
+  element char {
+    attribute cp { code-point-literal },
+    attribute comment { text }?,
+    attribute ref { text }?
+  }
+
+start-matcher = element start { empty }
+end-matcher = element end { empty }
+anchor-matcher = element anchor { empty }
+look-ahead-matcher = element look-ahead { empty }
+look-behind-matcher = element look-behind { empty }
+
+match-operator = (
+  any-matcher | choice-matcher
+  | start-matcher | end-matcher
+  | char-matcher
+  | class-or-set-operator-nested
+  | rule-matcher
+  | anchor-matcher | look-ahead-matcher | look-behind-matcher
 )
-# A collection of codepoints and ranges of codepoints that comprise
-# a label generation ruleset
 
-points = (point-single | point-multiple)+
-class-points = (point-single | point-multiple | logical-operators )
 
-any = element any {
-	attribute count { text }?
-}
-class = element class {
-	attribute count { text }?,
-	attribute name { text }?,
-	attribute tag { tag }?,
-	attribute comment { text }?,
-	attribute ref { text }?,
-	attribute property { text }?,
-	( class-points | text )
-}
-choice = element choice {
-	attribute count { text }?,
-	class-matchers+
+#
+# Rules
+#
 
-}
-look-ahead = element look-ahead {
-    class-matchers+
-}
-look-behind = element look-behind {
-    class-matchers+
-}
+# top-level rule must have "name" attribute
+rule-declaration-top = 
+  element rule {
+    attribute name { identifier },
+    attribute comment { text }?,
+    match-operator+
+  }
 
-class-matchers = ( any
-                    | choice
-                    | element \start { empty }
-                    | element end { empty }
-                    | point-single
-                    | class
-                    | rules-declaration
-                    | element anchor { empty }
-                    | look-ahead
-                    | look-behind
-                 )+
+## rule element used as a matcher (either byref or contains other match operators itself)
+rule-matcher =
+  element rule {
+    attribute count { count-pattern }?,
+    attribute comment { text }?,
+    (attribute byref { rule-ref } | match-operator+)
+  }
 
-rules-declaration = element rule {
-	attribute name { text },
-	class-matchers+
-}
-action-declaration = element action {
-	attribute disp { text },
-	( attribute match { text }
-	    | attribute not-match { text }
-	    | attribute any-variant { text }
-	    | attribute only-variants { text }
-	    | attribute all-variants { text }
-	)
-}
+
+#
+# Actions
+#
+
+action-declaration =
+  element action {
+    attribute comment { text }?,
+    attribute disp { text },
+    (attribute match { text }
+     | attribute not-match { text })?,
+    (attribute any-variant { text }
+     | attribute all-variants { text }
+     | attribute only-variants { text })?
+  }
+
+
 
 # DOCUMENT STRUCTURE
-
-# Main document structure, comprised of a meta section followed by
-# a data section.
-
 start = lgr
-lgr = element lgr {
-	attribute id { text },
-	meta-section?,
-	data-section,
-	rules-section?
-}
+lgr =
+  element lgr {
+    attribute id { text }?,
+    meta-section?,
+    data-section,
+    rules-section?
+  }
 
-# Meta-data section
-
-meta-section = element meta {
-	(
-		element version {
-		    attribute comment { text },
-		    text
-		}? |
-		element date { date }? |
-		element language { language-tag }* |
-		element domain { domain-name }* |
-		element validity-start { date }? |
-		element validity-end { date }? |
-		element unicode-version { text }? |
-		element description {
-			attribute type { text },
-			text
-		}* |
-		element references {
-		    element reference {
-		        attribute id { text },
-		        text
-		    }*
-		}?
-	)*
-}
+## Meta section - information recorded with an label
+## generation ruleset that generally does not affect machine processing
+## (except for unicode-version).
+meta-section =
+  element meta {
+    (element version {
+       attribute comment { text }?,
+       text }
+     | element date { text }?
+     | element language { language-tag }*
+     | element domain { domain-name }*
+     | element validity-start { date }?
+     | element validity-end { date }?
+     | element unicode-version { text }*
+     | element description {
+         attribute type { text }?,
+         text
+       }*
+     | element references {
+         element reference {
+           attribute id { text },
+	   attribute comment { text }?,
+           text
+         }*
+       }?)*
+  }
 
 # Data section - the actual code point data of the table.
-
-data-section = element data {
-	points
-}
+data-section = element data { (char | range)+ }
 
 # Rules section
-
-rules-section = element rules {
-	( rule-declaration | action-declaration )*
-}
+rules-section =
+  element rules {
+    (class-or-set-operator-declaration | rule-declaration-top | action-declaration)*
+  }
