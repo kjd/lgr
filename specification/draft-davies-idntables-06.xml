@@ -386,7 +386,7 @@
                         be acceptable to use tools based on a later version of Unicode.
                         </t>
                     <t>
-                        [[TODO: A method of indicating  arange of permissible Unicode versions should be descirbed.]]
+                        [[TODO: A method of indicating a range of permissible Unicode versions should be described.]]
                     </t>
                     <t><figure>
                         <artwork><![CDATA[    <unicode-version>6.2</unicode-version>

@@ -644,8 +644,8 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    were made in that standard.  If that fact can be established, it MAY
    be acceptable to use tools based on a later version of Unicode.
 
-   [[TODO: A method of indicating arange of permissible Unicode versions
-   should be descirbed.]]
+   [[TODO: A method of indicating a range of permissible Unicode
+   versions should be described.]]
 
        <unicode-version>6.2</unicode-version>
 
