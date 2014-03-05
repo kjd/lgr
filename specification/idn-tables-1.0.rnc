@@ -15,21 +15,22 @@ language-tag = xsd:token
 domain-name = text
 
 ## a single code point
-code-point-literal-single =
-  # XXX: perhaps we should only support 4-hex or 6-hex, i.e. "[0-9A-F]{4}|[0-9A-F]{6}"?
-  xsd:token {
+code-point = xsd:token {
     pattern = "[0-9A-F]{4,6}"
-  }
+}
 
-## a sequence of code points
-code-point-literal-sequence =
-  # a space-separated sequence of code-point-literal-single
-  xsd:token {
+## a space-separated sequence of code points
+code-point-sequence = xsd:token {
     pattern = "[0-9A-F]{4,6}( [0-9A-F]{4,6})+"
-  }
+}
 
 ## single code point, or a sequence of code points
-code-point-literal = code-point-literal-single | code-point-literal-sequence
+code-point-literal = code-point | code-point-sequence
+
+## dates are used in information fields in the meta section.
+date = xsd:token {
+    pattern = "\d{4}-\d\d-\d\d"
+}
 
 ## reference to a rule name (used in "when" and "not-when" attributes, as well
 ## as the "byref" attribute of the "rule" element.)
@@ -37,9 +38,6 @@ rule-ref = xsd:IDREF
 
 ## space-separated freeform tags
 tag = text
-
-## dates are used in information fields in the meta section.
-date = text
 
 ## an identifier type (used by "name" attributes).
 identifier = xsd:ID
@@ -52,15 +50,14 @@ class-ref = text
 ## count attribute pattern ("n", "n+" or "n:m")
 count-pattern = xsd:token {
     pattern = "\d+(\+|:\d+)?"
-  }
+}
 
 #
 # STRUCTURES
 #
 
 ## Representation of a single code point, or a sequence of code points
-char =
-  element char {
+char = element char {
     attribute cp { code-point-literal },
     attribute comment { text }?,
     attribute when { rule-ref }?,
@@ -68,31 +65,28 @@ char =
     attribute tag { tag }?,
     attribute ref { text }?,
     variant*
-  }
+}
 
 ## Representation of a single code point (no sequences allowed, and no tag attribute allowed)
-char-single =
-  element char {
-    attribute cp { code-point-literal-single },
+char-single = element char {
+    attribute cp { code-point },
     attribute comment { text }?,
     attribute ref { text }?,
     variant*
-  }
+}
 
 ## Representation of a range of code points
-range =
-  element range {
+range = element range {
     attribute first-cp { code-point-literal },
     attribute last-cp { code-point-literal },
     attribute comment { text }?,
     attribute tag { tag }?,
     attribute ref { text }?,
     text
-  }
+}
 
 ## Representation of a variant code point or sequence
-variant =
-  element var {
+variant = element var {
     attribute cp { code-point-literal },
     attribute type { text }?,
     attribute when { rule-ref }?,
@@ -100,7 +94,7 @@ variant =
     attribute comment { text }?,
     attribute disp { text }?,
     attribute ref { text }?
-  }
+}
 
 
 #
@@ -112,17 +106,15 @@ variant =
 ## (or set-operator like "union") defined elsewhere.
 ## This could also be used as a matcher (appearing under a "rule"
 ## element), ## in which case the "count" attribute may be present.
-class-invocation =
-  element class {
+class-invocation = element class {
     attribute byref { class-ref },
     attribute count { count-pattern }?,
     attribute comment { text }?
-  }
+}
 
 ## defines a new class (set of code points) using Unicode property or
 ## code point literals
-class-declaration =
-  element class {
+class-declaration = element class {
     # "name" attribute should be present if this is a "top-level" class
     # declaration, i.e. appearing directly under the "rules" element.
     # Otherwise, it should be absent.
@@ -138,8 +130,7 @@ class-declaration =
     )
   }
 
-class-or-set-operator-nested = 
-  class-invocation | class-declaration | set-operator
+class-or-set-operator-nested = class-invocation | class-declaration | set-operator
 
 class-or-set-operator-declaration = 
   # a "class" element or logical operator (effectively defining a class)
@@ -151,18 +142,16 @@ class-or-set-operator-declaration =
 # Set operators
 #
 
-complement-operator =
-  element complement {
+complement-operator = element complement {
     attribute name { identifier }?,
     attribute comment { text }?,
     # "count" attribute should only be used when this set-operator is
     # used as a matcher (i.e. directly within a <rule> element)
     attribute count { count-pattern }?,
     class-or-set-operator-nested
-  }
+}
 
-union-operator =
-  element union {
+union-operator = element union {
     attribute name { identifier }?,
     attribute comment { text }?,
     # "count" attribute should only be used when this set-operator is
@@ -171,10 +160,9 @@ union-operator =
     class-or-set-operator-nested,
     # needs two or more child elements
     class-or-set-operator-nested+
-  }
+}
 
-intersection-operator =
-  element intersection {
+intersection-operator = element intersection {
     attribute name { identifier }?,
     attribute comment { text }?,
     # "count" attribute should only be used when this set-operator is
@@ -182,10 +170,9 @@ intersection-operator =
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     class-or-set-operator-nested
-  }
+}
 
-difference-operator =
-  element difference {
+difference-operator = element difference {
     attribute name { identifier }?,
     attribute comment { text }?,
     # "count" attribute should only be used when this set-operator is
@@ -193,10 +180,9 @@ difference-operator =
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     class-or-set-operator-nested
-  }
+}
 
-symmetric-difference-operator =
-  element symmetric-difference {
+symmetric-difference-operator = element symmetric-difference {
     attribute name { identifier }?,
     attribute comment { text }?,
     # "count" attribute should only be used when this set-operator is
@@ -204,41 +190,34 @@ symmetric-difference-operator =
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     class-or-set-operator-nested
-  }
+}
 
 ## operators that transform class(es) into a new class.
-set-operator =
-  complement-operator
-  | union-operator
-  | intersection-operator
-  | difference-operator
-  | symmetric-difference-operator
+set-operator = complement-operator | union-operator | intersection-operator
+               | difference-operator | symmetric-difference-operator
 
 #
 # Match operators (matchers)
 #
 
-any-matcher =
-  element any {
+any-matcher = element any {
     attribute count { count-pattern }?
-  }
+}
 
-choice-matcher =
-  element choice {
+choice-matcher = element choice {
     attribute count { count-pattern }?,
     # two or more match operators
     match-operator,
     match-operator+
-  }
-
+}
 
 char-matcher =
-  # for used as a matcher - like "char", except without the "tag" attribute
+  # for use as a matcher - like "char", except without the "tag" attribute
   element char {
     attribute cp { code-point-literal },
     attribute comment { text }?,
     attribute ref { text }?
-  }
+}
 
 start-matcher = element start { empty }
 end-matcher = element end { empty }
@@ -247,12 +226,9 @@ look-ahead-matcher = element look-ahead { empty }
 look-behind-matcher = element look-behind { empty }
 
 match-operator = (
-  any-matcher | choice-matcher
-  | start-matcher | end-matcher
-  | char-matcher
-  | class-or-set-operator-nested
-  | rule-matcher
-  | anchor-matcher | look-ahead-matcher | look-behind-matcher
+  any-matcher | choice-matcher | start-matcher | end-matcher | char-matcher
+  | class-or-set-operator-nested | rule-matcher | anchor-matcher
+  | look-ahead-matcher | look-behind-matcher
 )
 
 
@@ -261,12 +237,11 @@ match-operator = (
 #
 
 # top-level rule must have "name" attribute
-rule-declaration-top = 
-  element rule {
+rule-declaration-top = element rule {
     attribute name { identifier },
     attribute comment { text }?,
     match-operator+
-  }
+}
 
 ## rule element used as a matcher (either byref or contains other match operators itself)
 rule-matcher =
@@ -281,61 +256,55 @@ rule-matcher =
 # Actions
 #
 
-action-declaration =
-  element action {
+action-declaration = element action {
     attribute comment { text }?,
     attribute disp { text },
-    (attribute match { text }
-     | attribute not-match { text })?,
-    (attribute any-variant { text }
-     | attribute all-variants { text }
-     | attribute only-variants { text })?
-  }
-
-
+    ( attribute match { text } | attribute not-match { text } )?,
+    ( attribute any-variant { text } | attribute all-variants { text } | attribute only-variants { text } )?
+}
 
 # DOCUMENT STRUCTURE
+
 start = lgr
-lgr =
-  element lgr {
+lgr = element lgr {
     attribute id { text }?,
     meta-section?,
     data-section,
     rules-section?
-  }
+}
+
 
 ## Meta section - information recorded with an label
 ## generation ruleset that generally does not affect machine processing
 ## (except for unicode-version).
-meta-section =
-  element meta {
-    (element version {
-       attribute comment { text }?,
-       text }
-     | element date { text }?
-     | element language { language-tag }*
-     | element domain { domain-name }*
-     | element validity-start { date }?
-     | element validity-end { date }?
-     | element unicode-version { text }*
-     | element description {
-         attribute type { text }?,
-         text
-       }*
-     | element references {
-         element reference {
-           attribute id { text },
-	   attribute comment { text }?,
-           text
-         }*
-       }?)*
-  }
+meta-section = element meta {
+    (
+        element version {
+            attribute comment { text }?,
+            text
+        }
+        | element date { date }?
+        | element language { language-tag }*
+        | element domain { domain-name }*
+        | element validity-start { text }?
+        | element validity-end { text }?
+        | element unicode-version { text }*
+        | element description {
+             attribute type { text }?,
+             text
+          }*
+        | element references {
+            element reference {
+                attribute id { text },
+                attribute comment { text }?,
+                text
+            }*
+          }?
+    )*
+}
 
-# Data section - the actual code point data of the table.
 data-section = element data { (char | range)+ }
 
-# Rules section
-rules-section =
-  element rules {
+rules-section = element rules {
     (class-or-set-operator-declaration | rule-declaration-top | action-declaration)*
-  }
+}

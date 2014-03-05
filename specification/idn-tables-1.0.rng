@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   
-  LGR XML Schema Version 0.5 - based on draft-davies-idntables-06
+  LGR XML Schema Version 0.5 - based on draft-davies-idntables-06 (to be published)
   
 -->
 <grammar ns="http://www.iana.org/lgr/0.1" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
@@ -18,16 +18,14 @@
     <a:documentation>domain to which this LGR applies</a:documentation>
     <text/>
   </define>
-  <define name="code-point-literal-single">
+  <define name="code-point">
     <a:documentation>a single code point</a:documentation>
-    <!-- XXX: perhaps we should only support 4-hex or 6-hex, i.e. "[0-9A-F]{4}|[0-9A-F]{6}"? -->
     <data type="token">
       <param name="pattern">[0-9A-F]{4,6}</param>
     </data>
   </define>
-  <define name="code-point-literal-sequence">
-    <a:documentation>a sequence of code points</a:documentation>
-    <!-- a space-separated sequence of code-point-literal-single -->
+  <define name="code-point-sequence">
+    <a:documentation>a space-separated sequence of code points</a:documentation>
     <data type="token">
       <param name="pattern">[0-9A-F]{4,6}( [0-9A-F]{4,6})+</param>
     </data>
@@ -35,9 +33,15 @@
   <define name="code-point-literal">
     <a:documentation>single code point, or a sequence of code points</a:documentation>
     <choice>
-      <ref name="code-point-literal-single"/>
-      <ref name="code-point-literal-sequence"/>
+      <ref name="code-point"/>
+      <ref name="code-point-sequence"/>
     </choice>
+  </define>
+  <define name="date">
+    <a:documentation>dates are used in information fields in the meta section.</a:documentation>
+    <data type="token">
+      <param name="pattern">\d{4}-\d\d-\d\d</param>
+    </data>
   </define>
   <define name="rule-ref">
     <a:documentation>reference to a rule name (used in "when" and "not-when" attributes, as well
@@ -46,10 +50,6 @@ as the "byref" attribute of the "rule" element.)</a:documentation>
   </define>
   <define name="tag">
     <a:documentation>space-separated freeform tags</a:documentation>
-    <text/>
-  </define>
-  <define name="date">
-    <a:documentation>dates are used in information fields in the meta section.</a:documentation>
     <text/>
   </define>
   <define name="identifier">
@@ -109,7 +109,7 @@ not use xsd:ID and therefore would not be recognized by the validator</a:documen
     <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed)</a:documentation>
     <element name="char">
       <attribute name="cp">
-        <ref name="code-point-literal-single"/>
+        <ref name="code-point"/>
       </attribute>
       <optional>
         <attribute name="comment"/>
@@ -409,7 +409,7 @@ code point literals</a:documentation>
     </element>
   </define>
   <define name="char-matcher">
-    <!-- for used as a matcher - like "char", except without the "tag" attribute -->
+    <!-- for use as a matcher - like "char", except without the "tag" attribute -->
     <element name="char">
       <attribute name="cp">
         <ref name="code-point-literal"/>
@@ -560,7 +560,7 @@ generation ruleset that generally does not affect machine processing
           </element>
           <optional>
             <element name="date">
-              <text/>
+              <ref name="date"/>
             </element>
           </optional>
           <zeroOrMore>
@@ -575,12 +575,12 @@ generation ruleset that generally does not affect machine processing
           </zeroOrMore>
           <optional>
             <element name="validity-start">
-              <ref name="date"/>
+              <text/>
             </element>
           </optional>
           <optional>
             <element name="validity-end">
-              <ref name="date"/>
+              <text/>
             </element>
           </optional>
           <zeroOrMore>
@@ -613,7 +613,6 @@ generation ruleset that generally does not affect machine processing
       </zeroOrMore>
     </element>
   </define>
-  <!-- Data section - the actual code point data of the table. -->
   <define name="data-section">
     <element name="data">
       <oneOrMore>
@@ -624,7 +623,6 @@ generation ruleset that generally does not affect machine processing
       </oneOrMore>
     </element>
   </define>
-  <!-- Rules section -->
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>
