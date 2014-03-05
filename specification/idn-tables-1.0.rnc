@@ -1,5 +1,5 @@
 #
-# LGR XML Schema Version 0.5 - based on draft-davies-idntables-06 (to be published)
+# LGR XML Schema 1.0 (internal version 0.5a - based on draft-davies-idntables-06)
 #
 
 default namespace = "http://www.iana.org/lgr/0.1"
@@ -44,7 +44,8 @@ identifier = xsd:ID
 
 ## Alias class "byref" attributes types to text. Even though they are
 ## closer to xsd:IDREF lexically and semantically, tag-based classes do
-## not use xsd:ID and therefore would not be recognized by the validator
+## not use xsd:ID and therefore would not be recognized by the validator.
+## Note, though, that class-ref should not contain spaces.
 class-ref = text
 
 ## count attribute pattern ("n", "n+" or "n:m")
@@ -67,12 +68,12 @@ char = element char {
     variant*
 }
 
-## Representation of a single code point (no sequences allowed, and no tag attribute allowed)
+## Representation of a single code point (no sequences allowed, and no tag attribute allowed).
+## This is used when defining the set of characters that constitute a class.
 char-single = element char {
     attribute cp { code-point },
     attribute comment { text }?,
-    attribute ref { text }?,
-    variant*
+    attribute ref { text }?
 }
 
 ## Representation of a range of code points
@@ -104,8 +105,8 @@ variant = element var {
 
 ## a "class" element that references the name of another "class"
 ## (or set-operator like "union") defined elsewhere.
-## This could also be used as a matcher (appearing under a "rule"
-## element), ## in which case the "count" attribute may be present.
+## If used as a matcher (appearing under a "rule" ## element),
+## the "count" attribute may be present.
 class-invocation = element class {
     attribute byref { class-ref },
     attribute count { count-pattern }?,
@@ -115,11 +116,15 @@ class-invocation = element class {
 ## defines a new class (set of code points) using Unicode property or
 ## code point literals
 class-declaration = element class {
-    # "name" attribute should be present if this is a "top-level" class
+    # "name" attribute MUST be present if this is a "top-level" class
     # declaration, i.e. appearing directly under the "rules" element.
-    # Otherwise, it should be absent.
+    # Otherwise, it MUST be absent.
     attribute name { identifier }?,
+    # If used as a matcher (appearing in a "rule" element), the "count"
+    # attribute may be present. Otherwise, it MUST be absent.
+    attribute count { count-pattern }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     (
       # define the class by property, OR
       attribute property { text }
@@ -133,8 +138,8 @@ class-declaration = element class {
 class-or-set-operator-nested = class-invocation | class-declaration | set-operator
 
 class-or-set-operator-declaration = 
-  # a "class" element or logical operator (effectively defining a class)
-  # directly in a "rule" element.
+  # a "class" element or set operator (effectively defining a class)
+  # directly in the "rules" element.
   class-declaration | set-operator
 
 
@@ -145,8 +150,8 @@ class-or-set-operator-declaration =
 complement-operator = element complement {
     attribute name { identifier }?,
     attribute comment { text }?,
-    # "count" attribute should only be used when this set-operator is
-    # used as a matcher (i.e. directly within a <rule> element)
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
     class-or-set-operator-nested
 }
@@ -154,8 +159,8 @@ complement-operator = element complement {
 union-operator = element union {
     attribute name { identifier }?,
     attribute comment { text }?,
-    # "count" attribute should only be used when this set-operator is
-    # used as a matcher (i.e. directly within a <rule> element)
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     # needs two or more child elements
@@ -165,8 +170,8 @@ union-operator = element union {
 intersection-operator = element intersection {
     attribute name { identifier }?,
     attribute comment { text }?,
-    # "count" attribute should only be used when this set-operator is
-    # used as a matcher (i.e. directly within a <rule> element)
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     class-or-set-operator-nested
@@ -175,8 +180,8 @@ intersection-operator = element intersection {
 difference-operator = element difference {
     attribute name { identifier }?,
     attribute comment { text }?,
-    # "count" attribute should only be used when this set-operator is
-    # used as a matcher (i.e. directly within a <rule> element)
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     class-or-set-operator-nested
@@ -185,8 +190,8 @@ difference-operator = element difference {
 symmetric-difference-operator = element symmetric-difference {
     attribute name { identifier }?,
     attribute comment { text }?,
-    # "count" attribute should only be used when this set-operator is
-    # used as a matcher (i.e. directly within a <rule> element)
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
     class-or-set-operator-nested,
     class-or-set-operator-nested
@@ -215,6 +220,9 @@ char-matcher =
   # for use as a matcher - like "char", except without the "tag" attribute
   element char {
     attribute cp { code-point-literal },
+    # If used as a matcher (appearing in a "rule" element), the "count"
+    # attribute may be present. Otherwise, it MUST be absent.
+    attribute count { count-pattern }?,
     attribute comment { text }?,
     attribute ref { text }?
 }
@@ -222,8 +230,14 @@ char-matcher =
 start-matcher = element start { empty }
 end-matcher = element end { empty }
 anchor-matcher = element anchor { empty }
-look-ahead-matcher = element look-ahead { empty }
-look-behind-matcher = element look-behind { empty }
+look-ahead-matcher = element look-ahead {
+    attribute comment { text }?,
+    match-operator+
+}
+look-behind-matcher = element look-behind {
+    attribute comment { text }?,
+    match-operator+
+}
 
 match-operator = (
   any-matcher | choice-matcher | start-matcher | end-matcher | char-matcher
@@ -240,6 +254,7 @@ match-operator = (
 rule-declaration-top = element rule {
     attribute name { identifier },
     attribute comment { text }?,
+    attribute ref { text }?,
     match-operator+
 }
 
@@ -277,6 +292,8 @@ lgr = element lgr {
 ## Meta section - information recorded with an label
 ## generation ruleset that generally does not affect machine processing
 ## (except for unicode-version).
+## However, if any "class-declaration" uses the "property" attribute,
+## one or more unicode-version MUST be present.
 meta-section = element meta {
     (
         element version {
@@ -306,5 +323,7 @@ meta-section = element meta {
 data-section = element data { (char | range)+ }
 
 rules-section = element rules {
-    (class-or-set-operator-declaration | rule-declaration-top | action-declaration)*
+    class-or-set-operator-declaration*,
+    rule-declaration-top*,
+    action-declaration*
 }

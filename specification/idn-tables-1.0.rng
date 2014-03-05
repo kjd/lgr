@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   
-  LGR XML Schema Version 0.5 - based on draft-davies-idntables-06 (to be published)
+  LGR XML Schema 1.0 (internal version 0.5a - based on draft-davies-idntables-06)
   
 -->
 <grammar ns="http://www.iana.org/lgr/0.1" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
@@ -59,7 +59,8 @@ as the "byref" attribute of the "rule" element.)</a:documentation>
   <define name="class-ref">
     <a:documentation>Alias class "byref" attributes types to text. Even though they are
 closer to xsd:IDREF lexically and semantically, tag-based classes do
-not use xsd:ID and therefore would not be recognized by the validator</a:documentation>
+not use xsd:ID and therefore would not be recognized by the validator.
+Note, though, that class-ref should not contain spaces.</a:documentation>
     <text/>
   </define>
   <define name="count-pattern">
@@ -106,7 +107,8 @@ not use xsd:ID and therefore would not be recognized by the validator</a:documen
     </element>
   </define>
   <define name="char-single">
-    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed)</a:documentation>
+    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed).
+This is used when defining the set of characters that constitute a class.</a:documentation>
     <element name="char">
       <attribute name="cp">
         <ref name="code-point"/>
@@ -117,9 +119,6 @@ not use xsd:ID and therefore would not be recognized by the validator</a:documen
       <optional>
         <attribute name="ref"/>
       </optional>
-      <zeroOrMore>
-        <ref name="variant"/>
-      </zeroOrMore>
     </element>
   </define>
   <define name="range">
@@ -183,8 +182,8 @@ not use xsd:ID and therefore would not be recognized by the validator</a:documen
   <define name="class-invocation">
     <a:documentation>a "class" element that references the name of another "class"
 (or set-operator like "union") defined elsewhere.
-This could also be used as a matcher (appearing under a "rule"
-element), ## in which case the "count" attribute may be present.</a:documentation>
+If used as a matcher (appearing under a "rule" ## element),
+the "count" attribute may be present.</a:documentation>
     <element name="class">
       <attribute name="byref">
         <ref name="class-ref"/>
@@ -205,16 +204,28 @@ code point literals</a:documentation>
     <element name="class">
       <optional>
         <!--
-          "name" attribute should be present if this is a "top-level" class
+          "name" attribute MUST be present if this is a "top-level" class
           declaration, i.e. appearing directly under the "rules" element.
-          Otherwise, it should be absent.
+          Otherwise, it MUST be absent.
         -->
         <attribute name="name">
           <ref name="identifier"/>
         </attribute>
       </optional>
       <optional>
+        <!--
+          If used as a matcher (appearing in a "rule" element), the "count"
+          attribute may be present. Otherwise, it MUST be absent.
+        -->
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <choice>
         <!-- define the class by property, OR -->
@@ -241,8 +252,8 @@ code point literals</a:documentation>
   <define name="class-or-set-operator-declaration">
     <choice>
       <!--
-        a "class" element or logical operator (effectively defining a class)
-        directly in a "rule" element.
+        a "class" element or set operator (effectively defining a class)
+        directly in the "rules" element.
       -->
       <ref name="class-declaration"/>
       <ref name="set-operator"/>
@@ -265,8 +276,8 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
         -->
         <attribute name="count">
           <ref name="count-pattern"/>
@@ -287,8 +298,8 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
         -->
         <attribute name="count">
           <ref name="count-pattern"/>
@@ -313,8 +324,8 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
         -->
         <attribute name="count">
           <ref name="count-pattern"/>
@@ -336,8 +347,8 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
         -->
         <attribute name="count">
           <ref name="count-pattern"/>
@@ -359,8 +370,8 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <!--
-          "count" attribute should only be used when this set-operator is
-          used as a matcher (i.e. directly within a <rule> element)
+          "count" attribute MUST only be used when this set-operator is
+          used as a matcher (i.e. nested in a <rule> element)
         -->
         <attribute name="count">
           <ref name="count-pattern"/>
@@ -415,6 +426,15 @@ code point literals</a:documentation>
         <ref name="code-point-literal"/>
       </attribute>
       <optional>
+        <!--
+          If used as a matcher (appearing in a "rule" element), the "count"
+          attribute may be present. Otherwise, it MUST be absent.
+        -->
+        <attribute name="count">
+          <ref name="count-pattern"/>
+        </attribute>
+      </optional>
+      <optional>
         <attribute name="comment"/>
       </optional>
       <optional>
@@ -439,12 +459,22 @@ code point literals</a:documentation>
   </define>
   <define name="look-ahead-matcher">
     <element name="look-ahead">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="look-behind-matcher">
     <element name="look-behind">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
+      <oneOrMore>
+        <ref name="match-operator"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="match-operator">
@@ -474,6 +504,9 @@ code point literals</a:documentation>
       </attribute>
       <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <oneOrMore>
         <ref name="match-operator"/>
@@ -548,7 +581,9 @@ code point literals</a:documentation>
   <define name="meta-section">
     <a:documentation>Meta section - information recorded with an label
 generation ruleset that generally does not affect machine processing
-(except for unicode-version).</a:documentation>
+(except for unicode-version).
+However, if any "class-declaration" uses the "property" attribute,
+one or more unicode-version MUST be present.</a:documentation>
     <element name="meta">
       <zeroOrMore>
         <choice>
@@ -626,11 +661,13 @@ generation ruleset that generally does not affect machine processing
   <define name="rules-section">
     <element name="rules">
       <zeroOrMore>
-        <choice>
-          <ref name="class-or-set-operator-declaration"/>
-          <ref name="rule-declaration-top"/>
-          <ref name="action-declaration"/>
-        </choice>
+        <ref name="class-or-set-operator-declaration"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="rule-declaration-top"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="action-declaration"/>
       </zeroOrMore>
     </element>
   </define>
