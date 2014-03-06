@@ -212,8 +212,8 @@ any-matcher = element any {
 choice-matcher = element choice {
     attribute count { count-pattern }?,
     # two or more match operators
-    match-operator,
-    match-operator+
+    match-operator-choice,
+    match-operator-choice+
 }
 
 char-matcher =
@@ -232,18 +232,34 @@ end-matcher = element end { empty }
 anchor-matcher = element anchor { empty }
 look-ahead-matcher = element look-ahead {
     attribute comment { text }?,
-    match-operator+
+    match-operators-non-pos
 }
 look-behind-matcher = element look-behind {
     attribute comment { text }?,
-    match-operator+
+    match-operators-non-pos
 }
 
-match-operator = (
+## non-positional match operator that can be used as a direct child element
+## of the choice matcher.
+match-operator-choice = (
   any-matcher | choice-matcher | start-matcher | end-matcher | char-matcher
-  | class-or-set-operator-nested | rule-matcher | anchor-matcher
-  | look-ahead-matcher | look-behind-matcher
+  | class-or-set-operator-nested | rule-matcher
 )
+
+## non-positional match operators do not contain any anchor, 
+## look-behind or look-ahead elements.
+match-operators-non-pos = (
+  start-matcher?,
+  (any-matcher | choice-matcher | char-matcher
+   | class-or-set-operator-nested | rule-matcher)*,
+  end-matcher?
+)
+
+## positional match operators have an anchor element, which may be preceeded by
+## a look-behind element, or followed by a look-ahead element, or both.
+match-operators-pos = look-behind-matcher?, anchor-matcher, look-ahead-matcher?
+
+match-operators = match-operators-non-pos | match-operators-pos
 
 
 #
@@ -255,7 +271,7 @@ rule-declaration-top = element rule {
     attribute name { identifier },
     attribute comment { text }?,
     attribute ref { text }?,
-    match-operator+
+    match-operators
 }
 
 ## rule element used as a matcher (either byref or contains other match operators itself)
@@ -263,7 +279,7 @@ rule-matcher =
   element rule {
     attribute count { count-pattern }?,
     attribute comment { text }?,
-    (attribute byref { rule-ref } | match-operator+)
+    (attribute byref { rule-ref } | match-operators)
   }
 
 
@@ -322,8 +338,10 @@ meta-section = element meta {
 
 data-section = element data { (char | range)+ }
 
+## Note that action declarations are strictly order dependent.
+## class-or-set-operator-declaration and rule-declaration-top
+## are weakly order dependent, they must precede first use of the
+## identifier via byref.
 rules-section = element rules {
-    class-or-set-operator-declaration*,
-    rule-declaration-top*,
-    action-declaration*
+    (class-or-set-operator-declaration | rule-declaration-top | action-declaration)*
 }

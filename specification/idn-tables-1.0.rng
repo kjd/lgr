@@ -413,9 +413,9 @@ code point literals</a:documentation>
         </attribute>
       </optional>
       <!-- two or more match operators -->
-      <ref name="match-operator"/>
+      <ref name="match-operator-choice"/>
       <oneOrMore>
-        <ref name="match-operator"/>
+        <ref name="match-operator-choice"/>
       </oneOrMore>
     </element>
   </define>
@@ -462,9 +462,7 @@ code point literals</a:documentation>
       <optional>
         <attribute name="comment"/>
       </optional>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
+      <ref name="match-operators-non-pos"/>
     </element>
   </define>
   <define name="look-behind-matcher">
@@ -472,12 +470,12 @@ code point literals</a:documentation>
       <optional>
         <attribute name="comment"/>
       </optional>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
+      <ref name="match-operators-non-pos"/>
     </element>
   </define>
-  <define name="match-operator">
+  <define name="match-operator-choice">
+    <a:documentation>non-positional match operator that can be used as a direct child element
+of the choice matcher.</a:documentation>
     <choice>
       <ref name="any-matcher"/>
       <ref name="choice-matcher"/>
@@ -486,9 +484,42 @@ code point literals</a:documentation>
       <ref name="char-matcher"/>
       <ref name="class-or-set-operator-nested"/>
       <ref name="rule-matcher"/>
-      <ref name="anchor-matcher"/>
-      <ref name="look-ahead-matcher"/>
+    </choice>
+  </define>
+  <define name="match-operators-non-pos">
+    <a:documentation>non-positional match operators do not contain any anchor, 
+look-behind or look-ahead elements.</a:documentation>
+    <optional>
+      <ref name="start-matcher"/>
+    </optional>
+    <zeroOrMore>
+      <choice>
+        <ref name="any-matcher"/>
+        <ref name="choice-matcher"/>
+        <ref name="char-matcher"/>
+        <ref name="class-or-set-operator-nested"/>
+        <ref name="rule-matcher"/>
+      </choice>
+    </zeroOrMore>
+    <optional>
+      <ref name="end-matcher"/>
+    </optional>
+  </define>
+  <define name="match-operators-pos">
+    <a:documentation>positional match operators have an anchor element, which may be preceeded by
+a look-behind element, or followed by a look-ahead element, or both.</a:documentation>
+    <optional>
       <ref name="look-behind-matcher"/>
+    </optional>
+    <ref name="anchor-matcher"/>
+    <optional>
+      <ref name="look-ahead-matcher"/>
+    </optional>
+  </define>
+  <define name="match-operators">
+    <choice>
+      <ref name="match-operators-non-pos"/>
+      <ref name="match-operators-pos"/>
     </choice>
   </define>
   <!--
@@ -508,9 +539,7 @@ code point literals</a:documentation>
       <optional>
         <attribute name="ref"/>
       </optional>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
+      <ref name="match-operators"/>
     </element>
   </define>
   <define name="rule-matcher">
@@ -528,9 +557,7 @@ code point literals</a:documentation>
         <attribute name="byref">
           <ref name="rule-ref"/>
         </attribute>
-        <oneOrMore>
-          <ref name="match-operator"/>
-        </oneOrMore>
+        <ref name="match-operators"/>
       </choice>
     </element>
   </define>
@@ -659,15 +686,17 @@ one or more unicode-version MUST be present.</a:documentation>
     </element>
   </define>
   <define name="rules-section">
+    <a:documentation>Note that action declarations are strictly order dependent.
+class-or-set-operator-declaration and rule-declaration-top
+are weakly order dependent, they must precede first use of the
+identifier via byref.</a:documentation>
     <element name="rules">
       <zeroOrMore>
-        <ref name="class-or-set-operator-declaration"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="rule-declaration-top"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="action-declaration"/>
+        <choice>
+          <ref name="class-or-set-operator-declaration"/>
+          <ref name="rule-declaration-top"/>
+          <ref name="action-declaration"/>
+        </choice>
       </zeroOrMore>
     </element>
   </define>
