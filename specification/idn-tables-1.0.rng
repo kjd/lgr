@@ -37,6 +37,11 @@
       <ref name="code-point-sequence"/>
     </choice>
   </define>
+  <define name="code-point-set-shorthand">
+    <data type="token">
+      <param name="pattern">([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6})( ([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6}))*</param>
+    </data>
+  </define>
   <define name="date">
     <a:documentation>dates are used in information fields in the meta section.</a:documentation>
     <data type="token">
@@ -45,11 +50,19 @@
   </define>
   <define name="rule-ref">
     <a:documentation>reference to a rule name (used in "when" and "not-when" attributes, as well
-as the "byref" attribute of the "rule" element.)</a:documentation>
+as the "by-ref" attribute of the "rule" element.)</a:documentation>
     <data type="IDREF"/>
   </define>
-  <define name="tag">
-    <a:documentation>space-separated freeform tags</a:documentation>
+  <define name="tags">
+    <a:documentation>a space-separated list of tags. Tags should generally follow identifier
+syntax, although the use of punctuation symbols such as a colon is allowed.</a:documentation>
+    <text/>
+  </define>
+  <define name="tag-ref">
+    <a:documentation>Although "from-tag" attributes are closer to xsd:IDREF lexically and
+semantically, tags do not appear as a single unique instance in the
+document. As such, we are unable to take advantage of facilities provided
+by the validator.</a:documentation>
     <text/>
   </define>
   <define name="identifier">
@@ -57,11 +70,9 @@ as the "byref" attribute of the "rule" element.)</a:documentation>
     <data type="ID"/>
   </define>
   <define name="class-ref">
-    <a:documentation>Alias class "byref" attributes types to text. Even though they are
-closer to xsd:IDREF lexically and semantically, tag-based classes do
-not use xsd:ID and therefore would not be recognized by the validator.
-Note, though, that class-ref should not contain spaces.</a:documentation>
-    <text/>
+    <a:documentation>used in the class "by-ref" attribute to reference another class of the same
+"name" attribute value.</a:documentation>
+    <data type="IDREF"/>
   </define>
   <define name="count-pattern">
     <a:documentation>count attribute pattern ("n", "n+" or "n:m")</a:documentation>
@@ -95,7 +106,7 @@ Note, though, that class-ref should not contain spaces.</a:documentation>
       </optional>
       <optional>
         <attribute name="tag">
-          <ref name="tag"/>
+          <ref name="tags"/>
         </attribute>
       </optional>
       <optional>
@@ -106,20 +117,10 @@ Note, though, that class-ref should not contain spaces.</a:documentation>
       </zeroOrMore>
     </element>
   </define>
-  <define name="char-single">
-    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed).
-This is used when defining the set of characters that constitute a class.</a:documentation>
-    <element name="char">
-      <attribute name="cp">
-        <ref name="code-point"/>
-      </attribute>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-    </element>
+  <define name="range-shorthand">
+    <data type="token">
+      <param name="pattern">[0-9A-F]{4,6}-[0-9A-F]{4,6}</param>
+    </data>
   </define>
   <define name="range">
     <a:documentation>Representation of a range of code points</a:documentation>
@@ -135,13 +136,39 @@ This is used when defining the set of characters that constitute a class.</a:doc
       </optional>
       <optional>
         <attribute name="tag">
-          <ref name="tag"/>
+          <ref name="tags"/>
         </attribute>
       </optional>
       <optional>
         <attribute name="ref"/>
       </optional>
-      <text/>
+      <optional>
+        <ref name="range-shorthand"/>
+      </optional>
+    </element>
+  </define>
+  <define name="char-simple">
+    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed).
+This is used when defining the set of characters that constitute a class.</a:documentation>
+    <element name="char">
+      <attribute name="cp">
+        <ref name="code-point"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="range-simple">
+    <a:documentation>Representation of a range of code points, for use in defining the set of
+characters that constitute a class.</a:documentation>
+    <element name="range">
+      <attribute name="first-cp">
+        <ref name="code-point-literal"/>
+      </attribute>
+      <attribute name="last-cp">
+        <ref name="code-point-literal"/>
+      </attribute>
+      <optional>
+        <ref name="range-shorthand"/>
+      </optional>
     </element>
   </define>
   <define name="variant">
@@ -185,9 +212,14 @@ This is used when defining the set of characters that constitute a class.</a:doc
 If used as a matcher (appearing under a "rule" ## element),
 the "count" attribute may be present.</a:documentation>
     <element name="class">
-      <attribute name="byref">
-        <ref name="class-ref"/>
-      </attribute>
+      <choice>
+        <attribute name="by-ref">
+          <ref name="class-ref"/>
+        </attribute>
+        <attribute name="from-tag">
+          <ref name="tag-ref"/>
+        </attribute>
+      </choice>
       <optional>
         <attribute name="count">
           <ref name="count-pattern"/>
@@ -228,17 +260,17 @@ code point literals</a:documentation>
         <attribute name="ref"/>
       </optional>
       <choice>
-        <!-- define the class by property, OR -->
+        <!-- define the class by property (e.g. property="sc:Latn"), OR -->
         <attribute name="property"/>
         <oneOrMore>
           <!-- list of single code points and ranges, OR -->
           <choice>
-            <ref name="char-single"/>
-            <ref name="range"/>
+            <ref name="char-simple"/>
+            <ref name="range-simple"/>
           </choice>
         </oneOrMore>
-        <!-- free form text node to allow for shorthand notation e.g. "0061 0062-0063" -->
-        <text/>
+        <!-- text node to allow for shorthand notation e.g. "0061 0062-0063" -->
+        <ref name="code-point-set-shorthand"/>
       </choice>
     </element>
   </define>
@@ -543,7 +575,7 @@ a look-behind element, or followed by a look-ahead element, or both.</a:document
     </element>
   </define>
   <define name="rule-matcher">
-    <a:documentation>rule element used as a matcher (either byref or contains other match operators itself)</a:documentation>
+    <a:documentation>rule element used as a matcher (either by-ref or contains other match operators itself)</a:documentation>
     <element name="rule">
       <optional>
         <attribute name="count">
@@ -554,7 +586,7 @@ a look-behind element, or followed by a look-ahead element, or both.</a:document
         <attribute name="comment"/>
       </optional>
       <choice>
-        <attribute name="byref">
+        <attribute name="by-ref">
           <ref name="rule-ref"/>
         </attribute>
         <ref name="match-operators"/>
@@ -612,67 +644,65 @@ generation ruleset that generally does not affect machine processing
 However, if any "class-declaration" uses the "property" attribute,
 one or more unicode-version MUST be present.</a:documentation>
     <element name="meta">
-      <zeroOrMore>
-        <choice>
-          <element name="version">
+      <interleave>
+        <element name="version">
+          <optional>
+            <attribute name="comment"/>
+          </optional>
+          <text/>
+        </element>
+        <optional>
+          <element name="date">
+            <ref name="date"/>
+          </element>
+        </optional>
+        <zeroOrMore>
+          <element name="language">
+            <ref name="language-tag"/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="domain">
+            <ref name="domain-name"/>
+          </element>
+        </zeroOrMore>
+        <optional>
+          <element name="validity-start">
+            <text/>
+          </element>
+        </optional>
+        <optional>
+          <element name="validity-end">
+            <text/>
+          </element>
+        </optional>
+        <zeroOrMore>
+          <element name="unicode-version">
+            <text/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="description">
             <optional>
-              <attribute name="comment"/>
+              <attribute name="type"/>
             </optional>
             <text/>
           </element>
-          <optional>
-            <element name="date">
-              <ref name="date"/>
-            </element>
-          </optional>
-          <zeroOrMore>
-            <element name="language">
-              <ref name="language-tag"/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="domain">
-              <ref name="domain-name"/>
-            </element>
-          </zeroOrMore>
-          <optional>
-            <element name="validity-start">
-              <text/>
-            </element>
-          </optional>
-          <optional>
-            <element name="validity-end">
-              <text/>
-            </element>
-          </optional>
-          <zeroOrMore>
-            <element name="unicode-version">
-              <text/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="description">
-              <optional>
-                <attribute name="type"/>
-              </optional>
-              <text/>
-            </element>
-          </zeroOrMore>
-          <optional>
-            <element name="references">
-              <zeroOrMore>
-                <element name="reference">
-                  <attribute name="id"/>
-                  <optional>
-                    <attribute name="comment"/>
-                  </optional>
-                  <text/>
-                </element>
-              </zeroOrMore>
-            </element>
-          </optional>
-        </choice>
-      </zeroOrMore>
+        </zeroOrMore>
+        <optional>
+          <element name="references">
+            <zeroOrMore>
+              <element name="reference">
+                <attribute name="id"/>
+                <optional>
+                  <attribute name="comment"/>
+                </optional>
+                <text/>
+              </element>
+            </zeroOrMore>
+          </element>
+        </optional>
+      </interleave>
     </element>
   </define>
   <define name="data-section">
@@ -689,7 +719,7 @@ one or more unicode-version MUST be present.</a:documentation>
     <a:documentation>Note that action declarations are strictly order dependent.
 class-or-set-operator-declaration and rule-declaration-top
 are weakly order dependent, they must precede first use of the
-identifier via byref.</a:documentation>
+identifier via by-ref.</a:documentation>
     <element name="rules">
       <zeroOrMore>
         <choice>

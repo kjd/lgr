@@ -27,26 +27,35 @@ code-point-sequence = xsd:token {
 ## single code point, or a sequence of code points
 code-point-literal = code-point | code-point-sequence
 
+code-point-set-shorthand = xsd:token {
+    pattern = "([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6})( ([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6}))*"
+}
+
 ## dates are used in information fields in the meta section.
 date = xsd:token {
     pattern = "\d{4}-\d\d-\d\d"
 }
 
 ## reference to a rule name (used in "when" and "not-when" attributes, as well
-## as the "byref" attribute of the "rule" element.)
+## as the "by-ref" attribute of the "rule" element.)
 rule-ref = xsd:IDREF
 
-## space-separated freeform tags
-tag = text
+## a space-separated list of tags. Tags should generally follow identifier
+## syntax, although the use of punctuation symbols such as a colon is allowed.
+tags = text
+
+## Although "from-tag" attributes are closer to xsd:IDREF lexically and
+## semantically, tags do not appear as a single unique instance in the
+## document. As such, we are unable to take advantage of facilities provided
+## by the validator.
+tag-ref = text
 
 ## an identifier type (used by "name" attributes).
 identifier = xsd:ID
 
-## Alias class "byref" attributes types to text. Even though they are
-## closer to xsd:IDREF lexically and semantically, tag-based classes do
-## not use xsd:ID and therefore would not be recognized by the validator.
-## Note, though, that class-ref should not contain spaces.
-class-ref = text
+## used in the class "by-ref" attribute to reference another class of the same
+## "name" attribute value.
+class-ref = xsd:IDREF
 
 ## count attribute pattern ("n", "n+" or "n:m")
 count-pattern = xsd:token {
@@ -63,17 +72,13 @@ char = element char {
     attribute comment { text }?,
     attribute when { rule-ref }?,
     attribute not-when { rule-ref }?,
-    attribute tag { tag }?,
+    attribute tag { tags }?,
     attribute ref { text }?,
     variant*
 }
 
-## Representation of a single code point (no sequences allowed, and no tag attribute allowed).
-## This is used when defining the set of characters that constitute a class.
-char-single = element char {
-    attribute cp { code-point },
-    attribute comment { text }?,
-    attribute ref { text }?
+range-shorthand = xsd:token {
+    pattern = "[0-9A-F]{4,6}-[0-9A-F]{4,6}"
 }
 
 ## Representation of a range of code points
@@ -81,10 +86,25 @@ range = element range {
     attribute first-cp { code-point-literal },
     attribute last-cp { code-point-literal },
     attribute comment { text }?,
-    attribute tag { tag }?,
+    attribute tag { tags }?,
     attribute ref { text }?,
-    text
+    range-shorthand?
 }
+
+## Representation of a single code point (no sequences allowed, and no tag attribute allowed).
+## This is used when defining the set of characters that constitute a class.
+char-simple = element char {
+    attribute cp { code-point }
+}
+
+## Representation of a range of code points, for use in defining the set of
+## characters that constitute a class.
+range-simple = element range {
+    attribute first-cp { code-point-literal },
+    attribute last-cp { code-point-literal },
+    range-shorthand?
+}
+
 
 ## Representation of a variant code point or sequence
 variant = element var {
@@ -108,7 +128,7 @@ variant = element var {
 ## If used as a matcher (appearing under a "rule" ## element),
 ## the "count" attribute may be present.
 class-invocation = element class {
-    attribute byref { class-ref },
+    (attribute by-ref { class-ref } | attribute from-tag { tag-ref }),
     attribute count { count-pattern }?,
     attribute comment { text }?
 }
@@ -126,12 +146,12 @@ class-declaration = element class {
     attribute comment { text }?,
     attribute ref { text }?,
     (
-      # define the class by property, OR
+      # define the class by property (e.g. property="sc:Latn"), OR
       attribute property { text }
       # list of single code points and ranges, OR
-      | (char-single | range)+
-      # free form text node to allow for shorthand notation e.g. "0061 0062-0063"
-      | text
+      | (char-simple | range-simple)+
+      # text node to allow for shorthand notation e.g. "0061 0062-0063"
+      | code-point-set-shorthand
     )
   }
 
@@ -274,12 +294,12 @@ rule-declaration-top = element rule {
     match-operators
 }
 
-## rule element used as a matcher (either byref or contains other match operators itself)
+## rule element used as a matcher (either by-ref or contains other match operators itself)
 rule-matcher =
   element rule {
     attribute count { count-pattern }?,
     attribute comment { text }?,
-    (attribute byref { rule-ref } | match-operators)
+    (attribute by-ref { rule-ref } | match-operators)
   }
 
 
@@ -311,29 +331,27 @@ lgr = element lgr {
 ## However, if any "class-declaration" uses the "property" attribute,
 ## one or more unicode-version MUST be present.
 meta-section = element meta {
-    (
-        element version {
+    element version {
+        attribute comment { text }?,
+      text
+    }
+    & element date { date }?
+    & element language { language-tag }*
+    & element domain { domain-name }*
+    & element validity-start { text }?
+    & element validity-end { text }?
+    & element unicode-version { text }*
+    & element description {
+        attribute type { text }?,
+        text
+    }*
+    & element references {
+        element reference {
+            attribute id { text },
             attribute comment { text }?,
             text
-        }
-        | element date { date }?
-        | element language { language-tag }*
-        | element domain { domain-name }*
-        | element validity-start { text }?
-        | element validity-end { text }?
-        | element unicode-version { text }*
-        | element description {
-             attribute type { text }?,
-             text
-          }*
-        | element references {
-            element reference {
-                attribute id { text },
-                attribute comment { text }?,
-                text
-            }*
-          }?
-    )*
+        }*
+    }?
 }
 
 data-section = element data { (char | range)+ }
@@ -341,7 +359,7 @@ data-section = element data { (char | range)+ }
 ## Note that action declarations are strictly order dependent.
 ## class-or-set-operator-declaration and rule-declaration-top
 ## are weakly order dependent, they must precede first use of the
-## identifier via byref.
+## identifier via by-ref.
 rules-section = element rules {
     (class-or-set-operator-declaration | rule-declaration-top | action-declaration)*
 }
