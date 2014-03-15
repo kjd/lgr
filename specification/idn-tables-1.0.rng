@@ -117,11 +117,6 @@ by the validator.</a:documentation>
       </zeroOrMore>
     </element>
   </define>
-  <define name="range-shorthand">
-    <data type="token">
-      <param name="pattern">[0-9A-F]{4,6}-[0-9A-F]{4,6}</param>
-    </data>
-  </define>
   <define name="range">
     <a:documentation>Representation of a range of code points</a:documentation>
     <element name="range">
@@ -141,9 +136,6 @@ by the validator.</a:documentation>
       </optional>
       <optional>
         <attribute name="ref"/>
-      </optional>
-      <optional>
-        <ref name="range-shorthand"/>
       </optional>
     </element>
   </define>
@@ -166,9 +158,6 @@ characters that constitute a class.</a:documentation>
       <attribute name="last-cp">
         <ref name="code-point-literal"/>
       </attribute>
-      <optional>
-        <ref name="range-shorthand"/>
-      </optional>
     </element>
   </define>
   <define name="variant">
@@ -645,15 +634,19 @@ However, if any "class-declaration" uses the "property" attribute,
 one or more unicode-version MUST be present.</a:documentation>
     <element name="meta">
       <interleave>
-        <element name="version">
-          <optional>
-            <attribute name="comment"/>
-          </optional>
-          <text/>
-        </element>
+        <optional>
+          <element name="version">
+            <optional>
+              <attribute name="comment"/>
+            </optional>
+            <text/>
+          </element>
+        </optional>
         <optional>
           <element name="date">
-            <ref name="date"/>
+            <data type="token">
+              <param name="pattern">\d{4}-\d{2}-\d{2}</param>
+            </data>
           </element>
         </optional>
         <zeroOrMore>
@@ -676,19 +669,21 @@ one or more unicode-version MUST be present.</a:documentation>
             <text/>
           </element>
         </optional>
-        <zeroOrMore>
+        <optional>
           <element name="unicode-version">
-            <text/>
+            <data type="token">
+              <param name="pattern">\d+\.\d+\.\d+</param>
+            </data>
           </element>
-        </zeroOrMore>
-        <zeroOrMore>
+        </optional>
+        <optional>
           <element name="description">
             <optional>
               <attribute name="type"/>
             </optional>
             <text/>
           </element>
-        </zeroOrMore>
+        </optional>
         <optional>
           <element name="references">
             <zeroOrMore>

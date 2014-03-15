@@ -77,18 +77,13 @@ char = element char {
     variant*
 }
 
-range-shorthand = xsd:token {
-    pattern = "[0-9A-F]{4,6}-[0-9A-F]{4,6}"
-}
-
 ## Representation of a range of code points
 range = element range {
     attribute first-cp { code-point-literal },
     attribute last-cp { code-point-literal },
     attribute comment { text }?,
     attribute tag { tags }?,
-    attribute ref { text }?,
-    range-shorthand?
+    attribute ref { text }?
 }
 
 ## Representation of a single code point (no sequences allowed, and no tag attribute allowed).
@@ -101,8 +96,7 @@ char-simple = element char {
 ## characters that constitute a class.
 range-simple = element range {
     attribute first-cp { code-point-literal },
-    attribute last-cp { code-point-literal },
-    range-shorthand?
+    attribute last-cp { code-point-literal }
 }
 
 
@@ -333,18 +327,26 @@ lgr = element lgr {
 meta-section = element meta {
     element version {
         attribute comment { text }?,
-      text
-    }
-    & element date { date }?
+        text
+    }?
+    & element date {
+        xsd:token {
+            pattern = "\d{4}-\d{2}-\d{2}"
+        }
+    }?
     & element language { language-tag }*
     & element domain { domain-name }*
     & element validity-start { text }?
     & element validity-end { text }?
-    & element unicode-version { text }*
+    & element unicode-version {
+        xsd:token {
+            pattern = "\d+\.\d+\.\d+"
+        }
+    }?
     & element description {
         attribute type { text }?,
         text
-    }*
+    }?
     & element references {
         element reference {
             attribute id { text },
