@@ -121,10 +121,10 @@ by the validator.</a:documentation>
     <a:documentation>Representation of a range of code points</a:documentation>
     <element name="range">
       <attribute name="first-cp">
-        <ref name="code-point-literal"/>
+        <ref name="code-point"/>
       </attribute>
       <attribute name="last-cp">
-        <ref name="code-point-literal"/>
+        <ref name="code-point"/>
       </attribute>
       <optional>
         <attribute name="comment"/>
@@ -153,10 +153,10 @@ This is used when defining the set of characters that constitute a class.</a:doc
 characters that constitute a class.</a:documentation>
     <element name="range">
       <attribute name="first-cp">
-        <ref name="code-point-literal"/>
+        <ref name="code-point"/>
       </attribute>
       <attribute name="last-cp">
-        <ref name="code-point-literal"/>
+        <ref name="code-point"/>
       </attribute>
     </element>
   </define>

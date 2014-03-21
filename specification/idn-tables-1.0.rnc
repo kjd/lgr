@@ -79,8 +79,8 @@ char = element char {
 
 ## Representation of a range of code points
 range = element range {
-    attribute first-cp { code-point-literal },
-    attribute last-cp { code-point-literal },
+    attribute first-cp { code-point },
+    attribute last-cp { code-point },
     attribute comment { text }?,
     attribute tag { tags }?,
     attribute ref { text }?
@@ -95,8 +95,8 @@ char-simple = element char {
 ## Representation of a range of code points, for use in defining the set of
 ## characters that constitute a class.
 range-simple = element range {
-    attribute first-cp { code-point-literal },
-    attribute last-cp { code-point-literal }
+    attribute first-cp { code-point },
+    attribute last-cp { code-point }
 }
 
 
