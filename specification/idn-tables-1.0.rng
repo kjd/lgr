@@ -251,6 +251,10 @@ code point literals</a:documentation>
       <choice>
         <!-- define the class by property (e.g. property="sc:Latn"), OR -->
         <attribute name="property"/>
+        <!-- define the class by tagged code points, OR -->
+        <attribute name="from-tag">
+          <ref name="tag-ref"/>
+        </attribute>
         <oneOrMore>
           <!-- list of single code points and ranges, OR -->
           <choice>
@@ -296,6 +300,9 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
+        <attribute name="ref"/>
+      </optional>
+      <optional>
         <!--
           "count" attribute MUST only be used when this set-operator is
           used as a matcher (i.e. nested in a <rule> element)
@@ -316,6 +323,9 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <optional>
         <!--
@@ -344,6 +354,9 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
+        <attribute name="ref"/>
+      </optional>
+      <optional>
         <!--
           "count" attribute MUST only be used when this set-operator is
           used as a matcher (i.e. nested in a <rule> element)
@@ -367,6 +380,9 @@ code point literals</a:documentation>
         <attribute name="comment"/>
       </optional>
       <optional>
+        <attribute name="ref"/>
+      </optional>
+      <optional>
         <!--
           "count" attribute MUST only be used when this set-operator is
           used as a matcher (i.e. nested in a <rule> element)
@@ -388,6 +404,9 @@ code point literals</a:documentation>
       </optional>
       <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <optional>
         <!--
@@ -424,6 +443,9 @@ code point literals</a:documentation>
           <ref name="count-pattern"/>
         </attribute>
       </optional>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
     </element>
   </define>
   <define name="choice-matcher">
@@ -432,6 +454,9 @@ code point literals</a:documentation>
         <attribute name="count">
           <ref name="count-pattern"/>
         </attribute>
+      </optional>
+      <optional>
+        <attribute name="comment"/>
       </optional>
       <!-- two or more match operators -->
       <ref name="match-operator-choice"/>
@@ -465,17 +490,23 @@ code point literals</a:documentation>
   </define>
   <define name="start-matcher">
     <element name="start">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
     </element>
   </define>
   <define name="end-matcher">
     <element name="end">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
     </element>
   </define>
   <define name="anchor-matcher">
     <element name="anchor">
-      <empty/>
+      <optional>
+        <attribute name="comment"/>
+      </optional>
     </element>
   </define>
   <define name="look-ahead-matcher">
@@ -574,6 +605,9 @@ a look-behind element, or followed by a look-ahead element, or both.</a:document
       <optional>
         <attribute name="comment"/>
       </optional>
+      <optional>
+        <attribute name="ref"/>
+      </optional>
       <choice>
         <attribute name="by-ref">
           <ref name="rule-ref"/>
@@ -591,6 +625,9 @@ a look-behind element, or followed by a look-ahead element, or both.</a:document
     <element name="action">
       <optional>
         <attribute name="comment"/>
+      </optional>
+      <optional>
+        <attribute name="ref"/>
       </optional>
       <attribute name="disp"/>
       <optional>

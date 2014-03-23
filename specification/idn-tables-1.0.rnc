@@ -142,6 +142,8 @@ class-declaration = element class {
     (
       # define the class by property (e.g. property="sc:Latn"), OR
       attribute property { text }
+      # define the class by tagged code points, OR
+      | attribute from-tag { tag-ref }
       # list of single code points and ranges, OR
       | (char-simple | range-simple)+
       # text node to allow for shorthand notation e.g. "0061 0062-0063"
@@ -164,6 +166,7 @@ class-or-set-operator-declaration =
 complement-operator = element complement {
     attribute name { identifier }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     # "count" attribute MUST only be used when this set-operator is
     # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
@@ -173,6 +176,7 @@ complement-operator = element complement {
 union-operator = element union {
     attribute name { identifier }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     # "count" attribute MUST only be used when this set-operator is
     # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
@@ -184,6 +188,7 @@ union-operator = element union {
 intersection-operator = element intersection {
     attribute name { identifier }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     # "count" attribute MUST only be used when this set-operator is
     # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
@@ -194,6 +199,7 @@ intersection-operator = element intersection {
 difference-operator = element difference {
     attribute name { identifier }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     # "count" attribute MUST only be used when this set-operator is
     # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
@@ -204,6 +210,7 @@ difference-operator = element difference {
 symmetric-difference-operator = element symmetric-difference {
     attribute name { identifier }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     # "count" attribute MUST only be used when this set-operator is
     # used as a matcher (i.e. nested in a <rule> element)
     attribute count { count-pattern }?,
@@ -220,11 +227,13 @@ set-operator = complement-operator | union-operator | intersection-operator
 #
 
 any-matcher = element any {
-    attribute count { count-pattern }?
+    attribute count { count-pattern }?,
+    attribute comment { text }?
 }
 
 choice-matcher = element choice {
     attribute count { count-pattern }?,
+    attribute comment { text }?,
     # two or more match operators
     match-operator-choice,
     match-operator-choice+
@@ -241,9 +250,18 @@ char-matcher =
     attribute ref { text }?
 }
 
-start-matcher = element start { empty }
-end-matcher = element end { empty }
-anchor-matcher = element anchor { empty }
+start-matcher = element start {
+    attribute comment { text }?
+}
+
+end-matcher = element end {
+    attribute comment { text }?
+}
+
+anchor-matcher = element anchor {
+    attribute comment { text }?
+}
+
 look-ahead-matcher = element look-ahead {
     attribute comment { text }?,
     match-operators-non-pos
@@ -293,6 +311,7 @@ rule-matcher =
   element rule {
     attribute count { count-pattern }?,
     attribute comment { text }?,
+    attribute ref { text }?,
     (attribute by-ref { rule-ref } | match-operators)
   }
 
@@ -303,6 +322,7 @@ rule-matcher =
 
 action-declaration = element action {
     attribute comment { text }?,
+    attribute ref { text }?,
     attribute disp { text },
     ( attribute match { text } | attribute not-match { text } )?,
     ( attribute any-variant { text } | attribute all-variants { text } | attribute only-variants { text } )?
