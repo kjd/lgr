@@ -4,8 +4,8 @@
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
 Intended status: Informational                                A. Freytag
-Expires: September 6, 2014                                    ASMUS Inc.
-                                                           March 5, 2014
+Expires: September 26, 2014                                   ASMUS Inc.
+                                                          March 25, 2014
 
 
             Representing Label Generation Rulesets using XML
@@ -13,15 +13,16 @@ Expires: September 6, 2014                                    ASMUS Inc.
 
 Abstract
 
-   This document describes a method of representing the domain name
-   registration policy for a zone administrator using Extensible Markup
-   Language (XML).  These policies, known as "Label Generation Rulesets"
-   (LGRs), are particularly used for the implementation of
-   Internationalized Domain Names (IDNs).  The rulesets are used to
-   implement and share policy defining which labels and specific Unicode
-   code points are permitted for registrations, which alternative code
-   points are considered variants, and what actions may be performed on
-   labels containing those variants.
+   This document describes a method of representing a key part of the
+   domain name registration policy for a zone administrator using
+   Extensible Markup Language (XML).  These policies, known as "Label
+   Generation Rulesets" (LGRs), are particularly used for the
+   implementation of Internationalized Domain Names (IDNs).  The
+   rulesets are used to implement and share that aspect of policy
+   defining which labels and specific Unicode code points are permitted
+   for registrations, which alternative code points are considered
+   variants, and what actions may be performed on labels containing
+   those variants.
 
 Status of this Memo
 
@@ -38,7 +39,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 6, 2014.
+   This Internet-Draft will expire on September 26, 2014.
 
 Copyright Notice
 
@@ -48,15 +49,15 @@ Copyright Notice
    This document is subject to BCP 78 and the IETF Trust's Legal
    Provisions Relating to IETF Documents
    (http://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 1]
+Davies & Freytag       Expires September 26, 2014               [Page 1]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
+   publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
    to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
@@ -72,7 +73,7 @@ Table of Contents
    4.  LGR Format . . . . . . . . . . . . . . . . . . . . . . . . . .  9
      4.1.  Namespace  . . . . . . . . . . . . . . . . . . . . . . . .  9
      4.2.  Basic Structure  . . . . . . . . . . . . . . . . . . . . .  9
-     4.3.  Metadata . . . . . . . . . . . . . . . . . . . . . . . . .  9
+     4.3.  Metadata . . . . . . . . . . . . . . . . . . . . . . . . . 10
        4.3.1.  The version Element  . . . . . . . . . . . . . . . . . 10
        4.3.2.  The date Element . . . . . . . . . . . . . . . . . . . 10
        4.3.3.  The language Element . . . . . . . . . . . . . . . . . 10
@@ -86,68 +87,68 @@ Table of Contents
      5.2.  Variants . . . . . . . . . . . . . . . . . . . . . . . . . 15
        5.2.1.  Basic Variants . . . . . . . . . . . . . . . . . . . . 15
        5.2.2.  Null Variants  . . . . . . . . . . . . . . . . . . . . 16
-       5.2.3.  Dispositions . . . . . . . . . . . . . . . . . . . . . 16
+       5.2.3.  Dispositions . . . . . . . . . . . . . . . . . . . . . 17
        5.2.4.  The ref Attribute  . . . . . . . . . . . . . . . . . . 17
        5.2.5.  Variants with Reflexive Mapping  . . . . . . . . . . . 18
        5.2.6.  Conditional Variants . . . . . . . . . . . . . . . . . 19
        5.2.7.  The comment Attribute  . . . . . . . . . . . . . . . . 20
      5.3.  Code Point Tagging . . . . . . . . . . . . . . . . . . . . 20
-   6.  Whole Label and Context Evaluation . . . . . . . . . . . . . . 21
-     6.1.  Basic Concepts . . . . . . . . . . . . . . . . . . . . . . 21
-     6.2.  Character Classes  . . . . . . . . . . . . . . . . . . . . 21
-       6.2.1.  Tag-based Classes  . . . . . . . . . . . . . . . . . . 22
-       6.2.2.  Unicode Property-based Classes . . . . . . . . . . . . 23
-       6.2.3.  Explicitly Declared Classes  . . . . . . . . . . . . . 23
-       6.2.4.  Combined Classes . . . . . . . . . . . . . . . . . . . 24
-     6.3.  Whole Label and Context Rules  . . . . . . . . . . . . . . 26
-       6.3.1.  The rule Element . . . . . . . . . . . . . . . . . . . 26
-       6.3.2.  The Match Operators  . . . . . . . . . . . . . . . . . 27
-       6.3.3.  The count Attribute  . . . . . . . . . . . . . . . . . 28
-       6.3.4.  The name and byref Attributes  . . . . . . . . . . . . 29
-       6.3.5.  The choice Element . . . . . . . . . . . . . . . . . . 30
+   6.  Whole Label and Context Evaluation . . . . . . . . . . . . . . 22
+     6.1.  Basic Concepts . . . . . . . . . . . . . . . . . . . . . . 22
+     6.2.  Character Classes  . . . . . . . . . . . . . . . . . . . . 22
+       6.2.1.  Tag-based Classes  . . . . . . . . . . . . . . . . . . 23
+       6.2.2.  Unicode Property-based Classes . . . . . . . . . . . . 24
+       6.2.3.  Explicitly Declared Classes  . . . . . . . . . . . . . 25
+       6.2.4.  Combined Classes . . . . . . . . . . . . . . . . . . . 26
+     6.3.  Whole Label and Context Rules  . . . . . . . . . . . . . . 27
+       6.3.1.  The rule Element . . . . . . . . . . . . . . . . . . . 27
+       6.3.2.  The Match Operators  . . . . . . . . . . . . . . . . . 28
+       6.3.3.  The count Attribute  . . . . . . . . . . . . . . . . . 29
+       6.3.4.  The name and by-ref Attributes . . . . . . . . . . . . 30
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 2]
+Davies & Freytag       Expires September 26, 2014               [Page 2]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-       6.3.6.  Literal Code Point Sequences . . . . . . . . . . . . . 30
-       6.3.7.  The any Element  . . . . . . . . . . . . . . . . . . . 30
-       6.3.8.  The start and end Elements . . . . . . . . . . . . . . 31
-       6.3.9.  Example rule from IDNA2008 . . . . . . . . . . . . . . 31
-     6.4.  Parameterized Context or When Rules  . . . . . . . . . . . 32
-       6.4.1.  The anchor Element . . . . . . . . . . . . . . . . . . 32
-       6.4.2.  The look-behind and look-ahead Elements  . . . . . . . 33
-       6.4.3.  Omitting the anchor Element  . . . . . . . . . . . . . 34
-   7.  The action Element . . . . . . . . . . . . . . . . . . . . . . 36
-     7.1.  The match and not-match Attributes . . . . . . . . . . . . 36
-     7.2.  Actions matching Variant Dispositions  . . . . . . . . . . 36
-       7.2.1.  Variant Disposition triggers . . . . . . . . . . . . . 36
-       7.2.2.  Example for RFC3743-style Tables . . . . . . . . . . . 37
-     7.3.  Recommended Disposition Values . . . . . . . . . . . . . . 38
-     7.4.  Precedence . . . . . . . . . . . . . . . . . . . . . . . . 38
-     7.5.  Implied Actions  . . . . . . . . . . . . . . . . . . . . . 39
-     7.6.  Default Actions  . . . . . . . . . . . . . . . . . . . . . 39
-   8.  Processing a Label Against an LGR  . . . . . . . . . . . . . . 41
-     8.1.  Determining Eligibility for a Label  . . . . . . . . . . . 41
-     8.2.  Determining Variants for a Label . . . . . . . . . . . . . 41
-     8.3.  Determining a  Disposition for a Label or variant Label  . 42
-   9.  Conversion to and from Other Formats . . . . . . . . . . . . . 43
-   10. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 44
-   11. Security Considerations  . . . . . . . . . . . . . . . . . . . 45
-   12. References . . . . . . . . . . . . . . . . . . . . . . . . . . 46
-   Appendix A.  Example Table . . . . . . . . . . . . . . . . . . . . 47
+       6.3.5.  The choice Element . . . . . . . . . . . . . . . . . . 31
+       6.3.6.  Literal Code Point Sequences . . . . . . . . . . . . . 31
+       6.3.7.  The any Element  . . . . . . . . . . . . . . . . . . . 32
+       6.3.8.  The start and end Elements . . . . . . . . . . . . . . 32
+       6.3.9.  Example rule from IDNA2008 . . . . . . . . . . . . . . 32
+     6.4.  Parameterized Context or When Rules  . . . . . . . . . . . 33
+       6.4.1.  The anchor Element . . . . . . . . . . . . . . . . . . 33
+       6.4.2.  The look-behind and look-ahead Elements  . . . . . . . 34
+       6.4.3.  Omitting the anchor Element  . . . . . . . . . . . . . 35
+   7.  The action Element . . . . . . . . . . . . . . . . . . . . . . 37
+     7.1.  The match and not-match Attributes . . . . . . . . . . . . 37
+     7.2.  Actions matching Variant Dispositions  . . . . . . . . . . 37
+       7.2.1.  Variant Disposition triggers . . . . . . . . . . . . . 37
+       7.2.2.  Example for RFC3743-style Tables . . . . . . . . . . . 38
+     7.3.  Recommended Disposition Values . . . . . . . . . . . . . . 39
+     7.4.  Precedence . . . . . . . . . . . . . . . . . . . . . . . . 39
+     7.5.  Implied Actions  . . . . . . . . . . . . . . . . . . . . . 40
+     7.6.  Default Actions  . . . . . . . . . . . . . . . . . . . . . 40
+   8.  Processing a Label Against an LGR  . . . . . . . . . . . . . . 42
+     8.1.  Determining Eligibility for a Label  . . . . . . . . . . . 42
+     8.2.  Determining Variants for a Label . . . . . . . . . . . . . 42
+     8.3.  Determining a  Disposition for a Label or variant Label  . 43
+   9.  Conversion to and from Other Formats . . . . . . . . . . . . . 44
+   10. IANA Considerations  . . . . . . . . . . . . . . . . . . . . . 45
+   11. Security Considerations  . . . . . . . . . . . . . . . . . . . 46
+   12. References . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+   Appendix A.  Example Tables  . . . . . . . . . . . . . . . . . . . 48
    Appendix B.  How to Translate RFC 3743 based Tables into the
-                XML Format  . . . . . . . . . . . . . . . . . . . . . 49
-   Appendix C.  Indic Syllable Structure Example  . . . . . . . . . . 54
-   Appendix D.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 57
-   Appendix E.  Acknowledgements  . . . . . . . . . . . . . . . . . . 69
-   Appendix F.  Editorial Notes . . . . . . . . . . . . . . . . . . . 70
-     F.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 70
-     F.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 70
-   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 72
+                XML Format  . . . . . . . . . . . . . . . . . . . . . 52
+   Appendix C.  Indic Syllable Structure Example  . . . . . . . . . . 57
+   Appendix D.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 60
+   Appendix E.  Acknowledgements  . . . . . . . . . . . . . . . . . . 72
+   Appendix F.  Editorial Notes . . . . . . . . . . . . . . . . . . . 73
+     F.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 73
+     F.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 73
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 75
 
 
 
@@ -163,8 +164,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-Davies & Freytag        Expires September 6, 2014               [Page 3]
+Davies & Freytag       Expires September 26, 2014               [Page 3]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -180,6 +180,12 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    part of a zone administrator's policies, and can be referred to as
    Label Generation Rulesets (LGRs), or IDN tables.
 
+   There are other kinds policies relating to labels which are not
+   normally covered by Label Generation Rulesets and are therefore not
+   representable by the XML format described here.  These include, but
+   are not limited to policies around trademarks, or prohibition of
+   fraudulent or objectionable words.
+
    Administrators of the zones for top-level domain registries have
    historically published their LGRs using ASCII text or HTML.  The
    formatting of these documents has been loosely based on the format
@@ -193,9 +199,13 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    implement and compare due to their differing formats.  A universal
    format, such as one using a structured XML format, will assist by
    improving machine-readability, consistency, reusability and
-   maintainability of LGRs.  It also provides for more complex
-   conditional implementation of variants that reflects the known
-   requirements of current zone administrator policies.
+   maintainability of LGRs.
+
+   When used to represent simple list of permitted code points, the
+   format is quite straightforward.  At the cost of some complexity in
+   the resulting file, it also allows for an implementation of more
+   sophisticated handling of conditional variants that reflects the
+   known requirements of current zone administrator policies.
 
    Another feature of this format is that it allows many of the
    algorithms to be made explicit and machine implementable.  A
@@ -210,17 +220,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014               [Page 4]
+Davies & Freytag       Expires September 26, 2014               [Page 4]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -276,7 +276,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 5]
+Davies & Freytag       Expires September 26, 2014               [Page 5]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -332,7 +332,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 6]
+Davies & Freytag       Expires September 26, 2014               [Page 6]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -388,7 +388,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 7]
+Davies & Freytag       Expires September 26, 2014               [Page 7]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -444,7 +444,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 8]
+Davies & Freytag       Expires September 26, 2014               [Page 8]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -455,7 +455,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 4.1.  Namespace
 
-   The XML Namespace URI is [TBD].
+   The XML Namespace URI is [TBD].  [Note: the examples and schemas for
+   any non-final versions of this specification use a temporary
+   namespace]
 
 4.2.  Basic Structure
 
@@ -466,9 +468,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
            ...
        </lgr>
 
-   Within the "lgr" element rest several sub-elements.  First is a
-   "meta" element that contains all meta-data associated with the IDN
-   table, such as its authorship, what it is used for, implementation
+   Within the "lgr" element rest several sub-elements.  First is an
+   optional "meta" element that contains all meta-data associated with
+   the LGR, such as its authorship, what it is used for, implementation
    notes and references.  This is followed by a "data" element that
    contains the substantive code point data.  Finally, an optional
    "rules" element contains information on contextual and whole-label
@@ -492,32 +494,36 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    element MUST contain exactly one "data" element, optionally preceded
    by one "meta" element and optionally followed by one "rules" element.
 
-4.3.  Metadata
-
-   The "meta" element is used to express meta-data associated within the
-   LGR.  It can be used to identify the author or relevant contact
-   person, explain the intended usage of the LGR, and provide
+   In the following descriptions, required, non-repeating elements or
+   attributes are generally not called out explicitly, in contrast to
+   optional ones or those that may be repeated.
 
 
 
-Davies & Freytag        Expires September 6, 2014               [Page 9]
+Davies & Freytag       Expires September 26, 2014               [Page 9]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
+4.3.  Metadata
+
+   The optional "meta" element is used to express meta-data associated
+   within the LGR.  It can be used to identify the author or relevant
+   contact person, explain the intended usage of the LGR, and provide
    implementation notes as well as references.  The data contained
    within is not required by software consuming the LGR in order to
    calculate valid labels, or to calculate variants.  However, the
    "unicode-version" element MUST be used by a consumer of the table to
-   identify that it has the right Unicode data to perform operations on
-   the table.
+   identify that it has the correct Unicode property data to perform
+   operations on the table.
 
 4.3.1.  The version Element
 
-   The "version" element is used to uniquely identify each version of
-   the LGR being represented.  No specific format is required, but it is
-   RECOMMENDED that it be a numerical positive integer, which is
-   incremented with each revision of the file.
+   The "version" element is optional.  It is used to uniquely identify
+   each version of the LGR being represented.  No specific format is
+   required, but it is RECOMMENDED that it be a the decimal
+   representation of a single positive integer, which is incremented
+   with each revision of the file.
 
    An example of a typical first edition of a document:
 
@@ -531,9 +537,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 4.3.2.  The date Element
 
-   The "date" element is used to identify the date the LGR was posted.
-   The contents of this element MUST be a valid ISO 8601 date string as
-   described in [RFC3339].
+   The optional "date" element is used to identify the date the LGR was
+   posted.  The contents of this element MUST be a valid ISO 8601 full-
+   date string as described in [RFC3339].
 
    Example of a date:
 
@@ -541,11 +547,19 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 4.3.3.  The language Element
 
-   The "language" element signals that the LGR is associated with a
-   specific language or script.  The value of the language element must
-   be a valid language tag as described in [RFC5646].  The tag may
-   simply refer to a script if the LGR is not referring to a specific
-   language.
+   The optional "language" element signals that the LGR is associated
+   with a specific language or script.  The value of the language
+   element MUST be a valid language tag as described in [RFC5646].  The
+   tag may refer to a script plus undefined language if the LGR is not
+   referring to a specific language.
+
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 10]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
 
    Example of an English language LGR:
 
@@ -553,14 +567,6 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
    If the LGR applies to a specific script, rather than a language, the
    "und" language tag should be used followed by the relevant [RFC5646]
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 10]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
    script subtag.  For example, for a Cyrillic script LGR:
 
       <language>und-Cyrl</language>
@@ -593,14 +599,25 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    There may be multiple <domain> tags used to reflect a list of
    domains.
 
+   [TODO: consider <scope type="domain">, to broaden applicability to
+   other scopes]
+
 4.3.5.  The description Element
 
-   The "description" element is a free-form element that contains any
-   additional relevant description that is useful for the user in its
-   interpretation.  Typically, this field contains authorship
-   information, as well as additional context on how the LGR was
-   formulated (such as citations and references), and how it has been
-   applied.
+   The "description" element is an optional free-form element that
+   contains any additional relevant description that is useful for the
+   user in its interpretation.  Typically, this field contains
+   authorship information, as well as additional context on how the LGR
+   was formulated (such as citations and references), and how it has
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 11]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
+   been applied.
 
    The element has an optional "type" attribute, which refers to the
    internet media type of the enclosed data.  Typical types would be
@@ -609,14 +626,6 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    that media type.  If the description lacks a type field, it will be
    assumed to be plain text ("text/plain").
 
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 11]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
 4.3.6.  The validity-start and validity-end Elements
 
    The "validity-start" and "validity-end" elements are optional
@@ -624,55 +633,52 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    LGR become valid (i.e. are used in registry policy), and the contents
    of the LGR cease to be used.
 
-   The times should conform to the format described in section 5.6 of
-   [RFC5646].  It may be comprised of a date, or a date and time stamp.
+   The dates MUST confirm to the "full-date" format described in section
+   5.6 of [RFC3339].
+
+       <validity-start>2014-03-12</validity-start>
 
 4.3.7.  The unicode-version Element
 
-   Whenever an IDN table depends on character properties from a given
-   version of the Unicode standard, the version number used in creating
-   the LGR MUST be listed.  If any software processing the table does
-   not have access to character property data of the requisite version,
-   it MUST NOT perform any operations relating to whole-label
-   evaluation.  While, some Unicode code points may not have been
-   assigned in an earlier version, leaving properties for these code
-   points undefined, in other cases their properties may have been
-   updated in the Unicode standard between versions.  It is RECOMMENDED
-   to only reference stable or immutable properties.  For a given LGR,
-   the property values for the code points in the actual repertoire may
-   be unchanged in a later version of Unicode, even though other changes
-   were made in that standard.  If that fact can be established, it MAY
-   be acceptable to use tools based on a later version of Unicode.
+   Whenever an LGR depends on character properties from a given version
+   of the Unicode standard, the version number used in creating the LGR
+   MUST be listed in the form x.y.z, where x, y, and z are positive,
+   decimal integers (see [Unicode-Versions]).  If any software
+   processing the table does not have access to character property data
+   of the requisite version, it MUST NOT perform any operations relating
+   to whole-label evaluation relying on Unicode properties
+   (Section 6.2.2).
 
-   [[TODO: A method of indicating a range of permissible Unicode
-   versions should be described.]]
+   The value of a given Unicode property in[UAX42]may change between
+   versions, unless such change has been explicitly disallowed in
+   [Unicode-Stability].  It is RECOMMENDED to only reference stable or
+   immutable properties, or, where possible, to provide explicit lists
+   of code points instead.
 
-       <unicode-version>6.2</unicode-version>
+       <unicode-version>6.2.0</unicode-version>
 
-   It is not necessary to include a "unicode-version" element for files
-   that do not make use of Unicode properties.  Because Unicode has been
-   strictly additive from Version 1.1, the required minimum version for
-   the repertoire can be uniquely determined by checking the code point
-   values in any "cp" attributes against the "age" property in [UAX42].
+   It is not necessary to include a "unicode-version" element for LGRs
+   that do not make use of Unicode properties, however, it is
+   RECOMMENDED.
 
 4.3.8.  The references Element
 
    A Label Generation Ruleset may define a list of references which are
    used to associate various elements in the LGR to one or more
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 12]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    normative references.  In contrast, global references for the entire
    LGR can simply be part of the "description" element.
 
    References are specified in an optional "references" element contains
    any number of "reference" elements, each with a unique "id"
    attribute.  It is RECOMMENDED that the "id" attribute be an zero-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 12]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
    based integer.  The value of each "reference" element SHOULD be the
    citation of a standard, dictionary or other specification in any
    suitable format.  In addition to an "id" attribute, a reference
@@ -718,13 +724,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 13]
+Davies & Freytag       Expires September 26, 2014              [Page 13]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -755,7 +755,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    difference in processing the data, and tools reading or writing the
    XML format are not required to retain a distinction.  All attributes
    defined for a range element are as if applied to each code point
-   within.
+   within.  A range element has no child elements.
 
    Code points must be expressed in uppercase, hexadecimal, and zero
    padded to a minimum of 4 digits - in other words according to the
@@ -780,7 +780,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 14]
+Davies & Freytag       Expires September 26, 2014              [Page 14]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -788,25 +788,35 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
        <char cp="006C 00B7 006C" comment="Catalan middle dot"/>
 
    As an alternative to using sequences to define a required context, a
-   "char" or "range" element may specify conditional context in a "when"
-   attribute as described below in Section 5.2.6.  The latter method is
-   more flexible in that such conditional context is not limited to
-   specific code point in addition to allowing both prohibited as well
-   as required context to be specified.
+   "char" or "range" element may specify conditional context using an
+   optional "when" attribute as described below in Section 5.2.6.  The
+   latter method is more flexible in that such conditional context is
+   not limited to specific code point in addition to allowing both
+   prohibited as well as required context to be specified.
+
+   As described below, the "char" element, whether or not it is used for
+   a single code point, or for a sequence, may have optional child
+   elements defining variants.  Both the "char" and "range" elements can
+   take a number of optional attributes for conditional inclusion,
+   commenting, cross referencing and character tagging, as described
+   below.
 
 5.2.  Variants
 
-   While most LGRs typically only determine code point eligibility,
-   others additionally specify a mapping of code points to other code
-   points, known as "variants".  What constitutes a variant code point
-   is a matter of policy, and varies for each implementation.  The
-   following examples are intended to demonstrate the syntax; they are
-   not necessarily typical.
+   Most LGRs typically only determine simple code point eligibility, and
+   for them, the elements described so far would be the only ones
+   required for their "data" section.  Others additionally specify a
+   mapping of code points to other code points, known as "variants".
+   What constitutes a variant code point is a matter of policy, and
+   varies for each implementation.  The following examples are intended
+   to demonstrate the syntax; they are not necessarily typical.
 
 5.2.1.  Basic Variants
 
    Variant code points are specified using one of more "var" elements as
-   children of a "char" element.
+   children of a "char" element.  The target mapping is specified using
+   the "cp" attribute.  Other, optional attributes for the var element
+   are described below.
 
    For example, to map LATIN SMALL LETTER V (U+0076) as a variant of
    LATIN SMALL LETTER U (U+0075):
@@ -821,6 +831,16 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    specified as a variant for an LATIN SMALL LETTER O WITH DIAERESIS
    (U+00F6) as follows:
 
+
+
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 15]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
        <char cp="00F6">
            <var cp="006F 0065"/>
        </char>
@@ -829,17 +849,8 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    even though the variant relation is usually considered symmetric,
    that is, if A is a variant of B then B should also be a variant of A.
    The format requires that the inverse of the variant be given
-   explicitly to fully specify symmetric variant relations in the IDN
-   table.  This has the beneficial side effect of making the symmetry
-   explicit:
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 15]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
+   explicitly to fully specify symmetric variant relations in the LGR.
+   This has the beneficial side effect of making the symmetry explicit:
 
        <char cp="006F 0065">
            <var cp="00F6"/>
@@ -847,7 +858,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
    Both the source and target of a variant mapping may be sequences.  As
    it is not possible to specify variants for ranges, ranges cannot be
-   used for characters for which variant relations need to be defined.
+   used for code points for which variant relations need to be defined.
 
    All variants MUST be unique.  For a given "char" element all variants
    must have a unique combination of "cp" , "when" and "not-when"
@@ -878,6 +889,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
        </char>
 
    A char element with an empty "cp" attribute MUST specify at least one
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 16]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    variant mapping, or the results are undefined.  It is strongly
    RECOMMENDED to use a disposition of 'invalid" or equivalent when
    defining variant mappings from null sequences, so that variant
@@ -885,17 +904,10 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 5.2.3.  Dispositions
 
-   Variants may be given dispositions.  These describe the policy state
-   for a variant label that was generated using a particular variant.
-   The dispositions are the same as described below in Section 7.
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 16]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
+   Variants may be given dispositions with the optional "disp"
+   attribute.  Dispositions describe the policy state for a variant
+   label that was generated using a particular variant.  The
+   dispositions are the same as described below in Section 7.
 
    A disposition may be of any non-empty value not starting with an
    underscore and not containing spaces.  Within these restrictions a
@@ -933,6 +945,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
    This facility is typically used to give source information for code
    points or variant relations.  This information is ignored when
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 17]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    machine-processing an LGR.  Specifying a "ref" attribute on a range
    element is equivalent to specifying the same ref attribute on every
    single code point of the range.  All reference identifiers MUST be
@@ -941,17 +961,12 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    order.
 
    In addition to "char", "range" and "var" elements in the data
-   section, a ref attribute may be present for literals ("char" inside a
-   rule) as well as rules and class definitions, but not for named
-   references to them.
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 17]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
+   section, a ref attribute may be present in the rules section for
+   these elements: actions, literals ("char" inside a rule), as well as
+   for definitions of rules and classes, but not for named references to
+   them.  In other words, the use of the "by-ref" and "ref" attributes
+   are mutually exclusive.  There are no "ref" attributes permitted on
+   any element in the metadata.
 
 5.2.5.  Variants with Reflexive Mapping
 
@@ -986,6 +1001,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
          <var cp="3473" disp="preferred" ref="0" />
        </char>
 
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 18]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    Having established the disposition values in this way, a set of
    actions could be defined that return a disposition of "allocate" or
    "activate" for a label consisting exclusively of variants with
@@ -1000,14 +1023,6 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    based on which variant mappings were executed in order to generate
    each of them.  (For details on how to generate variants and evaluate
    dispositions, see Section 8.)
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 18]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
 
 5.2.6.  Conditional Variants
 
@@ -1042,6 +1057,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
            <var cp="0673" when="arabic-final"/>
        </char>
 
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 19]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    Only a single "when" or "not-when" attribute can be applied to any
    "var" element, however, multiple "var" elements using the same
    mapping, but different "when" or "not-when" attributes may be
@@ -1057,27 +1080,20 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    As described in Section 5.1 a "when" or "not-when" attribute may also
    be specified to any "char" element in the data section to define
    required or prohibited contextual conditions under which a code point
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 19]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
    is valid.
 
 5.2.7.  The comment Attribute
 
-   Any "char", "range" or "variant" element may contain a "comment"
-   attribute.  The contents of a comment attribute are free-form plain
-   text.  Comments are ignored in machine processing of the table.
-   Comment attributes may also be placed on certain elements in the
-   "rules" section of the document, such as actions and literals
-   ("char"), as well as definitions of classes and rules, but not named
-   references to them.  Finally, in the metadata the "version" and
-   "reference" elements may have comment attributes to match the syntax
-   in [RFC3743]
+   Any "char", "range" or "variant" element in the data section may
+   contain an optional "comment" attribute.  The contents of a comment
+   attribute are free-form plain text.  Comments are ignored in machine
+   processing of the table.  Comment attributes may also be placed on
+   all elements in the "rules" section of the document, such as actions
+   and match operators, such as literals ("char"), as well as
+   definitions of classes and rules, but not on child elements of the
+   "class" element.  Finally, in the metadata, only the "version" and
+   "reference" elements may have comment attributes (to match the syntax
+   in [RFC3743]).
 
 5.3.  Code Point Tagging
 
@@ -1087,16 +1103,24 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    ruleset.
 
    For more complex registry rules, there may be a need to discern on or
-   more subsets code points.  This can be accomplished by applying a
-   "tag" attribute to char or range elements, thereby defining character
-   classes (see Section 6.2.1) which can then be used in whole label
-   evaluation rules (see Section 6.3.2).  Tag attributes may be of any
-   value, and multiple values are separated by space.  Code point
+   more subsets code points.  This can be accomplished by applying an
+   optional "tag" attribute to char or range elements, thereby defining
+   character classes (see Section 6.2.1) which can then be used in whole
+   label evaluation rules (see Section 6.3.2).  Tag attributes may be of
+   any value, and multiple values are separated by space.  Code point
    sequences not being proper members of a set of code points, a "tag"
    attribute MUST NOT be present in a char element defining a code point
    sequence.
 
    A simple example of tag use would be to label preferred code points
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 20]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    (as in [RFC3743]) by adding "preferred" to the tag, and then using a
    rule such as shown in Section 6.3.1 to single out labels for
    allocation that consist entirely of such preferred code points.  For
@@ -1116,7 +1140,39 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 20]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 21]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1172,7 +1228,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 21]
+Davies & Freytag       Expires September 26, 2014              [Page 22]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1202,38 +1258,53 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
        </class>
        ...
        <rule>
-           <class byref="example" />
+           <class by-ref="example" />
        </rule>
 
-   An empty "class" element with a "byref" attribute is a reference to
-   an existing named class.  Such an element MUST NOT have either
-   "comment" or "ref" attributes as those may only be placed on a class
-   definition.  A "byref" and a "name" attribute MUST NOT occur in the
-   same element.
+   An empty "class" element with a "by-ref" attribute is a reference to
+   an existing named class.  A "by-ref" attribute is mutually exclusive
+   with "name", "from-tag", "property" or "ref" attributes.
 
 6.2.1.  Tag-based Classes
 
    The char element may contain a tag attribute that consists of one or
-   more space separated identifiers, for example:
+   more space separated tag values, for example:
 
        <char cp="0061" tag="letter lower"/>
        <char cp="4E00" tag="letter"/>
 
    This defines two tags for use with code point U+0061, the tag
-   "letter" and the tag "lower".  Implicitly, this defines two named
-   character classes, the class "letter" and the class "lower", the
-   first with 0061 and 4E00 as elements and the latter with 0061, but
-   not 4E00 as an element.  The document MUST not contain an explicitly
-   named class definition of the same name as an implicitly named tag-
+   "letter" and the tag "lower".  Use
+
+       <class name="letter" from-tag="letter">
+       <class name="lower" from-tag="lower" />
+
+   to define two named character classes, "letter" and "lower",
+   containing all code points with the respective tags, the first with
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 22]
+Davies & Freytag       Expires September 26, 2014              [Page 23]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-   derived class.
+   0061 and 4E00 as elements and the latter with 0061, but not 4E00 as
+   an element.  The name attribute may be omitted for an anonymous in-
+   place definition of a nested, tag-based class.  The "from-tag"
+   attribute is mutually exclusive to the "by-ref" attribute.
+
+   Tag values are formally free-form, except they cannot contain spaces.
+   However, best practice would be to follow the identifier syntax,
+   perhaps with the addition of a few punctuation symbols, such as
+   colon.
+
+   If the document contains no "char" or "range" elements with a
+   corresponding tag, the character class represents the empty set.
+   This is valid, to allow a common "rules" element to be shared across
+   files.  However, it is RECOMMENDED that implementations allow for a
+   warning to ensure that referring to an undefined tag in this way is
+   intentional.
 
 6.2.2.  Unicode Property-based Classes
 
@@ -1247,14 +1318,44 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    canonical combining class (ccc) value is 9.  This value of the ccc is
    assigned to all code points that encode viramas.  The string "ccc" is
    the short-alias for the canonical combining class, as defined in the
-   Unicode Character Database [UAX42].
+   Unicode Character Database [UAX42].  The use of the "property"
+   attribute is mutually exclusive to the "by-ref" or "from-tag"
+   attributes.
 
    Unicode properties may, in principle, change between versions of the
    Unicode Standard.  However, the values assigned for a given version
-   are fixed.  If Unicode Properties are used, a minimum Unicode version
-   MUST be declared in the header.  (Note, some Unicode properties are
-   by definition stable across versions and do not change once
-   assigned.)
+   are fixed.  If Unicode Properties are used, a Unicode version MUST be
+   declared in the "unicode-version" element in the header.  (Note, some
+   Unicode properties are by definition stable across versions and do
+   not change once assigned (see [Unicode-Stability].)
+
+   If full support of all Unicode properties is not available, support
+   for the following minimal set of Unicode properties is RECOMMENDED:
+
+   o  General Category (gc)
+
+   o  Script (sc)
+
+
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 24]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
+   o  Canonical Combining Class (ccc)
+
+   o  Bidi Class (bc)
+
+   o  Arabic Joining Type (jt)
+
+   o  Indic Syllabic Category (InSC)
+
+   o  Deprecated (Dep)
+
+   The short name for each property is given in parentheses.
 
 6.2.3.  Explicitly Declared Classes
 
@@ -1280,15 +1381,6 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    consecutive code points.  The same declaration can be made as
    follows:
 
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 23]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
        <class name="abc">
            <range first-cp="0061" last-cp="0063"/>
        </class>
@@ -1301,11 +1393,20 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
        <class name="abc">0061 0062-0063</class>
 
    would be a more streamlined expression of the same class using the
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 25]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    shorthand notation.
 
    A class element either contains any combination of char and range
    elements and no other elements, or a text node with the shorthand
-   notation.
+   notation.  No attributes are permitted on char and range elements
+   when used as child elements of a class element.
 
 6.2.4.  Combined Classes
 
@@ -1315,60 +1416,30 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    several character classes is itself a class, for example.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 24]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
    +-------------------+---------------------------------------------+
    | Logical Operation | Example                                     |
    +-------------------+---------------------------------------------+
-   | Complement        | <complement><class byref="xxx"></complement>|
+   | Complement        | <complement><class by-ref="xxx"></complement>|
    +-------------------+---------------------------------------------+
    | Union             | <union>                                     |
-   |                   |    <class byref="class-1"/>                 |
-   |                   |    <class byref="class-2"/>                 |
-   |                   |    <class byref="class-3"/>                 |
+   |                   |    <class by-ref="class-1"/>                |
+   |                   |    <class by-ref="class-2"/>                |
+   |                   |    <class by-ref="class-3"/>                |
    |                   | </union>                                    |
    +-------------------+---------------------------------------------+
    | Intersection      | <intersection>                              |
-   |                   |    <class byref="class-1"/>                 |
-   |                   |    <class byref="class-2"/>                 |
+   |                   |    <class by-ref="class-1"/>                |
+   |                   |    <class by-ref="class-2"/>                |
    |                   | </intersection>                             |
    +-------------------+---------------------------------------------+
    | Difference        | <difference>                                |
-   |                   |    <class byref="class-1"/>                 |
-   |                   |    <class byref="class-2"/>                 |
+   |                   |    <class by-ref="class-1"/>                |
+   |                   |    <class by-ref="class-2"/>                |
    |                   | </difference>                               |
    +-------------------+---------------------------------------------+
    | Symmetric         | <symmetric-difference>                      |
-   | Difference        |    <class byref="class-1"/>                 |
-   |                   |    <class byref="class-2"/>                 |
+   | Difference        |    <class by-ref="class-1"/>                |
+   |                   |    <class by-ref="class-2"/>                |
    |                   | </symmetric-difference>                     |
    +-------------------+---------------------------------------------+
 
@@ -1379,40 +1450,39 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    element MUST contain precisely two, and a "union" element MUST
    contain two or more of these elements.
 
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 26]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    An anonymous combined class can be defined directly inside a rule or
    of the match operator elements that allow child elements (see
    Section 6.3.2) by using the set combination as the outer element.
 
        <rule>
            <union>
-               <class byref="xxx"/>
-               <class byref="yyy"/>
+               <class by-ref="xxx"/>
+               <class by-ref="yyy"/>
            </union>
        </rule>
 
    The example shows the definition of an anonymous combined class that
    represents the union of classes "xxx" and "yyy".  There is no need to
    wrap this union inside another class element, and, in fact, set
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 25]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
    combination elements MUST NOT be nested inside a "class" element.
 
    Lastly, to create a named combined class that can be referenced in
-   other classes or in rules as <class byref="xxxyyy"/>, add a "name"
+   other classes or in rules as <class by-ref="xxxyyy"/>, add a "name"
    attribute to the set combination element, for example <union
    name="xxxyyy" /> and place it at the top level below the "rules"
    element.
 
     <rules>
        <union class name="xxxyyy">
-           <class byref="xxx"/>
-           <class byref="yyy"/>
+           <class by-ref="xxx"/>
+           <class by-ref="yyy"/>
        </union>
          . . .
      </ rules>
@@ -1420,8 +1490,8 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    Because (as for sets) a combination of classes is itself a class, no
    matter how a class is created, a reference to it always uses the
    "class" element.  That is, a named class is always referenced via an
-   empty "class" element using the "byref" attribute containing the name
-   of the class to be referenced.
+   empty "class" element using the "by-ref" attribute containing the
+   name of the class to be referenced.
 
 6.3.  Whole Label and Context Rules
 
@@ -1435,6 +1505,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    A matching rule is defined by a "rule" element, the child elements of
    which are one of the match operators from the table below.  In
    evaluating a rule, each child element is matched in order.  Rule
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 27]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
    elements may be nested.
 
    Rules may optionally be named using a "name" attribute containing a
@@ -1447,19 +1525,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    A simple rule to match a label where all characters are members of
    the class "preferred":
 
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 26]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
        <rule name="preferred">
-          <start />
-              <class byref="preferred" count="1+"/>
+           <start />
+           <class by-ref="preferred" count="1+"/>
            <end />
        </rule>
 
@@ -1496,19 +1564,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 27]
+Davies & Freytag       Expires September 26, 2014              [Page 28]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1519,20 +1575,20 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    | logical    | any         | <any />                            |
    |            +-------------+------------------------------------+
    |            | choice      | <choice>                           |
-   |            |             |  <rule byref="alternative1"/>      |
-   |            |             |  <rule byref="alternative2"/>      |
+   |            |             |  <rule by-ref="alternative1"/>     |
+   |            |             |  <rule by-ref="alternative2"/>     |
    |            |             | </choice>                          |
    +--------------------------+------------------------------------+
-   | location   | start       | <start />                          |
+   | positional | start       | <start />                          |
    |            +-------------+------------------------------------+
    |            | end         | <end />                            |
    +--------------------------+------------------------------------+
    | literal    | char        | <char cp="0061 0062 0063" />       |
    +--------------------------+------------------------------------+
-   | set        | class       | <class byref="class1" />           |
+   | set        | class       | <class by-ref="class1" />          |
    |            |             | <class>0061 0064-0065</class>      |
    +--------------------------+------------------------------------+
-   | group      | rule        | <rule byref="rule1" />             |
+   | group      | rule        | <rule by-ref="rule1" />            |
    |            |             | <rule><any /><rule />              |
    +--------------------------+------------------------------------+
    | contextual | anchor      | <anchor />                         |
@@ -1542,9 +1598,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    |            | look-behind | <look-behind><any /></look-behind> |
    +--------------------------+------------------------------------+
 
-   Any expression defining an anonymous class, including any of the set
-   combination operators (see Section 6.2.4), in addition to references
-   to a named classes.
+   Any element defining an anonymous class can be used as a match
+   operator, including any of the set combination operators (see
+   Section 6.2.4) as well as references to a named classes.
 
    All match operators shown as empty elements in the Examples column of
    the table above do not support child elements of their own; otherwise
@@ -1553,9 +1609,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 6.3.3.  The count Attribute
 
-   The count attribute specifies the minimally required or maximal
-   permitted number of times a match operator is used to match input.
-   If the count attribute is
+   The optional count attribute specifies the minimally required or
+   maximal permitted number of times a match operator is used to match
+   input.  If the count attribute is
 
    n or n:n  the match operator matches the input exactly n times, where
         n is 1 or greater.
@@ -1564,7 +1620,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 28]
+Davies & Freytag       Expires September 26, 2014              [Page 29]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1584,60 +1640,62 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    a match of the remainder of the rule.
 
    The count attribute MUST NOT be applied to match operators of type
-   "start", "end", "anchor", "look-ahead" and "look-behind".  It may be
-   applied to "class" and "rule" elements only if they do not have a
-   "name" attribute, that is to anonymous rules and classes or any
-   invocation of predefined rules or classes by reference.
+   "start", "end", "anchor", "look-ahead" and "look-behind" or to any
+   operators, such as "rule" or "choice" that contain them, whether the
+   latter are declared in place or used by reference.  The count
+   attribute may be applied to "class" and "rule" elements only if they
+   do not have a "name" attribute, that is to anonymous rules and
+   classes or any invocation of predefined rules or classes by
+   reference.
 
-6.3.4.  The name and byref Attributes
+   The optional count attribute MAY be applied to match operators of
+   type "any", "char" and "class", as well as to match operators
+   "choice" and "rule", as long as they contain none of the operators
+   "start", "end", "anchor", "look-ahead" and "look-behind" as direct or
+   indirect child elements.  The same requirement applies recursively to
+   any "rule" element referenced inside a "choice" or "rule" with a
+   count attribute.  The count attribute is mutually exclusive to the
+   "name" attribute.
 
-   Rules (and classes) may be named using a "name" attribute and can
-   then be nested inside other match operators only by reference.  To
-   reference a named rule (or class) use a rule or class element with
-   the "byref" attribute containing the name of the referenced element.
-   It is an error to reference a rule or class for which the definition
-   has not been seen, or that is not an implicitly defined tag-based
-   class.  A rule or class element with a "byref" attribute does not
-   have child elements, nor any "ref" or "comment" attributes.
+6.3.4.  The name and by-ref Attributes
+
+   Rules (and classes) declared as immediate child elements of the
+   "rules" element MUST be named using a "name" attribute, all other
+   instances of rules and classes MUST NOT be named.  Named rules and
+   classes can be nested inside other match operators by reference.
+
+   To reference a named rule (or class) use a rule or class element with
+   an optional "by-ref" attribute containing the name of the referenced
+   element.  It is an error to reference a rule or class for which the
+   definition has not been seen.  The use of the "by-ref" for a rule or
+   class element is mutually exclusive with the use of the "name"
+   attribute, as well as with the presence of any child elements.
 
    Here's an example of a rule requiring that all labels be letters
    (optionally followed by combining marks) and possibly digits.  The
-   example shows rules and classes referenced by name.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 29]
+Davies & Freytag       Expires September 26, 2014              [Page 30]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
+
+   example shows rules and classes referenced by name.
 
        <class name="letter" property="gc:L"/>
        <class name="combining-mark" property="gc:M"/>
        <class name="digit" property="gc:Nd">
        <rule name="letter-grapheme">
-          <class byref="letter" count="1+"/>
-          <class byref="combining-mark" count="0+"/>
+          <class by-ref="letter" count="1+"/>
+          <class by-ref="combining-mark" count="0+"/>
        </rule>
        <rule name="leading-letter" >
           <start />
-          <rule byref="letter-grapheme" count="1"/>
+          <rule by-ref="letter-grapheme" count="1"/>
           <choice count="0+">
-              <rule byref="letter-grapheme" count="0+"/>
-              <class byref="digit" count="0+"/>
+              <rule by-ref="letter-grapheme" count="0+"/>
+              <class by-ref="digit" count="0+"/>
           </choice>
           <end />
        </rule>
@@ -1649,9 +1707,9 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
        <rule name="ldh">
           <choice count="1+">
-              <class byref="letters"/>
-              <class byref="digits"/>
-              <char cp="002D"/>
+              <class by-ref="letters"/>
+              <class by-ref="digits"/>
+              <char cp="002D" comment="literal HYPHEN"/>
           </choice>
        </rule>
 
@@ -1666,23 +1724,25 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    sequence.  It is defined by a "char" element, with the code point or
    sequence to be matched given by the "cp" attribute.  When used as a
    literal, a "char" element may contain a "count" in addition to the
-   "cp" attribute, comments or references, but no conditional contexts
-   or child elements.
+   "cp" attribute and optional "comment" or "ref" attributes.  No other
+   attributes or child elements. are permitted.
+
+
+
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 31]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
 
 6.3.7.  The any Element
 
    The "any" element matches any single code point.  It may have a
    "count" attribute.  For an example see Section 6.3.9
 
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 30]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
-   The "any" element" may have neither a "comment" nor a "ref"
-   attribute.
+   Unlike a literal, the "any" element" may not have a "ref" attribute.
 
 6.3.8.  The start and end Elements
 
@@ -1700,7 +1760,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    with a digit, the rule needs to describe only the initial part of a
    label.
 
-   Start and end elements do not have a "count" or any other attribute.
+   Start and end elements each occur at most once in a rule, except if
+   nested inside a "choice" element in such a way that in matching each
+   alternative at most one occurrence of each is encountered.
+   Otherwise, the result is undefined; as is any case where start and
+   end elements not encountered as first or last element, respectively,
+   in matching a rule.  Start and end elements do not have a "count" or
+   any other attribute.  If any enclosing match operator has a count
+   attribute the results are undefined.
 
 6.3.9.  Example rule from IDNA2008
 
@@ -1721,18 +1788,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 31]
+Davies & Freytag       Expires September 26, 2014              [Page 32]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1747,14 +1803,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
           <rule name="mixed-digits">
              <choice>
                <rule>
-                   <class byref="arabic-indic-digits"/>
+                   <class by-ref="arabic-indic-digits"/>
                    <any count="0+"/>
-                   <class byref="extended-arabic-indic-digits"/>
+                   <class by-ref="extended-arabic-indic-digits"/>
                 </rule>
                 <rule>
-                   <class byref="extended-arabic-indic-digits"/>
+                   <class by-ref="extended-arabic-indic-digits"/>
                    <any count="0+"/>
-                   <class byref="arabic-indic-digits"/>
+                   <class by-ref="arabic-indic-digits"/>
                 </rule>
              </choice>
           </rule>
@@ -1788,7 +1844,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 32]
+Davies & Freytag       Expires September 26, 2014              [Page 33]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1799,7 +1855,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
        <rule name="preceding-greek">
            <anchor/>
            <look-ahead>
-               <class byref="greek-script"/>
+               <class by-ref="greek-script"/>
            </look-ahead>
        </rule>
 
@@ -1844,7 +1900,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 33]
+Davies & Freytag       Expires September 26, 2014              [Page 34]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1859,29 +1915,31 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
            <choice>
              <start/>
              <rule>
-               <class byref="transparent" count="0+"/>
-               <class byref="non-joining"/>
+               <class by-ref="transparent" count="0+"/>
+               <class by-ref="non-joining"/>
              </rule>
            </choice>
          </look-behind>
          <anchor/>
          <look-ahead>
-           <class byref="transparent" count="0+" />
+           <class by-ref="transparent" count="0+" />
            <choice>
-             <class byref="right-joining" />
-             <class byref="dual-joining" />
+             <class by-ref="right-joining" />
+             <class by-ref="dual-joining" />
            </choice>
          </look-ahead>
        </rule>
 
-   A when rule contains any combination of "look-behind" , "anchor" and
-   "look-ahead" elements in that order.  Each of these elements occurs
-   at most once, except if nested inside a "choice" element in such a
-   way that each in matching each alternative has only one occurrence is
-   encountered.  Otherwise, the result is undefined.  None of these
-   elements takes a "count" attribute.  If a context rule contains a
-   look-ahead or look-behind element, it MUST contain an "anchor"
-   element.
+   A "when rule" contains any combination of "look-behind" , "anchor"
+   and "look-ahead" elements in that order.  Each of these elements
+   occurs at most once, except if nested inside a "choice" element in
+   such a way that in matching each alternative at most one occurrence
+   of each is encountered.  Otherwise, the result is undefined.  None of
+   these elements takes a "count" attribute, nor does any enclosing
+   match operator.  Otherwise, the result is undefined.  If a context
+   rule contains a look-ahead or look-behind element, it MUST contain an
+   "anchor" element.  If, because of a choice element, a required anchor
+   is not actually encountered, the results are undefined.
 
 6.4.3.  Omitting the anchor Element
 
@@ -1898,9 +1956,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 34]
+Davies & Freytag       Expires September 26, 2014              [Page 35]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1916,8 +1972,10 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
    The Katakana middle dot is used only with Han, Katakana or Hiragana.
    The corresponding When Rule requires that at least one code point in
-   the label is in one of these scripts.  (Note that the Katakana middle
-   dot itself is of script Common).
+   the label is in one of these scripts, but the position of that code
+   point is independent of the location of the middle dot and no anchor
+   therefore required.  (Note that the Katakana middle dot itself is of
+   script Common).
 
 
 
@@ -1954,9 +2012,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 35]
+Davies & Freytag       Expires September 26, 2014              [Page 36]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2012,7 +2068,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 36]
+Davies & Freytag       Expires September 26, 2014              [Page 37]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2068,7 +2124,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 37]
+Davies & Freytag       Expires September 26, 2014              [Page 38]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2124,7 +2180,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 38]
+Davies & Freytag       Expires September 26, 2014              [Page 39]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2180,7 +2236,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 39]
+Davies & Freytag       Expires September 26, 2014              [Page 40]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2236,7 +2292,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 40]
+Davies & Freytag       Expires September 26, 2014              [Page 41]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2245,11 +2301,11 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 8.1.  Determining Eligibility for a Label
 
-   In order to use a table to test a specific domain label for
-   membership in the LGR, a consumer of the LGR must iterate through
-   each code point within a given U-label, and test that each code point
-   is a member of the LGR.  If any code point is not a member of the
-   LGR, it shall be deemed as not eligible in accordance with the table.
+   In order to use a table to test a specific label for membership in
+   the LGR, a consumer of the LGR must iterate through each code point
+   within a given U-label, and test that each code point is a member of
+   the LGR.  If any code point is not a member of the LGR, it shall be
+   deemed as not eligible in accordance with the table.
 
    A code point is deemed a member of the table when it is listed with
    the "char" element, and all necessary condition listed in "when" or
@@ -2257,8 +2313,8 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
    A label must also not trigger any action that results in a
    disposition of "invalid" or equivalent, otherwise it is deemed not
-   eligible.  (This step may be deferred, until dispositions are
-   determined)
+   eligible.  (This step may need to be deferred, until variant code
+   point dispositions have been determined)
 
    For LGRs that contain reflexive variant mappings (defined in
    Section 5.2.5) the evaluation of dispositions must be deferred until
@@ -2292,7 +2348,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 41]
+Davies & Freytag       Expires September 26, 2014              [Page 42]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2348,7 +2404,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 42]
+Davies & Freytag       Expires September 26, 2014              [Page 43]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2404,7 +2460,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 43]
+Davies & Freytag       Expires September 26, 2014              [Page 44]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2460,7 +2516,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 44]
+Davies & Freytag       Expires September 26, 2014              [Page 45]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2516,7 +2572,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 45]
+Davies & Freytag       Expires September 26, 2014              [Page 46]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2560,119 +2616,195 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
    [UAX42]    Unicode Consortium, "Unicode Character Database in XML".
 
+   [Unicode-Stability]
+              Unicode Consortium, "Unicode Encoding Stability Policy,
+              Property Value Stability".
+
+   [Unicode-Versions]
+              Unicode Consortium, "Unicode Version Numbering".
+
    [XML]      World Wide Web Consortium, "Extensible Markup Language
               (XML) 1.0".
 
 
 
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 46]
+Davies & Freytag       Expires September 26, 2014              [Page 47]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-Appendix A.  Example Table
+Appendix A.  Example Tables
 
-   The following presents a sample XML LGR showing a near complete
-   collection of most of the elements and attributes defined in this
-   specification in somewhat typical context.
+   The following presents a minimal LGR table defining the lower case
+   LDH (letter-digit-hyphen) repertoire and containing no rules or
+   description elements.  Many simple LGR tables will look quite
+   similar, except that they would contain some meta data.
 
-   <?xml version="1.0" encoding="utf-8"?>
-   <lgr xmlns="http://www.iana.org/lgr/0.1">
+<?xml version="1.0" encoding="utf-8"?>
+<lgr xmlns="http://www.iana.org/lgr/0.1">
+<data>
+    <char cp="002D" comment="HYPHEN (-)" />
+    <range first-cp="0030" last-cp="0039" comment="DIGIT ZERO ('0') - DIGIT NINE ('9')" />
+    <range first-cp="0061" last-cp="007A" comment="LATIN SMALL LETTER A ('a') - LATTIN SMALL LETTER Z ('z')" />
+</data>
+</lgr>
 
-     <meta>
-       <version>1</version>
-       <date>2010-01-01</date>
-       <language>sv</language>
-       <domain>example</domain>
-       <description type="text/html">
-           <![CDATA[
-           This language table was developed with the
-           <a href="http://swedish.example/">Swedish
-           examples institute</a>.
-           ]]>
-       </description>
-       <references>
-         <reference id="0" >The Unicode Standard 6.3</reference>
-         <reference id="1" >RFC 5892</reference>
-         <reference id="2" >Big-5: Computer Chinese Glyph and Character
-            Code Mapping Table, Technical Report C-26, 1984</reference>
-       </references>
-    </meta>
-     <data>
-       <char cp="002D" ref="1" comment="HYPHEN" />
-       <range first-cp="0030" last-cp="0039" ref="1" tag="digit" />
-       <range first-cp="0061" last-cp="007A" ref ="1" tag="letter" />
-       <range first-cp="0370" last-cp="0380"  />
-       <char cp="00B7" when="catalan-middle-dot" />
-       <char cp="200D" when="joiner" />
-       <char cp="4E16" tag="preferred" ref="0">
-         <var cp="4E17" disp="block" ref="2" />
-         <var cp="534B" disp="allocate" ref="2" />
-       </char>
-       <char cp="4E17" ref="0">
-         <var cp="4E16" disp="allocate" ref="2" />
-         <var cp="534B" disp="allocate" ref="2" />
-       </char>
-       <char cp="534B" ref="0">
-         <var cp="4E16" disp="allocate" ref="2" />
-         <var cp="4E17" disp="block" ref="2" />
-       </char>
-     </data>
+   The following sample LGR shows a more complete collection of the
+   elements and attributes defined in this specification in a somewhat
+   typical context.
 
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This example uses a large subset of the features of this
+     specification. It does not include every set operator,
+     match operator element, or action trigger attribute, their
+     use being largely parallel to the ones demonstrated. -->
+
+<lgr xmlns="http://www.iana.org/lgr/0.1">
+<!-- meta element with all optional elements -->
+  <meta>
+    <version comment="initial version">1</version>
+    <date>2010-01-01</date>
+    <language>sv</language>
+    <domain>example</domain>
+    <validity-start>2010-01-01</validity-start>
+    <validity-end>2013-12-31</validity-end>
+    <description type="text/html">
+        <![CDATA[
+        This language table was developed with the
+        <a href="http://swedish.example/">Swedish
+        examples institute</a>.
+        ]]>
+    </description>
+    <unicode-version>6.3.0</unicode-version>
+    <references>
+      <reference id="0" comment="the most recent" >The Unicode Standard 6.2</reference>
+      <reference id="1" >RFC 5892</reference>
+      <reference id="2" >Big-5: Computer Chinese Glyph and Character
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 47]
+
+Davies & Freytag       Expires September 26, 2014              [Page 48]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-     <rules>
-       <class name="virama" property="ccc:9" />
-       <rule name="catalan-middle-dot" ref="0">
-           <look-behind>
-               <char cp="006C" />
-           </look-behind>
-           <anchor />
-           <look-ahead>
-               <char cp="006C" />
-           </look-ahead>
-       </rule>
-       <rule name="joiner"  ref="1" >
-           <look-behind>
-               <class byref="virama" />
-           </look-behind>
-       </rule>
-       <rule name="example" >
-           <difference>
-               <complement>
-                   <class comment="use shorthand class notation">
-                       006E 0070-0078
-                   </class>
-               </omplement>
-               <class comment="use standard notation">
-                   <range first-cp="0000" last-cp="001F" />
-                   <char cp="007F" />
-               </class>
-           </difference>
-       </rule>
-       <rule name="preferred"
-             comment="non-empty label of preferred code points">
-           <class byref="preferred" count="1+" />
-       </rule>
-       <action disp="example" match="example" />
-       <action disp="block" any-variant="block" />
-       <action disp="activate" all-variants="allocate"
-             match="preferred" />
-       <action disp="activate"  match="preferred" />
-     </rules>
-   </lgr>
+         Code Mapping Table, Technical Report C-26, 1984</reference>
+    </references>
+ </meta>
+ <!-- the data section describing the repertoire -->
+  <data>
+    <!-- single code point "char" element -->
+    <char cp="002D" ref="1" comment="HYPHEN" />
+
+    <!-- range elements for contiguous code points,  with tags -->
+    <range first-cp="0030" last-cp="0039" ref="1" tag="digit" />
+    <range first-cp="0061" last-cp="007A" ref ="1" tag="letter" />
+
+    <!-- code point sequence -->
+    <char cp="006C 00B7 006C" comment="catalan middle dot" />
+
+    <!-- alternatively use a when rule -->
+    <char cp="00B7" when="catalan-middle-dot" />
+
+     <!-- code point with context rule -->
+    <char cp="200D" when="joiner" ref="2" />
+
+    <!-- code points with variants -->
+    <char cp="4E16" tag="preferred" ref="0">
+      <var cp="4E17" disp="block" ref="2" />
+      <var cp="534B" disp="allocate" ref="2" />
+    </char>
+    <char cp="4E17" ref="0">
+      <var cp="4E16" disp="allocate" ref="2" />
+      <var cp="534B" disp="allocate" ref="2" />
+    </char>
+    <char cp="534B" ref="0">
+      <var cp="4E16" disp="allocate" ref="2" />
+      <var cp="4E17" disp="block" ref="2" />
+    </char>
+  </data>
+
+  <!-- Context and whole label rules -->
+  <rules>
+    <!-- Require the given code point to be between two 006C -->
+    <rule name="catalan-middle-dot" ref="0">
+        <look-behind>
+            <char cp="006C" />
+        </look-behind>
+        <anchor />
+        <look-ahead>
+            <char cp="006C" />
+        </look-ahead>
+    </rule>
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 49]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
+    <!-- example of a context rule based on property -->
+    <class name="virama" property="ccc:9" />
+    <rule name="joiner"  ref="1" >
+        <look-behind>
+            <class by-ref="virama" />
+        </look-behind>
+        <anchor />
+    </rule>
+
+    <!-- example of using set operators -->
+
+    <!-- Subtract vowels from letters to get
+         consonant, demonstrating the different
+         set notations and the difference operator -->
+    <difference name="consonants">
+         <!-- use standard notation -->
+         <class comment="all letters">
+           <char cp="0061" />
+           <range first-cp="0062" last-cp="0072" />
+         </class>
+         <!-- use shorthand notation -->
+         <class comment="all vowels">
+                 0061 0065 0069 006F 0075-0075
+         </class>
+     </difference>
+
+     <!-- by using the start and end, rule matches whole label -->
+     <rule name="three-or-more-consonants">
+         <start />
+         <!-- reference the class defined by the difference
+              and require three or more matches -->
+         <class by-ref="consonants" count="3+" />
+         <end />
+    </rule>
+
+    <!-- rule for negative matching -->
+    <rule name="non-preferred"
+          comment="matches any non-preferred code point">
+        <complement comment="non-preferred" >
+            <class from-tag="preferred" />
+        </complement>
+    </rule>
+
+   <!-- actions triggered by matching rules and/or
+        variant dispositions -->
+    <action disp="consonants"
+            match="three-or-more-consonants" />
+    <action disp="block" any-variant="block" />
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 50]
+
+Internet-Draft      Label Generation Rulesets in XML          March 2014
+
+
+    <action disp="activate" all-variants="allocate"
+            not-match="non-preferred" />
+  </rules>
+</lgr>
 
 
 
@@ -2684,7 +2816,43 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 48]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies & Freytag       Expires September 26, 2014              [Page 51]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2740,7 +2908,7 @@ Appendix B.  How to Translate RFC 3743 based Tables into the XML Format
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 49]
+Davies & Freytag       Expires September 26, 2014              [Page 52]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2796,7 +2964,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 50]
+Davies & Freytag       Expires September 26, 2014              [Page 53]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2814,8 +2982,8 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
    Section 5.2.5.
 
    Given a label "U+4E7E U+4E81", the following labels would be ruled
-   allocatable under [RFC3743] based on how it is commonly implemented
-   in domain registries:
+   allocatable under [RFC3743] based on how that standard is commonly
+   implemented in domain registries:
 
        Original label:     U+4E7E U+4E81
        Simplified label 1: U+4E7E U+5E72
@@ -2852,7 +3020,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 51]
+Davies & Freytag       Expires September 26, 2014              [Page 54]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2908,7 +3076,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 52]
+Davies & Freytag       Expires September 26, 2014              [Page 55]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2964,7 +3132,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 53]
+Davies & Freytag       Expires September 26, 2014              [Page 56]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3020,38 +3188,38 @@ Appendix C.  Indic Syllable Structure Example
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 54]
+Davies & Freytag       Expires September 26, 2014              [Page 57]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
     <rule name="consonant-with-optional-nukta">
-        <class byref="InSC:Consonant" />
-        <class byref="InSC:Nukta"  count="0:1"/>
+        <class by-ref="InSC:Consonant" />
+        <class by-ref="InSC:Nukta"  count="0:1"/>
     </rule>
     <rule name="independent-vowel-with-optional-modifier">
-        <class byref="InSC:Vowel_Independent" />
-        <class byref="vowel-modifier"  count="0:1" />
+        <class by-ref="InSC:Vowel_Independent" />
+        <class by-ref="vowel-modifier"  count="0:1" />
     </rule>
     <rule name="optional-dependent-vowel-with-optional-modifier" >
-      <class byref="InSC:Vowel_Dependent" count="0:1" />
-      <class byref="vowel-modifier" count="0:1"  />
+      <class by-ref="InSC:Vowel_Dependent" count="0:1" />
+      <class by-ref="vowel-modifier" count="0:1"  />
     </rule>
     <rule name="consonant-cluster">
       <rule count="0+">
-        <rule byref="consonant-with-optional-nukta" />
-        <class byref="halant" />
+        <rule by-ref="consonant-with-optional-nukta" />
+        <class by-ref="halant" />
       </rule>
-      <rule byref="consonant-with-optional-nukta" />
+      <rule by-ref="consonant-with-optional-nukta" />
       <choice>
-        <class byref="halant" />
-        <rule byref="optional-dependent-vowel-with-optional-modifier" />
+        <class by-ref="halant" />
+        <rule by-ref="optional-dependent-vowel-with-optional-modifier" />
       </choice>
     </rule>
     <rule name="akshara">
       <choice>
-        <rule byref="independent-vowel-with-optional-modifier" />
-        <rule byref="consonant-cluster" />
+        <rule by-ref="independent-vowel-with-optional-modifier" />
+        <rule by-ref="consonant-cluster" />
       </choice>
     </rule>
     <rule name="WLE-akshara-or-other" comment="series of one or
@@ -3060,7 +3228,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
       <start />
       <choice count="1+">
         <class property="InSC:other"  />
-        <rule byref="akshara"  />
+        <rule by-ref="akshara"  />
       </choice>
       <end />
     </rule>
@@ -3076,7 +3244,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 55]
+Davies & Freytag       Expires September 26, 2014              [Page 58]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3132,7 +3300,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 56]
+Davies & Freytag       Expires September 26, 2014              [Page 59]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3188,7 +3356,7 @@ Appendix D.  RelaxNG Schema
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 57]
+Davies & Freytag       Expires September 26, 2014              [Page 60]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3244,7 +3412,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 58]
+Davies & Freytag       Expires September 26, 2014              [Page 61]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3300,14 +3468,14 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 59]
+Davies & Freytag       Expires September 26, 2014              [Page 62]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
   <define name="class-invocation">
     <element name="class">
-      <attribute name="byref">
+      <attribute name="by-ref">
         <ref name="class-ref"/>
       </attribute>
       <optional>
@@ -3356,7 +3524,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 60]
+Davies & Freytag       Expires September 26, 2014              [Page 63]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3412,7 +3580,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 61]
+Davies & Freytag       Expires September 26, 2014              [Page 64]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3468,7 +3636,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 62]
+Davies & Freytag       Expires September 26, 2014              [Page 65]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3524,7 +3692,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 63]
+Davies & Freytag       Expires September 26, 2014              [Page 66]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3580,7 +3748,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 64]
+Davies & Freytag       Expires September 26, 2014              [Page 67]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3624,7 +3792,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
         <attribute name="comment"/>
       </optional>
       <choice>
-        <attribute name="byref">
+        <attribute name="by-ref">
           <ref name="rule-ref"/>
         </attribute>
         <oneOrMore>
@@ -3636,7 +3804,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 65]
+Davies & Freytag       Expires September 26, 2014              [Page 68]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3692,7 +3860,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 66]
+Davies & Freytag       Expires September 26, 2014              [Page 69]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3748,7 +3916,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 67]
+Davies & Freytag       Expires September 26, 2014              [Page 70]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3804,7 +3972,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 68]
+Davies & Freytag       Expires September 26, 2014              [Page 71]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3819,8 +3987,9 @@ Appendix E.  Acknowledgements
    [RFC5564] was published by the Arabic-language community.
 
    Contributions that have shaped this document have been provided by
-   Francisco Arias, Mark Davis, Nicholas Ostler, Thomas Roessler, Steve
-   Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and John Yunker.
+   Francisco Arias, Mark Davis, Paul Hoffman, Nicholas Ostler, Thomas
+   Roessler, Steve Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and
+   John Yunker.
 
 
 
@@ -3859,8 +4028,7 @@ Appendix E.  Acknowledgements
 
 
 
-
-Davies & Freytag        Expires September 6, 2014              [Page 69]
+Davies & Freytag       Expires September 26, 2014              [Page 72]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3916,7 +4084,7 @@ F.2.  Change History
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 70]
+Davies & Freytag       Expires September 26, 2014              [Page 73]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3929,10 +4097,10 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
         particular based on variant dispositions, as well as description
         of default actions.  Revise description of processing a label
         and its variants.  Move example table at the head of appendices.
-        Add "only-variants" attribute.  Change "name" attribute to
-        "byref" attribute for referencing named classes and rules.
-        Change "not" to "complement".  Remove "match" attribute on rules
-        as redundant if "start" and "end" are supported.  Rename "match"
+        Add "only-variants" attribute.  Change "name" attribute to "by-
+        ref" attribute for referencing named classes and rules.  Change
+        "not" to "complement".  Remove "match" attribute on rules as
+        redundant if "start" and "end" are supported.  Rename "match"
         element to "anchor" as better fitting it's function and removing
         confusion with both the "match" attribute on actions as well as
         the generic term Match Operator.  Augmented the examples
@@ -3945,6 +4113,13 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
         ".".  Add an appendix with an Indic Syllable Structure example.
         Extend count attribute to allow maximal counts.
 
+   -07  Change "byref" to "by-ref".  Add list of recommended properties.
+        Change "location" to "positional" for collective name of start/
+        end match operators.  Use from-tag instead of by-ref for tag-
+        based classes.  Made optional or mutually exclusive nature of
+        some attributes more explicit.  Allowing "comment" attributs on
+        all child elements of "rules" except "char" and "range" elements
+        used as child elements of "class".  [Schema update for that TBD]
 
 
 
@@ -3965,14 +4140,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-
-
-
-
-
-
-
-Davies & Freytag        Expires September 6, 2014              [Page 71]
+Davies & Freytag       Expires September 26, 2014              [Page 74]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -4028,5 +4196,5 @@ Authors' Addresses
 
 
 
-Davies & Freytag        Expires September 6, 2014              [Page 72]
+Davies & Freytag       Expires September 26, 2014              [Page 75]
 

@@ -42,10 +42,10 @@
         <area>Management</area>
         <abstract>
 
-            <t>This document describes a method of representing the domain name registration policy for a zone administrator
+            <t>This document describes a method of representing a key part of the domain name registration policy for a zone administrator
                 using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are
                 particularly used for the implementation of Internationalized Domain Names (IDNs). The rulesets are used
-                to implement and share policy defining which labels and specific Unicode code points are permitted for registrations,
+                to implement and share that aspect of policy defining which labels and specific Unicode code points are permitted for registrations,
                 which alternative code points are considered variants, and what actions may be performed on labels containing those
                 variants.
             </t>
@@ -63,6 +63,10 @@
                 form part of a zone administrator's policies, and can be referred to as Label Generation Rulesets
                 (LGRs), or IDN tables.
             </t>
+			<t>There are other kinds policies relating to labels which are not normally covered by Label Generation Rulesets and 
+			    are therefore not representable by the XML format described here. These include, but are not limited to
+				policies around trademarks, or prohibition of fraudulent or objectionable words.
+			</t>
             <t>Administrators of the zones for top-level domain registries have historically published their LGRs using
                 ASCII text or HTML. The formatting of these documents has been loosely based on the format used for the
                 Language Variant Table in <xref target="RFC3743"/>.
@@ -73,12 +77,15 @@
             <t>Through the first decade of IDN deployment, experience has shown that LGRs derived from these formats are
                 difficult to consistently implement and compare due to their differing formats. A universal format, such
                 as one using a structured XML format, will assist by improving machine-readability, consistency,
-                reusability and maintainability of LGRs. It also provides for more complex conditional implementation of
-                variants that reflects the known requirements of current zone administrator policies.
+                reusability and maintainability of LGRs.
+			</t> 
+			<t>When used to represent simple list of permitted code points, the format is quite straightforward.
+				At the cost of some complexity in the resulting file, it also allows for an implementation of more sophisticated
+				handling of conditional variants that reflects the known requirements of current zone administrator policies.
             </t>
             <t>Another feature of this format is that it allows many of the algorithms to be made explicit and machine
                 implementable. A remaining small set of implicit algorithms is described in this document to allow commonality
-                 in implementation.
+                in implementation.
             </t>
             <t>While the predominant usage of this specification is to represent IDN label policy, the format is not
                 limited to IDN usage may also be used for describing ASCII domain name label rulesets.
@@ -189,7 +196,7 @@
 
             <section title="Namespace">
 
-                <t>The XML Namespace URI is [TBD].</t>
+                <t>The XML Namespace URI is [TBD]. [Note: the examples and schemas for any non-final versions of this specification use a temporary namespace]</t>
 
             </section>
 
@@ -204,8 +211,8 @@
     </lgr>]]></artwork>
                 </figure>
 
-                <t>Within the "lgr" element rest several sub-elements. First is a "meta" element that contains all
-                    meta-data associated with the IDN table, such as its authorship, what it is used for, implementation
+                <t>Within the "lgr" element rest several sub-elements. First is an optional "meta" element that contains all
+                    meta-data associated with the LGR, such as its authorship, what it is used for, implementation
                     notes and references. This is followed by a "data" element that contains the substantive code point
                     data. Finally, an optional "rules" element contains information on contextual and whole-label evaluation
                     rules, if any, along with any specific action elements providing for the disposition of labels and computed
@@ -232,22 +239,25 @@
                 <t>A document MUST contain exactly one "lgr" element. Each "lgr" element MUST contain exactly one "data"
                     element, optionally preceded by one "meta" element and optionally followed by one "rules" element.
                 </t>
+				<t>In the following descriptions, required, non-repeating elements or attributes are generally not called out
+				 explicitly, in contrast to optional ones or those that may be repeated.
+				</t>
 
             </section>
             <section title="Metadata">
 
-                <t>The "meta" element is used to express meta-data associated within the LGR. It can be used to identify
+                <t>The optional "meta" element is used to express meta-data associated within the LGR. It can be used to identify
                     the author or relevant contact person, explain the intended usage of the LGR, and provide
                     implementation notes as well as references. The data contained within is not required by software
                     consuming the LGR in order to calculate valid labels, or to calculate variants. However, the
-                    "unicode-version" element MUST be used by a consumer of the table  to identify that it has the right
-                    Unicode data to perform operations on the table.
+                    "unicode-version" element MUST be used by a consumer of the table  to identify that it has the correct
+                    Unicode property data to perform operations on the table.
                 </t>
 
                 <section title="The version Element">
 
-                    <t>The "version" element is used to uniquely identify each version of the LGR being represented. No
-                        specific format is required, but it is RECOMMENDED that it be a numerical positive integer,
+                    <t>The "version" element is optional. It is used to uniquely identify each version of the LGR being represented. No
+                        specific format is required, but it is RECOMMENDED that it be a the decimal representation of a single positive integer,
                         which is incremented with each revision of the file.
                     </t>
 
@@ -267,8 +277,8 @@
                 </section>
                 <section title="The date Element">
 
-                    <t>The "date" element is used to identify the date the LGR was posted. The contents of this element
-                        MUST be a valid ISO 8601 date string as described in <xref target="RFC3339"/>.
+                    <t>The optional "date" element is used to identify the date the LGR was posted. The contents of this element
+                        MUST be a valid ISO 8601 full-date string as described in <xref target="RFC3339"/>.
                     </t>
 
                     <figure>
@@ -281,9 +291,9 @@
                 </section>
                 <section title="The language Element">
 
-                    <t>The "language" element signals that the LGR is associated with a specific language or script. The
-                        value of the language element must be a valid language tag as described in <xref
-                                target="RFC5646"/>. The tag may simply refer to a script if the LGR is not referring to
+                    <t>The optional "language" element signals that the LGR is associated with a specific language or script. The
+                        value of the language element MUST be a valid language tag as described in <xref
+                                target="RFC5646"/>. The tag may refer to a script plus undefined language if the LGR is not referring to
                         a specific language.
                     </t>
 
@@ -339,18 +349,19 @@
                     <t>There may be multiple &lt;domain&gt; tags used to
                         reflect a list of domains.
                     </t>
+					<t>[TODO: consider <![CDATA[<scope type="domain">]]>, to broaden applicability to other scopes]</t>
 
                 </section>
                 <section title="The description Element">
 
-                    <t>The "description" element is a free-form element that contains any additional relevant
+                    <t>The "description" element is an optional free-form element that contains any additional relevant
                         description that is useful for the user in its interpretation. Typically, this field contains
                         authorship information, as well as additional context on how the LGR was formulated (such as
                         citations and references), and how it has been applied.
                     </t>
 
                     <t>The element has an optional "type" attribute, which refers to the internet media type of the enclosed
-                        data. Typical types would be "text/plain" or "text/html". The attribute SHOULD    be a valid MIME 
+                        data. Typical types would be "text/plain" or "text/html". The attribute SHOULD be a valid MIME 
                         type. If supplied, it will be assumed the contents is content
                         of that media type.  If the description lacks a type field, it will 
                         be assumed to be plain text ("text/plain").
@@ -364,38 +375,33 @@
                         period from which the contents of the LGR become valid (i.e. are used in registry policy), and
                         the contents of the LGR cease to be used.
                     </t>
-                    <t>The times should conform to the format described in section 5.6 of <xref target="RFC5646"/>. It
-                        may be comprised of a date, or a date and time stamp.
-                    </t>
-
+                    <t>The dates MUST confirm to the "full-date" format described in section 5.6 of <xref target="RFC3339"/>.</t>
+					
+					<t><figure><artwork><![CDATA[    <validity-start>2014-03-12</validity-start>]]></artwork></figure></t>
                 </section>
 
                 <section title="The unicode-version Element">
 
-                    <t>Whenever an IDN table depends on character properties from a given version of the Unicode
-                        standard, the version number used in creating the LGR MUST be listed. If any software processing the table does
+                    <t>Whenever an LGR depends on character properties from a given version of the Unicode
+                        standard, the version number used in creating the LGR MUST be listed in the form x.y.z, where
+						x, y, and z are positive, decimal integers (see <xref target="Unicode-Versions"/>).
+						If any software processing the table does
                         not have access to character property data of 
                         the requisite version, it MUST NOT perform any operations relating to whole-label
-                        evaluation.
-                        While, some Unicode code points may not have been assigned in an earlier version,
-                        leaving properties for these code points undefined, in other cases their properties may have
-                        been updated in the Unicode standard between versions. It is RECOMMENDED to only reference stable
-                        or immutable properties. For a given LGR, the property
-                        values for the code points in the actual repertoire may be unchanged in a later version of Unicode,
-                        even though other changes were made in that standard. If that fact can be established, it MAY
-                        be acceptable to use tools based on a later version of Unicode.
-                        </t>
-                    <t>
-                        [[TODO: A method of indicating a range of permissible Unicode versions should be described.]]
-                    </t>
+                        evaluation relying on Unicode properties (<xref target="property" />).</t>
+						<t>
+                        The value of a given Unicode property in<xref target="UAX42"/>may change between versions, 
+						unless such change has been explicitly 
+						disallowed in <xref target="Unicode-Stability"/>.  It is RECOMMENDED to only reference stable
+                        or immutable properties, or, where possible, to provide explicit lists of code points instead.
+						</t>
+
                     <t><figure>
-                        <artwork><![CDATA[    <unicode-version>6.2</unicode-version>
+                        <artwork><![CDATA[    <unicode-version>6.2.0</unicode-version>
 ]]></artwork>
                     </figure></t>
-                    <t>It is not necessary to include a "unicode-version" element for files that do not make use of
-                        Unicode properties. Because Unicode has been strictly additive from Version 1.1, the required
-                        minimum version for the repertoire can be uniquely determined by checking the code point values
-                        in any "cp" attributes against the "age" property in <xref target="UAX42"/>.
+                    <t>It is not necessary to include a "unicode-version" element for LGRs that do not make use of
+                        Unicode properties, however, it is RECOMMENDED. 
                     </t>
                 </section>
                 <section title="The references Element" anchor="references">
@@ -458,7 +464,7 @@
             <t>The range is inclusive of the first and last code points. Whether code points are specified individually
                 or as part of a range makes no difference in processing the data, and tools reading or writing the
                 XML format are not required to retain a distinction. All attributes defined for a range element are as if applied
-                to each code point within.
+                to each code point within. A range element has no child elements.
             </t>
 
             <t>Code points must be expressed in uppercase, hexadecimal, and zero padded to a minimum of 4 digits - in
@@ -483,22 +489,28 @@
                     <artwork><![CDATA[    <char cp="006C 00B7 006C" comment="Catalan middle dot"/>]]></artwork>
                 </figure></t>
                 <t>As an alternative to using sequences to define a required context, a "char" or "range" element may
-                    specify conditional context in a "when" attribute as described below in <xref target="when"/>. The
+                    specify conditional context using an optional "when" attribute as described below in <xref target="when"/>. The
                     latter method is more flexible in that such conditional context is not limited to specific code
                     point in addition to allowing both prohibited as well as required context to be specified.
                 </t>
+				<t>As described below, the "char" element, whether or not it is used for a single code point, or for a sequence,
+				may have optional child elements defining variants.  Both the "char" and "range" elements can take a number 
+				of optional attributes for conditional inclusion, commenting, cross referencing and character tagging, as described below.</t>
             </section>
 
             <section title="Variants">
 
-                <t>While most LGRs typically only determine code point eligibility, others additionally specify a
+                <t>Most LGRs typically only determine simple code point eligibility,  and for them, the elements described so far
+				    would be the only ones required for their "data" section.  Others additionally specify a
                     mapping of code points to other code points, known as "variants". What constitutes a variant code point is a
                     matter of policy, and varies for each implementation. The following examples are intended to
                     demonstrate the syntax; they are not necessarily typical.
                 </t>
 
                 <section title="Basic Variants">
-                    <t>Variant code points are specified using one of more "var" elements as children of a "char" element.</t>
+                    <t>Variant code points are specified using one of more "var" elements as children of a "char" element. 
+					The target mapping is specified using the "cp" attribute. Other, optional attributes for the var element
+					are described below.</t>
                     <t>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U
                         (U+0075):
                     </t>
@@ -521,7 +533,7 @@
                     <t>The "var" element specifies variant mappings in only one direction, even though the variant relation is
                         usually considered symmetric, that is, if A is a variant of B then B should also be a variant
                         of A. The format requires that the inverse of the variant be given explicitly to fully specify
-                        symmetric variant relations in the IDN table. This has the beneficial side effect of making the
+                        symmetric variant relations in the LGR. This has the beneficial side effect of making the
                         symmetry explicit:
                     </t>
 
@@ -532,7 +544,7 @@
                     </figure></t>
 
                     <t>Both the source and target of a variant mapping may be sequences. As it is not possible to
-                        specify variants for ranges, ranges cannot be used for characters for which variant relations
+                        specify variants for ranges, ranges cannot be used for code points for which variant relations
                         need to be defined.
                     </t>
                     <t>All variants MUST be unique. For a given "char" element all variants must have a unique
@@ -569,12 +581,13 @@
 
                 <section title="Dispositions">
 
-                <t>Variants may be given dispositions. These describe the policy state for a variant label that was
+                <t>Variants may be given dispositions with the optional "disp" attribute. Dispositions describe the policy state 
+				for a variant label that was
                     generated using a particular variant. The dispositions are the same as described below in
                     <xref target="actions" />. 
                 </t>
                 <t>A disposition may be of any non-empty value not starting with an underscore and not containing 
-                     spaces.                  Within these restrictions a disposition may have any value, but several conventional dispositions are
+                     spaces.       Within these restrictions a disposition may have any value, but several conventional dispositions are
                      predefined below in  <xref target="actions"/>  to encourage common conventions in their application. If these values can represent registry
                     policy, they SHOULD be used. (See also
                     <xref target="default_actions" />
@@ -611,8 +624,10 @@
                         <xref target="references"/>).  It is RECOMMENDED that they be listed in ascending order.
                     </t>
                     <t>In addition to "char", "range" and "var" elements in the data section, a ref attribute may be
-                        present for literals ("char" inside a rule) as well as rules and class definitions, but not for
-                        named references to them.
+                        present in the rules section for these elements:  actions, literals ("char" inside a rule), as well as 
+						for definitions of rules and classes, but not for
+                        named references to them.  In other words, the use of the "by-ref" and "ref" attributes are mutually
+						exclusive. There are no "ref" attributes permitted on any element in the metadata.
                     </t>
                 </section>
 
@@ -701,13 +716,13 @@
 
                 <section title="The comment Attribute" anchor="comment">
 
-                    <t>Any "char", "range" or "variant" element may contain a "comment" attribute. The
+                    <t>Any "char", "range" or "variant" element in the data section may contain an optional "comment" attribute. The
                         contents of a comment attribute are free-form plain text. Comments are ignored in machine
-                        processing of the table. Comment attributes may also be placed on certain elements in the
-                        "rules" section of the document, such as actions and literals ("char"), as well as definitions
-                        of classes and rules, but not named references to them. Finally, in the metadata the "version"
-                        and "reference" elements may have comment attributes to match the syntax in
-                        <xref target="RFC3743"/>
+                        processing of the table. Comment attributes may also be placed on all elements in the
+                        "rules" section of the document, such as actions and match operators, such as literals ("char"), as well as definitions
+                        of classes and rules, but not on child elements of the "class" element. Finally, in the metadata, only the "version"
+                        and "reference" elements may have comment attributes (to match the syntax in
+                        <xref target="RFC3743"/>).
                     </t>
                 </section>
             </section>
@@ -718,7 +733,7 @@
                     ruleset.
                 </t>
                 <t>For more complex registry rules, there may be a need to discern on or more subsets code points. This
-                    can be accomplished by applying a "tag" attribute to char or range elements, thereby defining character 
+                    can be accomplished by applying an optional "tag" attribute to char or range elements, thereby defining character 
                     classes (see <xref target="tag_based_classes" />) which can then be used in whole label evaluation
                     rules (see <xref target="match_operators" />). Tag attributes may be of any value, and multiple values are
                     separated by space. Code point sequences not being proper members of a set of code points, a "tag"  attribute
@@ -797,17 +812,16 @@
     </class>
     ...
     <rule>
-        <class byref="example" />
+        <class by-ref="example" />
     </rule>
 ]]></artwork>
                 </figure></t>
-                <t>An empty "class" element with a "byref" attribute is a reference to an existing named class. Such an
-                    element MUST NOT have either "comment" or "ref" attributes as those may only be placed on a class
-                    definition.  A "byref" and a "name" attribute MUST NOT occur in the same element.
+                <t>An empty "class" element with a "by-ref" attribute is a reference to an existing named class. A
+				"by-ref" attribute is mutually exclusive with "name", "from-tag", "property" or "ref" attributes.
                 </t>
                 <section title="Tag-based Classes" anchor="tag_based_classes">
                     <t>The char element may contain a tag attribute that consists of one or more space separated
-                        identifiers, for example:
+                        tag values, for example:
                     </t>
                     <t><figure>
                         <artwork><![CDATA[    <char cp="0061" tag="letter lower"/>
@@ -815,14 +829,31 @@
 ]]></artwork>
                     </figure></t>
                     <t>This defines two tags for use with code point U+0061, the tag "letter" and the tag "lower".
-                        Implicitly, this defines two named character classes, the class "letter" and the class "lower",
-                        the first with 0061 and 4E00 as elements and the latter with 0061, but not 4E00 as an element.
+                        Use</t>
+						<t><figure><artwork><![CDATA[    <class name="letter" from-tag="letter">
+    <class name="lower" from-tag="lower" />
+]]></artwork>
+						</figure></t>
+						 
+						<t>to define two named character classes, "letter" and "lower", containing all code points with the respective tags, 
+                        the first with 0061 and 4E00 as elements and the latter with 0061, but not 4E00 as an element. The name attribute
+						may be omitted for an anonymous in-place definition of a nested, tag-based class. The "from-tag" attribute is
+						mutually exclusive to the "by-ref" attribute.
+						</t>
+						<t>Tag values are formally free-form, except they cannot contain spaces. However, best practice would be to follow
+						the identifier syntax, perhaps with the addition of a few punctuation symbols, such as colon.</t>
+						
+						<t>If the document contains no "char" or "range" elements with a corresponding tag, the character class
+						represents the empty set. This is valid, to allow a common "rules" element to be shared across files. However, 
+						it is RECOMMENDED that implementations allow for a warning to ensure that referring to an undefined tag
+						in this way is intentional.</t>
+<!--						<t>
                         The document MUST not contain an explicitly named class definition of the same name as an
-                        implicitly named tag-derived class.
-                    </t>
+                        implicitly named tag-derived class. 
+                    </t> -->
                 </section>
 
-                <section title="Unicode Property-based Classes">
+                <section title="Unicode Property-based Classes" anchor="property">
                     <t>A class is defined in terms of Unicode properties by giving the Unicode property alias and the
                         property value or property value alias, separated by a colon.
                     </t>
@@ -833,13 +864,27 @@
                     <t>The example above selects all code points for which the Unicode canonical combining class (ccc)
                         value is 9. This value of the ccc is assigned to all code points that encode viramas. The
                         string "ccc" is the short-alias for the canonical combining class, as defined in the Unicode
-                        Character Database <xref target="UAX42"/>.
+                        Character Database <xref target="UAX42"/>. The use of the "property" attribute is mutually
+						exclusive to the "by-ref" or "from-tag" attributes.
                     </t>
                     <t>Unicode properties may, in principle, change between versions of the Unicode Standard. However,
-                        the values assigned for a given version are fixed. If Unicode Properties are used, a minimum
-                        Unicode version MUST be declared in the header. (Note, some Unicode properties are by definition
-                        stable across versions and do not change once assigned.)
+                        the values assigned for a given version are fixed. If Unicode Properties are used, a 
+                        Unicode version MUST be declared in the "unicode-version" element in the header. 
+						(Note, some Unicode properties are by definition
+                        stable across versions and do not change once assigned (see <xref target="Unicode-Stability" />.)
                     </t>
+					<t>If full support of all Unicode properties is not available, support for the following minimal 
+					set of Unicode properties is RECOMMENDED: 
+					<list style="symbols">
+					<t>General Category (gc)</t>
+					<t>Script (sc)</t>
+					<t>Canonical Combining Class (ccc)</t>
+					<t>Bidi Class (bc)</t>
+					<t>Arabic Joining Type (jt)</t>
+					<t>Indic Syllabic Category (InSC)</t>  
+					<t>Deprecated (Dep)</t>
+					</list>
+					The short name for each property is given in parentheses.</t>
                 </section>
 
                 <section title="Explicitly Declared Classes">
@@ -881,7 +926,8 @@
                     <t>would be a more streamlined expression of the same class using the shorthand notation.</t>
 
                     <t>A class element either contains any combination of char and range elements and no other elements,
-                    or a text node with the    shorthand notation.</t>
+                    or a text node with the    shorthand notation. No attributes are permitted on char and range elements when
+					used as child elements of a class element.</t>
                 </section>
 
                 <section title="Combined Classes" anchor="combined_classes">
@@ -895,27 +941,27 @@
 +-------------------+---------------------------------------------+
 | Logical Operation | Example                                     |
 +-------------------+---------------------------------------------+
-| Complement        | <complement><class byref="xxx"></complement>|
+| Complement        | <complement><class by-ref="xxx"></complement>|
 +-------------------+---------------------------------------------+
 | Union             | <union>                                     |
-|                   |    <class byref="class-1"/>                 |
-|                   |    <class byref="class-2"/>                 |
-|                   |    <class byref="class-3"/>                 |
+|                   |    <class by-ref="class-1"/>                |
+|                   |    <class by-ref="class-2"/>                |
+|                   |    <class by-ref="class-3"/>                |
 |                   | </union>                                    |
 +-------------------+---------------------------------------------+
 | Intersection      | <intersection>                              |
-|                   |    <class byref="class-1"/>                 |
-|                   |    <class byref="class-2"/>                 |
+|                   |    <class by-ref="class-1"/>                |
+|                   |    <class by-ref="class-2"/>                |
 |                   | </intersection>                             |
 +-------------------+---------------------------------------------+
 | Difference        | <difference>                                |
-|                   |    <class byref="class-1"/>                 |
-|                   |    <class byref="class-2"/>                 |
+|                   |    <class by-ref="class-1"/>                |
+|                   |    <class by-ref="class-2"/>                |
 |                   | </difference>                               |
 +-------------------+---------------------------------------------+
 | Symmetric         | <symmetric-difference>                      |
-| Difference        |    <class byref="class-1"/>                 |
-|                   |    <class byref="class-2"/>                 |
+| Difference        |    <class by-ref="class-1"/>                |
+|                   |    <class by-ref="class-2"/>                |
 |                   | </symmetric-difference>                     |
 +-------------------+---------------------------------------------+
 ]]></artwork>
@@ -929,15 +975,15 @@
                     </t>
 
                     <t>An anonymous combined class can be defined directly inside a rule or of the match
-                    operator elements that allow child elements (see <xref target="match_operators"/>)
+                    operator elements that allow child elements (see  <xref target="match_operators"/>)
                                         by using the set combination as the outer element.
                     </t>
                     <t>
                         <figure>
                             <artwork><![CDATA[    <rule>
         <union>
-            <class byref="xxx"/>
-            <class byref="yyy"/>
+            <class by-ref="xxx"/>
+            <class by-ref="yyy"/>
         </union>
     </rule>
 ]]></artwork>
@@ -947,15 +993,15 @@
                     There is no need to wrap this union inside another class element, and, in fact, set combination elements
                     MUST NOT be nested inside a "class" element.  </t>
                     <t>Lastly, to create a named combined class that can be
-                        referenced in other classes or in rules as &lt;class byref="xxxyyy"/&gt;, add a "name" attribute to
+                        referenced in other classes or in rules as &lt;class by-ref="xxxyyy"/&gt;, add a "name" attribute to
                         the set combination element, for example &lt;union name="xxxyyy" /&gt; and place it at the
                         top level below the "rules" element.</t>
                     <t>
                         <figure>
                             <artwork><![CDATA[ <rules>
     <union class name="xxxyyy">
-        <class byref="xxx"/>
-        <class byref="yyy"/>
+        <class by-ref="xxx"/>
+        <class by-ref="yyy"/>
     </union>
       . . .
   </ rules>    
@@ -964,7 +1010,7 @@
                     </t>
                     <t>Because (as for sets) a combination of classes is itself a class, no matter how a class is created, a reference 
                     to it always uses the "class" element. That is, a named class is always referenced via an empty "class" element
-                    using the "byref" attribute containing the name of the class to be referenced. </t>
+                    using the "by-ref" attribute containing the name of the class to be referenced. </t>
                 </section>
             </section>
 
@@ -988,8 +1034,8 @@
                     <t>
                         <figure>
                             <artwork><![CDATA[    <rule name="preferred">
-       <start />
-           <class byref="preferred" count="1+"/>
+        <start />
+        <class by-ref="preferred" count="1+"/>
         <end />
     </rule>]]></artwork>
                         </figure>
@@ -1022,20 +1068,20 @@
 | logical    | any         | <any />                            |
 |            +-------------+------------------------------------+
 |            | choice      | <choice>                           |
-|            |             |  <rule byref="alternative1"/>      |
-|            |             |  <rule byref="alternative2"/>      |
+|            |             |  <rule by-ref="alternative1"/>     |
+|            |             |  <rule by-ref="alternative2"/>     |
 |            |             | </choice>                          |
 +--------------------------+------------------------------------+
-| location   | start       | <start />                          |
+| positional | start       | <start />                          |
 |            +-------------+------------------------------------+
 |            | end         | <end />                            |
 +--------------------------+------------------------------------+
 | literal    | char        | <char cp="0061 0062 0063" />       |
 +--------------------------+------------------------------------+
-| set        | class       | <class byref="class1" />           |
+| set        | class       | <class by-ref="class1" />          |
 |            |             | <class>0061 0064-0065</class>      |
 +--------------------------+------------------------------------+
-| group      | rule        | <rule byref="rule1" />             |
+| group      | rule        | <rule by-ref="rule1" />            |
 |            |             | <rule><any /><rule />              |
 +--------------------------+------------------------------------+
 | contextual | anchor      | <anchor />                         |
@@ -1047,8 +1093,8 @@
 ]]></artwork>
                         </figure>
                     </t>
-                    <t>Any expression defining an anonymous class,  including any of the set combination operators
-                    (see <xref target="combined_classes" />), in addition to references to a named classes.</t>
+                    <t>Any element defining an anonymous class can be used as a match operator,  including any of the set combination operators
+                    (see <xref target="combined_classes" />) as well as references to a named classes.</t>
 
                     <t>All match operators shown as empty elements in the Examples
                     column of the table above do not support child elements of their own; otherwise match operators may be nested.
@@ -1057,7 +1103,7 @@
 
                     <section title="The count Attribute">
 
-                        <t>The count attribute specifies the minimally required or maximal permitted number of
+                        <t>The optional count attribute specifies the minimally required or maximal permitted number of
                         times a match operator is used to match input. If the count attribute is<list style="hanging" hangIndent="5">
                         <t  hangText="n or n:n">
                         the match operator matches the input exactly n times, where n is 1 or greater.
@@ -1076,32 +1122,28 @@
                         In matching, greedy evaluation is used in the sense defined for regular expressions:  beyond the required
                         number or times, the input is matched as many times as possible, but not so often as to prevent a match
                         of the remainder of the rule. </t>
-                        <!--
-                        <t>The number of times a match operator may be used to match input  is given by the
-                         "count" attribute. The attribute consists of a number, optionally
-                            followed by a "+" sign. The number MUST be an integer of value 0 or higher. If no count attribute is specified, 
-                            the number of times the match operator may be applied in matching is "1".                     
-                            A count of 0 MUST NOT be used
-                            without a "+".
-                            </t>
-                            <t>
-                             If the number is followed by a
-                            plus sign ("+"), it means that any number of additional occurrences are allowed beyond the
-                            number stated.    A count attribute of "1" would mean exactly one occurrence, whereas "1+" would indicate
-                            one or more occurrences and that the match operator is applied as many times as possible (greedy match).
-                        </t> -->
+
                         <t>The count attribute MUST NOT be applied to match operators of type "start", "end", "anchor", "look-ahead"
-                        and "look-behind". It may be applied to "class" and "rule" elements only if they do not have a "name" attribute,
+                        and "look-behind" or to any operators, such as "rule" or "choice" that contain them, whether the latter are declared in place or used by reference.  The count attribute may be applied to "class" and "rule" elements only if they do not have a "name" attribute,
                         that is to anonymous rules and classes or any invocation of predefined rules or classes by reference.
                         </t>
-                  </section>
+						<t>The optional count attribute MAY be applied to match operators of type "any", "char" and "class", as well as to
+						match operators "choice" and "rule", as long as they contain none of the operators "start", "end", "anchor", "look-ahead"
+                        and "look-behind" as direct or indirect child elements. The same requirement applies recursively to any "rule"
+						element referenced inside a "choice" or "rule" with a count attribute.  The count attribute is mutually exclusive 
+						to the "name" attribute.</t>
+	               </section>
 
-                    <section title="The name and byref Attributes">
-                        <t>Rules (and classes) may be named using a "name" attribute and can then be nested inside other match
-                        operators only by reference. To reference a named rule (or class) use a rule or class element with the "byref"
+                    <section title="The name and by-ref Attributes">
+                        <t>Rules (and classes) declared as immediate child elements of the "rules" element MUST be named 
+						using a "name" attribute, all other instances of rules and classes MUST NOT be named. 
+						Named rules and classes can be nested inside other match
+                        operators by reference.</t>
+						<t>To reference a named rule (or class) use a rule or class element with an optional "by-ref"
                         attribute containing the name of the referenced element. It is an error to reference a rule or class for which the
-                        definition has not been seen, or that is not an implicitly defined tag-based class. A rule or class
-                            element with a "byref" attribute does not have child elements, nor any "ref" or "comment" attributes.
+                        definition has not been seen. 
+						The use of the "by-ref" for a rule or class element is mutually exclusive with the use of  the "name" attribute, 
+						as well as with the presence of any child elements.
                         </t>
 
                         <t>Here's an example of a rule requiring that all labels be letters (optionally followed by
@@ -1113,15 +1155,15 @@
     <class name="combining-mark" property="gc:M"/>
     <class name="digit" property="gc:Nd">
     <rule name="letter-grapheme">
-       <class byref="letter" count="1+"/>
-       <class byref="combining-mark" count="0+"/>
+       <class by-ref="letter" count="1+"/>
+       <class by-ref="combining-mark" count="0+"/>
     </rule>
     <rule name="leading-letter" >
        <start />
-       <rule byref="letter-grapheme" count="1"/>
+       <rule by-ref="letter-grapheme" count="1"/>
        <choice count="0+">
-           <rule byref="letter-grapheme" count="0+"/>
-           <class byref="digit" count="0+"/>
+           <rule by-ref="letter-grapheme" count="0+"/>
+           <class by-ref="digit" count="0+"/>
        </choice>
        <end />
     </rule>]]></artwork>
@@ -1136,9 +1178,9 @@
                         <t><figure>
                             <artwork><![CDATA[    <rule name="ldh">
        <choice count="1+">
-           <class byref="letters"/>
-           <class byref="digits"/>
-           <char cp="002D"/>
+           <class by-ref="letters"/>
+           <class by-ref="digits"/>
+           <char cp="002D" comment="literal HYPHEN"/>
        </choice>
     </rule>]]></artwork>
                         </figure></t>
@@ -1153,9 +1195,10 @@
                         <t>A literal code point sequence matches a single code point or a sequence. It is defined by a
                             "char" element, with the code point or sequence to be matched given by the "cp" attribute.
                             When used as a literal, a "char" element may contain a "count" in addition to the "cp"
-                            attribute, comments or references, but no conditional contexts or child elements.
-                        </t>
-                    </section>
+                            attribute and optional "comment" or "ref" attributes. No other attributes or child elements.
+							are permitted.
+                        </t>         
+					</section>
 
                     <section title="The any Element">
 
@@ -1163,7 +1206,7 @@
                             example see
                             <xref target="IDNA2008-example"/>
                         </t>
-                        <t>The "any" element" may have neither a "comment" nor a "ref" attribute.</t>
+                        <t>Unlike a literal, the "any" element" may not have a "ref" attribute.</t>
                     </section>
 
                     <section title="The start and end Elements">
@@ -1179,7 +1222,11 @@
                              many rules do not need to cover the entire label. For example, to express a requirement of
                              not starting a label with a digit, the rule needs to describe only the initial part of a label.
                         </t>
-                        <t>Start and end elements do not have a "count" or any other attribute. </t>
+                        <t>Start and end elements each occur at most once in a rule, except if nested inside a "choice" element in
+                            such a way that in matching each alternative at most one occurrence of each is encountered. Otherwise,
+                            the result is undefined; as is any case where start and end elements not encountered as first or last element, respectively, in 
+							matching a rule. Start and end elements do not have a "count" or any other attribute. If 
+						    any enclosing match operator has a count attribute the results are undefined. </t>
                     </section>
 
                     <section title="Example rule from IDNA2008" anchor="IDNA2008-example">
@@ -1199,14 +1246,14 @@
        <rule name="mixed-digits">
           <choice>
             <rule>
-                <class byref="arabic-indic-digits"/>
+                <class by-ref="arabic-indic-digits"/>
                 <any count="0+"/>
-                <class byref="extended-arabic-indic-digits"/>
+                <class by-ref="extended-arabic-indic-digits"/>
              </rule>
              <rule>
-                <class byref="extended-arabic-indic-digits"/>
+                <class by-ref="extended-arabic-indic-digits"/>
                 <any count="0+"/>
-                <class byref="arabic-indic-digits"/>
+                <class by-ref="arabic-indic-digits"/>
              </rule>
           </choice>
        </rule>
@@ -1243,7 +1290,7 @@
     <rule name="preceding-greek">
         <anchor/>
         <look-ahead>
-            <class byref="greek-script"/>
+            <class by-ref="greek-script"/>
         </look-ahead>
     </rule>]]></artwork>
                     </figure></t>
@@ -1281,27 +1328,28 @@
         <choice>
           <start/>
           <rule>
-            <class byref="transparent" count="0+"/>
-            <class byref="non-joining"/>
+            <class by-ref="transparent" count="0+"/>
+            <class by-ref="non-joining"/>
           </rule>
         </choice>
       </look-behind>
       <anchor/>
       <look-ahead>
-        <class byref="transparent" count="0+" />
+        <class by-ref="transparent" count="0+" />
         <choice>
-          <class byref="right-joining" />
-          <class byref="dual-joining" />
+          <class by-ref="right-joining" />
+          <class by-ref="dual-joining" />
         </choice>
       </look-ahead>
     </rule>]]></artwork>
                         </figure></t>
-                        <t>A when rule contains any combination of "look-behind" , "anchor" and "look-ahead" elements in
+                        <t>A "when rule" contains any combination of "look-behind" , "anchor" and "look-ahead" elements in
                             that order. Each of these elements occurs at most once, except if nested inside a "choice" element in
-                            such a way that each in matching each alternative has only one occurrence is encountered. Otherwise,
-                            the result is undefined. None of these elements takes a "count" attribute.
-                            If a context rule contains a look-ahead or look-behind element, it MUST contain an "anchor"
-                            element.
+                            such a way that in matching each alternative at most one occurrence of each is encountered. Otherwise,
+                            the result is undefined. None of these elements takes a "count" attribute, nor does any enclosing
+							match operator. Otherwise, the result is undefined.
+                            If a context rule contains a look-ahead or look-behind element, it MUST contain an "anchor" element. 
+							If, because of a choice element, a required anchor is not actually encountered, the results are undefined.
                         </t>
                     </section>
 
@@ -1326,8 +1374,9 @@
     </rule>]]></artwork>
                         </figure>
                         <t>The Katakana middle dot is used only with Han, Katakana or Hiragana. The corresponding When Rule requires
-                            that at least one code point in the label is in one of these scripts. (Note that the
-                            Katakana middle dot itself is of script Common).
+                            that at least one code point in the label is in one of these scripts, but the position of that code point is independent
+							of the location of the middle dot and no anchor therefore required. (Note that the Katakana middle dot itself is of 
+							script Common).
                         </t>
                     </section>
                 </section>
@@ -1512,7 +1561,7 @@
 
             <section title="Determining Eligibility for a Label">
 
-                <t>In order to use a table to test a specific domain label for membership in the LGR, a consumer of the
+                <t>In order to use a table to test a specific label for membership in the LGR, a consumer of the
                     LGR must iterate through each code point within a given U-label, and test that each code point is a
                     member of the LGR. If any code point is not a member of the LGR, it shall be deemed as not eligible
                     in accordance with the table.
@@ -1523,7 +1572,7 @@
                 </t>
 
                 <t>A label must also not trigger any action that results in a disposition of "invalid" or equivalent, otherwise
-                it is deemed not eligible. (This step may be deferred, until dispositions are determined)</t>
+                it is deemed not eligible. (This step may need to be deferred, until variant code point dispositions have been determined)</t>
 
                 <t>For LGRs that contain reflexive variant mappings (defined in <xref target="reflexive_mapping" />) the evaluation
                 of dispositions must be deferred until variants are generated. In essence, tables that use this feature treat the original
@@ -1629,7 +1678,27 @@
             &rfc5646;
             &rfc5564;
             &rfc5892;
-            <reference anchor="UAX42">
+			<reference anchor="Unicode-Stability">
+                <front>
+                    <title>Unicode Encoding Stability Policy, Property Value Stability</title>
+                    <author>
+                        <organization abbrev="Unicode">Unicode Consortium</organization>
+                    </author>
+                    <date/>
+                </front>
+                <format type="HTML" target="http://www.unicode.org/policies/stability_policy.html#Property_Value"/>
+            </reference>
+             <reference anchor="Unicode-Versions">
+                <front>
+                    <title>Unicode Version Numbering</title>
+                    <author>
+                        <organization abbrev="Unicode">Unicode Consortium</organization>
+                    </author>
+                    <date/>
+                </front>
+                <format type="HTML" target="http://unicode.org/versions/#Version_Numbering"/>
+            </reference>
+		    <reference anchor="UAX42">
                 <front>
                     <title>Unicode Character Database in XML</title>
                     <author>
@@ -1682,18 +1751,38 @@
             </reference>
         </references>
 
-        <section title="Example Table">
-            <t>The following presents a sample XML LGR showing a near complete collection of most of the elements and
-                attributes defined in this specification in somewhat typical context.</t>
+        <section title="Example Tables">
+            <t>The following presents a minimal LGR table defining the lower case LDH (letter-digit-hyphen) repertoire
+			and containing no rules or description elements. Many simple LGR tables will look quite similar, except that
+			they would contain some meta data.</t>
             <t><figure>
                 <artwork>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+&lt;data&gt;
+    &lt;char cp="002D" comment="HYPHEN (-)" /&gt;
+    &lt;range first-cp="0030" last-cp="0039" comment="DIGIT ZERO ('0') - DIGIT NINE ('9')" /&gt;
+    &lt;range first-cp="0061" last-cp="007A" comment="LATIN SMALL LETTER A ('a') - LATTIN SMALL LETTER Z ('z')" /&gt;
+&lt;/data&gt;
+&lt;/lgr></artwork></figure></t>
+             <t>The following sample LGR shows a more complete collection of the elements and
+                attributes defined in this specification in a somewhat typical context.</t>
+            <t><figure>
+                <artwork>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 
+&lt;!-- This example uses a large subset of the features of this
+     specification. It does not include every set operator,
+     match operator element, or action trigger attribute, their 
+     use being largely parallel to the ones demonstrated. --&gt;
+
+&lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+&lt;!-- meta element with all optional elements --&gt;
   &lt;meta&gt;
-    &lt;version&gt;1&lt;/version&gt;
+    &lt;version comment="initial version"&gt;1&lt;/version&gt;
     &lt;date&gt;2010-01-01&lt;/date&gt;
     &lt;language&gt;sv&lt;/language&gt;
     &lt;domain&gt;example&lt;/domain&gt;
+    &lt;validity-start&gt;2010-01-01&lt;/validity-start&gt;
+    &lt;validity-end&gt;2013-12-31&lt;/validity-end&gt;
     &lt;description type="text/html"&gt;
         &lt;![CDATA[
         This language table was developed with the
@@ -1701,20 +1790,33 @@
         examples institute&lt;/a&gt;.
         ]]&gt;
     &lt;/description&gt;
+    &lt;unicode-version&gt;6.3.0&lt;/unicode-version&gt;
     &lt;references&gt;
-      &lt;reference id="0" &gt;The Unicode Standard 6.3&lt;/reference&gt;
+      &lt;reference id="0" comment="the most recent" &gt;The Unicode Standard 6.2&lt;/reference&gt;
       &lt;reference id="1" &gt;RFC 5892&lt;/reference&gt;
       &lt;reference id="2" &gt;Big-5: Computer Chinese Glyph and Character
          Code Mapping Table, Technical Report C-26, 1984&lt;/reference&gt;
     &lt;/references&gt;
  &lt;/meta&gt;
+ &lt;!-- the data section describing the repertoire --&gt;
   &lt;data&gt;
+    &lt;!-- single code point "char" element --&gt;
     &lt;char cp="002D" ref="1" comment="HYPHEN" /&gt;
+
+    &lt;!-- range elements for contiguous code points,  with tags --&gt;
     &lt;range first-cp="0030" last-cp="0039" ref="1" tag="digit" /&gt;
     &lt;range first-cp="0061" last-cp="007A" ref ="1" tag="letter" /&gt;
-    &lt;range first-cp="0370" last-cp="0380"  /&gt;
+	
+    &lt;!-- code point sequence --&gt;
+    &lt;char cp="006C 00B7 006C" comment="catalan middle dot" /&gt;
+	
+    &lt;!-- alternatively use a when rule --&gt;
     &lt;char cp="00B7" when="catalan-middle-dot" /&gt;
-    &lt;char cp="200D" when="joiner" /&gt;
+	
+     &lt;!-- code point with context rule --&gt;
+    &lt;char cp="200D" when="joiner" ref="2" /&gt;
+	
+    &lt;!-- code points with variants --&gt;
     &lt;char cp="4E16" tag="preferred" ref="0"&gt;
       &lt;var cp="4E17" disp="block" ref="2" /&gt;
       &lt;var cp="534B" disp="allocate" ref="2" /&gt;
@@ -1728,8 +1830,10 @@
       &lt;var cp="4E17" disp="block" ref="2" /&gt;
     &lt;/char&gt;
   &lt;/data&gt;
+  
+  &lt;!-- Context and whole label rules --&gt;
   &lt;rules&gt;
-    &lt;class name="virama" property="ccc:9" /&gt;
+    &lt;!-- Require the given code point to be between two 006C --&gt;
     &lt;rule name="catalan-middle-dot" ref="0"&gt;
         &lt;look-behind&gt;
             &lt;char cp="006C" /&gt;
@@ -1739,33 +1843,57 @@
             &lt;char cp="006C" /&gt;
         &lt;/look-ahead&gt;
     &lt;/rule&gt;
+	
+    &lt;!-- example of a context rule based on property --&gt;
+    &lt;class name="virama" property="ccc:9" /&gt;
     &lt;rule name="joiner"  ref="1" &gt;
         &lt;look-behind&gt;
-            &lt;class byref="virama" /&gt;
+            &lt;class by-ref="virama" /&gt;
         &lt;/look-behind&gt;
+        &lt;anchor /&gt;
     &lt;/rule&gt;
-    &lt;rule name="example" &gt;
-        &lt;difference&gt;
-            &lt;complement&gt;
-                &lt;class comment="use shorthand class notation"&gt;
-                    006E 0070-0078
-                &lt;/class&gt;
-            &lt;/omplement&gt;
-            &lt;class comment="use standard notation"&gt;
-                &lt;range first-cp="0000" last-cp="001F" /&gt;
-                &lt;char cp="007F" /&gt;
-            &lt;/class&gt;
-        &lt;/difference&gt;
+	
+    &lt;!-- example of using set operators --&gt;
+	
+    &lt;!-- Subtract vowels from letters to get
+         consonant, demonstrating the different 
+         set notations and the difference operator --&gt;
+    &lt;difference name="consonants"&gt;
+         &lt;!-- use standard notation --&gt;
+         &lt;class comment="all letters"&gt;
+           &lt;char cp="0061" /&gt;
+           &lt;range first-cp="0062" last-cp="0072" /&gt;
+         &lt;/class&gt;
+         &lt;!-- use shorthand notation --&gt;
+         &lt;class comment="all vowels"&gt;
+                 0061 0065 0069 006F 0075-0075
+         &lt;/class&gt;
+     &lt;/difference&gt;
+	 
+     &lt;!-- by using the start and end, rule matches whole label --&gt;
+     &lt;rule name="three-or-more-consonants"&gt;
+         &lt;start /&gt;
+         &lt;!-- reference the class defined by the difference
+              and require three or more matches --&gt;
+         &lt;class by-ref="consonants" count="3+" /&gt;
+         &lt;end /&gt;
     &lt;/rule&gt;
-    &lt;rule name="preferred"
-          comment="non-empty label of preferred code points"&gt;
-        &lt;class byref="preferred" count="1+" /&gt;
+
+    &lt;!-- rule for negative matching --&gt;
+    &lt;rule name="non-preferred"
+          comment="matches any non-preferred code point"&gt;
+        &lt;complement comment="non-preferred" &gt;
+            &lt;class from-tag="preferred" /&gt;
+        &lt;/complement&gt;
     &lt;/rule&gt;
-    &lt;action disp="example" match="example" /&gt;
+	
+   &lt;!-- actions triggered by matching rules and/or 
+        variant dispositions --&gt;
+    &lt;action disp="consonants" 
+            match="three-or-more-consonants" /&gt;
     &lt;action disp="block" any-variant="block" /&gt;
     &lt;action disp="activate" all-variants="allocate"
-          match="preferred" /&gt;
-    &lt;action disp="activate"  match="preferred" /&gt;
+            not-match="non-preferred" /&gt;
   &lt;/rules&gt;
 &lt;/lgr&gt;</artwork>
             </figure></t>
@@ -1878,7 +2006,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
     </t>
      <t>
      Given a label "U+4E7E U+4E81", the following labels would be ruled
-     allocatable under <xref target="RFC3743" /> based on how it is commonly
+     allocatable under <xref target="RFC3743" /> based on how that standard is commonly
      implemented in domain registries:</t>
 <t><figure><artwork><![CDATA[    Original label:     U+4E7E U+4E81
     Simplified label 1: U+4E7E U+5E72
@@ -2015,32 +2143,32 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
     </union>
     <!--Whole label evaluation and Context rules go here-->
     <rule name="consonant-with-optional-nukta">
-        <class byref="InSC:Consonant" />
-        <class byref="InSC:Nukta"  count="0:1"/>
+        <class by-ref="InSC:Consonant" />
+        <class by-ref="InSC:Nukta"  count="0:1"/>
     </rule>
     <rule name="independent-vowel-with-optional-modifier">
-        <class byref="InSC:Vowel_Independent" />
-        <class byref="vowel-modifier"  count="0:1" />
+        <class by-ref="InSC:Vowel_Independent" />
+        <class by-ref="vowel-modifier"  count="0:1" />
     </rule>
     <rule name="optional-dependent-vowel-with-optional-modifier" >
-      <class byref="InSC:Vowel_Dependent" count="0:1" />
-      <class byref="vowel-modifier" count="0:1"  />
+      <class by-ref="InSC:Vowel_Dependent" count="0:1" />
+      <class by-ref="vowel-modifier" count="0:1"  />
     </rule>
     <rule name="consonant-cluster">
       <rule count="0+">
-        <rule byref="consonant-with-optional-nukta" />
-        <class byref="halant" />
+        <rule by-ref="consonant-with-optional-nukta" />
+        <class by-ref="halant" />
       </rule>
-      <rule byref="consonant-with-optional-nukta" />
+      <rule by-ref="consonant-with-optional-nukta" />
       <choice>
-        <class byref="halant" />
-        <rule byref="optional-dependent-vowel-with-optional-modifier" />
+        <class by-ref="halant" />
+        <rule by-ref="optional-dependent-vowel-with-optional-modifier" />
       </choice>
     </rule>
     <rule name="akshara">
       <choice>
-        <rule byref="independent-vowel-with-optional-modifier" />
-        <rule byref="consonant-cluster" />
+        <rule by-ref="independent-vowel-with-optional-modifier" />
+        <rule by-ref="consonant-cluster" />
       </choice>
     </rule>
     <rule name="WLE-akshara-or-other" comment="series of one or
@@ -2049,7 +2177,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <start />
       <choice count="1+">
         <class property="InSC:other"  />
-        <rule byref="akshara"  />
+        <rule by-ref="akshara"  />
       </choice>
       <end />
     </rule>
@@ -2216,7 +2344,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
   </define>
   <define name="class-invocation">
     <element name="class">
-      <attribute name="byref">
+      <attribute name="by-ref">
         <ref name="class-ref"/>
       </attribute>
       <optional>
@@ -2493,7 +2621,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
         <attribute name="comment"/>
       </optional>
       <choice>
-        <attribute name="byref">
+        <attribute name="by-ref">
           <ref name="rule-ref"/>
         </attribute>
         <oneOrMore>
@@ -2641,8 +2769,8 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
                 <xref target="RFC5564"/>
                 was published by the Arabic-language community.
             </t>
-            <t>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas
-                Ostler, Thomas Roessler, Steve Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and John Yunker.
+            <t>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Paul Hoffman,
+			    Nicholas Ostler, Thomas Roessler, Steve Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and John Yunker.
             </t>
         </section>
         <section title="Editorial Notes">
@@ -2712,7 +2840,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
                         elements to support expressing symmetric mapping of null variants. Describe use of variants that map identically.
                         Clarify how actions are triggered, in particular based on variant dispositions, as well as description of default actions.
                         Revise description of processing a label and its variants. Move example table at the head of appendices. Add "only-variants"
-                        attribute. Change "name" attribute to "byref" attribute for referencing named classes and rules.  Change "not" to "complement".
+                        attribute. Change "name" attribute to "by-ref" attribute for referencing named classes and rules.  Change "not" to "complement".
                         Remove "match" attribute on rules as redundant if "start" and "end" are supported.
                         Rename "match" element to "anchor" as better fitting it's function and removing confusion with both the "match"
                         attribute on actions as well as the generic term Match Operator. Augmented the examples relevant to <xref target="RFC3743" />.</t>
@@ -2722,6 +2850,13 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
                     converting  tables in the style of <xref target="RFC3743" />. Improve description of tagging and
                      clarify that it doesn't apply to sequences. Specify that root zone uses ".". Add an appendix with an Indic Syllable
                      Structure example. Extend count attribute to allow maximal counts.</t>
+                    </list>
+					<list style="hanging" hangIndent="5">
+                    <t hangText="-07">Change "byref" to "by-ref". Add list of recommended properties. Change "location" to 
+					"positional" for collective name of start/end match operators. Use from-tag instead of by-ref for tag-based
+					classes. Made optional or mutually exclusive nature of some attributes more explicit. Allowing "comment" 
+					attributs on all child elements of "rules" except "char" and "range" elements used as child elements of "class".
+					[Schema update for that TBD]</t>
                     </list>
                 </t>
             </section>

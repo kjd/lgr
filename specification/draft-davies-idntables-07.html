@@ -144,17 +144,17 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: September 6, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">March 5, 2014</td></tr>
+<tr><td class="header">Expires: September 26, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">March 25, 2014</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-07</h1>
 
 <h3>Abstract</h3>
 
-<p>This document describes a method of representing the domain name registration policy for a zone administrator
+<p>This document describes a method of representing a key part of the domain name registration policy for a zone administrator
                 using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are
                 particularly used for the implementation of Internationalized Domain Names (IDNs). The rulesets are used
-                to implement and share policy defining which labels and specific Unicode code points are permitted for registrations,
+                to implement and share that aspect of policy defining which labels and specific Unicode code points are permitted for registrations,
                 which alternative code points are considered variants, and what actions may be performed on labels containing those
                 variants.
             
@@ -174,7 +174,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on September 6, 2014.</p>
+This Internet-Draft will expire on September 26, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -253,37 +253,37 @@ Basic Concepts<br />
 Character Classes<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tag_based_classes">6.2.1.</a>&nbsp;
 Tag-based Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">6.2.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#property">6.2.2.</a>&nbsp;
 Unicode Property-based Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">6.2.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor23">6.2.3.</a>&nbsp;
 Explicitly Declared Classes<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#combined_classes">6.2.4.</a>&nbsp;
 Combined Classes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">6.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor24">6.3.</a>&nbsp;
 Whole Label and Context Rules<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#rule">6.3.1.</a>&nbsp;
 The rule Element<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#match_operators">6.3.2.</a>&nbsp;
 The Match Operators<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">6.3.3.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor25">6.3.3.</a>&nbsp;
 The count Attribute<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">6.3.4.</a>&nbsp;
-The name and byref Attributes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">6.3.5.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor26">6.3.4.</a>&nbsp;
+The name and by-ref Attributes<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor27">6.3.5.</a>&nbsp;
 The choice Element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">6.3.6.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor28">6.3.6.</a>&nbsp;
 Literal Code Point Sequences<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor30">6.3.7.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor29">6.3.7.</a>&nbsp;
 The any Element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">6.3.8.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor30">6.3.8.</a>&nbsp;
 The start and end Elements<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#IDNA2008-example">6.3.9.</a>&nbsp;
 Example rule from IDNA2008<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#parameterized_context_rule">6.4.</a>&nbsp;
 Parameterized Context or When Rules<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor32">6.4.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor31">6.4.1.</a>&nbsp;
 The anchor Element<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor33">6.4.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor32">6.4.2.</a>&nbsp;
 The look-behind and look-ahead Elements<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#omitting">6.4.3.</a>&nbsp;
 Omitting the anchor Element<br />
@@ -307,35 +307,35 @@ Implied Actions<br />
 Default Actions<br />
 <a href="#processing">8.</a>&nbsp;
 Processing a Label Against an LGR<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor34">8.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor33">8.1.</a>&nbsp;
 Determining Eligibility for a Label<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor35">8.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor34">8.2.</a>&nbsp;
 Determining Variants for a Label<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#determining_dispositions">8.3.</a>&nbsp;
 Determining a  Disposition for a Label or variant Label<br />
-<a href="#anchor36">9.</a>&nbsp;
+<a href="#anchor35">9.</a>&nbsp;
 Conversion to and from Other Formats<br />
-<a href="#anchor37">10.</a>&nbsp;
+<a href="#anchor36">10.</a>&nbsp;
 IANA Considerations<br />
-<a href="#anchor38">11.</a>&nbsp;
+<a href="#anchor37">11.</a>&nbsp;
 Security Considerations<br />
 <a href="#rfc.references1">12.</a>&nbsp;
 References<br />
-<a href="#anchor40">Appendix&nbsp;A.</a>&nbsp;
-Example Table<br />
+<a href="#anchor39">Appendix&nbsp;A.</a>&nbsp;
+Example Tables<br />
 <a href="#translate_rfc3743">Appendix&nbsp;B.</a>&nbsp;
 How to Translate RFC 3743 based Tables into the XML Format<br />
 <a href="#indic_syllable">Appendix&nbsp;C.</a>&nbsp;
 Indic Syllable Structure Example<br />
-<a href="#anchor41">Appendix&nbsp;D.</a>&nbsp;
+<a href="#anchor40">Appendix&nbsp;D.</a>&nbsp;
 RelaxNG Schema<br />
-<a href="#anchor42">Appendix&nbsp;E.</a>&nbsp;
+<a href="#anchor41">Appendix&nbsp;E.</a>&nbsp;
 Acknowledgements<br />
-<a href="#anchor43">Appendix&nbsp;F.</a>&nbsp;
+<a href="#anchor42">Appendix&nbsp;F.</a>&nbsp;
 Editorial Notes<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor44">F.1.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor43">F.1.</a>&nbsp;
 Known Issues and Future Work<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor45">F.2.</a>&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#anchor44">F.2.</a>&nbsp;
 Change History<br />
 <a href="#rfc.authors">&#167;</a>&nbsp;
 Authors' Addresses<br />
@@ -355,6 +355,11 @@ Introduction</h3>
                 (LGRs), or IDN tables.
             
 </p>
+<p>There are other kinds policies relating to labels which are not normally covered by Label Generation Rulesets and 
+			    are therefore not representable by the XML format described here. These include, but are not limited to
+				policies around trademarks, or prohibition of fraudulent or objectionable words.
+			
+</p>
 <p>Administrators of the zones for top-level domain registries have historically published their LGRs using
                 ASCII text or HTML. The formatting of these documents has been loosely based on the format used for the
                 Language Variant Table in <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
@@ -366,13 +371,17 @@ Introduction</h3>
 <p>Through the first decade of IDN deployment, experience has shown that LGRs derived from these formats are
                 difficult to consistently implement and compare due to their differing formats. A universal format, such
                 as one using a structured XML format, will assist by improving machine-readability, consistency,
-                reusability and maintainability of LGRs. It also provides for more complex conditional implementation of
-                variants that reflects the known requirements of current zone administrator policies.
+                reusability and maintainability of LGRs.
+			
+</p>
+<p>When used to represent simple list of permitted code points, the format is quite straightforward.
+				At the cost of some complexity in the resulting file, it also allows for an implementation of more sophisticated
+				handling of conditional variants that reflects the known requirements of current zone administrator policies.
             
 </p>
 <p>Another feature of this format is that it allows many of the algorithms to be made explicit and machine
                 implementable. A remaining small set of implicit algorithms is described in this document to allow commonality
-                 in implementation.
+                in implementation.
             
 </p>
 <p>While the predominant usage of this specification is to represent IDN label policy, the format is not
@@ -510,7 +519,7 @@ LGR Format</h3>
 <a name="rfc.section.4.1"></a><h3>4.1.&nbsp;
 Namespace</h3>
 
-<p>The XML Namespace URI is [TBD].
+<p>The XML Namespace URI is [TBD]. [Note: the examples and schemas for any non-final versions of this specification use a temporary namespace]
 </p>
 <a name="anchor6"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -523,8 +532,8 @@ Basic Structure</h3>
     &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
         ...
     &lt;/lgr&gt;</pre></div>
-<p>Within the "lgr" element rest several sub-elements. First is a "meta" element that contains all
-                    meta-data associated with the IDN table, such as its authorship, what it is used for, implementation
+<p>Within the "lgr" element rest several sub-elements. First is an optional "meta" element that contains all
+                    meta-data associated with the LGR, such as its authorship, what it is used for, implementation
                     notes and references. This is followed by a "data" element that contains the substantive code point
                     data. Finally, an optional "rules" element contains information on contextual and whole-label evaluation
                     rules, if any, along with any specific action elements providing for the disposition of labels and computed
@@ -548,17 +557,21 @@ Basic Structure</h3>
                     element, optionally preceded by one "meta" element and optionally followed by one "rules" element.
                 
 </p>
+<p>In the following descriptions, required, non-repeating elements or attributes are generally not called out
+				 explicitly, in contrast to optional ones or those that may be repeated.
+				
+</p>
 <a name="anchor7"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3"></a><h3>4.3.&nbsp;
 Metadata</h3>
 
-<p>The "meta" element is used to express meta-data associated within the LGR. It can be used to identify
+<p>The optional "meta" element is used to express meta-data associated within the LGR. It can be used to identify
                     the author or relevant contact person, explain the intended usage of the LGR, and provide
                     implementation notes as well as references. The data contained within is not required by software
                     consuming the LGR in order to calculate valid labels, or to calculate variants. However, the
-                    "unicode-version" element MUST be used by a consumer of the table  to identify that it has the right
-                    Unicode data to perform operations on the table.
+                    "unicode-version" element MUST be used by a consumer of the table  to identify that it has the correct
+                    Unicode property data to perform operations on the table.
                 
 </p>
 <a name="anchor8"></a><br /><hr />
@@ -566,8 +579,8 @@ Metadata</h3>
 <a name="rfc.section.4.3.1"></a><h3>4.3.1.&nbsp;
 The version Element</h3>
 
-<p>The "version" element is used to uniquely identify each version of the LGR being represented. No
-                        specific format is required, but it is RECOMMENDED that it be a numerical positive integer,
+<p>The "version" element is optional. It is used to uniquely identify each version of the LGR being represented. No
+                        specific format is required, but it is RECOMMENDED that it be a the decimal representation of a single positive integer,
                         which is incremented with each revision of the file.
                     
 </p>
@@ -592,8 +605,8 @@ The version Element</h3>
 <a name="rfc.section.4.3.2"></a><h3>4.3.2.&nbsp;
 The date Element</h3>
 
-<p>The "date" element is used to identify the date the LGR was posted. The contents of this element
-                        MUST be a valid ISO 8601 date string as described in <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+<p>The optional "date" element is used to identify the date the LGR was posted. The contents of this element
+                        MUST be a valid ISO 8601 full-date string as described in <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
                     
 </p>
 <p>Example of a date:
@@ -605,8 +618,8 @@ The date Element</h3>
 <a name="rfc.section.4.3.3"></a><h3>4.3.3.&nbsp;
 The language Element</h3>
 
-<p>The "language" element signals that the LGR is associated with a specific language or script. The
-                        value of the language element must be a valid language tag as described in <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. The tag may simply refer to a script if the LGR is not referring to
+<p>The optional "language" element signals that the LGR is associated with a specific language or script. The
+                        value of the language element MUST be a valid language tag as described in <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. The tag may refer to a script plus undefined language if the LGR is not referring to
                         a specific language.
                     
 </p>
@@ -654,19 +667,21 @@ The domain Element</h3>
                         reflect a list of domains.
                     
 </p>
+<p>[TODO: consider &lt;scope type="domain"&gt;, to broaden applicability to other scopes]
+</p>
 <a name="anchor12"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.5"></a><h3>4.3.5.&nbsp;
 The description Element</h3>
 
-<p>The "description" element is a free-form element that contains any additional relevant
+<p>The "description" element is an optional free-form element that contains any additional relevant
                         description that is useful for the user in its interpretation. Typically, this field contains
                         authorship information, as well as additional context on how the LGR was formulated (such as
                         citations and references), and how it has been applied.
                     
 </p>
 <p>The element has an optional "type" attribute, which refers to the internet media type of the enclosed
-                        data. Typical types would be "text/plain" or "text/html". The attribute SHOULD    be a valid MIME 
+                        data. Typical types would be "text/plain" or "text/html". The attribute SHOULD be a valid MIME 
                         type. If supplied, it will be assumed the contents is content
                         of that media type.  If the description lacks a type field, it will 
                         be assumed to be plain text ("text/plain").
@@ -682,42 +697,39 @@ The validity-start and validity-end Elements</h3>
                         the contents of the LGR cease to be used.
                     
 </p>
-<p>The times should conform to the format described in section 5.6 of <a class='info' href='#RFC5646'>[RFC5646]<span> (</span><span class='info'>Phillips, A. and M. Davis, &ldquo;Tags for Identifying Languages,&rdquo; September&nbsp;2009.</span><span>)</span></a>. It
-                        may be comprised of a date, or a date and time stamp.
-                    
+<p>The dates MUST confirm to the "full-date" format described in section 5.6 of <a class='info' href='#RFC3339'>[RFC3339]<span> (</span><span class='info'>Klyne, G., Ed. and C. Newman, &ldquo;Date and Time on the Internet: Timestamps,&rdquo; July&nbsp;2002.</span><span>)</span></a>.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;validity-start&gt;2014-03-12&lt;/validity-start&gt;</pre></div><p>
+
 </p>
 <a name="anchor14"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.4.3.7"></a><h3>4.3.7.&nbsp;
 The unicode-version Element</h3>
 
-<p>Whenever an IDN table depends on character properties from a given version of the Unicode
-                        standard, the version number used in creating the LGR MUST be listed. If any software processing the table does
+<p>Whenever an LGR depends on character properties from a given version of the Unicode
+                        standard, the version number used in creating the LGR MUST be listed in the form x.y.z, where
+						x, y, and z are positive, decimal integers (see <a class='info' href='#Unicode-Versions'>[Unicode&#8209;Versions]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Version Numbering,&rdquo; .</span><span>)</span></a>).
+						If any software processing the table does
                         not have access to character property data of 
                         the requisite version, it MUST NOT perform any operations relating to whole-label
-                        evaluation.
-                        While, some Unicode code points may not have been assigned in an earlier version,
-                        leaving properties for these code points undefined, in other cases their properties may have
-                        been updated in the Unicode standard between versions. It is RECOMMENDED to only reference stable
-                        or immutable properties. For a given LGR, the property
-                        values for the code points in the actual repertoire may be unchanged in a later version of Unicode,
-                        even though other changes were made in that standard. If that fact can be established, it MAY
-                        be acceptable to use tools based on a later version of Unicode.
-                        
+                        evaluation relying on Unicode properties (<a class='info' href='#property'>Section&nbsp;6.2.2<span> (</span><span class='info'>Unicode Property-based Classes</span><span>)</span></a>).
 </p>
 <p>
-                        [[TODO: A method of indicating a range of permissible Unicode versions should be described.]]
-                    
+                        The value of a given Unicode property in<a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>may change between versions, 
+						unless such change has been explicitly 
+						disallowed in <a class='info' href='#Unicode-Stability'>[Unicode&#8209;Stability]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Encoding Stability Policy, Property Value Stability,&rdquo; .</span><span>)</span></a>.  It is RECOMMENDED to only reference stable
+                        or immutable properties, or, where possible, to provide explicit lists of code points instead.
+						
 </p>
 <p></p>
-<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;unicode-version&gt;6.2&lt;/unicode-version&gt;
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;unicode-version&gt;6.2.0&lt;/unicode-version&gt;
 </pre></div><p>
 
 </p>
-<p>It is not necessary to include a "unicode-version" element for files that do not make use of
-                        Unicode properties. Because Unicode has been strictly additive from Version 1.1, the required
-                        minimum version for the repertoire can be uniquely determined by checking the code point values
-                        in any "cp" attributes against the "age" property in <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>.
+<p>It is not necessary to include a "unicode-version" element for LGRs that do not make use of
+                        Unicode properties, however, it is RECOMMENDED. 
                     
 </p>
 <a name="references"></a><br /><hr />
@@ -787,7 +799,7 @@ Code Points and Variants</h3>
 <p>The range is inclusive of the first and last code points. Whether code points are specified individually
                 or as part of a range makes no difference in processing the data, and tools reading or writing the
                 XML format are not required to retain a distinction. All attributes defined for a range element are as if applied
-                to each code point within.
+                to each code point within. A range element has no child elements.
             
 </p>
 <p>Code points must be expressed in uppercase, hexadecimal, and zero padded to a minimum of 4 digits - in
@@ -815,17 +827,22 @@ Sequences</h3>
 
 </p>
 <p>As an alternative to using sequences to define a required context, a "char" or "range" element may
-                    specify conditional context in a "when" attribute as described below in <a class='info' href='#when'>Section&nbsp;5.2.6<span> (</span><span class='info'>Conditional Variants</span><span>)</span></a>. The
+                    specify conditional context using an optional "when" attribute as described below in <a class='info' href='#when'>Section&nbsp;5.2.6<span> (</span><span class='info'>Conditional Variants</span><span>)</span></a>. The
                     latter method is more flexible in that such conditional context is not limited to specific code
                     point in addition to allowing both prohibited as well as required context to be specified.
                 
+</p>
+<p>As described below, the "char" element, whether or not it is used for a single code point, or for a sequence,
+				may have optional child elements defining variants.  Both the "char" and "range" elements can take a number 
+				of optional attributes for conditional inclusion, commenting, cross referencing and character tagging, as described below.
 </p>
 <a name="anchor16"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.5.2"></a><h3>5.2.&nbsp;
 Variants</h3>
 
-<p>While most LGRs typically only determine code point eligibility, others additionally specify a
+<p>Most LGRs typically only determine simple code point eligibility,  and for them, the elements described so far
+				    would be the only ones required for their "data" section.  Others additionally specify a
                     mapping of code points to other code points, known as "variants". What constitutes a variant code point is a
                     matter of policy, and varies for each implementation. The following examples are intended to
                     demonstrate the syntax; they are not necessarily typical.
@@ -836,7 +853,9 @@ Variants</h3>
 <a name="rfc.section.5.2.1"></a><h3>5.2.1.&nbsp;
 Basic Variants</h3>
 
-<p>Variant code points are specified using one of more "var" elements as children of a "char" element.
+<p>Variant code points are specified using one of more "var" elements as children of a "char" element. 
+					The target mapping is specified using the "cp" attribute. Other, optional attributes for the var element
+					are described below.
 </p>
 <p>For example, to map LATIN SMALL LETTER V (U+0076) as a variant of LATIN SMALL LETTER U
                         (U+0075):
@@ -863,7 +882,7 @@ Basic Variants</h3>
 <p>The "var" element specifies variant mappings in only one direction, even though the variant relation is
                         usually considered symmetric, that is, if A is a variant of B then B should also be a variant
                         of A. The format requires that the inverse of the variant be given explicitly to fully specify
-                        symmetric variant relations in the IDN table. This has the beneficial side effect of making the
+                        symmetric variant relations in the LGR. This has the beneficial side effect of making the
                         symmetry explicit:
                     
 </p>
@@ -874,7 +893,7 @@ Basic Variants</h3>
 
 </p>
 <p>Both the source and target of a variant mapping may be sequences. As it is not possible to
-                        specify variants for ranges, ranges cannot be used for characters for which variant relations
+                        specify variants for ranges, ranges cannot be used for code points for which variant relations
                         need to be defined.
                     
 </p>
@@ -919,13 +938,14 @@ Null Variants</h3>
 <a name="rfc.section.5.2.3"></a><h3>5.2.3.&nbsp;
 Dispositions</h3>
 
-<p>Variants may be given dispositions. These describe the policy state for a variant label that was
+<p>Variants may be given dispositions with the optional "disp" attribute. Dispositions describe the policy state 
+				for a variant label that was
                     generated using a particular variant. The dispositions are the same as described below in
                     <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>. 
                 
 </p>
 <p>A disposition may be of any non-empty value not starting with an underscore and not containing 
-                     spaces.                  Within these restrictions a disposition may have any value, but several conventional dispositions are
+                     spaces.       Within these restrictions a disposition may have any value, but several conventional dispositions are
                      predefined below in  <a class='info' href='#actions'>Section&nbsp;7<span> (</span><span class='info'>The action Element</span><span>)</span></a>  to encourage common conventions in their application. If these values can represent registry
                     policy, they SHOULD be used. (See also
                     <a class='info' href='#default_actions'>Section&nbsp;7.6<span> (</span><span class='info'>Default Actions</span><span>)</span></a>
@@ -972,8 +992,10 @@ The ref Attribute</h3>
                     
 </p>
 <p>In addition to "char", "range" and "var" elements in the data section, a ref attribute may be
-                        present for literals ("char" inside a rule) as well as rules and class definitions, but not for
-                        named references to them.
+                        present in the rules section for these elements:  actions, literals ("char" inside a rule), as well as 
+						for definitions of rules and classes, but not for
+                        named references to them.  In other words, the use of the "by-ref" and "ref" attributes are mutually
+						exclusive. There are no "ref" attributes permitted on any element in the metadata.
                     
 </p>
 <a name="reflexive_mapping"></a><br /><hr />
@@ -1080,13 +1102,13 @@ Conditional Variants</h3>
 <a name="rfc.section.5.2.7"></a><h3>5.2.7.&nbsp;
 The comment Attribute</h3>
 
-<p>Any "char", "range" or "variant" element may contain a "comment" attribute. The
+<p>Any "char", "range" or "variant" element in the data section may contain an optional "comment" attribute. The
                         contents of a comment attribute are free-form plain text. Comments are ignored in machine
-                        processing of the table. Comment attributes may also be placed on certain elements in the
-                        "rules" section of the document, such as actions and literals ("char"), as well as definitions
-                        of classes and rules, but not named references to them. Finally, in the metadata the "version"
-                        and "reference" elements may have comment attributes to match the syntax in
-                        <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>
+                        processing of the table. Comment attributes may also be placed on all elements in the
+                        "rules" section of the document, such as actions and match operators, such as literals ("char"), as well as definitions
+                        of classes and rules, but not on child elements of the "class" element. Finally, in the metadata, only the "version"
+                        and "reference" elements may have comment attributes (to match the syntax in
+                        <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>).
                     
 </p>
 <a name="tagging"></a><br /><hr />
@@ -1100,7 +1122,7 @@ Code Point Tagging</h3>
                 
 </p>
 <p>For more complex registry rules, there may be a need to discern on or more subsets code points. This
-                    can be accomplished by applying a "tag" attribute to char or range elements, thereby defining character 
+                    can be accomplished by applying an optional "tag" attribute to char or range elements, thereby defining character 
                     classes (see <a class='info' href='#tag_based_classes'>Section&nbsp;6.2.1<span> (</span><span class='info'>Tag-based Classes</span><span>)</span></a>) which can then be used in whole label evaluation
                     rules (see <a class='info' href='#match_operators'>Section&nbsp;6.3.2<span> (</span><span class='info'>The Match Operators</span><span>)</span></a>). Tag attributes may be of any value, and multiple values are
                     separated by space. Code point sequences not being proper members of a set of code points, a "tag"  attribute
@@ -1203,14 +1225,13 @@ Character Classes</h3>
     &lt;/class&gt;
     ...
     &lt;rule&gt;
-        &lt;class byref="example" /&gt;
+        &lt;class by-ref="example" /&gt;
     &lt;/rule&gt;
 </pre></div><p>
 
 </p>
-<p>An empty "class" element with a "byref" attribute is a reference to an existing named class. Such an
-                    element MUST NOT have either "comment" or "ref" attributes as those may only be placed on a class
-                    definition.  A "byref" and a "name" attribute MUST NOT occur in the same element.
+<p>An empty "class" element with a "by-ref" attribute is a reference to an existing named class. A
+				"by-ref" attribute is mutually exclusive with "name", "from-tag", "property" or "ref" attributes.
                 
 </p>
 <a name="tag_based_classes"></a><br /><hr />
@@ -1219,7 +1240,7 @@ Character Classes</h3>
 Tag-based Classes</h3>
 
 <p>The char element may contain a tag attribute that consists of one or more space separated
-                        identifiers, for example:
+                        tag values, for example:
                     
 </p>
 <p></p>
@@ -1229,13 +1250,29 @@ Tag-based Classes</h3>
 
 </p>
 <p>This defines two tags for use with code point U+0061, the tag "letter" and the tag "lower".
-                        Implicitly, this defines two named character classes, the class "letter" and the class "lower",
-                        the first with 0061 and 4E00 as elements and the latter with 0061, but not 4E00 as an element.
-                        The document MUST not contain an explicitly named class definition of the same name as an
-                        implicitly named tag-derived class.
-                    
+                        Use
 </p>
-<a name="anchor23"></a><br /><hr />
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;class name="letter" from-tag="letter"&gt;
+    &lt;class name="lower" from-tag="lower" /&gt;
+</pre></div><p>
+
+</p>
+<p>to define two named character classes, "letter" and "lower", containing all code points with the respective tags, 
+                        the first with 0061 and 4E00 as elements and the latter with 0061, but not 4E00 as an element. The name attribute
+						may be omitted for an anonymous in-place definition of a nested, tag-based class. The "from-tag" attribute is
+						mutually exclusive to the "by-ref" attribute.
+						
+</p>
+<p>Tag values are formally free-form, except they cannot contain spaces. However, best practice would be to follow
+						the identifier syntax, perhaps with the addition of a few punctuation symbols, such as colon.
+</p>
+<p>If the document contains no "char" or "range" elements with a corresponding tag, the character class
+						represents the empty set. This is valid, to allow a common "rules" element to be shared across files. However, 
+						it is RECOMMENDED that implementations allow for a warning to ensure that referring to an undefined tag
+						in this way is intentional.
+</p>
+<a name="property"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2.2"></a><h3>6.2.2.&nbsp;
 Unicode Property-based Classes</h3>
@@ -1252,16 +1289,39 @@ Unicode Property-based Classes</h3>
 <p>The example above selects all code points for which the Unicode canonical combining class (ccc)
                         value is 9. This value of the ccc is assigned to all code points that encode viramas. The
                         string "ccc" is the short-alias for the canonical combining class, as defined in the Unicode
-                        Character Database <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>.
+                        Character Database <a class='info' href='#UAX42'>[UAX42]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Character Database in XML,&rdquo; .</span><span>)</span></a>. The use of the "property" attribute is mutually
+						exclusive to the "by-ref" or "from-tag" attributes.
                     
 </p>
 <p>Unicode properties may, in principle, change between versions of the Unicode Standard. However,
-                        the values assigned for a given version are fixed. If Unicode Properties are used, a minimum
-                        Unicode version MUST be declared in the header. (Note, some Unicode properties are by definition
-                        stable across versions and do not change once assigned.)
+                        the values assigned for a given version are fixed. If Unicode Properties are used, a 
+                        Unicode version MUST be declared in the "unicode-version" element in the header. 
+						(Note, some Unicode properties are by definition
+                        stable across versions and do not change once assigned (see <a class='info' href='#Unicode-Stability'>[Unicode&#8209;Stability]<span> (</span><span class='info'>Unicode Consortium, &ldquo;Unicode Encoding Stability Policy, Property Value Stability,&rdquo; .</span><span>)</span></a>.)
                     
 </p>
-<a name="anchor24"></a><br /><hr />
+<p>If full support of all Unicode properties is not available, support for the following minimal 
+					set of Unicode properties is RECOMMENDED: 
+					</p>
+<ul class="text">
+<li>General Category (gc)
+</li>
+<li>Script (sc)
+</li>
+<li>Canonical Combining Class (ccc)
+</li>
+<li>Bidi Class (bc)
+</li>
+<li>Arabic Joining Type (jt)
+</li>
+<li>Indic Syllabic Category (InSC)
+</li>
+<li>Deprecated (Dep)
+</li>
+</ul><p>
+					The short name for each property is given in parentheses.
+</p>
+<a name="anchor23"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.2.3"></a><h3>6.2.3.&nbsp;
 Explicitly Declared Classes</h3>
@@ -1312,7 +1372,8 @@ Explicitly Declared Classes</h3>
 <p>would be a more streamlined expression of the same class using the shorthand notation.
 </p>
 <p>A class element either contains any combination of char and range elements and no other elements,
-                    or a text node with the    shorthand notation.
+                    or a text node with the    shorthand notation. No attributes are permitted on char and range elements when
+					used as child elements of a class element.
 </p>
 <a name="combined_classes"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1330,27 +1391,27 @@ Combined Classes</h3>
 +-------------------+---------------------------------------------+
 | Logical Operation | Example                                     |
 +-------------------+---------------------------------------------+
-| Complement        | &lt;complement&gt;&lt;class byref="xxx"&gt;&lt;/complement&gt;|
+| Complement        | &lt;complement&gt;&lt;class by-ref="xxx"&gt;&lt;/complement&gt;|
 +-------------------+---------------------------------------------+
 | Union             | &lt;union&gt;                                     |
-|                   |    &lt;class byref="class-1"/&gt;                 |
-|                   |    &lt;class byref="class-2"/&gt;                 |
-|                   |    &lt;class byref="class-3"/&gt;                 |
+|                   |    &lt;class by-ref="class-1"/&gt;                |
+|                   |    &lt;class by-ref="class-2"/&gt;                |
+|                   |    &lt;class by-ref="class-3"/&gt;                |
 |                   | &lt;/union&gt;                                    |
 +-------------------+---------------------------------------------+
 | Intersection      | &lt;intersection&gt;                              |
-|                   |    &lt;class byref="class-1"/&gt;                 |
-|                   |    &lt;class byref="class-2"/&gt;                 |
+|                   |    &lt;class by-ref="class-1"/&gt;                |
+|                   |    &lt;class by-ref="class-2"/&gt;                |
 |                   | &lt;/intersection&gt;                             |
 +-------------------+---------------------------------------------+
 | Difference        | &lt;difference&gt;                                |
-|                   |    &lt;class byref="class-1"/&gt;                 |
-|                   |    &lt;class byref="class-2"/&gt;                 |
+|                   |    &lt;class by-ref="class-1"/&gt;                |
+|                   |    &lt;class by-ref="class-2"/&gt;                |
 |                   | &lt;/difference&gt;                               |
 +-------------------+---------------------------------------------+
 | Symmetric         | &lt;symmetric-difference&gt;                      |
-| Difference        |    &lt;class byref="class-1"/&gt;                 |
-|                   |    &lt;class byref="class-2"/&gt;                 |
+| Difference        |    &lt;class by-ref="class-1"/&gt;                |
+|                   |    &lt;class by-ref="class-2"/&gt;                |
 |                   | &lt;/symmetric-difference&gt;                     |
 +-------------------+---------------------------------------------+
 </pre></div><p>
@@ -1364,7 +1425,7 @@ Combined Classes</h3>
                     
 </p>
 <p>An anonymous combined class can be defined directly inside a rule or of the match
-                    operator elements that allow child elements (see <a class='info' href='#match_operators'>Section&nbsp;6.3.2<span> (</span><span class='info'>The Match Operators</span><span>)</span></a>)
+                    operator elements that allow child elements (see  <a class='info' href='#match_operators'>Section&nbsp;6.3.2<span> (</span><span class='info'>The Match Operators</span><span>)</span></a>)
                                         by using the set combination as the outer element.
                     
 </p>
@@ -1372,8 +1433,8 @@ Combined Classes</h3>
                         </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule&gt;
         &lt;union&gt;
-            &lt;class byref="xxx"/&gt;
-            &lt;class byref="yyy"/&gt;
+            &lt;class by-ref="xxx"/&gt;
+            &lt;class by-ref="yyy"/&gt;
         &lt;/union&gt;
     &lt;/rule&gt;
 </pre></div><p>
@@ -1385,7 +1446,7 @@ Combined Classes</h3>
                     MUST NOT be nested inside a "class" element.  
 </p>
 <p>Lastly, to create a named combined class that can be
-                        referenced in other classes or in rules as &lt;class byref="xxxyyy"/&gt;, add a "name" attribute to
+                        referenced in other classes or in rules as &lt;class by-ref="xxxyyy"/&gt;, add a "name" attribute to
                         the set combination element, for example &lt;union name="xxxyyy" /&gt; and place it at the
                         top level below the "rules" element.
 </p>
@@ -1393,8 +1454,8 @@ Combined Classes</h3>
                         </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre> &lt;rules&gt;
     &lt;union class name="xxxyyy"&gt;
-        &lt;class byref="xxx"/&gt;
-        &lt;class byref="yyy"/&gt;
+        &lt;class by-ref="xxx"/&gt;
+        &lt;class by-ref="yyy"/&gt;
     &lt;/union&gt;
       . . .
   &lt;/ rules&gt;
@@ -1404,9 +1465,9 @@ Combined Classes</h3>
 </p>
 <p>Because (as for sets) a combination of classes is itself a class, no matter how a class is created, a reference 
                     to it always uses the "class" element. That is, a named class is always referenced via an empty "class" element
-                    using the "byref" attribute containing the name of the class to be referenced. 
+                    using the "by-ref" attribute containing the name of the class to be referenced. 
 </p>
-<a name="anchor25"></a><br /><hr />
+<a name="anchor24"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3"></a><h3>6.3.&nbsp;
 Whole Label and Context Rules</h3>
@@ -1436,8 +1497,8 @@ The rule Element</h3>
 <p>
                         </p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule name="preferred"&gt;
-       &lt;start /&gt;
-           &lt;class byref="preferred" count="1+"/&gt;
+        &lt;start /&gt;
+        &lt;class by-ref="preferred" count="1+"/&gt;
         &lt;end /&gt;
     &lt;/rule&gt;</pre></div><p>
 
@@ -1478,20 +1539,20 @@ The Match Operators</h3>
 | logical    | any         | &lt;any /&gt;                            |
 |            +-------------+------------------------------------+
 |            | choice      | &lt;choice&gt;                           |
-|            |             |  &lt;rule byref="alternative1"/&gt;      |
-|            |             |  &lt;rule byref="alternative2"/&gt;      |
+|            |             |  &lt;rule by-ref="alternative1"/&gt;     |
+|            |             |  &lt;rule by-ref="alternative2"/&gt;     |
 |            |             | &lt;/choice&gt;                          |
 +--------------------------+------------------------------------+
-| location   | start       | &lt;start /&gt;                          |
+| positional | start       | &lt;start /&gt;                          |
 |            +-------------+------------------------------------+
 |            | end         | &lt;end /&gt;                            |
 +--------------------------+------------------------------------+
 | literal    | char        | &lt;char cp="0061 0062 0063" /&gt;       |
 +--------------------------+------------------------------------+
-| set        | class       | &lt;class byref="class1" /&gt;           |
+| set        | class       | &lt;class by-ref="class1" /&gt;          |
 |            |             | &lt;class&gt;0061 0064-0065&lt;/class&gt;      |
 +--------------------------+------------------------------------+
-| group      | rule        | &lt;rule byref="rule1" /&gt;             |
+| group      | rule        | &lt;rule by-ref="rule1" /&gt;            |
 |            |             | &lt;rule&gt;&lt;any /&gt;&lt;rule /&gt;              |
 +--------------------------+------------------------------------+
 | contextual | anchor      | &lt;anchor /&gt;                         |
@@ -1504,19 +1565,19 @@ The Match Operators</h3>
 
                     
 </p>
-<p>Any expression defining an anonymous class,  including any of the set combination operators
-                    (see <a class='info' href='#combined_classes'>Section&nbsp;6.2.4<span> (</span><span class='info'>Combined Classes</span><span>)</span></a>), in addition to references to a named classes.
+<p>Any element defining an anonymous class can be used as a match operator,  including any of the set combination operators
+                    (see <a class='info' href='#combined_classes'>Section&nbsp;6.2.4<span> (</span><span class='info'>Combined Classes</span><span>)</span></a>) as well as references to a named classes.
 </p>
 <p>All match operators shown as empty elements in the Examples
                     column of the table above do not support child elements of their own; otherwise match operators may be nested.
                     In particular, anonymous rule elements can be used for grouping.
 </p>
-<a name="anchor26"></a><br /><hr />
+<a name="anchor25"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.3"></a><h3>6.3.3.&nbsp;
 The count Attribute</h3>
 
-<p>The count attribute specifies the minimally required or maximal permitted number of
+<p>The optional count attribute specifies the minimally required or maximal permitted number of
                         times a match operator is used to match input. If the count attribute is</p>
 <blockquote class="text"><dl>
 <dt>n or n:n</dt>
@@ -1546,20 +1607,31 @@ The count Attribute</h3>
                         of the remainder of the rule. 
 </p>
 <p>The count attribute MUST NOT be applied to match operators of type "start", "end", "anchor", "look-ahead"
-                        and "look-behind". It may be applied to "class" and "rule" elements only if they do not have a "name" attribute,
+                        and "look-behind" or to any operators, such as "rule" or "choice" that contain them, whether the latter are declared in place or used by reference.  The count attribute may be applied to "class" and "rule" elements only if they do not have a "name" attribute,
                         that is to anonymous rules and classes or any invocation of predefined rules or classes by reference.
                         
 </p>
-<a name="anchor27"></a><br /><hr />
+<p>The optional count attribute MAY be applied to match operators of type "any", "char" and "class", as well as to
+						match operators "choice" and "rule", as long as they contain none of the operators "start", "end", "anchor", "look-ahead"
+                        and "look-behind" as direct or indirect child elements. The same requirement applies recursively to any "rule"
+						element referenced inside a "choice" or "rule" with a count attribute.  The count attribute is mutually exclusive 
+						to the "name" attribute.
+</p>
+<a name="anchor26"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.4"></a><h3>6.3.4.&nbsp;
-The name and byref Attributes</h3>
+The name and by-ref Attributes</h3>
 
-<p>Rules (and classes) may be named using a "name" attribute and can then be nested inside other match
-                        operators only by reference. To reference a named rule (or class) use a rule or class element with the "byref"
+<p>Rules (and classes) declared as immediate child elements of the "rules" element MUST be named 
+						using a "name" attribute, all other instances of rules and classes MUST NOT be named. 
+						Named rules and classes can be nested inside other match
+                        operators by reference.
+</p>
+<p>To reference a named rule (or class) use a rule or class element with an optional "by-ref"
                         attribute containing the name of the referenced element. It is an error to reference a rule or class for which the
-                        definition has not been seen, or that is not an implicitly defined tag-based class. A rule or class
-                            element with a "byref" attribute does not have child elements, nor any "ref" or "comment" attributes.
+                        definition has not been seen. 
+						The use of the "by-ref" for a rule or class element is mutually exclusive with the use of  the "name" attribute, 
+						as well as with the presence of any child elements.
                         
 </p>
 <p>Here's an example of a rule requiring that all labels be letters (optionally followed by
@@ -1572,21 +1644,21 @@ The name and byref Attributes</h3>
     &lt;class name="combining-mark" property="gc:M"/&gt;
     &lt;class name="digit" property="gc:Nd"&gt;
     &lt;rule name="letter-grapheme"&gt;
-       &lt;class byref="letter" count="1+"/&gt;
-       &lt;class byref="combining-mark" count="0+"/&gt;
+       &lt;class by-ref="letter" count="1+"/&gt;
+       &lt;class by-ref="combining-mark" count="0+"/&gt;
     &lt;/rule&gt;
     &lt;rule name="leading-letter" &gt;
        &lt;start /&gt;
-       &lt;rule byref="letter-grapheme" count="1"/&gt;
+       &lt;rule by-ref="letter-grapheme" count="1"/&gt;
        &lt;choice count="0+"&gt;
-           &lt;rule byref="letter-grapheme" count="0+"/&gt;
-           &lt;class byref="digit" count="0+"/&gt;
+           &lt;rule by-ref="letter-grapheme" count="0+"/&gt;
+           &lt;class by-ref="digit" count="0+"/&gt;
        &lt;/choice&gt;
        &lt;end /&gt;
     &lt;/rule&gt;</pre></div><p>
 
 </p>
-<a name="anchor28"></a><br /><hr />
+<a name="anchor27"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.5"></a><h3>6.3.5.&nbsp;
 The choice Element</h3>
@@ -1598,9 +1670,9 @@ The choice Element</h3>
 <p></p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>    &lt;rule name="ldh"&gt;
        &lt;choice count="1+"&gt;
-           &lt;class byref="letters"/&gt;
-           &lt;class byref="digits"/&gt;
-           &lt;char cp="002D"/&gt;
+           &lt;class by-ref="letters"/&gt;
+           &lt;class by-ref="digits"/&gt;
+           &lt;char cp="002D" comment="literal HYPHEN"/&gt;
        &lt;/choice&gt;
     &lt;/rule&gt;</pre></div><p>
 
@@ -1610,7 +1682,7 @@ The choice Element</h3>
                             consists of a sequence of elements, they can be wrapped in an anonymous rule.
                         
 </p>
-<a name="anchor29"></a><br /><hr />
+<a name="anchor28"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.6"></a><h3>6.3.6.&nbsp;
 Literal Code Point Sequences</h3>
@@ -1618,10 +1690,11 @@ Literal Code Point Sequences</h3>
 <p>A literal code point sequence matches a single code point or a sequence. It is defined by a
                             "char" element, with the code point or sequence to be matched given by the "cp" attribute.
                             When used as a literal, a "char" element may contain a "count" in addition to the "cp"
-                            attribute, comments or references, but no conditional contexts or child elements.
+                            attribute and optional "comment" or "ref" attributes. No other attributes or child elements.
+							are permitted.
                         
 </p>
-<a name="anchor30"></a><br /><hr />
+<a name="anchor29"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.7"></a><h3>6.3.7.&nbsp;
 The any Element</h3>
@@ -1631,9 +1704,9 @@ The any Element</h3>
                             <a class='info' href='#IDNA2008-example'>Section&nbsp;6.3.9<span> (</span><span class='info'>Example rule from IDNA2008</span><span>)</span></a>
                         
 </p>
-<p>The "any" element" may have neither a "comment" nor a "ref" attribute.
+<p>Unlike a literal, the "any" element" may not have a "ref" attribute.
 </p>
-<a name="anchor31"></a><br /><hr />
+<a name="anchor30"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.3.8"></a><h3>6.3.8.&nbsp;
 The start and end Elements</h3>
@@ -1652,7 +1725,11 @@ The start and end Elements</h3>
                              not starting a label with a digit, the rule needs to describe only the initial part of a label.
                         
 </p>
-<p>Start and end elements do not have a "count" or any other attribute. 
+<p>Start and end elements each occur at most once in a rule, except if nested inside a "choice" element in
+                            such a way that in matching each alternative at most one occurrence of each is encountered. Otherwise,
+                            the result is undefined; as is any case where start and end elements not encountered as first or last element, respectively, in 
+							matching a rule. Start and end elements do not have a "count" or any other attribute. If 
+						    any enclosing match operator has a count attribute the results are undefined. 
 </p>
 <a name="IDNA2008-example"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
@@ -1674,14 +1751,14 @@ Example rule from IDNA2008</h3>
        &lt;rule name="mixed-digits"&gt;
           &lt;choice&gt;
             &lt;rule&gt;
-                &lt;class byref="arabic-indic-digits"/&gt;
+                &lt;class by-ref="arabic-indic-digits"/&gt;
                 &lt;any count="0+"/&gt;
-                &lt;class byref="extended-arabic-indic-digits"/&gt;
+                &lt;class by-ref="extended-arabic-indic-digits"/&gt;
              &lt;/rule&gt;
              &lt;rule&gt;
-                &lt;class byref="extended-arabic-indic-digits"/&gt;
+                &lt;class by-ref="extended-arabic-indic-digits"/&gt;
                 &lt;any count="0+"/&gt;
-                &lt;class byref="arabic-indic-digits"/&gt;
+                &lt;class by-ref="arabic-indic-digits"/&gt;
              &lt;/rule&gt;
           &lt;/choice&gt;
        &lt;/rule&gt;
@@ -1703,7 +1780,7 @@ Parameterized Context or When Rules</h3>
                         matched (see <a class='info' href='#implied_actions'>Section&nbsp;7.5<span> (</span><span class='info'>Implied Actions</span><span>)</span></a>). Conversely, a "not-when" attribute results 
                         in a disposition    of invalid whenever the rule is matched.
 </p>
-<a name="anchor32"></a><br /><hr />
+<a name="anchor31"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.4.1"></a><h3>6.4.1.&nbsp;
 The anchor Element</h3>
@@ -1726,7 +1803,7 @@ The anchor Element</h3>
     &lt;rule name="preceding-greek"&gt;
         &lt;anchor/&gt;
         &lt;look-ahead&gt;
-            &lt;class byref="greek-script"/&gt;
+            &lt;class by-ref="greek-script"/&gt;
         &lt;/look-ahead&gt;
     &lt;/rule&gt;</pre></div><p>
 
@@ -1748,7 +1825,7 @@ The anchor Element</h3>
                     "when" or "not-when" attribute. (See <a class='info' href='#omitting'>Section&nbsp;6.4.3<span> (</span><span class='info'>Omitting the anchor Element</span><span>)</span></a>)
                     
 </p>
-<a name="anchor33"></a><br /><hr />
+<a name="anchor32"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.6.4.2"></a><h3>6.4.2.&nbsp;
 The look-behind and look-ahead Elements</h3>
@@ -1771,28 +1848,29 @@ The look-behind and look-ahead Elements</h3>
         &lt;choice&gt;
           &lt;start/&gt;
           &lt;rule&gt;
-            &lt;class byref="transparent" count="0+"/&gt;
-            &lt;class byref="non-joining"/&gt;
+            &lt;class by-ref="transparent" count="0+"/&gt;
+            &lt;class by-ref="non-joining"/&gt;
           &lt;/rule&gt;
         &lt;/choice&gt;
       &lt;/look-behind&gt;
       &lt;anchor/&gt;
       &lt;look-ahead&gt;
-        &lt;class byref="transparent" count="0+" /&gt;
+        &lt;class by-ref="transparent" count="0+" /&gt;
         &lt;choice&gt;
-          &lt;class byref="right-joining" /&gt;
-          &lt;class byref="dual-joining" /&gt;
+          &lt;class by-ref="right-joining" /&gt;
+          &lt;class by-ref="dual-joining" /&gt;
         &lt;/choice&gt;
       &lt;/look-ahead&gt;
     &lt;/rule&gt;</pre></div><p>
 
 </p>
-<p>A when rule contains any combination of "look-behind" , "anchor" and "look-ahead" elements in
+<p>A "when rule" contains any combination of "look-behind" , "anchor" and "look-ahead" elements in
                             that order. Each of these elements occurs at most once, except if nested inside a "choice" element in
-                            such a way that each in matching each alternative has only one occurrence is encountered. Otherwise,
-                            the result is undefined. None of these elements takes a "count" attribute.
-                            If a context rule contains a look-ahead or look-behind element, it MUST contain an "anchor"
-                            element.
+                            such a way that in matching each alternative at most one occurrence of each is encountered. Otherwise,
+                            the result is undefined. None of these elements takes a "count" attribute, nor does any enclosing
+							match operator. Otherwise, the result is undefined.
+                            If a context rule contains a look-ahead or look-behind element, it MUST contain an "anchor" element. 
+							If, because of a choice element, a required anchor is not actually encountered, the results are undefined.
                         
 </p>
 <a name="omitting"></a><br /><hr />
@@ -1818,8 +1896,9 @@ Omitting the anchor Element</h3>
         &lt;/union&gt;
     &lt;/rule&gt;</pre></div>
 <p>The Katakana middle dot is used only with Han, Katakana or Hiragana. The corresponding When Rule requires
-                            that at least one code point in the label is in one of these scripts. (Note that the
-                            Katakana middle dot itself is of script Common).
+                            that at least one code point in the label is in one of these scripts, but the position of that code point is independent
+							of the location of the middle dot and no anchor therefore required. (Note that the Katakana middle dot itself is of 
+							script Common).
                         
 </p>
 <a name="actions"></a><br /><hr />
@@ -2052,12 +2131,12 @@ Default Actions</h3>
 <a name="rfc.section.8"></a><h3>8.&nbsp;
 Processing a Label Against an LGR</h3>
 
-<a name="anchor34"></a><br /><hr />
+<a name="anchor33"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.8.1"></a><h3>8.1.&nbsp;
 Determining Eligibility for a Label</h3>
 
-<p>In order to use a table to test a specific domain label for membership in the LGR, a consumer of the
+<p>In order to use a table to test a specific label for membership in the LGR, a consumer of the
                     LGR must iterate through each code point within a given U-label, and test that each code point is a
                     member of the LGR. If any code point is not a member of the LGR, it shall be deemed as not eligible
                     in accordance with the table.
@@ -2068,14 +2147,14 @@ Determining Eligibility for a Label</h3>
                 
 </p>
 <p>A label must also not trigger any action that results in a disposition of "invalid" or equivalent, otherwise
-                it is deemed not eligible. (This step may be deferred, until dispositions are determined)
+                it is deemed not eligible. (This step may need to be deferred, until variant code point dispositions have been determined)
 </p>
 <p>For LGRs that contain reflexive variant mappings (defined in <a class='info' href='#reflexive_mapping'>Section&nbsp;5.2.5<span> (</span><span class='info'>Variants with Reflexive Mapping</span><span>)</span></a>) the evaluation
                 of dispositions must be deferred until variants are generated. In essence, tables that use this feature treat the original
                 as the (identity) variant of itself. For such tables, the ordinary iteration over code points can at best be used to exclude
                 a subset of invalid labels, effectively a pre-screening.
 </p>
-<a name="anchor35"></a><br /><hr />
+<a name="anchor34"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.8.2"></a><h3>8.2.&nbsp;
 Determining Variants for a Label</h3>
@@ -2155,7 +2234,7 @@ Determining a  Disposition for a Label or variant Label</h3>
 </ul><p>
                 
 </p>
-<a name="anchor36"></a><br /><hr />
+<a name="anchor35"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.9"></a><h3>9.&nbsp;
 Conversion to and from Other Formats</h3>
@@ -2178,14 +2257,14 @@ Conversion to and from Other Formats</h3>
 </p>
 <p>For notes on how to translate an RFC 3743-style table, see <a class='info' href='#translate_rfc3743'>Appendix&nbsp;B<span> (</span><span class='info'>How to Translate RFC 3743 based Tables into the XML Format</span><span>)</span></a>.
 </p>
-<a name="anchor37"></a><br /><hr />
+<a name="anchor36"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.10"></a><h3>10.&nbsp;
 IANA Considerations</h3>
 
 <p>This document does not specify any IANA actions.
 </p>
-<a name="anchor38"></a><br /><hr />
+<a name="anchor37"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.11"></a><h3>11.&nbsp;
 Security Considerations</h3>
@@ -2217,27 +2296,54 @@ Security Considerations</h3>
 <td class="author-text">Technology Development for Indian Languages (TDIL) Programme, &ldquo;Devanagari Script Behaviour for Hindi.&rdquo;</td></tr>
 <tr><td class="author-text" valign="top"><a name="UAX42">[UAX42]</a></td>
 <td class="author-text">Unicode Consortium, &ldquo;<a href="http://unicode.org/reports/tr42/">Unicode Character Database in XML</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="Unicode-Stability">[Unicode-Stability]</a></td>
+<td class="author-text">Unicode Consortium, &ldquo;<a href="http://www.unicode.org/policies/stability_policy.html#Property_Value">Unicode Encoding Stability Policy, Property Value Stability</a>.&rdquo;</td></tr>
+<tr><td class="author-text" valign="top"><a name="Unicode-Versions">[Unicode-Versions]</a></td>
+<td class="author-text">Unicode Consortium, &ldquo;<a href="http://unicode.org/versions/#Version_Numbering">Unicode Version Numbering</a>.&rdquo;</td></tr>
 <tr><td class="author-text" valign="top"><a name="XML">[XML]</a></td>
 <td class="author-text">World Wide Web Consortium, &ldquo;<a href="http://www.w3.org/TR/REC-xml/">Extensible Markup Language (XML) 1.0</a>.&rdquo;</td></tr>
 </table>
 
-<a name="anchor40"></a><br /><hr />
+<a name="anchor39"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.A"></a><h3>Appendix A.&nbsp;
-Example Table</h3>
+Example Tables</h3>
 
-<p>The following presents a sample XML LGR showing a near complete collection of most of the elements and
-                attributes defined in this specification in somewhat typical context.
+<p>The following presents a minimal LGR table defining the lower case LDH (letter-digit-hyphen) repertoire
+			and containing no rules or description elements. Many simple LGR tables will look quite similar, except that
+			they would contain some meta data.
 </p>
 <p></p>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+&lt;data&gt;
+    &lt;char cp="002D" comment="HYPHEN (-)" /&gt;
+    &lt;range first-cp="0030" last-cp="0039" comment="DIGIT ZERO ('0') - DIGIT NINE ('9')" /&gt;
+    &lt;range first-cp="0061" last-cp="007A" comment="LATIN SMALL LETTER A ('a') - LATTIN SMALL LETTER Z ('z')" /&gt;
+&lt;/data&gt;
+&lt;/lgr&gt;</pre></div><p>
 
+</p>
+<p>The following sample LGR shows a more complete collection of the elements and
+                attributes defined in this specification in a somewhat typical context.
+</p>
+<p></p>
+<div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+
+&lt;!-- This example uses a large subset of the features of this
+     specification. It does not include every set operator,
+     match operator element, or action trigger attribute, their
+     use being largely parallel to the ones demonstrated. --&gt;
+
+&lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
+&lt;!-- meta element with all optional elements --&gt;
   &lt;meta&gt;
-    &lt;version&gt;1&lt;/version&gt;
+    &lt;version comment="initial version"&gt;1&lt;/version&gt;
     &lt;date&gt;2010-01-01&lt;/date&gt;
     &lt;language&gt;sv&lt;/language&gt;
     &lt;domain&gt;example&lt;/domain&gt;
+    &lt;validity-start&gt;2010-01-01&lt;/validity-start&gt;
+    &lt;validity-end&gt;2013-12-31&lt;/validity-end&gt;
     &lt;description type="text/html"&gt;
         &lt;![CDATA[
         This language table was developed with the
@@ -2245,20 +2351,33 @@ Example Table</h3>
         examples institute&lt;/a&gt;.
         ]]&gt;
     &lt;/description&gt;
+    &lt;unicode-version&gt;6.3.0&lt;/unicode-version&gt;
     &lt;references&gt;
-      &lt;reference id="0" &gt;The Unicode Standard 6.3&lt;/reference&gt;
+      &lt;reference id="0" comment="the most recent" &gt;The Unicode Standard 6.2&lt;/reference&gt;
       &lt;reference id="1" &gt;RFC 5892&lt;/reference&gt;
       &lt;reference id="2" &gt;Big-5: Computer Chinese Glyph and Character
          Code Mapping Table, Technical Report C-26, 1984&lt;/reference&gt;
     &lt;/references&gt;
  &lt;/meta&gt;
+ &lt;!-- the data section describing the repertoire --&gt;
   &lt;data&gt;
+    &lt;!-- single code point "char" element --&gt;
     &lt;char cp="002D" ref="1" comment="HYPHEN" /&gt;
+
+    &lt;!-- range elements for contiguous code points,  with tags --&gt;
     &lt;range first-cp="0030" last-cp="0039" ref="1" tag="digit" /&gt;
     &lt;range first-cp="0061" last-cp="007A" ref ="1" tag="letter" /&gt;
-    &lt;range first-cp="0370" last-cp="0380"  /&gt;
+
+    &lt;!-- code point sequence --&gt;
+    &lt;char cp="006C 00B7 006C" comment="catalan middle dot" /&gt;
+
+    &lt;!-- alternatively use a when rule --&gt;
     &lt;char cp="00B7" when="catalan-middle-dot" /&gt;
-    &lt;char cp="200D" when="joiner" /&gt;
+
+     &lt;!-- code point with context rule --&gt;
+    &lt;char cp="200D" when="joiner" ref="2" /&gt;
+
+    &lt;!-- code points with variants --&gt;
     &lt;char cp="4E16" tag="preferred" ref="0"&gt;
       &lt;var cp="4E17" disp="block" ref="2" /&gt;
       &lt;var cp="534B" disp="allocate" ref="2" /&gt;
@@ -2272,8 +2391,10 @@ Example Table</h3>
       &lt;var cp="4E17" disp="block" ref="2" /&gt;
     &lt;/char&gt;
   &lt;/data&gt;
+
+  &lt;!-- Context and whole label rules --&gt;
   &lt;rules&gt;
-    &lt;class name="virama" property="ccc:9" /&gt;
+    &lt;!-- Require the given code point to be between two 006C --&gt;
     &lt;rule name="catalan-middle-dot" ref="0"&gt;
         &lt;look-behind&gt;
             &lt;char cp="006C" /&gt;
@@ -2283,33 +2404,57 @@ Example Table</h3>
             &lt;char cp="006C" /&gt;
         &lt;/look-ahead&gt;
     &lt;/rule&gt;
+
+    &lt;!-- example of a context rule based on property --&gt;
+    &lt;class name="virama" property="ccc:9" /&gt;
     &lt;rule name="joiner"  ref="1" &gt;
         &lt;look-behind&gt;
-            &lt;class byref="virama" /&gt;
+            &lt;class by-ref="virama" /&gt;
         &lt;/look-behind&gt;
+        &lt;anchor /&gt;
     &lt;/rule&gt;
-    &lt;rule name="example" &gt;
-        &lt;difference&gt;
-            &lt;complement&gt;
-                &lt;class comment="use shorthand class notation"&gt;
-                    006E 0070-0078
-                &lt;/class&gt;
-            &lt;/omplement&gt;
-            &lt;class comment="use standard notation"&gt;
-                &lt;range first-cp="0000" last-cp="001F" /&gt;
-                &lt;char cp="007F" /&gt;
-            &lt;/class&gt;
-        &lt;/difference&gt;
+
+    &lt;!-- example of using set operators --&gt;
+
+    &lt;!-- Subtract vowels from letters to get
+         consonant, demonstrating the different
+         set notations and the difference operator --&gt;
+    &lt;difference name="consonants"&gt;
+         &lt;!-- use standard notation --&gt;
+         &lt;class comment="all letters"&gt;
+           &lt;char cp="0061" /&gt;
+           &lt;range first-cp="0062" last-cp="0072" /&gt;
+         &lt;/class&gt;
+         &lt;!-- use shorthand notation --&gt;
+         &lt;class comment="all vowels"&gt;
+                 0061 0065 0069 006F 0075-0075
+         &lt;/class&gt;
+     &lt;/difference&gt;
+
+     &lt;!-- by using the start and end, rule matches whole label --&gt;
+     &lt;rule name="three-or-more-consonants"&gt;
+         &lt;start /&gt;
+         &lt;!-- reference the class defined by the difference
+              and require three or more matches --&gt;
+         &lt;class by-ref="consonants" count="3+" /&gt;
+         &lt;end /&gt;
     &lt;/rule&gt;
-    &lt;rule name="preferred"
-          comment="non-empty label of preferred code points"&gt;
-        &lt;class byref="preferred" count="1+" /&gt;
+
+    &lt;!-- rule for negative matching --&gt;
+    &lt;rule name="non-preferred"
+          comment="matches any non-preferred code point"&gt;
+        &lt;complement comment="non-preferred" &gt;
+            &lt;class from-tag="preferred" /&gt;
+        &lt;/complement&gt;
     &lt;/rule&gt;
-    &lt;action disp="example" match="example" /&gt;
+
+   &lt;!-- actions triggered by matching rules and/or
+        variant dispositions --&gt;
+    &lt;action disp="consonants"
+            match="three-or-more-consonants" /&gt;
     &lt;action disp="block" any-variant="block" /&gt;
     &lt;action disp="activate" all-variants="allocate"
-          match="preferred" /&gt;
-    &lt;action disp="activate"  match="preferred" /&gt;
+            not-match="non-preferred" /&gt;
   &lt;/rules&gt;
 &lt;/lgr&gt;</pre></div><p>
 
@@ -2446,7 +2591,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6</pre></div><p>
 </p>
 <p>
      Given a label "U+4E7E U+4E81", the following labels would be ruled
-     allocatable under <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a> based on how it is commonly
+     allocatable under <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a> based on how that standard is commonly
      implemented in domain registries:
 </p>
 <p></p>
@@ -2632,32 +2777,32 @@ Indic Syllable Structure Example</h3>
     &lt;/union&gt;
     &lt;!--Whole label evaluation and Context rules go here--&gt;
     &lt;rule name="consonant-with-optional-nukta"&gt;
-        &lt;class byref="InSC:Consonant" /&gt;
-        &lt;class byref="InSC:Nukta"  count="0:1"/&gt;
+        &lt;class by-ref="InSC:Consonant" /&gt;
+        &lt;class by-ref="InSC:Nukta"  count="0:1"/&gt;
     &lt;/rule&gt;
     &lt;rule name="independent-vowel-with-optional-modifier"&gt;
-        &lt;class byref="InSC:Vowel_Independent" /&gt;
-        &lt;class byref="vowel-modifier"  count="0:1" /&gt;
+        &lt;class by-ref="InSC:Vowel_Independent" /&gt;
+        &lt;class by-ref="vowel-modifier"  count="0:1" /&gt;
     &lt;/rule&gt;
     &lt;rule name="optional-dependent-vowel-with-optional-modifier" &gt;
-      &lt;class byref="InSC:Vowel_Dependent" count="0:1" /&gt;
-      &lt;class byref="vowel-modifier" count="0:1"  /&gt;
+      &lt;class by-ref="InSC:Vowel_Dependent" count="0:1" /&gt;
+      &lt;class by-ref="vowel-modifier" count="0:1"  /&gt;
     &lt;/rule&gt;
     &lt;rule name="consonant-cluster"&gt;
       &lt;rule count="0+"&gt;
-        &lt;rule byref="consonant-with-optional-nukta" /&gt;
-        &lt;class byref="halant" /&gt;
+        &lt;rule by-ref="consonant-with-optional-nukta" /&gt;
+        &lt;class by-ref="halant" /&gt;
       &lt;/rule&gt;
-      &lt;rule byref="consonant-with-optional-nukta" /&gt;
+      &lt;rule by-ref="consonant-with-optional-nukta" /&gt;
       &lt;choice&gt;
-        &lt;class byref="halant" /&gt;
-        &lt;rule byref="optional-dependent-vowel-with-optional-modifier" /&gt;
+        &lt;class by-ref="halant" /&gt;
+        &lt;rule by-ref="optional-dependent-vowel-with-optional-modifier" /&gt;
       &lt;/choice&gt;
     &lt;/rule&gt;
     &lt;rule name="akshara"&gt;
       &lt;choice&gt;
-        &lt;rule byref="independent-vowel-with-optional-modifier" /&gt;
-        &lt;rule byref="consonant-cluster" /&gt;
+        &lt;rule by-ref="independent-vowel-with-optional-modifier" /&gt;
+        &lt;rule by-ref="consonant-cluster" /&gt;
       &lt;/choice&gt;
     &lt;/rule&gt;
     &lt;rule name="WLE-akshara-or-other" comment="series of one or
@@ -2666,7 +2811,7 @@ Indic Syllable Structure Example</h3>
       &lt;start /&gt;
       &lt;choice count="1+"&gt;
         &lt;class property="InSC:other"  /&gt;
-        &lt;rule byref="akshara"  /&gt;
+        &lt;rule by-ref="akshara"  /&gt;
       &lt;/choice&gt;
       &lt;end /&gt;
     &lt;/rule&gt;
@@ -2686,7 +2831,7 @@ Indic Syllable Structure Example</h3>
     which would remove the dependency on the Unicode Standard altogether.
     
 </p>
-<a name="anchor41"></a><br /><hr />
+<a name="anchor40"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.D"></a><h3>Appendix D.&nbsp;
 RelaxNG Schema</h3>
@@ -2835,7 +2980,7 @@ RelaxNG Schema</h3>
   &lt;/define&gt;
   &lt;define name="class-invocation"&gt;
     &lt;element name="class"&gt;
-      &lt;attribute name="byref"&gt;
+      &lt;attribute name="by-ref"&gt;
         &lt;ref name="class-ref"/&gt;
       &lt;/attribute&gt;
       &lt;optional&gt;
@@ -3112,7 +3257,7 @@ RelaxNG Schema</h3>
         &lt;attribute name="comment"/&gt;
       &lt;/optional&gt;
       &lt;choice&gt;
-        &lt;attribute name="byref"&gt;
+        &lt;attribute name="by-ref"&gt;
           &lt;ref name="rule-ref"/&gt;
         &lt;/attribute&gt;
         &lt;oneOrMore&gt;
@@ -3249,7 +3394,7 @@ RelaxNG Schema</h3>
   &lt;/define&gt;
 &lt;/grammar&gt;
 </pre></div>
-<a name="anchor42"></a><br /><hr />
+<a name="anchor41"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.E"></a><h3>Appendix E.&nbsp;
 Acknowledgements</h3>
@@ -3263,18 +3408,18 @@ Acknowledgements</h3>
                 was published by the Arabic-language community.
             
 </p>
-<p>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Nicholas
-                Ostler, Thomas Roessler, Steve Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and John Yunker.
+<p>Contributions that have shaped this document have been provided by Francisco Arias, Mark Davis, Paul Hoffman,
+			    Nicholas Ostler, Thomas Roessler, Steve Sheng, Michel Suignard, Andrew Sullivan, Wil Tan and John Yunker.
             
 </p>
-<a name="anchor43"></a><br /><hr />
+<a name="anchor42"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.F"></a><h3>Appendix F.&nbsp;
 Editorial Notes</h3>
 
 <p>This appendix to be removed prior to final publication.
 </p>
-<a name="anchor44"></a><br /><hr />
+<a name="anchor43"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.F.1"></a><h3>F.1.&nbsp;
 Known Issues and Future Work</h3>
@@ -3296,7 +3441,7 @@ Known Issues and Future Work</h3>
 </ul><p>
                 
 </p>
-<a name="anchor45"></a><br /><hr />
+<a name="anchor44"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>
 <a name="rfc.section.F.2"></a><h3>F.2.&nbsp;
 Change History</h3>
@@ -3352,7 +3497,7 @@ Change History</h3>
                         elements to support expressing symmetric mapping of null variants. Describe use of variants that map identically.
                         Clarify how actions are triggered, in particular based on variant dispositions, as well as description of default actions.
                         Revise description of processing a label and its variants. Move example table at the head of appendices. Add "only-variants"
-                        attribute. Change "name" attribute to "byref" attribute for referencing named classes and rules.  Change "not" to "complement".
+                        attribute. Change "name" attribute to "by-ref" attribute for referencing named classes and rules.  Change "not" to "complement".
                         Remove "match" attribute on rules as redundant if "start" and "end" are supported.
                         Rename "match" element to "anchor" as better fitting it's function and removing confusion with both the "match"
                         attribute on actions as well as the generic term Match Operator. Augmented the examples relevant to <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>.
@@ -3365,6 +3510,16 @@ Change History</h3>
                     converting  tables in the style of <a class='info' href='#RFC3743'>[RFC3743]<span> (</span><span class='info'>Konishi, K., Huang, K., Qian, H., and Y. Ko, &ldquo;Joint Engineering Team (JET) Guidelines for Internationalized Domain Names (IDN) Registration and Administration for Chinese, Japanese, and Korean,&rdquo; April&nbsp;2004.</span><span>)</span></a>. Improve description of tagging and
                      clarify that it doesn't apply to sequences. Specify that root zone uses ".". Add an appendix with an Indic Syllable
                      Structure example. Extend count attribute to allow maximal counts.
+</dd>
+</dl></blockquote><p>
+					</p>
+<blockquote class="text"><dl>
+<dt>-07</dt>
+<dd>Change "byref" to "by-ref". Add list of recommended properties. Change "location" to 
+					"positional" for collective name of start/end match operators. Use from-tag instead of by-ref for tag-based
+					classes. Made optional or mutually exclusive nature of some attributes more explicit. Allowing "comment" 
+					attributs on all child elements of "rules" except "char" and "range" elements used as child elements of "class".
+					[Schema update for that TBD]
 </dd>
 </dl></blockquote><p>
                 
