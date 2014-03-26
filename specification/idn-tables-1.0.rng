@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   
-  LGR XML Schema 1.0 (internal version 0.5a - based on draft-davies-idntables-06)
+  LGR XML Schema 1.0
   
 -->
 <grammar ns="http://www.iana.org/lgr/0.1" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
@@ -49,20 +49,21 @@
     </data>
   </define>
   <define name="rule-ref">
-    <a:documentation>reference to a rule name (used in "when" and "not-when" attributes, as well
-as the "by-ref" attribute of the "rule" element.)</a:documentation>
+    <a:documentation>reference to a rule name (used in "when" and "not-when" attributes,
+as well as the "by-ref" attribute of the "rule" element.)</a:documentation>
     <data type="IDREF"/>
   </define>
   <define name="tags">
-    <a:documentation>a space-separated list of tags. Tags should generally follow identifier
-syntax, although the use of punctuation symbols such as a colon is allowed.</a:documentation>
+    <a:documentation>a space-separated list of tags. Tags should generally follow
+identifier syntax, although the use of punctuation symbols such as
+a colon is allowed.</a:documentation>
     <text/>
   </define>
   <define name="tag-ref">
     <a:documentation>Although "from-tag" attributes are closer to xsd:IDREF lexically and
 semantically, tags do not appear as a single unique instance in the
-document. As such, we are unable to take advantage of facilities provided
-by the validator.</a:documentation>
+document. As such, we are unable to take advantage of facilities
+provided by the validator.</a:documentation>
     <text/>
   </define>
   <define name="identifier">
@@ -70,8 +71,8 @@ by the validator.</a:documentation>
     <data type="ID"/>
   </define>
   <define name="class-ref">
-    <a:documentation>used in the class "by-ref" attribute to reference another class of the same
-"name" attribute value.</a:documentation>
+    <a:documentation>used in the class "by-ref" attribute to reference another class of
+the same "name" attribute value.</a:documentation>
     <data type="IDREF"/>
   </define>
   <define name="count-pattern">
@@ -140,8 +141,9 @@ by the validator.</a:documentation>
     </element>
   </define>
   <define name="char-simple">
-    <a:documentation>Representation of a single code point (no sequences allowed, and no tag attribute allowed).
-This is used when defining the set of characters that constitute a class.</a:documentation>
+    <a:documentation>Representation of a single code point (no sequences allowed, and no
+tag attribute allowed). This is used when defining the set of
+characters that constitute a class.</a:documentation>
     <element name="char">
       <attribute name="cp">
         <ref name="code-point"/>
@@ -149,8 +151,8 @@ This is used when defining the set of characters that constitute a class.</a:doc
     </element>
   </define>
   <define name="range-simple">
-    <a:documentation>Representation of a range of code points, for use in defining the set of
-characters that constitute a class.</a:documentation>
+    <a:documentation>Representation of a range of code points, for use in defining the
+set of characters that constitute a class.</a:documentation>
     <element name="range">
       <attribute name="first-cp">
         <ref name="code-point"/>
@@ -466,7 +468,7 @@ code point literals</a:documentation>
     </element>
   </define>
   <define name="char-matcher">
-    <!-- for use as a matcher - like "char", except without the "tag" attribute -->
+    <!-- for use as a matcher - like "char" but without a "tag" attribute -->
     <element name="char">
       <attribute name="cp">
         <ref name="code-point-literal"/>
@@ -526,8 +528,8 @@ code point literals</a:documentation>
     </element>
   </define>
   <define name="match-operator-choice">
-    <a:documentation>non-positional match operator that can be used as a direct child element
-of the choice matcher.</a:documentation>
+    <a:documentation>non-positional match operator that can be used as a direct child
+element of the choice matcher.</a:documentation>
     <choice>
       <ref name="any-matcher"/>
       <ref name="choice-matcher"/>
@@ -558,8 +560,9 @@ look-behind or look-ahead elements.</a:documentation>
     </optional>
   </define>
   <define name="match-operators-pos">
-    <a:documentation>positional match operators have an anchor element, which may be preceeded by
-a look-behind element, or followed by a look-ahead element, or both.</a:documentation>
+    <a:documentation>positional match operators have an anchor element, which may be
+preceeded by a look-behind element, or followed by a look-ahead
+element, or both.</a:documentation>
     <optional>
       <ref name="look-behind-matcher"/>
     </optional>
@@ -595,7 +598,8 @@ a look-behind element, or followed by a look-ahead element, or both.</a:document
     </element>
   </define>
   <define name="rule-matcher">
-    <a:documentation>rule element used as a matcher (either by-ref or contains other match operators itself)</a:documentation>
+    <a:documentation>rule element used as a matcher (either by-ref or contains other
+match operators itself)</a:documentation>
     <element name="rule">
       <optional>
         <attribute name="count">

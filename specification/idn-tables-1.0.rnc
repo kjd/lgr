@@ -1,5 +1,5 @@
 #
-# LGR XML Schema 1.0 (internal version 0.5a - based on draft-davies-idntables-06)
+# LGR XML Schema 1.0
 #
 
 default namespace = "http://www.iana.org/lgr/0.1"
@@ -28,7 +28,8 @@ code-point-sequence = xsd:token {
 code-point-literal = code-point | code-point-sequence
 
 code-point-set-shorthand = xsd:token {
-    pattern = "([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6})( ([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6}))*"
+    pattern = "([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6})"
+              ~ "( ([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6}))*"
 }
 
 ## dates are used in information fields in the meta section.
@@ -36,25 +37,26 @@ date = xsd:token {
     pattern = "\d{4}-\d\d-\d\d"
 }
 
-## reference to a rule name (used in "when" and "not-when" attributes, as well
-## as the "by-ref" attribute of the "rule" element.)
+## reference to a rule name (used in "when" and "not-when" attributes,
+## as well as the "by-ref" attribute of the "rule" element.)
 rule-ref = xsd:IDREF
 
-## a space-separated list of tags. Tags should generally follow identifier
-## syntax, although the use of punctuation symbols such as a colon is allowed.
+## a space-separated list of tags. Tags should generally follow
+## identifier syntax, although the use of punctuation symbols such as
+## a colon is allowed.
 tags = text
 
 ## Although "from-tag" attributes are closer to xsd:IDREF lexically and
 ## semantically, tags do not appear as a single unique instance in the
-## document. As such, we are unable to take advantage of facilities provided
-## by the validator.
+## document. As such, we are unable to take advantage of facilities
+## provided by the validator.
 tag-ref = text
 
 ## an identifier type (used by "name" attributes).
 identifier = xsd:ID
 
-## used in the class "by-ref" attribute to reference another class of the same
-## "name" attribute value.
+## used in the class "by-ref" attribute to reference another class of
+## the same "name" attribute value.
 class-ref = xsd:IDREF
 
 ## count attribute pattern ("n", "n+" or "n:m")
@@ -86,14 +88,15 @@ range = element range {
     attribute ref { text }?
 }
 
-## Representation of a single code point (no sequences allowed, and no tag attribute allowed).
-## This is used when defining the set of characters that constitute a class.
+## Representation of a single code point (no sequences allowed, and no
+## tag attribute allowed). This is used when defining the set of
+## characters that constitute a class.
 char-simple = element char {
     attribute cp { code-point }
 }
 
-## Representation of a range of code points, for use in defining the set of
-## characters that constitute a class.
+## Representation of a range of code points, for use in defining the
+## set of characters that constitute a class.
 range-simple = element range {
     attribute first-cp { code-point },
     attribute last-cp { code-point }
@@ -151,7 +154,8 @@ class-declaration = element class {
     )
   }
 
-class-or-set-operator-nested = class-invocation | class-declaration | set-operator
+class-or-set-operator-nested =
+  class-invocation | class-declaration | set-operator
 
 class-or-set-operator-declaration = 
   # a "class" element or set operator (effectively defining a class)
@@ -219,8 +223,11 @@ symmetric-difference-operator = element symmetric-difference {
 }
 
 ## operators that transform class(es) into a new class.
-set-operator = complement-operator | union-operator | intersection-operator
-               | difference-operator | symmetric-difference-operator
+set-operator = complement-operator
+               | union-operator
+               | intersection-operator
+               | difference-operator
+               | symmetric-difference-operator
 
 #
 # Match operators (matchers)
@@ -240,7 +247,7 @@ choice-matcher = element choice {
 }
 
 char-matcher =
-  # for use as a matcher - like "char", except without the "tag" attribute
+  # for use as a matcher - like "char" but without a "tag" attribute
   element char {
     attribute cp { code-point-literal },
     # If used as a matcher (appearing in a "rule" element), the "count"
@@ -271,11 +278,11 @@ look-behind-matcher = element look-behind {
     match-operators-non-pos
 }
 
-## non-positional match operator that can be used as a direct child element
-## of the choice matcher.
+## non-positional match operator that can be used as a direct child
+## element of the choice matcher.
 match-operator-choice = (
-  any-matcher | choice-matcher | start-matcher | end-matcher | char-matcher
-  | class-or-set-operator-nested | rule-matcher
+  any-matcher | choice-matcher | start-matcher | end-matcher
+  | char-matcher | class-or-set-operator-nested | rule-matcher
 )
 
 ## non-positional match operators do not contain any anchor, 
@@ -287,9 +294,11 @@ match-operators-non-pos = (
   end-matcher?
 )
 
-## positional match operators have an anchor element, which may be preceeded by
-## a look-behind element, or followed by a look-ahead element, or both.
-match-operators-pos = look-behind-matcher?, anchor-matcher, look-ahead-matcher?
+## positional match operators have an anchor element, which may be
+## preceeded by a look-behind element, or followed by a look-ahead
+## element, or both.
+match-operators-pos =
+  look-behind-matcher?, anchor-matcher, look-ahead-matcher?
 
 match-operators = match-operators-non-pos | match-operators-pos
 
@@ -306,7 +315,8 @@ rule-declaration-top = element rule {
     match-operators
 }
 
-## rule element used as a matcher (either by-ref or contains other match operators itself)
+## rule element used as a matcher (either by-ref or contains other
+## match operators itself)
 rule-matcher =
   element rule {
     attribute count { count-pattern }?,
@@ -325,7 +335,9 @@ action-declaration = element action {
     attribute ref { text }?,
     attribute disp { text },
     ( attribute match { text } | attribute not-match { text } )?,
-    ( attribute any-variant { text } | attribute all-variants { text } | attribute only-variants { text } )?
+    ( attribute any-variant { text }
+      | attribute all-variants { text }
+      | attribute only-variants { text } )?
 }
 
 # DOCUMENT STRUCTURE
@@ -383,5 +395,7 @@ data-section = element data { (char | range)+ }
 ## are weakly order dependent, they must precede first use of the
 ## identifier via by-ref.
 rules-section = element rules {
-    (class-or-set-operator-declaration | rule-declaration-top | action-declaration)*
+  ( class-or-set-operator-declaration
+    | rule-declaration-top
+    | action-declaration)*
 }
