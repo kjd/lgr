@@ -6,3 +6,6 @@
 build/
 dist/
 docs/_build/
+draft-*.txt
+draft-*.html
+*.rng
