@@ -144,8 +144,8 @@
 <tr><td class="header">Network Working Group</td><td class="header">K. Davies</td></tr>
 <tr><td class="header">Internet-Draft</td><td class="header">ICANN</td></tr>
 <tr><td class="header">Intended status: Informational</td><td class="header">A. Freytag</td></tr>
-<tr><td class="header">Expires: September 26, 2014</td><td class="header">ASMUS Inc.</td></tr>
-<tr><td class="header">&nbsp;</td><td class="header">March 25, 2014</td></tr>
+<tr><td class="header">Expires: September 27, 2014</td><td class="header">ASMUS Inc.</td></tr>
+<tr><td class="header">&nbsp;</td><td class="header">March 26, 2014</td></tr>
 </table></td></tr></table>
 <h1><br />Representing Label Generation Rulesets using XML<br />draft-davies-idntables-07</h1>
 
@@ -174,7 +174,7 @@ and may be updated, replaced, or obsoleted by other documents at any time.
 It is inappropriate to use Internet-Drafts as reference material or to cite
 them other than as &ldquo;work in progress.&rdquo;</p>
 <p>
-This Internet-Draft will expire on September 26, 2014.</p>
+This Internet-Draft will expire on September 27, 2014.</p>
 
 <h3>Copyright Notice</h3>
 <p>
@@ -2836,563 +2836,403 @@ Indic Syllable Structure Example</h3>
 <a name="rfc.section.D"></a><h3>Appendix D.&nbsp;
 RelaxNG Schema</h3>
 <div style='display: table; width: 0; margin-left: 3em; margin-right: auto'><pre>
-&lt;grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-   xmlns="http://relaxng.org/ns/structure/1.0" ns="http://www.iana.org/lgr/0.1"
-   datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"&gt;
-  &lt;define name="language-tag"&gt;
-    &lt;data type="token"/&gt;
-  &lt;/define&gt;
-  &lt;define name="domain-name"&gt;
-    &lt;text/&gt;
-  &lt;/define&gt;
-  &lt;define name="code-point"&gt;
-    &lt;data type="token"&gt;
-      &lt;param name="pattern"&gt;[0-9A-F]{4,6}&lt;/param&gt;
-    &lt;/data&gt;
-  &lt;/define&gt;
-  &lt;define name="code-point-sequence"&gt;
-    &lt;data type="token"&gt;
-      &lt;param name="pattern"&gt;[0-9A-F]{4,6}( [0-9A-F]{4,6})+&lt;/param&gt;
-    &lt;/data&gt;
-  &lt;/define&gt;
-  &lt;define name="code-point-literal"&gt;
-    &lt;choice&gt;
-      &lt;ref name="code-point"/&gt;
-      &lt;ref name="code-point-sequence"/&gt;
-    &lt;/choice&gt;
-  &lt;/define&gt;
-  &lt;define name="date"&gt;
-    &lt;data type="token"&gt;
-      &lt;param name="pattern"&gt;\d{4}-\d\d-\d\d&lt;/param&gt;
-    &lt;/data&gt;
-  &lt;/define&gt;
-  &lt;define name="rule-ref"&gt;
-    &lt;data type="IDREF"/&gt;
-  &lt;/define&gt;
-  &lt;define name="tag"&gt;
-    &lt;text/&gt;
-  &lt;/define&gt;
-  &lt;define name="identifier"&gt;
-    &lt;data type="ID"/&gt;
-  &lt;/define&gt;
-  &lt;define name="class-ref"&gt;
-    &lt;text/&gt;
-  &lt;/define&gt;
-  &lt;define name="count-pattern"&gt;
-    &lt;data type="token"&gt;
-      &lt;param name="pattern"&gt;\d+(\+|:\d+)?&lt;/param&gt;
-    &lt;/data&gt;
-  &lt;/define&gt;
-  &lt;define name="char"&gt;
-    &lt;element name="char"&gt;
-      &lt;attribute name="cp"&gt;
-        &lt;ref name="code-point-literal"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="when"&gt;
-          &lt;ref name="rule-ref"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="not-when"&gt;
-          &lt;ref name="rule-ref"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="tag"&gt;
-          &lt;ref name="tag"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-      &lt;zeroOrMore&gt;
-        &lt;ref name="variant"/&gt;
-      &lt;/zeroOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="char-single"&gt;
-    &lt;element name="char"&gt;
-      &lt;attribute name="cp"&gt;
-        &lt;ref name="code-point"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="range"&gt;
-    &lt;element name="range"&gt;
-      &lt;attribute name="first-cp"&gt;
-        &lt;ref name="code-point-literal"/&gt;
-      &lt;/attribute&gt;
-      &lt;attribute name="last-cp"&gt;
-        &lt;ref name="code-point-literal"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="tag"&gt;
-          &lt;ref name="tag"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-      &lt;text/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="variant"&gt;
-    &lt;element name="var"&gt;
-      &lt;attribute name="cp"&gt;
-        &lt;ref name="code-point-literal"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="type"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="when"&gt;
-          &lt;ref name="rule-ref"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="not-when"&gt;
-          &lt;ref name="rule-ref"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="disp"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="class-invocation"&gt;
-    &lt;element name="class"&gt;
-      &lt;attribute name="by-ref"&gt;
-        &lt;ref name="class-ref"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="class-declaration"&gt;
-    &lt;element name="class"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="name"&gt;
-          &lt;ref name="identifier"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-      &lt;choice&gt;
-        &lt;attribute name="property"/&gt;
-        &lt;oneOrMore&gt;
-          &lt;choice&gt;
-            &lt;ref name="char-single"/&gt;
-            &lt;ref name="range"/&gt;
-          &lt;/choice&gt;
-        &lt;/oneOrMore&gt;
-        &lt;text/&gt;
-      &lt;/choice&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="class-or-set-operator-nested"&gt;
-    &lt;choice&gt;
-      &lt;ref name="class-invocation"/&gt;
-      &lt;ref name="class-declaration"/&gt;
-      &lt;ref name="set-operator"/&gt;
-    &lt;/choice&gt;
-  &lt;/define&gt;
-  &lt;define name="class-or-set-operator-declaration"&gt;
-    &lt;choice&gt;
-      &lt;ref name="class-declaration"/&gt;
-      &lt;ref name="set-operator"/&gt;
-    &lt;/choice&gt;
-  &lt;/define&gt;
-  &lt;define name="complement-operator"&gt;
-    &lt;element name="complement"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="name"&gt;
-          &lt;ref name="identifier"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="union-operator"&gt;
-    &lt;element name="union"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="name"&gt;
-          &lt;ref name="identifier"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-      &lt;oneOrMore&gt;
-        &lt;ref name="class-or-set-operator-nested"/&gt;
-      &lt;/oneOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="intersection-operator"&gt;
-    &lt;element name="intersection"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="name"&gt;
-          &lt;ref name="identifier"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="difference-operator"&gt;
-    &lt;element name="difference"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="name"&gt;
-          &lt;ref name="identifier"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="symmetric-difference-operator"&gt;
-    &lt;element name="symmetric-difference"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="name"&gt;
-          &lt;ref name="identifier"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="set-operator"&gt;
-    &lt;choice&gt;
-      &lt;ref name="complement-operator"/&gt;
-      &lt;ref name="union-operator"/&gt;
-      &lt;ref name="intersection-operator"/&gt;
-      &lt;ref name="difference-operator"/&gt;
-      &lt;ref name="symmetric-difference-operator"/&gt;
-    &lt;/choice&gt;
-  &lt;/define&gt;
-  &lt;define name="any-matcher"&gt;
-    &lt;element name="any"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="choice-matcher"&gt;
-    &lt;element name="choice"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;ref name="match-operator"/&gt;
-      &lt;oneOrMore&gt;
-        &lt;ref name="match-operator"/&gt;
-      &lt;/oneOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="char-matcher"&gt;
-    &lt;element name="char"&gt;
-      &lt;attribute name="cp"&gt;
-        &lt;ref name="code-point-literal"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="start-matcher"&gt;
-    &lt;element name="start"&gt;
-      &lt;empty/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="end-matcher"&gt;
-    &lt;element name="end"&gt;
-      &lt;empty/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="anchor-matcher"&gt;
-    &lt;element name="anchor"&gt;
-      &lt;empty/&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="look-ahead-matcher"&gt;
-    &lt;element name="look-ahead"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;oneOrMore&gt;
-        &lt;ref name="match-operator"/&gt;
-      &lt;/oneOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="look-behind-matcher"&gt;
-    &lt;element name="look-behind"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;oneOrMore&gt;
-        &lt;ref name="match-operator"/&gt;
-      &lt;/oneOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="match-operator"&gt;
-    &lt;choice&gt;
-      &lt;ref name="any-matcher"/&gt;
-      &lt;ref name="choice-matcher"/&gt;
-      &lt;ref name="start-matcher"/&gt;
-      &lt;ref name="end-matcher"/&gt;
-      &lt;ref name="char-matcher"/&gt;
-      &lt;ref name="class-or-set-operator-nested"/&gt;
-      &lt;ref name="rule-matcher"/&gt;
-      &lt;ref name="anchor-matcher"/&gt;
-      &lt;ref name="look-ahead-matcher"/&gt;
-      &lt;ref name="look-behind-matcher"/&gt;
-    &lt;/choice&gt;
-  &lt;/define&gt;
-  &lt;define name="rule-declaration-top"&gt;
-    &lt;element name="rule"&gt;
-      &lt;attribute name="name"&gt;
-        &lt;ref name="identifier"/&gt;
-      &lt;/attribute&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="ref"/&gt;
-      &lt;/optional&gt;
-      &lt;oneOrMore&gt;
-        &lt;ref name="match-operator"/&gt;
-      &lt;/oneOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="rule-matcher"&gt;
-    &lt;element name="rule"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="count"&gt;
-          &lt;ref name="count-pattern"/&gt;
-        &lt;/attribute&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;choice&gt;
-        &lt;attribute name="by-ref"&gt;
-          &lt;ref name="rule-ref"/&gt;
-        &lt;/attribute&gt;
-        &lt;oneOrMore&gt;
-          &lt;ref name="match-operator"/&gt;
-        &lt;/oneOrMore&gt;
-      &lt;/choice&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="action-declaration"&gt;
-    &lt;element name="action"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="comment"/&gt;
-      &lt;/optional&gt;
-      &lt;attribute name="disp"/&gt;
-      &lt;optional&gt;
-        &lt;choice&gt;
-          &lt;attribute name="match"/&gt;
-          &lt;attribute name="not-match"/&gt;
-        &lt;/choice&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;choice&gt;
-          &lt;attribute name="any-variant"/&gt;
-          &lt;attribute name="all-variants"/&gt;
-          &lt;attribute name="only-variants"/&gt;
-        &lt;/choice&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;start&gt;
-    &lt;ref name="lgr"/&gt;
-  &lt;/start&gt;
-  &lt;define name="lgr"&gt;
-    &lt;element name="lgr"&gt;
-      &lt;optional&gt;
-        &lt;attribute name="id"/&gt;
-      &lt;/optional&gt;
-      &lt;optional&gt;
-        &lt;ref name="meta-section"/&gt;
-      &lt;/optional&gt;
-      &lt;ref name="data-section"/&gt;
-      &lt;optional&gt;
-        &lt;ref name="rules-section"/&gt;
-      &lt;/optional&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="meta-section"&gt;
-    &lt;element name="meta"&gt;
-      &lt;zeroOrMore&gt;
-        &lt;choice&gt;
-          &lt;element name="version"&gt;
-            &lt;optional&gt;
-              &lt;attribute name="comment"/&gt;
-            &lt;/optional&gt;
-            &lt;text/&gt;
-          &lt;/element&gt;
-          &lt;optional&gt;
-            &lt;element name="date"&gt;
-              &lt;ref name="date"/&gt;
-            &lt;/element&gt;
-          &lt;/optional&gt;
-          &lt;zeroOrMore&gt;
-            &lt;element name="language"&gt;
-              &lt;ref name="language-tag"/&gt;
-            &lt;/element&gt;
-          &lt;/zeroOrMore&gt;
-          &lt;zeroOrMore&gt;
-            &lt;element name="domain"&gt;
-              &lt;ref name="domain-name"/&gt;
-            &lt;/element&gt;
-          &lt;/zeroOrMore&gt;
-          &lt;optional&gt;
-            &lt;element name="validity-start"&gt;
-              &lt;text/&gt;
-            &lt;/element&gt;
-          &lt;/optional&gt;
-          &lt;optional&gt;
-            &lt;element name="validity-end"&gt;
-              &lt;text/&gt;
-            &lt;/element&gt;
-          &lt;/optional&gt;
-          &lt;zeroOrMore&gt;
-            &lt;element name="unicode-version"&gt;
-              &lt;text/&gt;
-            &lt;/element&gt;
-          &lt;/zeroOrMore&gt;
-          &lt;zeroOrMore&gt;
-            &lt;element name="description"&gt;
-              &lt;optional&gt;
-                &lt;attribute name="type"/&gt;
-              &lt;/optional&gt;
-              &lt;text/&gt;
-            &lt;/element&gt;
-          &lt;/zeroOrMore&gt;
-          &lt;optional&gt;
-            &lt;element name="references"&gt;
-              &lt;zeroOrMore&gt;
-                &lt;element name="reference"&gt;
-                  &lt;attribute name="id"/&gt;
-                  &lt;optional&gt;
-                    &lt;attribute name="comment"/&gt;
-                  &lt;/optional&gt;
-                  &lt;text/&gt;
-                &lt;/element&gt;
-              &lt;/zeroOrMore&gt;
-            &lt;/element&gt;
-          &lt;/optional&gt;
-        &lt;/choice&gt;
-      &lt;/zeroOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="data-section"&gt;
-    &lt;element name="data"&gt;
-      &lt;oneOrMore&gt;
-        &lt;choice&gt;
-          &lt;ref name="char"/&gt;
-          &lt;ref name="range"/&gt;
-        &lt;/choice&gt;
-      &lt;/oneOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-  &lt;define name="rules-section"&gt;
-    &lt;element name="rules"&gt;
-      &lt;zeroOrMore&gt;
-        &lt;ref name="class-or-set-operator-declaration"/&gt;
-      &lt;/zeroOrMore&gt;
-      &lt;zeroOrMore&gt;
-        &lt;ref name="rule-declaration-top"/&gt;
-      &lt;/zeroOrMore&gt;
-      &lt;zeroOrMore&gt;
-        &lt;ref name="action-declaration"/&gt;
-      &lt;/zeroOrMore&gt;
-    &lt;/element&gt;
-  &lt;/define&gt;
-&lt;/grammar&gt;
+default namespace = "http://www.iana.org/lgr/0.1"
+
+#
+# SIMPLE TYPES
+#
+
+# RFC 5646 language tag (e.g. "de", "Latn", etc.)
+language-tag = xsd:token
+
+## domain to which this LGR applies
+domain-name = text
+
+## a single code point
+code-point = xsd:token {
+    pattern = "[0-9A-F]{4,6}"
+}
+
+## a space-separated sequence of code points
+code-point-sequence = xsd:token {
+    pattern = "[0-9A-F]{4,6}( [0-9A-F]{4,6})+"
+}
+
+## single code point, or a sequence of code points
+code-point-literal = code-point | code-point-sequence
+
+code-point-set-shorthand = xsd:token {
+    pattern = "([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6})"
+              ~ "( ([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6}))*"
+}
+
+## dates are used in information fields in the meta section.
+date = xsd:token {
+    pattern = "\d{4}-\d\d-\d\d"
+}
+
+## reference to a rule name (used in "when" and "not-when" attributes,
+## as well as the "by-ref" attribute of the "rule" element.)
+rule-ref = xsd:IDREF
+
+## a space-separated list of tags. Tags should generally follow
+## identifier syntax, although the use of punctuation symbols such as
+## a colon is allowed.
+tags = text
+
+## Although "from-tag" attributes are closer to xsd:IDREF lexically and
+## semantically, tags do not appear as a single unique instance in the
+## document. As such, we are unable to take advantage of facilities
+## provided by the validator.
+tag-ref = text
+
+## an identifier type (used by "name" attributes).
+identifier = xsd:ID
+
+## used in the class "by-ref" attribute to reference another class of
+## the same "name" attribute value.
+class-ref = xsd:IDREF
+
+## count attribute pattern ("n", "n+" or "n:m")
+count-pattern = xsd:token {
+    pattern = "\d+(\+|:\d+)?"
+}
+
+#
+# STRUCTURES
+#
+
+## Representation of a single code point, or a sequence of code points
+char = element char {
+    attribute cp { code-point-literal },
+    attribute comment { text }?,
+    attribute when { rule-ref }?,
+    attribute not-when { rule-ref }?,
+    attribute tag { tags }?,
+    attribute ref { text }?,
+    variant*
+}
+
+## Representation of a range of code points
+range = element range {
+    attribute first-cp { code-point },
+    attribute last-cp { code-point },
+    attribute comment { text }?,
+    attribute tag { tags }?,
+    attribute ref { text }?
+}
+
+## Representation of a single code point (no sequences allowed, and no
+## tag attribute allowed). This is used when defining the set of
+## characters that constitute a class.
+char-simple = element char {
+    attribute cp { code-point }
+}
+
+## Representation of a range of code points, for use in defining the
+## set of characters that constitute a class.
+range-simple = element range {
+    attribute first-cp { code-point },
+    attribute last-cp { code-point }
+}
+
+
+## Representation of a variant code point or sequence
+variant = element var {
+    attribute cp { code-point-literal },
+    attribute type { text }?,
+    attribute when { rule-ref }?,
+    attribute not-when { rule-ref }?,
+    attribute comment { text }?,
+    attribute disp { text }?,
+    attribute ref { text }?
+}
+
+
+#
+# Classes
+#
+
+
+## a "class" element that references the name of another "class"
+## (or set-operator like "union") defined elsewhere.
+## If used as a matcher (appearing under a "rule" ## element),
+## the "count" attribute may be present.
+class-invocation = element class {
+    (attribute by-ref { class-ref } | attribute from-tag { tag-ref }),
+    attribute count { count-pattern }?,
+    attribute comment { text }?
+}
+
+## defines a new class (set of code points) using Unicode property or
+## code point literals
+class-declaration = element class {
+    # "name" attribute MUST be present if this is a "top-level" class
+    # declaration, i.e. appearing directly under the "rules" element.
+    # Otherwise, it MUST be absent.
+    attribute name { identifier }?,
+    # If used as a matcher (appearing in a "rule" element), the "count"
+    # attribute may be present. Otherwise, it MUST be absent.
+    attribute count { count-pattern }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    (
+      # define the class by property (e.g. property="sc:Latn"), OR
+      attribute property { text }
+      # define the class by tagged code points, OR
+      | attribute from-tag { tag-ref }
+      # list of single code points and ranges, OR
+      | (char-simple | range-simple)+
+      # text node to allow for shorthand notation e.g. "0061 0062-0063"
+      | code-point-set-shorthand
+    )
+  }
+
+class-or-set-operator-nested =
+  class-invocation | class-declaration | set-operator
+
+class-or-set-operator-declaration =
+  # a "class" element or set operator (effectively defining a class)
+  # directly in the "rules" element.
+  class-declaration | set-operator
+
+
+#
+# Set operators
+#
+
+complement-operator = element complement {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a &lt;rule&gt; element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested
+}
+
+union-operator = element union {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a &lt;rule&gt; element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    # needs two or more child elements
+    class-or-set-operator-nested+
+}
+
+intersection-operator = element intersection {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a &lt;rule&gt; element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    class-or-set-operator-nested
+}
+
+difference-operator = element difference {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a &lt;rule&gt; element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    class-or-set-operator-nested
+}
+
+symmetric-difference-operator = element symmetric-difference {
+    attribute name { identifier }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    # "count" attribute MUST only be used when this set-operator is
+    # used as a matcher (i.e. nested in a &lt;rule&gt; element)
+    attribute count { count-pattern }?,
+    class-or-set-operator-nested,
+    class-or-set-operator-nested
+}
+
+## operators that transform class(es) into a new class.
+set-operator = complement-operator
+               | union-operator
+               | intersection-operator
+               | difference-operator
+               | symmetric-difference-operator
+
+#
+# Match operators (matchers)
+#
+
+any-matcher = element any {
+    attribute count { count-pattern }?,
+    attribute comment { text }?
+}
+
+choice-matcher = element choice {
+    attribute count { count-pattern }?,
+    attribute comment { text }?,
+    # two or more match operators
+    match-operator-choice,
+    match-operator-choice+
+}
+
+char-matcher =
+  # for use as a matcher - like "char" but without a "tag" attribute
+  element char {
+    attribute cp { code-point-literal },
+    # If used as a matcher (appearing in a "rule" element), the "count"
+    # attribute may be present. Otherwise, it MUST be absent.
+    attribute count { count-pattern }?,
+    attribute comment { text }?,
+    attribute ref { text }?
+}
+
+start-matcher = element start {
+    attribute comment { text }?
+}
+
+end-matcher = element end {
+    attribute comment { text }?
+}
+
+anchor-matcher = element anchor {
+    attribute comment { text }?
+}
+
+look-ahead-matcher = element look-ahead {
+    attribute comment { text }?,
+    match-operators-non-pos
+}
+look-behind-matcher = element look-behind {
+    attribute comment { text }?,
+    match-operators-non-pos
+}
+
+## non-positional match operator that can be used as a direct child
+## element of the choice matcher.
+match-operator-choice = (
+  any-matcher | choice-matcher | start-matcher | end-matcher
+  | char-matcher | class-or-set-operator-nested | rule-matcher
+)
+
+## non-positional match operators do not contain any anchor,
+## look-behind or look-ahead elements.
+match-operators-non-pos = (
+  start-matcher?,
+  (any-matcher | choice-matcher | char-matcher
+   | class-or-set-operator-nested | rule-matcher)*,
+  end-matcher?
+)
+
+## positional match operators have an anchor element, which may be
+## preceeded by a look-behind element, or followed by a look-ahead
+## element, or both.
+match-operators-pos =
+  look-behind-matcher?, anchor-matcher, look-ahead-matcher?
+
+match-operators = match-operators-non-pos | match-operators-pos
+
+
+#
+# Rules
+#
+
+# top-level rule must have "name" attribute
+rule-declaration-top = element rule {
+    attribute name { identifier },
+    attribute comment { text }?,
+    attribute ref { text }?,
+    match-operators
+}
+
+## rule element used as a matcher (either by-ref or contains other
+## match operators itself)
+rule-matcher =
+  element rule {
+    attribute count { count-pattern }?,
+    attribute comment { text }?,
+    attribute ref { text }?,
+    (attribute by-ref { rule-ref } | match-operators)
+  }
+
+
+#
+# Actions
+#
+
+action-declaration = element action {
+    attribute comment { text }?,
+    attribute ref { text }?,
+    attribute disp { text },
+    ( attribute match { text } | attribute not-match { text } )?,
+    ( attribute any-variant { text }
+      | attribute all-variants { text }
+      | attribute only-variants { text } )?
+}
+
+# DOCUMENT STRUCTURE
+
+start = lgr
+lgr = element lgr {
+    attribute id { text }?,
+    meta-section?,
+    data-section,
+    rules-section?
+}
+
+
+## Meta section - information recorded with an label
+## generation ruleset that generally does not affect machine processing
+## (except for unicode-version).
+## However, if any "class-declaration" uses the "property" attribute,
+## one or more unicode-version MUST be present.
+meta-section = element meta {
+    element version {
+        attribute comment { text }?,
+        text
+    }?
+    &amp; element date {
+        xsd:token {
+            pattern = "\d{4}-\d{2}-\d{2}"
+        }
+    }?
+    &amp; element language { language-tag }*
+    &amp; element domain { domain-name }*
+    &amp; element validity-start { text }?
+    &amp; element validity-end { text }?
+    &amp; element unicode-version {
+        xsd:token {
+            pattern = "\d+\.\d+\.\d+"
+        }
+    }?
+    &amp; element description {
+        attribute type { text }?,
+        text
+    }?
+    &amp; element references {
+        element reference {
+            attribute id { text },
+            attribute comment { text }?,
+            text
+        }*
+    }?
+}
+
+data-section = element data { (char | range)+ }
+
+## Note that action declarations are strictly order dependent.
+## class-or-set-operator-declaration and rule-declaration-top
+## are weakly order dependent, they must precede first use of the
+## identifier via by-ref.
+rules-section = element rules {
+  ( class-or-set-operator-declaration
+    | rule-declaration-top
+    | action-declaration)*
+}
 </pre></div>
 <a name="anchor41"></a><br /><hr />
 <table summary="layout" cellpadding="0" cellspacing="2" class="TOCbug" align="right"><tr><td class="TOCbug"><a href="#toc">&nbsp;TOC&nbsp;</a></td></tr></table>

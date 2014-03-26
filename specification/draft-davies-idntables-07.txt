@@ -4,8 +4,8 @@
 Network Working Group                                          K. Davies
 Internet-Draft                                                     ICANN
 Intended status: Informational                                A. Freytag
-Expires: September 26, 2014                                   ASMUS Inc.
-                                                          March 25, 2014
+Expires: September 27, 2014                                   ASMUS Inc.
+                                                          March 26, 2014
 
 
             Representing Label Generation Rulesets using XML
@@ -39,7 +39,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 26, 2014.
+   This Internet-Draft will expire on September 27, 2014.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 1]
+Davies & Freytag       Expires September 27, 2014               [Page 1]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 2]
+Davies & Freytag       Expires September 27, 2014               [Page 2]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -144,11 +144,11 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
                 XML Format  . . . . . . . . . . . . . . . . . . . . . 52
    Appendix C.  Indic Syllable Structure Example  . . . . . . . . . . 57
    Appendix D.  RelaxNG Schema  . . . . . . . . . . . . . . . . . . . 60
-   Appendix E.  Acknowledgements  . . . . . . . . . . . . . . . . . . 72
-   Appendix F.  Editorial Notes . . . . . . . . . . . . . . . . . . . 73
-     F.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 73
-     F.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 73
-   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 75
+   Appendix E.  Acknowledgements  . . . . . . . . . . . . . . . . . . 69
+   Appendix F.  Editorial Notes . . . . . . . . . . . . . . . . . . . 70
+     F.1.  Known Issues and Future Work . . . . . . . . . . . . . . . 70
+     F.2.  Change History . . . . . . . . . . . . . . . . . . . . . . 70
+   Authors' Addresses . . . . . . . . . . . . . . . . . . . . . . . . 72
 
 
 
@@ -164,7 +164,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 3]
+Davies & Freytag       Expires September 27, 2014               [Page 3]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -220,7 +220,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 4]
+Davies & Freytag       Expires September 27, 2014               [Page 4]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -276,7 +276,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 5]
+Davies & Freytag       Expires September 27, 2014               [Page 5]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -332,7 +332,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 6]
+Davies & Freytag       Expires September 27, 2014               [Page 6]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -388,7 +388,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 7]
+Davies & Freytag       Expires September 27, 2014               [Page 7]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -444,7 +444,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 8]
+Davies & Freytag       Expires September 27, 2014               [Page 8]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -500,7 +500,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014               [Page 9]
+Davies & Freytag       Expires September 27, 2014               [Page 9]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -556,7 +556,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 10]
+Davies & Freytag       Expires September 27, 2014              [Page 10]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -612,7 +612,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 11]
+Davies & Freytag       Expires September 27, 2014              [Page 11]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -668,7 +668,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 12]
+Davies & Freytag       Expires September 27, 2014              [Page 12]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -724,7 +724,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 13]
+Davies & Freytag       Expires September 27, 2014              [Page 13]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -780,7 +780,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 14]
+Davies & Freytag       Expires September 27, 2014              [Page 14]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -836,7 +836,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 15]
+Davies & Freytag       Expires September 27, 2014              [Page 15]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -892,7 +892,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 16]
+Davies & Freytag       Expires September 27, 2014              [Page 16]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -948,7 +948,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 17]
+Davies & Freytag       Expires September 27, 2014              [Page 17]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1004,7 +1004,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 18]
+Davies & Freytag       Expires September 27, 2014              [Page 18]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1060,7 +1060,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 19]
+Davies & Freytag       Expires September 27, 2014              [Page 19]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1116,7 +1116,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 20]
+Davies & Freytag       Expires September 27, 2014              [Page 20]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1172,7 +1172,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 21]
+Davies & Freytag       Expires September 27, 2014              [Page 21]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1228,7 +1228,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 22]
+Davies & Freytag       Expires September 27, 2014              [Page 22]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1284,7 +1284,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 23]
+Davies & Freytag       Expires September 27, 2014              [Page 23]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1340,7 +1340,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 24]
+Davies & Freytag       Expires September 27, 2014              [Page 24]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1396,7 +1396,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 25]
+Davies & Freytag       Expires September 27, 2014              [Page 25]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1452,7 +1452,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 26]
+Davies & Freytag       Expires September 27, 2014              [Page 26]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1508,7 +1508,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 27]
+Davies & Freytag       Expires September 27, 2014              [Page 27]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1564,7 +1564,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 28]
+Davies & Freytag       Expires September 27, 2014              [Page 28]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1620,7 +1620,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 29]
+Davies & Freytag       Expires September 27, 2014              [Page 29]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1676,7 +1676,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 30]
+Davies & Freytag       Expires September 27, 2014              [Page 30]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1732,7 +1732,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 31]
+Davies & Freytag       Expires September 27, 2014              [Page 31]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1788,7 +1788,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 32]
+Davies & Freytag       Expires September 27, 2014              [Page 32]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1844,7 +1844,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 33]
+Davies & Freytag       Expires September 27, 2014              [Page 33]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1900,7 +1900,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 34]
+Davies & Freytag       Expires September 27, 2014              [Page 34]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -1956,7 +1956,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 35]
+Davies & Freytag       Expires September 27, 2014              [Page 35]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2012,7 +2012,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 36]
+Davies & Freytag       Expires September 27, 2014              [Page 36]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2068,7 +2068,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 37]
+Davies & Freytag       Expires September 27, 2014              [Page 37]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2124,7 +2124,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 38]
+Davies & Freytag       Expires September 27, 2014              [Page 38]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2180,7 +2180,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 39]
+Davies & Freytag       Expires September 27, 2014              [Page 39]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2236,7 +2236,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 40]
+Davies & Freytag       Expires September 27, 2014              [Page 40]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2292,7 +2292,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 41]
+Davies & Freytag       Expires September 27, 2014              [Page 41]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2348,7 +2348,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 42]
+Davies & Freytag       Expires September 27, 2014              [Page 42]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2404,7 +2404,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 43]
+Davies & Freytag       Expires September 27, 2014              [Page 43]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2460,7 +2460,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 44]
+Davies & Freytag       Expires September 27, 2014              [Page 44]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2516,7 +2516,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 45]
+Davies & Freytag       Expires September 27, 2014              [Page 45]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2572,7 +2572,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 46]
+Davies & Freytag       Expires September 27, 2014              [Page 46]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2628,7 +2628,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 47]
+Davies & Freytag       Expires September 27, 2014              [Page 47]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2684,7 +2684,7 @@ Appendix A.  Example Tables
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 48]
+Davies & Freytag       Expires September 27, 2014              [Page 48]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2740,7 +2740,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 49]
+Davies & Freytag       Expires September 27, 2014              [Page 49]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2796,7 +2796,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 50]
+Davies & Freytag       Expires September 27, 2014              [Page 50]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2852,7 +2852,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 51]
+Davies & Freytag       Expires September 27, 2014              [Page 51]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2908,7 +2908,7 @@ Appendix B.  How to Translate RFC 3743 based Tables into the XML Format
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 52]
+Davies & Freytag       Expires September 27, 2014              [Page 52]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -2964,7 +2964,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 53]
+Davies & Freytag       Expires September 27, 2014              [Page 53]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3020,7 +3020,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 54]
+Davies & Freytag       Expires September 27, 2014              [Page 54]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3076,7 +3076,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 55]
+Davies & Freytag       Expires September 27, 2014              [Page 55]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3132,7 +3132,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 56]
+Davies & Freytag       Expires September 27, 2014              [Page 56]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3188,7 +3188,7 @@ Appendix C.  Indic Syllable Structure Example
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 57]
+Davies & Freytag       Expires September 27, 2014              [Page 57]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3244,7 +3244,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 58]
+Davies & Freytag       Expires September 27, 2014              [Page 58]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -3300,658 +3300,474 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 59]
+Davies & Freytag       Expires September 27, 2014              [Page 59]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 Appendix D.  RelaxNG Schema
 
-<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-   xmlns="http://relaxng.org/ns/structure/1.0" ns="http://www.iana.org/lgr/0.1"
-   datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
-  <define name="language-tag">
-    <data type="token"/>
-  </define>
-  <define name="domain-name">
-    <text/>
-  </define>
-  <define name="code-point">
-    <data type="token">
-      <param name="pattern">[0-9A-F]{4,6}</param>
-    </data>
-  </define>
-  <define name="code-point-sequence">
-    <data type="token">
-      <param name="pattern">[0-9A-F]{4,6}( [0-9A-F]{4,6})+</param>
-    </data>
-  </define>
-  <define name="code-point-literal">
-    <choice>
-      <ref name="code-point"/>
-      <ref name="code-point-sequence"/>
-    </choice>
-  </define>
-  <define name="date">
-    <data type="token">
-      <param name="pattern">\d{4}-\d\d-\d\d</param>
-    </data>
-  </define>
-  <define name="rule-ref">
-    <data type="IDREF"/>
-  </define>
-  <define name="tag">
-    <text/>
-  </define>
-  <define name="identifier">
-    <data type="ID"/>
-  </define>
-  <define name="class-ref">
-    <text/>
-  </define>
-  <define name="count-pattern">
-    <data type="token">
-      <param name="pattern">\d+(\+|:\d+)?</param>
-    </data>
+ default namespace = "http://www.iana.org/lgr/0.1"
+
+ #
+ # SIMPLE TYPES
+ #
+
+ # RFC 5646 language tag (e.g. "de", "Latn", etc.)
+ language-tag = xsd:token
+
+ ## domain to which this LGR applies
+ domain-name = text
+
+ ## a single code point
+ code-point = xsd:token {
+     pattern = "[0-9A-F]{4,6}"
+ }
+
+ ## a space-separated sequence of code points
+ code-point-sequence = xsd:token {
+     pattern = "[0-9A-F]{4,6}( [0-9A-F]{4,6})+"
+ }
+
+ ## single code point, or a sequence of code points
+ code-point-literal = code-point | code-point-sequence
+
+ code-point-set-shorthand = xsd:token {
+     pattern = "([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6})"
+               ~ "( ([0-9A-F]{4,6}|[0-9A-F]{4,6}-[0-9A-F]{4,6}))*"
+ }
+
+ ## dates are used in information fields in the meta section.
+ date = xsd:token {
+     pattern = "\d{4}-\d\d-\d\d"
+ }
+
+ ## reference to a rule name (used in "when" and "not-when" attributes,
+ ## as well as the "by-ref" attribute of the "rule" element.)
+ rule-ref = xsd:IDREF
+
+ ## a space-separated list of tags. Tags should generally follow
+ ## identifier syntax, although the use of punctuation symbols such as
+ ## a colon is allowed.
+ tags = text
+
+ ## Although "from-tag" attributes are closer to xsd:IDREF lexically and
+ ## semantically, tags do not appear as a single unique instance in the
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 60]
+Davies & Freytag       Expires September 27, 2014              [Page 60]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-  </define>
-  <define name="char">
-    <element name="char">
-      <attribute name="cp">
-        <ref name="code-point-literal"/>
-      </attribute>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="when">
-          <ref name="rule-ref"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="not-when">
-          <ref name="rule-ref"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="tag">
-          <ref name="tag"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="variant"/>
-      </zeroOrMore>
-    </element>
-  </define>
-  <define name="char-single">
-    <element name="char">
-      <attribute name="cp">
-        <ref name="code-point"/>
-      </attribute>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-    </element>
-  </define>
-  <define name="range">
-    <element name="range">
-      <attribute name="first-cp">
+ ## document. As such, we are unable to take advantage of facilities
+ ## provided by the validator.
+ tag-ref = text
+
+ ## an identifier type (used by "name" attributes).
+ identifier = xsd:ID
+
+ ## used in the class "by-ref" attribute to reference another class of
+ ## the same "name" attribute value.
+ class-ref = xsd:IDREF
+
+ ## count attribute pattern ("n", "n+" or "n:m")
+ count-pattern = xsd:token {
+     pattern = "\d+(\+|:\d+)?"
+ }
+
+ #
+ # STRUCTURES
+ #
+
+ ## Representation of a single code point, or a sequence of code points
+ char = element char {
+     attribute cp { code-point-literal },
+     attribute comment { text }?,
+     attribute when { rule-ref }?,
+     attribute not-when { rule-ref }?,
+     attribute tag { tags }?,
+     attribute ref { text }?,
+     variant*
+ }
+
+ ## Representation of a range of code points
+ range = element range {
+     attribute first-cp { code-point },
+     attribute last-cp { code-point },
+     attribute comment { text }?,
+     attribute tag { tags }?,
+     attribute ref { text }?
+ }
+
+ ## Representation of a single code point (no sequences allowed, and no
+ ## tag attribute allowed). This is used when defining the set of
+ ## characters that constitute a class.
+ char-simple = element char {
+     attribute cp { code-point }
+ }
+
+ ## Representation of a range of code points, for use in defining the
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 61]
+Davies & Freytag       Expires September 27, 2014              [Page 61]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-        <ref name="code-point-literal"/>
-      </attribute>
-      <attribute name="last-cp">
-        <ref name="code-point-literal"/>
-      </attribute>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="tag">
-          <ref name="tag"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-      <text/>
-    </element>
-  </define>
-  <define name="variant">
-    <element name="var">
-      <attribute name="cp">
-        <ref name="code-point-literal"/>
-      </attribute>
-      <optional>
-        <attribute name="type"/>
-      </optional>
-      <optional>
-        <attribute name="when">
-          <ref name="rule-ref"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="not-when">
-          <ref name="rule-ref"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="disp"/>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-    </element>
-  </define>
+ ## set of characters that constitute a class.
+ range-simple = element range {
+     attribute first-cp { code-point },
+     attribute last-cp { code-point }
+ }
+
+
+ ## Representation of a variant code point or sequence
+ variant = element var {
+     attribute cp { code-point-literal },
+     attribute type { text }?,
+     attribute when { rule-ref }?,
+     attribute not-when { rule-ref }?,
+     attribute comment { text }?,
+     attribute disp { text }?,
+     attribute ref { text }?
+ }
+
+
+ #
+ # Classes
+ #
+
+
+ ## a "class" element that references the name of another "class"
+ ## (or set-operator like "union") defined elsewhere.
+ ## If used as a matcher (appearing under a "rule" ## element),
+ ## the "count" attribute may be present.
+ class-invocation = element class {
+     (attribute by-ref { class-ref } | attribute from-tag { tag-ref }),
+     attribute count { count-pattern }?,
+     attribute comment { text }?
+ }
+
+ ## defines a new class (set of code points) using Unicode property or
+ ## code point literals
+ class-declaration = element class {
+     # "name" attribute MUST be present if this is a "top-level" class
+     # declaration, i.e. appearing directly under the "rules" element.
+     # Otherwise, it MUST be absent.
+     attribute name { identifier }?,
+     # If used as a matcher (appearing in a "rule" element), the "count"
+     # attribute may be present. Otherwise, it MUST be absent.
+     attribute count { count-pattern }?,
+     attribute comment { text }?,
+     attribute ref { text }?,
+     (
+       # define the class by property (e.g. property="sc:Latn"), OR
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 62]
+Davies & Freytag       Expires September 27, 2014              [Page 62]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-  <define name="class-invocation">
-    <element name="class">
-      <attribute name="by-ref">
-        <ref name="class-ref"/>
-      </attribute>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-    </element>
-  </define>
-  <define name="class-declaration">
-    <element name="class">
-      <optional>
-        <attribute name="name">
-          <ref name="identifier"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-      <choice>
-        <attribute name="property"/>
-        <oneOrMore>
-          <choice>
-            <ref name="char-single"/>
-            <ref name="range"/>
-          </choice>
-        </oneOrMore>
-        <text/>
-      </choice>
-    </element>
-  </define>
-  <define name="class-or-set-operator-nested">
-    <choice>
-      <ref name="class-invocation"/>
+       attribute property { text }
+       # define the class by tagged code points, OR
+       | attribute from-tag { tag-ref }
+       # list of single code points and ranges, OR
+       | (char-simple | range-simple)+
+       # text node to allow for shorthand notation e.g. "0061 0062-0063"
+       | code-point-set-shorthand
+     )
+   }
+
+ class-or-set-operator-nested =
+   class-invocation | class-declaration | set-operator
+
+ class-or-set-operator-declaration =
+   # a "class" element or set operator (effectively defining a class)
+   # directly in the "rules" element.
+   class-declaration | set-operator
+
+
+ #
+ # Set operators
+ #
+
+ complement-operator = element complement {
+     attribute name { identifier }?,
+     attribute comment { text }?,
+     attribute ref { text }?,
+     # "count" attribute MUST only be used when this set-operator is
+     # used as a matcher (i.e. nested in a <rule> element)
+     attribute count { count-pattern }?,
+     class-or-set-operator-nested
+ }
+
+ union-operator = element union {
+     attribute name { identifier }?,
+     attribute comment { text }?,
+     attribute ref { text }?,
+     # "count" attribute MUST only be used when this set-operator is
+     # used as a matcher (i.e. nested in a <rule> element)
+     attribute count { count-pattern }?,
+     class-or-set-operator-nested,
+     # needs two or more child elements
+     class-or-set-operator-nested+
+ }
+
+ intersection-operator = element intersection {
+     attribute name { identifier }?,
+     attribute comment { text }?,
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 63]
+Davies & Freytag       Expires September 27, 2014              [Page 63]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-      <ref name="class-declaration"/>
-      <ref name="set-operator"/>
-    </choice>
-  </define>
-  <define name="class-or-set-operator-declaration">
-    <choice>
-      <ref name="class-declaration"/>
-      <ref name="set-operator"/>
-    </choice>
-  </define>
-  <define name="complement-operator">
-    <element name="complement">
-      <optional>
-        <attribute name="name">
-          <ref name="identifier"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <ref name="class-or-set-operator-nested"/>
-    </element>
-  </define>
-  <define name="union-operator">
-    <element name="union">
-      <optional>
-        <attribute name="name">
-          <ref name="identifier"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <ref name="class-or-set-operator-nested"/>
-      <oneOrMore>
-        <ref name="class-or-set-operator-nested"/>
-      </oneOrMore>
-    </element>
+     attribute ref { text }?,
+     # "count" attribute MUST only be used when this set-operator is
+     # used as a matcher (i.e. nested in a <rule> element)
+     attribute count { count-pattern }?,
+     class-or-set-operator-nested,
+     class-or-set-operator-nested
+ }
+
+ difference-operator = element difference {
+     attribute name { identifier }?,
+     attribute comment { text }?,
+     attribute ref { text }?,
+     # "count" attribute MUST only be used when this set-operator is
+     # used as a matcher (i.e. nested in a <rule> element)
+     attribute count { count-pattern }?,
+     class-or-set-operator-nested,
+     class-or-set-operator-nested
+ }
+
+ symmetric-difference-operator = element symmetric-difference {
+     attribute name { identifier }?,
+     attribute comment { text }?,
+     attribute ref { text }?,
+     # "count" attribute MUST only be used when this set-operator is
+     # used as a matcher (i.e. nested in a <rule> element)
+     attribute count { count-pattern }?,
+     class-or-set-operator-nested,
+     class-or-set-operator-nested
+ }
+
+ ## operators that transform class(es) into a new class.
+ set-operator = complement-operator
+                | union-operator
+                | intersection-operator
+                | difference-operator
+                | symmetric-difference-operator
+
+ #
+ # Match operators (matchers)
+ #
+
+ any-matcher = element any {
+     attribute count { count-pattern }?,
+     attribute comment { text }?
+ }
+
+ choice-matcher = element choice {
+     attribute count { count-pattern }?,
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 64]
+Davies & Freytag       Expires September 27, 2014              [Page 64]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-  </define>
-  <define name="intersection-operator">
-    <element name="intersection">
-      <optional>
-        <attribute name="name">
-          <ref name="identifier"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <ref name="class-or-set-operator-nested"/>
-      <ref name="class-or-set-operator-nested"/>
-    </element>
-  </define>
-  <define name="difference-operator">
-    <element name="difference">
-      <optional>
-        <attribute name="name">
-          <ref name="identifier"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <ref name="class-or-set-operator-nested"/>
-      <ref name="class-or-set-operator-nested"/>
-    </element>
-  </define>
-  <define name="symmetric-difference-operator">
-    <element name="symmetric-difference">
-      <optional>
-        <attribute name="name">
-          <ref name="identifier"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
+     attribute comment { text }?,
+     # two or more match operators
+     match-operator-choice,
+     match-operator-choice+
+ }
+
+ char-matcher =
+   # for use as a matcher - like "char" but without a "tag" attribute
+   element char {
+     attribute cp { code-point-literal },
+     # If used as a matcher (appearing in a "rule" element), the "count"
+     # attribute may be present. Otherwise, it MUST be absent.
+     attribute count { count-pattern }?,
+     attribute comment { text }?,
+     attribute ref { text }?
+ }
+
+ start-matcher = element start {
+     attribute comment { text }?
+ }
+
+ end-matcher = element end {
+     attribute comment { text }?
+ }
+
+ anchor-matcher = element anchor {
+     attribute comment { text }?
+ }
+
+ look-ahead-matcher = element look-ahead {
+     attribute comment { text }?,
+     match-operators-non-pos
+ }
+ look-behind-matcher = element look-behind {
+     attribute comment { text }?,
+     match-operators-non-pos
+ }
+
+ ## non-positional match operator that can be used as a direct child
+ ## element of the choice matcher.
+ match-operator-choice = (
+   any-matcher | choice-matcher | start-matcher | end-matcher
+   | char-matcher | class-or-set-operator-nested | rule-matcher
+ )
+
+ ## non-positional match operators do not contain any anchor,
+ ## look-behind or look-ahead elements.
+ match-operators-non-pos = (
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 65]
+Davies & Freytag       Expires September 27, 2014              [Page 65]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-      </optional>
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <ref name="class-or-set-operator-nested"/>
-      <ref name="class-or-set-operator-nested"/>
-    </element>
-  </define>
-  <define name="set-operator">
-    <choice>
-      <ref name="complement-operator"/>
-      <ref name="union-operator"/>
-      <ref name="intersection-operator"/>
-      <ref name="difference-operator"/>
-      <ref name="symmetric-difference-operator"/>
-    </choice>
-  </define>
-  <define name="any-matcher">
-    <element name="any">
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-    </element>
-  </define>
-  <define name="choice-matcher">
-    <element name="choice">
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <ref name="match-operator"/>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
-    </element>
-  </define>
-  <define name="char-matcher">
-    <element name="char">
-      <attribute name="cp">
-        <ref name="code-point-literal"/>
-      </attribute>
-      <optional>
-        <attribute name="count">
+   start-matcher?,
+   (any-matcher | choice-matcher | char-matcher
+    | class-or-set-operator-nested | rule-matcher)*,
+   end-matcher?
+ )
+
+ ## positional match operators have an anchor element, which may be
+ ## preceeded by a look-behind element, or followed by a look-ahead
+ ## element, or both.
+ match-operators-pos =
+   look-behind-matcher?, anchor-matcher, look-ahead-matcher?
+
+ match-operators = match-operators-non-pos | match-operators-pos
+
+
+ #
+ # Rules
+ #
+
+ # top-level rule must have "name" attribute
+ rule-declaration-top = element rule {
+     attribute name { identifier },
+     attribute comment { text }?,
+     attribute ref { text }?,
+     match-operators
+ }
+
+ ## rule element used as a matcher (either by-ref or contains other
+ ## match operators itself)
+ rule-matcher =
+   element rule {
+     attribute count { count-pattern }?,
+     attribute comment { text }?,
+     attribute ref { text }?,
+     (attribute by-ref { rule-ref } | match-operators)
+   }
+
+
+ #
+ # Actions
+ #
+
+ action-declaration = element action {
+     attribute comment { text }?,
+     attribute ref { text }?,
+     attribute disp { text },
+     ( attribute match { text } | attribute not-match { text } )?,
+     ( attribute any-variant { text }
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 66]
+Davies & Freytag       Expires September 27, 2014              [Page 66]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-    </element>
-  </define>
-  <define name="start-matcher">
-    <element name="start">
-      <empty/>
-    </element>
-  </define>
-  <define name="end-matcher">
-    <element name="end">
-      <empty/>
-    </element>
-  </define>
-  <define name="anchor-matcher">
-    <element name="anchor">
-      <empty/>
-    </element>
-  </define>
-  <define name="look-ahead-matcher">
-    <element name="look-ahead">
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
-    </element>
-  </define>
-  <define name="look-behind-matcher">
-    <element name="look-behind">
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
-    </element>
-  </define>
-  <define name="match-operator">
-    <choice>
+       | attribute all-variants { text }
+       | attribute only-variants { text } )?
+ }
+
+ # DOCUMENT STRUCTURE
+
+ start = lgr
+ lgr = element lgr {
+     attribute id { text }?,
+     meta-section?,
+     data-section,
+     rules-section?
+ }
+
+
+ ## Meta section - information recorded with an label
+ ## generation ruleset that generally does not affect machine processing
+ ## (except for unicode-version).
+ ## However, if any "class-declaration" uses the "property" attribute,
+ ## one or more unicode-version MUST be present.
+ meta-section = element meta {
+     element version {
+         attribute comment { text }?,
+         text
+     }?
+     & element date {
+         xsd:token {
+             pattern = "\d{4}-\d{2}-\d{2}"
+         }
+     }?
+     & element language { language-tag }*
+     & element domain { domain-name }*
+     & element validity-start { text }?
+     & element validity-end { text }?
+     & element unicode-version {
+         xsd:token {
+             pattern = "\d+\.\d+\.\d+"
+         }
+     }?
+     & element description {
+         attribute type { text }?,
+         text
+     }?
+     & element references {
+         element reference {
+             attribute id { text },
+             attribute comment { text }?,
+             text
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 67]
+Davies & Freytag       Expires September 27, 2014              [Page 67]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
-      <ref name="any-matcher"/>
-      <ref name="choice-matcher"/>
-      <ref name="start-matcher"/>
-      <ref name="end-matcher"/>
-      <ref name="char-matcher"/>
-      <ref name="class-or-set-operator-nested"/>
-      <ref name="rule-matcher"/>
-      <ref name="anchor-matcher"/>
-      <ref name="look-ahead-matcher"/>
-      <ref name="look-behind-matcher"/>
-    </choice>
-  </define>
-  <define name="rule-declaration-top">
-    <element name="rule">
-      <attribute name="name">
-        <ref name="identifier"/>
-      </attribute>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <optional>
-        <attribute name="ref"/>
-      </optional>
-      <oneOrMore>
-        <ref name="match-operator"/>
-      </oneOrMore>
-    </element>
-  </define>
-  <define name="rule-matcher">
-    <element name="rule">
-      <optional>
-        <attribute name="count">
-          <ref name="count-pattern"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <choice>
-        <attribute name="by-ref">
-          <ref name="rule-ref"/>
-        </attribute>
-        <oneOrMore>
-          <ref name="match-operator"/>
-        </oneOrMore>
-      </choice>
-    </element>
-  </define>
+         }*
+     }?
+ }
 
+ data-section = element data { (char | range)+ }
 
-
-Davies & Freytag       Expires September 26, 2014              [Page 68]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
-  <define name="action-declaration">
-    <element name="action">
-      <optional>
-        <attribute name="comment"/>
-      </optional>
-      <attribute name="disp"/>
-      <optional>
-        <choice>
-          <attribute name="match"/>
-          <attribute name="not-match"/>
-        </choice>
-      </optional>
-      <optional>
-        <choice>
-          <attribute name="any-variant"/>
-          <attribute name="all-variants"/>
-          <attribute name="only-variants"/>
-        </choice>
-      </optional>
-    </element>
-  </define>
-  <start>
-    <ref name="lgr"/>
-  </start>
-  <define name="lgr">
-    <element name="lgr">
-      <optional>
-        <attribute name="id"/>
-      </optional>
-      <optional>
-        <ref name="meta-section"/>
-      </optional>
-      <ref name="data-section"/>
-      <optional>
-        <ref name="rules-section"/>
-      </optional>
-    </element>
-  </define>
-  <define name="meta-section">
-    <element name="meta">
-      <zeroOrMore>
-        <choice>
-          <element name="version">
-            <optional>
-              <attribute name="comment"/>
-            </optional>
-            <text/>
-          </element>
-
-
-
-Davies & Freytag       Expires September 26, 2014              [Page 69]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
-          <optional>
-            <element name="date">
-              <ref name="date"/>
-            </element>
-          </optional>
-          <zeroOrMore>
-            <element name="language">
-              <ref name="language-tag"/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="domain">
-              <ref name="domain-name"/>
-            </element>
-          </zeroOrMore>
-          <optional>
-            <element name="validity-start">
-              <text/>
-            </element>
-          </optional>
-          <optional>
-            <element name="validity-end">
-              <text/>
-            </element>
-          </optional>
-          <zeroOrMore>
-            <element name="unicode-version">
-              <text/>
-            </element>
-          </zeroOrMore>
-          <zeroOrMore>
-            <element name="description">
-              <optional>
-                <attribute name="type"/>
-              </optional>
-              <text/>
-            </element>
-          </zeroOrMore>
-          <optional>
-            <element name="references">
-              <zeroOrMore>
-                <element name="reference">
-                  <attribute name="id"/>
-                  <optional>
-                    <attribute name="comment"/>
-                  </optional>
-                  <text/>
-                </element>
-
-
-
-Davies & Freytag       Expires September 26, 2014              [Page 70]
-
-Internet-Draft      Label Generation Rulesets in XML          March 2014
-
-
-              </zeroOrMore>
-            </element>
-          </optional>
-        </choice>
-      </zeroOrMore>
-    </element>
-  </define>
-  <define name="data-section">
-    <element name="data">
-      <oneOrMore>
-        <choice>
-          <ref name="char"/>
-          <ref name="range"/>
-        </choice>
-      </oneOrMore>
-    </element>
-  </define>
-  <define name="rules-section">
-    <element name="rules">
-      <zeroOrMore>
-        <ref name="class-or-set-operator-declaration"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="rule-declaration-top"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="action-declaration"/>
-      </zeroOrMore>
-    </element>
-  </define>
-</grammar>
+ ## Note that action declarations are strictly order dependent.
+ ## class-or-set-operator-declaration and rule-declaration-top
+ ## are weakly order dependent, they must precede first use of the
+ ## identifier via by-ref.
+ rules-section = element rules {
+   ( class-or-set-operator-declaration
+     | rule-declaration-top
+     | action-declaration)*
+ }
 
 
 
@@ -3972,7 +3788,23 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 71]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Davies & Freytag       Expires September 27, 2014              [Page 68]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -4028,7 +3860,7 @@ Appendix E.  Acknowledgements
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 72]
+Davies & Freytag       Expires September 27, 2014              [Page 69]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -4084,7 +3916,7 @@ F.2.  Change History
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 73]
+Davies & Freytag       Expires September 27, 2014              [Page 70]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -4140,7 +3972,7 @@ Internet-Draft      Label Generation Rulesets in XML          March 2014
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 74]
+Davies & Freytag       Expires September 27, 2014              [Page 71]
 
 Internet-Draft      Label Generation Rulesets in XML          March 2014
 
@@ -4196,5 +4028,5 @@ Authors' Addresses
 
 
 
-Davies & Freytag       Expires September 26, 2014              [Page 75]
+Davies & Freytag       Expires September 27, 2014              [Page 72]
 
