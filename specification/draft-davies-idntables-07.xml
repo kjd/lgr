@@ -42,8 +42,8 @@
         <area>Management</area>
         <abstract>
 
-            <t>This document describes a method of representing a key part of the domain name registration policy for a zone administrator
-                using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are
+            <t>This document describes a method of representing rules for validating identifier labels and alternate representations
+                of those labels using Extensible Markup Language (XML). These policies, known as "Label Generation Rulesets" (LGRs), are
                 particularly used for the implementation of Internationalized Domain Names (IDNs). The rulesets are used
                 to implement and share that aspect of policy defining which labels and specific Unicode code points are permitted for registrations,
                 which alternative code points are considered variants, and what actions may be performed on labels containing those
@@ -57,10 +57,10 @@
         <section title="Introduction">
 
             <t>This memo describes a method of using Extensible Markup Language (XML) to describe the algorithm used to
-                determine whether a given domain label is permitted, and under which conditions, based on the code points
+                determine whether a given identifier label is permitted, and under which conditions, based on the code points
                 it contains and their context. These algorithms are comprised of a list of permissible code points,
                 variant code point mappings, and a set of rules acting on them. These algorithms
-                form part of a zone administrator's policies, and can be referred to as Label Generation Rulesets
+                form part of an administrator's policies, and can be referred to as Label Generation Rulesets
                 (LGRs), or IDN tables.
             </t>
 			<t>There are other kinds policies relating to labels which are not normally covered by Label Generation Rulesets and 
@@ -88,106 +88,79 @@
                 in implementation.
             </t>
             <t>While the predominant usage of this specification is to represent IDN label policy, the format is not
-                limited to IDN usage may also be used for describing ASCII domain name label rulesets.
+                limited to IDN usage may also be used for describing ASCII domain name label rulesets, or other identifier
+                labels beyond domain names.
             </t>
 
         </section>
 
         <section title="Design Goals">
 
-            <t>The following items are explicit design goals of this format:</t>
+            <t>The following goals informed the design of this format:</t>
 
             <t>
                 <list style="symbols">
-                    <t>MUST be in a format that can be implemented in a reasonably straightforward manner in software;
+                    <t>The format needs to be implementable in a reasonably straightforward manner in software;
                     </t>
 
-                    <t>The format SHOULD be able to be checked for formatting errors, such that common mistakes can be
+                    <t>The format should be able to be checked for formatting errors, such that common mistakes can be
                         caught;
                     </t>
 
-                    <t>An LGR MUST be able to express the set of valid code points that are allowed for registration
+                    <t>An LGR needs to be able to express the set of valid code points that are allowed for registration
                         under a specific zone administrator's policies;
                     </t>
 
-                    <t>MUST be able to express computed alternatives to a given domain name based on mapping relationships 
+                    <t>Provide the ability to express computed alternatives to a given domain name based on mapping relationships 
                         between code points, whether one-to-one or many-to-many. These computed alternatives are commonly
                         known as "variants";
                     </t>
 
-                    <t>Variant code points SHOULD be able to be tagged with specific dispositions or categories that can be
+                    <t>Variant code points should be able to be tagged with specific dispositions or categories that can be
                         used to support registry policy (such as whether to allocate the computed variant in the zone, or to
                         merely block it from registration);
                     </t>
 
-                    <t>Variants and code points MUST be able to stipulated based on contextual information. For example, specific
+                    <t>Variants and code points must be able to stipulated based on contextual information. For example, specific
                         variants may only be applicable when they follow another specific code point, or when the code
                         point is displayed in a specific presentation form;
                     </t>
 
-                    <t>The data contained within an LGR MUST be able to be interpreted unambiguously, such that independent 
+                    <t>The data contained within an LGR must be able to be interpreted unambiguously, such that independent 
                         implementations that utilize the contents will arrive at the same results;
                     </t>
 
-                    <t>To the largest extent possible, policy rules SHOULD be able to be specified in the XML format without relying
+                    <t>To the largest extent possible, policy rules should be able to be specified in the XML format without relying
                         hidden, or built-in algorithms in implementations.</t>
 
-                    <t>LGRs SHOULD be suitable for comparison and re-use, such that one could easily compare the
+                    <t>LGRs should be suitable for comparison and re-use, such that one could easily compare the
                         contents of two or more to see the differences, to merge them, and so on.
                     </t>
 
-                    <t>LGRs SHOULD be able to be merged automatically, at the minimum where code points and variant information is
-                        concerned.
-                    </t>
-
-                    <t>As many existing IDN tables as practicable SHOULD be able to be migrated to the LGR format with
-                        all applicable logic retained.
+                    <t>As many existing IDN tables as practicable should be able to be migrated to the LGR format with
+                        all applicable interpretation logic retained.
                     </t>
                 </list>
             </t>
 
-            <t>It is explicitly NOT the goal of this format to stipulate what code points should be listed in an LGR by
+
+            <t>These requirements are partly derived from reviewing the existing corpus of published IDN tables, plus the
+             requirements of ICANN's work to implement an LGR for the DNS Root Zone
+                <xref target="LGR-PROCEDURE"/>. In particular, Section B of that document identifies five specific requirements for an LGR methodology.
+            </t>
+            <t>The syntax and rules in
+                <xref target="RFC5892"/> and <xref target="RFC3743" />
+                were also reviewed.
+            </t>
+
+            <t>It is explicitly not the goal of this format to stipulate what code points should be listed in an LGR by
                 a zone administrator. Which registration policies are used for a particular zone is outside the scope of
                 this memo.
             </t>
 
         </section>
 
-        <section title="Requirements">
-            <t>To be able to fulfill the known utilization of LGRs,
-                the existing corpus of published IDN tables were reviewed to prepare this specification.
-            </t>
-            <t>In addition, the requirements of ICANN's work to implement an LGR for the DNS Root Zone
-                <xref target="LGR-PROCEDURE"/>
-                were also considered. In particular, Section B of that document identifies five specific requirements for an LGR methodology.
-            </t>
-            <t>Finally, the syntax and rules in
-                <xref target="RFC5892"/> and <xref target="RFC3743" />
-                were reviewed.
-            </t>
 
-            <t>Altogether these reviews resulted in the following requirements:</t>
-            <t>
-                 <list style="symbols">
-                    <t>The ability to identify a set of code points that are permitted.</t>
-                    <t>The ability to include code points that are permitted only in given contexts.</t>
-                    <t>The ability to represent a list of variants, if any, for each code point.</t>
-                    <t>The ability to include variants that are defined only in given contexts.</t>
-                    <t>The ability to assign a single disposition or categorization for each variants</t>
-                    <t>The ability to assign variants with reflexive mappings.</t>
-                    <t>The ability to assign variants that have a code point sequence as target.</t>
-                    <t>The ability to express variant mappings symmetrically.</t>
-                    <t>A method of identifying code points that are related, using a one or several tags per code point.</t>
-                    <t>The ability to describe rules regarding the possible actions that may be performed on the
-                        resulting label (such as block, allocatable, etc.)
-                    </t>
-                    <t>The ability to describe rules that check for ill-formed combinations across the whole label.</t>
-                    <t>The ability to describe rules that define contexts in which code points are permissible or variants defined.</t>
-                    <t>The ability to preserve normative reference information as well as informative comments.</t>
-                </list>
-            </t>
-
-        </section>
 
         <section title="LGR Format">
 
@@ -2701,7 +2674,8 @@ rules-section = element rules {
 					"positional" for collective name of start/end match operators. Use from-tag instead of by-ref for tag-based
 					classes. Made optional or mutually exclusive nature of some attributes more explicit. Allowing "comment" 
 					attributs on all child elements of "rules" except "char" and "range" elements used as child elements of "class".
-					[Schema update for that TBD]</t>
+					Recast the design goals and requirements at the start of the document. Reword aspects of the document to make
+                    it clear the format's application is not limited only to domain names.</t>
                     </list>
                 </t>
             </section>
