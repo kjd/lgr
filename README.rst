@@ -23,11 +23,12 @@ Helpful Resources
 * `Expressing IDNA 2008 Contextual Rules in LGR`_
 
 
-Author
-------
+Key Contributors
+----------------
 
 - Kim Davies <kim.davies@icann.org>
-
+- Asmus Freytag
+- Wil Tan
 
 
 .. _`Mapping of Regular Expressions to LGR syntax`: resources/regex-to-lgr.pdf
