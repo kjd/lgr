@@ -1760,8 +1760,11 @@
 &lt;lgr xmlns="http://www.iana.org/lgr/0.1"&gt;
 &lt;data&gt;
     &lt;char cp="002D" comment="HYPHEN (-)" /&gt;
-    &lt;range first-cp="0030" last-cp="0039" comment="DIGIT ZERO ('0') - DIGIT NINE ('9')" /&gt;
-    &lt;range first-cp="0061" last-cp="007A" comment="LATIN SMALL LETTER A ('a') - LATTIN SMALL LETTER Z ('z')" /&gt;
+    &lt;range first-cp="0030" last-cp="0039"
+          comment="DIGIT ZERO ('0') - DIGIT NINE ('9')" /&gt;
+    &lt;range first-cp="0061" last-cp="007A"
+          comment="LATIN SMALL LETTER A ('a') 
+          - LATIN SMALL LETTER Z ('z')" /&gt;
 &lt;/data&gt;
 &lt;/lgr></artwork></figure></t>
              <t>The following sample LGR shows a more complete collection of the elements and
@@ -1792,10 +1795,12 @@
     &lt;/description&gt;
     &lt;unicode-version&gt;6.3.0&lt;/unicode-version&gt;
     &lt;references&gt;
-      &lt;reference id="0" comment="the most recent" &gt;The Unicode Standard 6.2&lt;/reference&gt;
+      &lt;reference id="0" comment="the most recent" &gt;The
+            Unicode Standard 6.2&lt;/reference&gt;
       &lt;reference id="1" &gt;RFC 5892&lt;/reference&gt;
-      &lt;reference id="2" &gt;Big-5: Computer Chinese Glyph and Character
-         Code Mapping Table, Technical Report C-26, 1984&lt;/reference&gt;
+      &lt;reference id="2" &gt;Big-5: Computer Chinese Glyph
+         and Character Code Mapping Table, Technical Report
+         C-26, 1984&lt;/reference&gt;
     &lt;/references&gt;
  &lt;/meta&gt;
  &lt;!-- the data section describing the repertoire --&gt;
@@ -2080,11 +2085,11 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
     With all the dispositions prepared in this way, only a slight modification to the actions
     is needed to yield the correct set of allocatable labels:
     </t>
- <t><figure><artwork><![CDATA[    <action disp="block" any-variant="block" />
-    <action disp="allocate" only-variants="simp i-simp both i-both" />
-    <action disp="allocate" only-variants="trad i-trad both i-both" />
-    <action disp="block" all-variants="simp trad both" />
-    <action disp="allocate" />
+ <t><figure><artwork><![CDATA[  <action disp="block" any-variant="block" />
+  <action disp="allocate" only-variants="simp i-simp both i-both" />
+  <action disp="allocate" only-variants="trad i-trad both i-both" />
+  <action disp="block" all-variants="simp trad both" />
+  <action disp="allocate" />
 ]]></artwork></figure></t>
           <t>The first three actions get triggered by the same labels as before.</t>
           <t>
@@ -2150,7 +2155,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
         <class by-ref="InSC:Vowel_Independent" />
         <class by-ref="vowel-modifier"  count="0:1" />
     </rule>
-    <rule name="optional-dependent-vowel-with-optional-modifier" >
+    <rule name="optional-dependent-vowel-with-opt-modifier" >
       <class by-ref="InSC:Vowel_Dependent" count="0:1" />
       <class by-ref="vowel-modifier" count="0:1"  />
     </rule>
@@ -2162,7 +2167,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
       <rule by-ref="consonant-with-optional-nukta" />
       <choice>
         <class by-ref="halant" />
-        <rule by-ref="optional-dependent-vowel-with-optional-modifier" />
+        <rule by-ref="optional-dependent-vowel-with-opt-modifier" />
       </choice>
     </rule>
     <rule name="akshara">
@@ -2197,7 +2202,7 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork></figure></t>
     </t>
         </section>
 
-        <section title="RelaxNG Schema">
+        <section title="RelaxNG Compact Schema">
             <figure>
                 <artwork><![CDATA[
 default namespace = "http://www.iana.org/lgr/0.1"
