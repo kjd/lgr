@@ -8,11 +8,14 @@ default namespace = "http://www.iana.org/lgr/0.1"
 # SIMPLE TYPES
 #
 
-# RFC 5646 language tag (e.g. "de", "Latn", etc.)
+# RFC 5646 language tag (e.g. "de", "und-Latn", etc.)
 language-tag = xsd:token
 
-## domain to which this LGR applies
-domain-name = text
+# the scope to which the LGR applies. For the "domain" scope type it
+# should be a domain name.
+scope-value = xsd:token {
+    minLength = "1"
+}
 
 ## a single code point
 code-point = xsd:token {
@@ -42,15 +45,16 @@ date = xsd:token {
 rule-ref = xsd:IDREF
 
 ## a space-separated list of tags. Tags should generally follow
-## identifier syntax, although the use of punctuation symbols such as
-## a colon is allowed.
-tags = text
+## xsd:Name syntax. However, we are using the xsd:NMTOKENS here
+## because there is no native XSD datatype for space-separated xsd:Name
+tags = xsd:NMTOKENS
 
-## Although "from-tag" attributes are closer to xsd:IDREF lexically and
-## semantically, tags do not appear as a single unique instance in the
+## The value space of a "from-tag" attribute. Although it is closer to
+## xsd:IDREF lexically and semantically, tags are not unique in the
 ## document. As such, we are unable to take advantage of facilities
-## provided by the validator.
-tag-ref = text
+## provided by a validator. xsd:NMTOKEN is used instead of the stricter
+## xsd:Names here so as to be consistent with the above.
+tag-ref = xsd:NMTOKEN
 
 ## an identifier type (used by "name" attributes).
 identifier = xsd:ID
@@ -367,7 +371,11 @@ meta-section = element meta {
         }
     }?
     & element language { language-tag }*
-    & element domain { domain-name }*
+    & element scope {
+        # type may by "domain" or an application-defined value
+        attribute type { xsd:NCName },
+        scope-value
+    }*
     & element validity-start { text }?
     & element validity-end { text }?
     & element unicode-version {
