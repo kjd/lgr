@@ -11,8 +11,8 @@ default namespace = "http://www.iana.org/lgr/0.1"
 # RFC 5646 language tag (e.g. "de", "und-Latn", etc.)
 language-tag = xsd:token
 
-# the scope to which the LGR applies. For the "domain" scope type it
-# should be a domain name.
+# The scope to which the LGR applies. For the "domain" scope type it
+# should be a fully qualified domain name.
 scope-value = xsd:token {
     minLength = "1"
 }
@@ -114,7 +114,7 @@ variant = element var {
     attribute when { rule-ref }?,
     attribute not-when { rule-ref }?,
     attribute comment { text }?,
-    attribute disp { text }?,
+    attribute type { text }?,
     attribute ref { text }?
 }
 
