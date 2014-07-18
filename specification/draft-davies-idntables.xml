@@ -2067,7 +2067,7 @@
     &lt;difference name="consonants"&gt;
          &lt;class comment="all letters"&gt;0061-007A&lt;/class&gt;
          &lt;class comment="all vowels"&gt;
-                 0061 0065 0069 006F 0075-0075
+                 0061 0065 0069 006F 0075
          &lt;/class&gt;
      &lt;/difference&gt;
 
