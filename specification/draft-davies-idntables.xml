@@ -216,7 +216,7 @@
 
                     <t>The "version" element is optional. It is used to uniquely identify each
                         version of the LGR. No specific format is required, but it is RECOMMENDED
-                        that it be a the decimal representation of a single positive
+                        that it be the decimal representation of a single positive
                         integer, which is incremented with each revision of the file. </t>
 
                     <t>An example of a typical first edition of a document:</t>
@@ -2935,7 +2935,7 @@ rules-section = element rules {
                             properties. Change "location" to "positional" for collective name of
                             start/end match operators. Use from-tag instead of by-ref for tag-based
                             classes. Made optional or mutually exclusive nature of some attributes
-                            more explicit. Allowing "comment" attributs on all child elements of
+                            more explicit. Allowing "comment" attributes on all child elements of
                             "rules" except "char" and "range" elements used as child elements of
                             "class". Recast the design goals and requirements at the start of the
                             document. Reword aspects of the document to make it clear the format's
