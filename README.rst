@@ -21,6 +21,7 @@ Helpful Resources
 
 * `Mapping of Regular Expressions to LGR syntax`_
 * `Expressing IDNA 2008 Contextual Rules in LGR`_
+* `Sample Thaana LGR`_
 
 
 Key Contributors
@@ -33,4 +34,5 @@ Key Contributors
 
 .. _`Mapping of Regular Expressions to LGR syntax`: resources/regex-to-lgr.pdf
 .. _`Expressing IDNA 2008 Contextual Rules in LGR`: resources/Expressing%20IDNA%202008%20Contextual%20Rules%20in%20LGR.pdf
+.. _`Sample Thaana LGR`: resources/Sample-LGR-Thaana.xml
 

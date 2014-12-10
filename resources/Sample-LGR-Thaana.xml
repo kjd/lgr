@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lgr xmlns="http://www.iana.org/lgr/0.1">
+  <meta>
+    <version comment="Sample LGR for Thaana">1</version>
+    <date>2014-11-29</date>
+    <language>und-Thaa</language>
+    <scope type="domain">.</scope>
+    <unicode-version>6.3.0</unicode-version>
+    <description type="text/html"><![CDATA[
+        <h1>Label Generation Rules for Thaana: Sample LGR for Thaana</h1>
+        <h2>Overview</h2>
+        <p>This file contains a sample of a possible set of Label Generation Rules for Thaana
+        using a limited repertoire as would be appropriate for the Root Zone.</p> 
+        
+        <p>Unicode encodes consonants and vowels separately for Thaana, even though, in practice,
+        all consonants must be followed by a vowel, with the single exception of U+0782. These restrictions
+        are implemented by context rules (when rules) attached to each code point, except U+0782.</p>
+        
+        <p>There are further constraints on the allowable contexts for U+0782 when not followed by a vowel,
+        but trying to enforce those yields diminishing returns.</p>
+        
+        <h2>Repertoire</h2>
+        <p>The sample repertoire does not contain digits. For zones that allow digits, an appropriate set of
+         digits would have to be added. (All code points are tagged as either vowels or consonants.) The "ref"   
+         attribute for each code point or range contains the Unicode version for which the corresponding
+        code points were first encoded (for example, ref="3" means a character was first encoded in Unicode 
+        Version 3.0).
+        </p>
+        
+        <p>The "tag" attribute for each code point or range also indicates the script or scripts that the code
+         point is used with, using Unicode script identifiers preceded by "sc:".</p>
+        
+        <h2>Thaana-specific Rules</h2>
+        
+        <p>There are two context rules specific to Thaana ("precedes-vowel" and "follows-consonant"). They are
+        implemented as context rules (when rules), so no corresponding action element needs to be defined.</p>
+        
+        <h2>Default Whole Label Evaluation Rules</h2>
+        
+        <p>The sample LGR includes the default WLE rules as well as the actions that would be applicable by
+        default for the Root Zone. For other zones, other applicable rules may be included. In this sample,
+        the "leading-combining-mark" rule is never expected to be matched, because the only combining marks
+        are vowels and they cannot occur except after a consonant by application of the "follows-consonant"
+        context rule.</p>
+        ]]></description>
+    <references>
+      <reference id="3">The Unicode Standard 3.0</reference>
+      <reference id="5">The Unicode Standard 3.2</reference>
+    </references>
+  </meta>
+  <data>
+    <range first-cp="0780" last-cp="0781" tag="sc:Thaa consonant" ref="3" when="precedes-vowel" />
+    <char cp="0782" tag="sc:Thaa consonant" ref="3" />
+    <range first-cp="0783" last-cp="07A5" tag="sc:Thaa consonant" ref="3" when="precedes-vowel" />
+    <range first-cp="07A6" last-cp="07B0" tag="sc:Thaa vowel" ref="3" when="follows-consonant" />
+    <char cp="07B1" tag="sc:Thaa consonant" ref="5" when="precedes-vowel" />
+  </data>
+  <!--Rules section goes here-->
+  <rules>
+    <!--Character class definitions go here-->
+    <!--Whole label evaluation and context rules go here-->
+    <rule name="leading-combining-mark" comment="Default WLE rule">
+      <start />
+      <union>
+        <class property="gc:Mn" />
+        <class property="gc:Mc" />
+      </union>
+    </rule>
+    <rule name="follows-consonant">
+      <look-behind>
+        <class from-tag="consonant" />
+      </look-behind>
+      <anchor />
+    </rule>
+    <rule name="precedes-vowel">
+      <anchor />
+      <look-ahead>
+        <class from-tag="vowel" />
+     </look-ahead>
+   </rule>
+
+    <!--Action elements go here - order defines precedence-->
+    <action disp="invalid" match="leading-combining-mark" />
+    <action disp="invalid" any-variant="out-of-repertoire-var" comment="any variant label with a code point out of repertoire is invalid" />
+    <action disp="blocked" any-variant="blocked" />
+    <action disp="allocatable" any-variant="allocatable" />
+    <action disp="valid" comment="catch all" />
+  </rules>
+</lgr>
