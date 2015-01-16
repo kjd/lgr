@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lgr xmlns="http://www.iana.org/lgr/0.1">
+  <meta>
+    <version comment="Sample LGR for Greek">1</version>
+    <date>2014-12-16</date>
+    <language>und-Grek</language>
+    <scope type="domain">.</scope>
+    <unicode-version>6.3.0</unicode-version>
+    <description type="text/html"><![CDATA[
+        <h1>Label Generation Rules for Greek: Sample LGR for Greek</h1>
+        <h2>Overview</h2>
+        <p>This file contains a sample of a possible set of Label Generation Rules for Greek
+        using a limited repertoire as would be appropriate for the Root Zone, and demonstrating
+        how to define both in-repertoire and out-of-repertoire variants. The primary purpose
+        of the document is to illlustrate the typical use of the XML format, not to recommend
+        particular choices of repertoire or variants.</p>
+
+        <h2>Repertoire</h2>
+        <p>The sample repertoire does not contain digits. For zones that allow digits, an appropriate set of
+        digits would have to be added. The "ref" attribute for each code point or range contains the Unicode 
+        version for which the corresponding code points were first encoded (for example, ref="0" means 
+        a character was first encoded in Unicode Version 1.1).</p>
+        
+        <p>The "tag" attribute for each code point or range also indicates the script or scripts that the code
+        point is used with, using Unicode script identifiers preceded by "sc:".</p>
+
+        <h2>Variants</h2>
+        <p>Most variants in this sample map to out-of-repertoire code points, that represent homoglyphs 
+        of Greek code points in related scripts. In order to make the mapping symmetric, these code points 
+        (and one sequence) need to be included in the LGR. To identify them as being out of "repertoire", 
+        they have reflexive variant mappings for which the type is set to "out-of-repertoire-var." This is so 
+        the corresponding default action willl filter out any attempted labels containing out-of-repertoire code 
+        points or sequences. The only in-repertoire variant relation is between the sigma and the final sigma. 
+        In this sample, they are treated as blocked variants of each other.</p>
+        
+        <h2>Default Whole Label Evaluation Rules</h2>
+        <p>The sample LGR includes the default WLE rules as well as the actions that would be applicable by
+        default for the Root Zone. For other zones, these rules would include any applicable IDNA2008 context 
+        rules. </p>
+        ]]></description>
+    <references>
+      <reference id="0">The Unicode Standard 1.1</reference>
+    </references>
+  </meta>
+  <data>
+    <char cp="006F" comment="target for out-of-repertoire variant mapping">
+      <var cp="006F" type="out-of-repertoire-var" />
+      <var cp="03BF" type="blocked" />
+      <var cp="043E" type="blocked" />
+    </char>
+    <char cp="0076" comment="target for out-of-repertoire variant mapping">
+      <var cp="0076" type="out-of-repertoire-var" />
+      <var cp="03BD" type="blocked" />
+    </char>
+    <char cp="00ED" comment="target for out-of-repertoire variant mapping">
+      <var cp="00ED" type="out-of-repertoire-var" />
+      <var cp="03AF" type="blocked" />
+    </char>
+    <char cp="00EF" comment="target for out-of-repertoire variant mapping">
+      <var cp="00EF" type="out-of-repertoire-var" />
+      <var cp="03CA" type="blocked" />
+      <var cp="0457" type="blocked" />
+    </char>
+    <char cp="00F3" comment="target for out-of-repertoire variant mapping">
+      <var cp="00F3" type="out-of-repertoire-var" />
+      <var cp="03CC" type="blocked" />
+    </char>
+    <char cp="0131" comment="target for out-of-repertoire variant mapping">
+      <var cp="0131" type="out-of-repertoire-var" />
+      <var cp="03B9" type="blocked" />
+    </char>
+    <char cp="025B" comment="target for out-of-repertoire variant mapping">
+      <var cp="025B" type="out-of-repertoire-var" />
+      <var cp="03B5" type="blocked" />
+    </char>
+    <char cp="025B 0301" comment="target for out-of-repertoire variant mapping">
+      <var cp="025B 0301" type="out-of-repertoire-var" />
+      <var cp="03AD" type="blocked" />
+    </char>
+    <char cp="0390" tag="sc:Grek" ref="0" />
+    <char cp="03AC" tag="sc:Grek" ref="0" />
+    <char cp="03AD" tag="sc:Grek" ref="0">
+      <var cp="025B 0301" type="blocked" />
+    </char>
+    <char cp="03AE" tag="sc:Grek" ref="0" />
+    <char cp="03AF" tag="sc:Grek" ref="0">
+      <var cp="00ED" type="blocked" />
+    </char>
+    <range first-cp="03B0" last-cp="03B2" tag="sc:Grek" ref="0" />
+    <char cp="03B3" tag="sc:Grek" ref="0">
+      <var cp="04AF" type="blocked" />
+    </char>
+    <char cp="03B4" tag="sc:Grek" ref="0" />
+    <char cp="03B5" tag="sc:Grek" ref="0">
+      <var cp="025B" type="blocked" />
+    </char>
+    <range first-cp="03B6" last-cp="03B8" tag="sc:Grek" ref="0" />
+    <char cp="03B9" tag="sc:Grek" ref="0">
+      <var cp="0131" type="blocked" />
+    </char>
+    <range first-cp="03BA" last-cp="03BC" tag="sc:Grek" ref="0" />
+    <char cp="03BD" tag="sc:Grek" ref="0">
+      <var cp="0076" type="blocked" />
+    </char>
+    <char cp="03BE" tag="sc:Grek" ref="0" />
+    <char cp="03BF" tag="sc:Grek" ref="0">
+      <var cp="006F" type="blocked" />
+      <var cp="043E" type="blocked" />
+    </char>
+    <range first-cp="03C0" last-cp="03C1" tag="sc:Grek" ref="0" />
+    <char cp="03C2" tag="sc:Grek" ref="0">
+      <var cp="03C3" type="blocked" />
+    </char>
+    <char cp="03C3" tag="sc:Grek" ref="0">
+      <var cp="03C2" type="blocked" />
+    </char>
+    <range first-cp="03C4" last-cp="03C9" tag="sc:Grek" ref="0" />
+    <char cp="03CA" tag="sc:Grek" ref="0">
+      <var cp="00EF" type="blocked" />
+      <var cp="0457" type="blocked" />
+    </char>
+    <char cp="03CB" tag="sc:Grek" ref="0" />
+    <char cp="03CC" tag="sc:Grek" ref="0">
+      <var cp="00F3" type="blocked" />
+    </char>
+    <range first-cp="03CD" last-cp="03CE" tag="sc:Grek" ref="0" />
+    <char cp="043E" comment="target for out-of-repertoire variant mapping">
+      <var cp="006F" type="blocked" />
+      <var cp="03BF" type="blocked" />
+      <var cp="043E" type="out-of-repertoire-var" />
+    </char>
+    <char cp="0457" comment="target for out-of-repertoire variant mapping">
+      <var cp="00EF" type="blocked" />
+      <var cp="03CA" type="blocked" />
+      <var cp="0457" type="out-of-repertoire-var" />
+    </char>
+    <char cp="04AF" comment="target for out-of-repertoire variant mapping">
+      <var cp="03B3" type="blocked" />
+      <var cp="04AF" type="out-of-repertoire-var" />
+    </char>
+  </data>
+  <!--Rules section goes here-->
+  <rules>
+    <!--Character class definitions go here-->
+    <!--Whole label evaluation and context rules go here-->
+    <rule name="leading-combining-mark">
+      <start />
+      <union>
+        <class property="gc:Mn" />
+        <class property="gc:Mc" />
+      </union>
+    </rule>
+    <!--Action elements go here - order defines precedence-->
+    <action disp="invalid" match="leading-combining-mark" />
+    <action disp="invalid" any-variant="out-of-repertoire-var" comment="any label with a code point out of repertoire is invalid" />
+    <action disp="blocked" any-variant="blocked" />
+    <action disp="allocatable" any-variant="allocatable" />
+    <action disp="valid" comment="catch all" />
+  </rules>
+</lgr>
