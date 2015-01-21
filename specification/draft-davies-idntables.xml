@@ -241,7 +241,7 @@
                 <section title="The date Element">
 
                     <t>The optional "date" element is used to identify the date the LGR was posted.
-                        The contents of this element MUST be a valid ISO 8601 full-date string as
+                        The contents of this element MUST be a valid ISO 8601 "full-date" string as
                         described in <xref target="RFC3339"/>. </t>
 
                     <figure>
@@ -325,10 +325,10 @@
                         well as additional context on how the LGR was formulated and how it applies,
                         such as citations and references that apply to the LGR as a whole.</t>
 
-					<t>This field should not be used for instructions on how to
-						parse or utilise the data contained elsewhere in the
+					<t>This field should not be relied upon for providing instructions on how to
+						parse or utilize the data contained elsewhere in the
 						specification. Authors of tables should expect that
-						applications that parse and use LGRs will not use the
+						software applications that parse and use LGRs will not use the
 						description field to condition the application of the
 						LGR's data and rules.</t>
 
@@ -454,10 +454,11 @@
                 has no child elements.</t>
             <t>It is always possible to substitute a list of individually specified code points for
                 a range element. The reverse is not necessarily the case.  Whenever a such a
-                substitution is possible, it makes no difference in processing the data and tools
-                reading or writing the XML format are free to make it. </t>
+                substitution is possible, it makes no difference in processing the data. Tools
+                reading or writing the LGR format are free to aggregate
+				sequences of consecutive code points of the same properties into range elements. </t>
             <t>Code points must be expressed in uppercase, hexadecimal, and zero padded to a minimum
-                of 4 digits - in other words according to the standard Unicode convention but
+                of 4 digits. In other words, represented according to the standard Unicode convention but
                 without the prefix "U+". The rationale for not allowing other encoding formats,
                 including native Unicode encoding in XML, is explored in <xref target="UAX42"/>. The
                 XML conventions used in this format, including the element and attribute names,
@@ -469,7 +470,7 @@
 
             <section title="Sequences" anchor="sequences">
 
-                <t>A sequence of two or more code points may be specified in a LGR, for example,
+                <t>A sequence of two or more code points may be specified in an LGR, for example,
                     when defining the source for n:m variant mappings. Another use of sequences
                     would be in cases when the exact sequence of code points is required to occur in
                     order for the constituent elements to be eligible, such as when a specific code
@@ -554,8 +555,8 @@
                     <t>Both the source and target of a variant mapping may be sequences, but not
                         ranges.</t>
                     <t>All variant mappings are unique. For a given "char" element all "var" elements
-                        MUST have a unique combination of "cp" , "when" and "not-when" attributes.
-                        It is RECOMMENDED to list the  "var" elements  in ascending order of their
+                        MUST have a unique combination of "cp", "when" and "not-when" attributes.
+                        It is RECOMMENDED to list the "var" elements in ascending order of their
                         target code point sequence. (For "when" and "not-when" attributes, see
                         <xref target="when" />).</t>
                 </section>
@@ -563,15 +564,15 @@
                 <section title="The type attribute" anchor="var_type">
 
                     <t>Variants may be tagged with an optional "type" attribute. The value of the
-                        "type" attribute may be any non-empty  value not starting with an underscore
-                        and not containing spaces.  This value is used to resolve the disposition of
+                        "type" attribute may be any non-empty value not starting with an underscore
+                        and not containing spaces. This value is used to resolve the disposition of
                         any variant labels created using a given variant. (See
                         <xref target="variants_actions" />.)</t>
-                    <t>By default, the values of the "type" attribute more or less directly describe
-                        the policy state (disposition) for a variant label that was generated using
+					<t>By default, the values of the "type" attribute directly describe the target
+						policy status (disposition) for a variant label that was generated using
                         a particular variant, with any variant label being assigned a disposition
                         corresponding to the most restrictive variant type. Several conventional
-                        disposition values are predefined below in  <xref target="actions"/>. Whenever
+                        disposition values are predefined below in <xref target="actions"/>. Whenever
                         these values can represent the desired policy, they SHOULD be used.
                     </t>
                     <t><figure>
@@ -605,10 +606,11 @@
 
                 <section title="Null Variants">
 
-                    <t>To specify a null variant, which is a variant string that maps to no code
-                        point, use an empty cp attribute. For example, to mark a string with a ZERO
-                        WIDTH NON-JOINER (U+200C) to the same string without the ZERO WIDTH
-                        NON-JOINER: </t>
+					<t>A null variant is a variant string that maps to no code point. This is used when
+						a particular code point sequence is considered discretionary in the context of
+						a whole label. To specify a null variant, use an empty cp attribute. For example,
+						to mark a string with a ZERO WIDTH NON-JOINER (U+200C) to the same string
+						without the ZERO WIDTH NON-JOINER: </t>
 
                     <t>
                         <figure>
@@ -2957,7 +2959,8 @@ rules-section = element rules {
                             variant type triggers.  Remove "long form" of class definition.</t>
 					</list>
 					<list style="hanging" hangIndent="5">
-						<t hangText="-09">Grammatical updates.</t>
+						<t hangText="-09">Grammatical updates, clarity improvements. Altered some
+							DNS-specific terminology.</t>
 					</list>
                 </t>
             </section>
