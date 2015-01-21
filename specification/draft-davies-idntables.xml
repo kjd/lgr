@@ -8,7 +8,7 @@
         <!ENTITY rfc5564 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5564.xml">
         <!ENTITY rfc5892 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5892.xml">
         ]>
-<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-08">
+<rfc category="info" ipr="trust200902" docName="draft-davies-idntables-09">
     <?rfc toc="yes" ?>
     <?rfc symrefs="yes" ?>
     <?rfc sortrefs="yes"?>
@@ -50,7 +50,7 @@
                 The rulesets are used to implement and share that aspect of policy defining which
                 labels and specific Unicode code points are permitted for registrations, which
                 alternative code points are considered variants, and what actions may be performed
-                on labels containing those variants. </t>
+                on labels containing those variants.</t>
         </abstract>
     </front>
 
@@ -71,8 +71,8 @@
                 prohibition of fraudulent or objectionable words. </t>
             <t>Administrators of the zones for top-level domain registries have historically
                 published their LGRs using ASCII text or HTML. The formatting of these documents has
-                been loosely based on the format used for the Language Variant Table in <xref
-                    target="RFC3743"/>. <xref target="RFC4290"/> also provides a "model table
+				been loosely based on the format used for the Language Variant Table described
+				in <xref target="RFC3743"/>. <xref target="RFC4290"/> also provides a "model table
                 format" that describes a similar set of functionality. Common to these formats is
                 that the algorithms used to evaluate the data therein are implicit or specified
                 elsewhere. </t>
@@ -90,9 +90,10 @@
                 described in this document to allow commonality in implementation. </t>
             <t>While the predominant usage of this specification is to represent IDN label policy,
                 the format is not limited to IDN usage may also be used for describing ASCII domain
-                name label rulesets, or other identifier labels beyond domain names. </t>
+				name label rulesets, or other types of identifier labels beyond those used for
+				domain names. </t>
 
-        </section>
+		</section>
 
         <section title="Design Goals">
 
@@ -101,17 +102,17 @@
                 <list style="symbols">
                     <t>The format needs to be implementable in a reasonably straightforward manner
                         in software. </t>
-                    <t>The format should be able to be checked for formatting errors, so that
-                        common mistakes can be caught. </t>
+					<t>The format should be able to be automatically checked for formatting errors,
+						so that common mistakes can be caught. </t>
                     <t>An LGR needs to be able to express the set of valid code points that are
-                        allowed for registration under a specific zone administrator's policies. </t>
-                    <t>Provide the ability to express computed alternatives to a given domain name
+                        allowed for registration under a specific administrator's policies. </t>
+                    <t>Provide the ability to express computed alternatives to a given identifier 
                         based on mapping relationships between code points, whether one-to-one or
                         many-to-many. These computed alternatives are commonly known as "variants". </t>
                     <t>Variant code points should be able to be tagged with specific dispositions or
                         categories that can be used to support registry policy (such as whether to
-                        allocate the computed variant in the zone, or to merely block it from
-                        registration). </t>
+						allocate the computed variant, or to merely block it from usage or
+						registration). </t>
                     <t>Variants and code points must be able to stipulated based on contextual
                         information. For example, specific variants may only be applicable when they
                         follow another specific code point, or when the code point is displayed in a
@@ -121,7 +122,7 @@
                         contents will arrive at the same results. </t>
                     <t>To the largest extent possible, policy rules should be able to be specified
                         in the XML format without relying hidden, or built-in algorithms in
-                        implementations.</t>
+                        implementations. </t>
                     <t>LGRs should be suitable for comparison and re-use, such that one could easily
                         compare the contents of two or more to see the differences, to merge them,
                         and so on. </t>
@@ -167,7 +168,7 @@
     </lgr>]]></artwork>
                 </figure>
 
-                <t>Within the "lgr" element rest several sub-elements. First is an optional "meta"
+                <t>The "lgr" element contains up to three sub-elements. First is an optional "meta"
                     element that contains all meta-data associated with the LGR, such as its
                     authorship, what it is used for, implementation notes and references. This is
                     followed by a "data" element that contains the substantive code point data.
@@ -206,11 +207,11 @@
                 <t>The optional "meta" element is used to express meta-data associated within the
                     LGR. It can be used to identify the author or relevant contact person, explain
                     the intended usage of the LGR, and provide implementation notes as well as
-                    references. The data contained within is not required by software consuming the
-                    LGR in order to calculate valid labels, or to calculate variants. However, the
-                    "unicode-version" element MUST be used by a consumer of the table to identify
-                    that it has the correct Unicode property data to perform operations on the
-                    table. </t>
+					references. With the exception of "unicode-version" element, the data contained
+					within is not required by software consuming the LGR in order to calculate valid
+					labels, or to calculate variants. The "unicode-version" element MUST be used by a
+					consumer of the table to identify that it has the correct Unicode property
+					data to perform operations on the table. </t>
 
                 <section title="The version Element">
 
@@ -302,8 +303,8 @@
                     <t>This optional element refers to a scope, such as a domain, to which this
                         policy is applied. The "type" attribute specifies the type of scope being
                         defined. A type of "domain" means that the scope is a domain that represents
-                        the apex of the zone to which the LGR is applied. The value must be a valid
-                        domain name, and in the case of the root zone, should be represented as ".".
+                        the apex of the DNS zone to which the LGR is applied. The value must be a valid
+                        domain name, and in the case of the DNS root zone, should be represented as ".".
                     </t>
                     <t>
                         <figure>
@@ -323,6 +324,13 @@
                         interpretation. Typically, this field contains authorship information, as
                         well as additional context on how the LGR was formulated and how it applies,
                         such as citations and references that apply to the LGR as a whole.</t>
+
+					<t>This field should not be used for instructions on how to
+						parse or utilise the data contained elsewhere in the
+						specification. Authors of tables should expect that
+						applications that parse and use LGRs will not use the
+						description field to condition the application of the
+						LGR's data and rules.</t>
 
                     <t>The element has an optional "type" attribute, which refers to the internet
                         media type of the enclosed data. Typical types would be "text/plain" or
@@ -2925,7 +2933,7 @@ rules-section = element rules {
                     <list style="hanging" hangIndent="5">
                         <t hangText="-06">Extend the discussion of reflexive variants and their use;
                             includes update of the appendix on converting tables in the style of
-                                <xref target="RFC3743"/>. Improve description of tagging and clarify
+                            <xref target="RFC3743"/>. Improve description of tagging and clarify
                             that it doesn't apply to sequences. Specify that root zone uses ".". Add
                             an appendix with an Indic Syllable Structure example. Extend count
                             attribute to allow maximal counts.</t>
@@ -2947,7 +2955,10 @@ rules-section = element rules {
                             to "type" for variants, to mark that these attributes do not necessarily
                             correspond one-to-one to variant label dispositions. Add example of
                             variant type triggers.  Remove "long form" of class definition.</t>
-                    </list>
+					</list>
+					<list style="hanging" hangIndent="5">
+						<t hangText="-09">Grammatical updates.</t>
+					</list>
                 </t>
             </section>
         </section>
