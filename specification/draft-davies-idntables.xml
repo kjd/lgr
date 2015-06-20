@@ -65,7 +65,7 @@
                 point mappings, and a set of rules acting on them. These algorithms form part of an
                 administrator's policies, and can be referred to as Label Generation Rulesets
                 (LGRs), or IDN tables. </t>
-            <t>There are other kinds policies relating to labels which are not normally covered by
+            <t>There are other kinds of policies relating to labels which are not normally covered by
                 Label Generation Rulesets and are therefore not representable by the XML format
                 described here. These include, but are not limited to policies around trademarks, or
                 prohibition of fraudulent or objectionable words. </t>
@@ -113,7 +113,7 @@
                         categories that can be used to support registry policy (such as whether to
 						allocate the computed variant, or to merely block it from usage or
 						registration). </t>
-                    <t>Variants and code points must be able to stipulated based on contextual
+                    <t>Variants and code points must be able to be stipulated based on contextual
                         information. For example, specific variants may only be applicable when they
                         follow another specific code point, or when the code point is displayed in a
                         specific presentation form. </t>
@@ -335,7 +335,7 @@
                     <t>The element has an optional "type" attribute, which refers to the internet
                         media type of the enclosed data. Typical types would be "text/plain" or
                         "text/html". The attribute SHOULD be a valid MIME type. If supplied, it will
-                        be assumed the contents is content of that media type. If the description
+                        be assumed that the contents are of that media type. If the description
                         lacks a type field, it will be assumed to be plain text ("text/plain"). </t>
 
                 </section>
@@ -388,7 +388,7 @@
                        for rules.</t>
                     <t>References are specified in an optional "references" element contains any
                         number of "reference" elements, each with a unique "id" attribute. It is
-                        RECOMMENDED that the "id" attribute be an zero-based integer. The value of
+                        RECOMMENDED that the "id" attribute be a zero-based integer. The value of
                         each "reference" element SHOULD be the citation of a standard, dictionary or
                         other specification in any suitable format. In addition to an "id"
                         attribute, a "reference" element may have a "comment" attribute for an
@@ -414,7 +414,7 @@
                     <t> A reference is associated with an element by using an optional "ref" attribute
                         (see <xref target="ref"/>).  The use of "ref" attributes is limited to certain
                         kinds of elements in the "data" or "rules" sections of the LGR, most notably
-                        those defining code points and rules. A "ref" attribute may not occur on elements
+                        those defining code points and rules. A "ref" attribute may neither occur on elements
                         that are named references to character classes and rules nor on certain other
                         element types. See description of these elements below.</t>
                 </section>
@@ -453,7 +453,7 @@
                 for a "range" element act as if applied to each code point within. A "range" element
                 has no child elements.</t>
             <t>It is always possible to substitute a list of individually specified code points for
-                a range element. The reverse is not necessarily the case.  Whenever a such a
+                a range element. The reverse is not necessarily the case.  Whenever such a
                 substitution is possible, it makes no difference in processing the data. Tools
                 reading or writing the LGR format are free to aggregate
 				sequences of consecutive code points of the same properties into range elements. </t>
@@ -536,7 +536,9 @@
     </char>]]></artwork>
                         </figure>
                     </t>
-
+                    <t>The source and target of a variant mapping may both be sequences, but not
+                        ranges.</t>
+						
                     <t>The "var" element specifies variant mappings in only one direction, even
                         though the variant relation is usually considered symmetric, that is, if A
                         is a variant of B then B should also be a variant of A. The format requires
@@ -551,9 +553,10 @@
     </char>]]></artwork>
                         </figure>
                     </t>
+					<t>Variant relations are normally not only symmetric, but also transitive.
+					  If A is a variant of B and B is a variant of C, then A is also a variant of C. 
+					  As with symmetry, these transitive relations are spelled out explicitly in the LGR.</t>
 
-                    <t>Both the source and target of a variant mapping may be sequences, but not
-                        ranges.</t>
                     <t>All variant mappings are unique. For a given "char" element all "var" elements
                         MUST have a unique combination of "cp", "when" and "not-when" attributes.
                         It is RECOMMENDED to list the "var" elements in ascending order of their
@@ -644,11 +647,13 @@
                         source and target code points are the same, that is for which the mapping is
                         reflexive, or, in other words, an identity mapping. Yet such reflexive mappings
                         occur frequently in LGRs that follow <xref target="RFC3743"/>.</t>
+						
                     <t>Adding a "var" element allows both a type and a reference id to be specified for
                         it. While the reference id is not used in processing, the type of the variant
                         can be used to trigger actions. In permuting the label to generate all possible
                         variants, the type associated with a reflexive variant mapping is applied to any
                         of the permuted labels containing the original code point.</t>
+						
                     <t>In the following example, the code point U+3473 exists both as a variant of U+3447
                         and as a variant of itself (reflexive mapping). Assuming an original label of
                         "U+3473 U+3447", the permuted variant "U+3473 U+3473" would consist of the reflexive
@@ -668,7 +673,8 @@
                     <t>Having established the variant types in this way, a set of actions could be defined
                         that return a disposition of "allocate" or "activate" for a label consisting
                         exclusively of variants with type "preferred" for example. (For details on how to
-                        define actions based on variant types see <xref target="actions"/>.)</t>
+                        define actions based on variant types see <xref target="variant_triggers"/>.)</t>
+						
                     <t>In general, using reflexive variant mappings in this manner makes it possible to
                         calculate disposition values using a uniform approach for all labels, whether they
                         consist of mapped variant code points, original code points, or a mixture of both.
@@ -676,6 +682,9 @@
                         on which variant mappings were executed in order to generate each of them. (For
                         details on how to generate variants and evaluate dispositions, see
                         <xref target="processing" />.)</t>
+						
+					 <t>Another useful convention that uses reflexive variants is described below in
+					 <xref target="variant_triggers" />. </t>
                 </section>
 
                 <section title="Conditional Variants" anchor="when">
@@ -697,6 +706,12 @@
                         that must not be satisfied. The value of each "when" or "not-when"
                         attributes is a parameterized context rule as described below in <xref
                             target="parameterized_context_rule"/>. </t>
+							
+					<t>As described in <xref target="sequences"/> a "when" or "not-when" attribute
+                        may also be specified to any "char" element in the data section to define
+                        required or prohibited contextual conditions under which a code point is
+                        valid. </t>		
+						
                     <t>Assuming the "rules" element contains suitably defined rules for
                         "arabic-isolated" and "arabic-final", the following example shows how to
                         mark ARABIC LETTER ALEF WITH WAVY HAMZA BELOW (U+0673) as a variant of
@@ -713,18 +728,51 @@
                     </t>
                     <t>Only a single "when" or "not-when" attribute can be applied to any "var"
                         element, however, multiple "var" elements using the same mapping, but
-                        different "when" or "not-when" attributes may be specified. If two
-                        "when" attributes for the same "var" elements are different care must
-                        be taken to ensure that they do not both match the same context; otherwise
-                        the results are undefined.</t>
+                        different "when" or "not-when" attributes may be specified. In such a case
+                        care must be taken to ensure that for each context at most one of the context
+						rules for the  "when" or "not-when" attributes is satisfied; otherwise
+                        the results are undefined. </t>
+						
+					<t>Two contexts may be complementary, as in the following example, which shows
+					       ARABIC	LETTER TEH MARBUTA (U+0629) as a variant of ARABIC LETTER ALEF 
+						   MAKSURA (U+0649), but with two different types. </t>
+					<t>
+                        <figure>
+                            <artwork><![CDATA[    <char cp="0647" >
+      <var cp="0629" not-when="arabic-final" type="blocked" />
+      <var cp="0629" when="arabic-final" type="allocatable" />
+    </char>
+]]></artwork>
+                        </figure>
+                    </t>
+					<t>The intent is that in final position a label that uses U+0629 instead of U+0647
+					     should be considered essentially the same label and therefore allocatable to the
+						 same entity, while the same substitution in non-final context leads to labels that
+						 are different, but considered confusable so that either one, but not both should
+						 be delegatable. </t>
+						 
+						 <t>For symmetry, the reverse mappings must exist, and must agree in their
+						 "when" or "not-when" attributes. However, symmetry does not apply to the other
+						 attributes. For example, these are the actual reverse mappings for the above: </t>
+					<t>
+                        <figure>
+                            <artwork><![CDATA[    <char cp="0629" >
+      <var cp="0647" not-when="arabic-final" type="allocatable" />
+      <var cp="0647" when="arabic-final" type="allocatable" />
+    </char>
+]]></artwork>
+                        </figure>
+						</t>
+						<t>Here, both variants have the same "type" attribute. While it is tempting to
+						recognize that in this instance the "when" and "not-when" attributes are complementary 
+						and therefore between them cover every single possible context, it is STRONGLY RECOMMENDED
+						to use the format shown in the example that makes the symmetry easily verifiable
+						by parsers and tools. (The same applies to entries created for transitivity.)</t>
+						
                     <t>Arabic is an example of a script for which such conditional variants
                         have been established in at least some existing LGRs.  The mechanism
                         defined here supports other forms of conditional variants that may
                         required by other scripts.</t>
-                    <t>As described in <xref target="sequences"/> a "when" or "not-when" attribute
-                        may also be specified to any "char" element in the data section to define
-                        required or prohibited contextual conditions under which a code point is
-                        valid. </t>
                 </section>
                 </section>
 
@@ -748,8 +796,8 @@
                 </figure></t>
                 <t>This facility is typically used to give source information for code points
                     or variant relations. This information is ignored when machine-processing an
-                    LGR. If applied to a range the "ref" attribute applies to very code point
-                    code point in the range. All reference identifiers MUST be from the set
+                    LGR. If applied to a range the "ref" attribute applies to every code point
+                    in the range. All reference identifiers MUST be from the set
                     declared in the "references" element (see <xref target="references"/>). It
                     is an error to repeat a reference identifier in the same "ref" attribute.
                     It is RECOMMENDED that identifiers be listed in ascending order. </t>
@@ -938,7 +986,7 @@
                     <t>Unicode properties may, in principle, change between versions of the Unicode
                         Standard. However, the values assigned for a given version are fixed. If
                         Unicode Properties are used, a Unicode version MUST be declared in the
-                        "unicode-version" element in the header. (Note, some Unicode properties are
+                        "unicode-version" element in the header. (Note: some Unicode properties are
                         by definition stable across versions and do not change once assigned (see
                             <xref target="Unicode-Stability"/>.) </t>
                     <t>It is RECOMMENDED that all implementations processing LGR files provide support
@@ -1115,7 +1163,7 @@
                             <artwork><![CDATA[    <action disp="allocate" match="preferred" />]]></artwork>
                         </figure>
                     </t>
-                    <t>which has the effect of setting the policy disposition for a label made up
+                    <t>This has the effect of setting the policy disposition for a label made up
                         entirely of "preferred" code points to "allocate". Explicit actions are
                         further discussed in <xref target="actions"/> and the use of rules in
                         conditional contexts for implied actions is discussed in <xref target="when"
@@ -1160,7 +1208,7 @@
                     </t>
                     <t>Any element defining an anonymous class can be used as a match operator,
                         including any of the set combination operators (see <xref
-                            target="combined_classes"/>) as well as references to a named
+                            target="combined_classes"/>) as well as references to named
                         classes.</t>
 
                     <t>All match operators shown as empty elements in the Examples column of the
@@ -1310,7 +1358,7 @@
                         inside a "choice" element in such a way that in matching each alternative
                         at most one occurrence of each is encountered. Otherwise, the result is an
                         error; as is any case where a "start" or "end" element is not encountered as
-                        first or last element to be matched	, respectively, in matching a rule. Start
+                        first or last element to be matched, respectively, in matching a rule. Start
                         and end elements do not have a "count" or any other attribute. It is an error
                         for any match operator enclosing a nested "start" or "end" element to have a
                         "count" attribute.</t>
@@ -1511,6 +1559,7 @@
                 <xref target="recommended_disposition_values" />)</t>
 
             <section title="The match and not-match Attributes" anchor="match_attribute">
+			
                 <t>A "match" or "not-match" attribute specify a rule that must be matched or not
                     matched as a condition for triggering an action. Only a single rule may be named
                     as the value of a "match" or "not-match" attribute. Because rules may be
@@ -1549,8 +1598,11 @@
                     <t>Any single match may trigger an action that contains an "any-variant"
                         attribute, while for an "all-variants" or "only-variants" attribute,
                         the variant type for all variant code points must match one or several
-                        of the types values specified in to trigger the action. An
-                        "only-variants" attribute will trigger the action only if all code
+                        of the type values specified in the attribute to trigger the action.  There is 
+						no requirement that the entire liste of variant type values be matched,
+						as long as all variant code points match at least one of the values.</t>
+						
+						<t>An "only-variants" attribute will trigger the action only if all code
                         points of the variant label have variant mappings from the original code
                         points. In other words, the label contains no original code points other
                         than those with a reflexive mapping (see <xref
@@ -1590,15 +1642,52 @@
                         or respectively "not-match" the specified rule, AND satisfy the conditions
                         on the variant type values given by the "any-variant", "all-variants", or
                         "only-variants" attribute.</t>
+					
+					<t>A useful convention combines the "any-variants" trigger with reflexive
+					     variant mappings (<xref target="reflexive_mapping"/>). 
+						 This convention is used, for example, when multiple LGRs are defined
+						 within the same registry and for overlapping repertoire. In some cases,
+						 the delegation of a label from one LGR must prohibit the delegation of
+						 another label in some other LGR. This can be done using a variant of type
+						 "blocked" as in this example from an Armenian LGR, where the Armenian,
+						 Latin and Cyrillic letters all look identical:</t>
+						<t>
+                          <figure>
+						     <artwork><![CDATA[    <char cp="0570" comment="Armenian small letter HO">
+      <var cp="0068" type="blocked" comment="Latin small letter H" />
+      <var cp="04BB" type="blocked" comment="Cyrillic small letter SSHA" />
+    </char>]]></artwork></figure></t>
+						<t>The issue is that the target code points for these two variants are both outside
+						the Armenian repertoire. By using a reflexive variant with the following convention:</t>
+						<t>
+                          <figure>
+						     <artwork><![CDATA[    <char cp="0068" comment="not part of repertoire">
+      <var cp="0068" type="out-of-repertoire-var" comment="reflexive mapping" />
+      <var cp="04BB" type="blocked"  />
+      <var cp="0570" type="blocked"  />
+    </char>
+      ... ]]></artwork></figure></t>						
+					<t>and associating this with an action of the form: </t>
+					<t>
+                          <figure>
+						     <artwork><![CDATA[    <action disp="invalid" any-variants="out-of-repertoire-var" />]]></artwork></figure></t>    
+					<t>it is possible to list the symmetric and transitive variant mappings in the LGR
+					even	where they involve out-of-repertoire code points. By associating the action shown with
+					the special type for these reflexive mappings any original labels containing one or more of the
+					out-of-repertoire code points are filtered out &mdash; just as if these code points had not been  
+					listed in the LGR in the first place. Nevertheless, they do participate in the permutation of 
+					variant labels for n-repertoire labels (Armenian in the example), and these permuted variants
+					can be used to detect collisions with out-of-repertoire labels (see <xref target="processing" />).</t>
                 </section>
 
                 <section title="Example from RFC 3743 Tables" anchor="rfc3743_example">
                     <t>This section gives an example of using variant type triggers, combined with
                         variants with reflexive mappings (<xref target="reflexive_mapping"/>) to
                         achieve LGRs that implement tables like those defined according to <xref
-                                target="RFC3743"/> where the goal is to allow only variants that
+                        target="RFC3743"/> where the goal is to allow as variants only labels that
                         consist entirely of simplified or traditional variants, in addition to the
                         original label. </t>
+						
                  <t>Assuming an LGR where all variants have been given suitable "type" attributes
                      of "block", "simplified", "traditional", or "both", similar to the ones
                      discussed in <xref target="translate_rfc3743" />. Given such an LGR, the
@@ -1627,6 +1716,7 @@
                     variant label (see <xref target="precedence"/>). They further rely on the
                     assumption that the only variants with type "both" are also reflexive
                     variants.</t>
+					
                 <t>Given these assumptions, any remaining simplified or traditional variants must
                     then be part of a mixed label, and so are blocked; all labels surviving to the
                     last action are original code points only (that is the original label). The
@@ -1666,7 +1756,7 @@
             <section title="Precedence" anchor="precedence">
                 <t>Actions are applied in the order of their appearance in the file. This defines
                     their relative precedence. The first action triggered by a label defines the
-                    disposition for that label. To define a specific order of precedence list the
+                    disposition for that label. To define a specific order of precedence, list the
                     actions in the desired order. The conventional order of precedence for the
                     actions defined in <xref target="recommended_disposition_values"/> is "invalid",
                     "block", "allocate", then "activate". This default precedence is used for the
@@ -1831,8 +1921,8 @@
                                 case of "only-variants" the label contains only code points that
                                 are the target of applied variant mappings; or</t>
 
-                            <t>the action does not contain any "match", "not-match", "any-variant"
-                                or "all-variants" attributes: catch-all.</t>
+                            <t>the action does not contain any "match", "not-match", "any-variant".
+                                "all-variants", or "only-variants" attributes: catch-all.</t>
 
                         </list>
                         </t>
@@ -1947,6 +2037,16 @@
                 </front>
                 <format type="HTML" target="http://www.w3.org/TR/REC-xml/"/>
             </reference>
+			<reference anchor="WLE-RULES">
+				<front>
+					<title>WLE Rules</title>
+					<author>
+						<organization abbrev="ICANN">Internet Corporation for Assigned Names and Numbers</organization>
+					</author>
+					<date/><!-- April, 2015 -->
+				</front>
+				<format type="PDF" target="https://community.icann.org/download/attachments/43989034/WLE-Rules.pdf" />
+			</reference>
             <reference anchor="ASIA-TABLE">
                 <front>
                     <title>.ASIA ZH IDN Language Table</title>
@@ -2329,13 +2429,14 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork>
 
         <section title="Indic Syllable Structure Example" anchor="indic_syllable">
 
-            <t> In LGRs for Indic scripts it may be desirable to restrict valid labels to sequences
+            <t>In LGRs for Indic scripts it may be desirable to restrict valid labels to sequences
                 of valid Indic syllables, or aksharas. This appendix gives a sample set of rules
                 designed to enforce this restriction. </t>
-            <t>We start with the following BNF form for an akshara which has been published in
-                “Devanagari Script Behavior for Hindi" <xref target="TDIL-HINDI"/> but which, if not
-                directly valid for other languages and scripts used in India is at least similar to
-                equivalent definitions used for them.</t>
+            <t>An example of a BNF from for an akshara which has been published in
+                “Devanagari Script Behavior for Hindi" <xref target="TDIL-HINDI"/>. The rules for
+				ther languages and scripts used in India are expected to be generally similar.</t>
+				
+				<t>For Hindi, the BNF has the form:</t>
 
             <t>
                 <figure>
@@ -2423,9 +2524,20 @@ U+6F27;U+4E7E;U+6F27;U+4E81,U+5E72,U+5E79,U+69A6]]></artwork>
                 aksharas, optionally interspersed with other characters, perhaps digits, for
                 example.</t>
 
-            <t> The relevant Unicode property is as of this writing still considered provisional;
-                however, it could be replicated by tagging repertoire values directly in the LGR
-                which would remove the dependency on the Unicode Standard altogether. </t>
+            <t>The relevant Unicode property could be replicated by tagging repertoire values 
+			    directly in the LGR which would remove the dependency on any specific version 
+				of the Unicode Standard. </t>
+				
+			<t>Generally, dependent vowels may only follow consonant expressions, however,
+			     for some scripts, like Bengali, the Unicode standard supports sequences of
+				 dependent vowels or their application on independent vowels. This makes
+				 the definition of akshara less restrictive.</t>
+				 
+			<t>It is possible to reduce the complexity of these rules by defining alternate rules
+			     which simply define the permissible pair-wise context of adjacent code points by
+				 character class&mdash;such as the rule that a Halant can only follow a (nuktated) consonant. 
+				 (See the example in <xref target="WLE-RULES" />).
+			</t>
         </section>
 
         <section title="RelaxNG Compact Schema">
@@ -2962,9 +3074,15 @@ rules-section = element rules {
 						<t hangText="-09">Grammatical updates, clarity improvements. Altered some
 							DNS-specific terminology.</t>
 					</list>
+					<list style="hanging" hangIndent="5">
+						<t hangText="-10">Added convention for out-of-repertoire variants, additional examples 
+						of when rules in the context of symmetry, isolated minor copy editing.</t>
+					</list>
                 </t>
             </section>
         </section>
     </back>
 
 </rfc>
+
+
