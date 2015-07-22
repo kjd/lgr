@@ -1,0 +1,3 @@
+[submodule "lgr-specification"]
+	path = specification
+	url = https://github.com/kjd/lgr-specification
