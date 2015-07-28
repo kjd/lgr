@@ -1,3 +1,6 @@
+**Note: This project has not tracked changes to the specification, so consider it on hiatus. You shouldn't rely on it to implement LGRs correct at this time.**
+
+
 lgr
 ---
 
